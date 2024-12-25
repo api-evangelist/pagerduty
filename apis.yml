@@ -18,7 +18,6 @@ apis:
       codes. Use the Datadog API to access the Datadog platform
       programmatically.
     tags: []
-    overlays: []
     aid: datadog:datadog-api
 maintainers:
   - FN: API Evangelist
