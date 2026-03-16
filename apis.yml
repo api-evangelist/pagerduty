@@ -1,26 +1,88 @@
-name: Datadog
+aid: pagerduty
+name: PagerDuty
 description: >-
-  Datadog is an observability service for cloud-scale applications, providing
-  monitoring of servers, databases, tools, and services, through a SaaS-based
-  data analytics platform. 
+  PagerDuty is a digital operations management platform that helps teams
+  detect problems and resolve incidents with automated alerting, on-call
+  management, and incident response workflows.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Incident Management
+  - Alerting
+  - On-Call Management
+  - DevOps
 url: >-
-  https://raw.githubusercontent.com/api-search/infrastructure/main/_apis/pagerduty/apis.md
-created: 2024/04/14
-modified: '2024-07-03'
-specificationVersion: '0.18'
-tags: []
+  https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
-  - name: Datadog API
+  - aid: pagerduty:pagerduty-rest-api
+    name: PagerDuty REST API
     description: >-
-      The Datadog API is an HTTP REST API. The API uses resource-oriented URLs
-      to call the API, uses status codes to indicate the success or failure of
-      requests, returns JSON from all requests, and uses standard HTTP response
-      codes. Use the Datadog API to access the Datadog platform
-      programmatically.
-    tags: []
-    aid: datadog:datadog-api
+      The PagerDuty REST API provides programmatic access to PagerDuty
+      incidents, services, escalation policies, schedules, and users.
+    humanURL: https://developer.pagerduty.com/api-reference/
+    baseURL: https://api.pagerduty.com
+    tags:
+      - Incidents
+      - Alerting
+      - On-Call
+      - Services
+    properties:
+      - type: Documentation
+        url: https://developer.pagerduty.com/api-reference/
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/PagerDuty/api-schema/main/reference/REST/openapiv3.json
+      - type: Authentication
+        url: https://developer.pagerduty.com/docs/authentication
+      - type: Getting Started
+        url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
+  - aid: pagerduty:pagerduty-events-api
+    name: PagerDuty Events API
+    description: >-
+      The PagerDuty Events API is a system for triggering, acknowledging,
+      and resolving alerts from monitoring tools and other data sources.
+    humanURL: https://developer.pagerduty.com/docs/events-api-v2/overview/
+    baseURL: https://events.pagerduty.com
+    tags:
+      - Events
+      - Alerting
+      - Monitoring
+    properties:
+      - type: Documentation
+        url: https://developer.pagerduty.com/docs/events-api-v2/overview/
+      - type: Getting Started
+        url: https://developer.pagerduty.com/docs/events-api-v2/send-an-alert/
+common:
+  - type: Portal
+    url: https://developer.pagerduty.com/
+  - type: Documentation
+    url: https://developer.pagerduty.com/docs/
+  - type: Getting Started
+    url: https://developer.pagerduty.com/docs/getting-started/
+  - type: Authentication
+    url: https://developer.pagerduty.com/docs/authentication
+  - type: Sign Up
+    url: https://www.pagerduty.com/sign-up-free/
+  - type: Login
+    url: https://identity.pagerduty.com/sign_in
+  - type: Blog
+    url: https://www.pagerduty.com/blog/
+  - type: Community
+    url: https://community.pagerduty.com/
+  - type: Support
+    url: https://support.pagerduty.com/
+  - type: Status
+    url: https://status.pagerduty.com/
+  - type: Terms of Service
+    url: https://www.pagerduty.com/terms-of-service/
+  - type: Privacy Policy
+    url: https://www.pagerduty.com/privacy-policy/
+  - type: GitHub Organization
+    url: https://github.com/PagerDuty
+  - type: Website
+    url: https://www.pagerduty.com/
 maintainers:
-  - FN: API Evangelist
-    url: http://apievangelist.com
-    email: info@apievangelist.com
-aid: datadog
+  - FN: Kin Lane
+    email: kin@apievangelist.com
