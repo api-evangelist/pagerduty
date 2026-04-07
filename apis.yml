@@ -7,10 +7,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Incident Management
   - Alerting
-  - On-Call Management
   - DevOps
+  - Incident Management
+  - On-Call Management
 url: >-
   https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/apis.yml
 created: '2026-03-16'
@@ -25,10 +25,9 @@ apis:
     humanURL: https://developer.pagerduty.com/api-reference/
     baseURL: https://api.pagerduty.com
     tags:
-      - Incidents
       - Alerting
+      - Incidents
       - On-Call
-      - Services
     properties:
       - type: Documentation
         url: https://developer.pagerduty.com/api-reference/
@@ -46,8 +45,8 @@ apis:
     humanURL: https://developer.pagerduty.com/docs/events-api-v2/overview/
     baseURL: https://events.pagerduty.com
     tags:
-      - Events
       - Alerting
+      - Events
       - Monitoring
     properties:
       - type: Documentation

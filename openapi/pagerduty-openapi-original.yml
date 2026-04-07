@@ -21,7 +21,7 @@ tags:
     description: |
       This describes your account's abilities by feature name. For example `"teams"`.
       An ability may be available to your account based on things like your pricing plan or account state.
-  - name: Add-ons
+  - name: Add-Ons
     description: |
       Developers can write their own functionality to insert into PagerDuty's UI.
   - name: Alert Grouping Settings
@@ -30,26 +30,21 @@ tags:
   - name: Analytics
     description: |
       Provides enriched incident data.
-  - name: Apps
-    description: ''
   - name: Audit
     description: |
       Provides audit record data.
   - name: Automation Actions
     description: |
       Automation Actions invoke jobs that are staged in Runbook Automation or Process Automation.
-  - name: Paused Incident Reports
-    description: |
-      Provides paused Incident reporting data on services and accounts that have paused Alerts.
   - name: Business Services
     description: |
       Business services model capabilities that span multiple technical services and that may be owned by several different teams.
-  - name: Custom Fields
-    description: |
-      Custom fields allow you to enrich PagerDuty incidents with critical and helpful metadata throughout the incident lifecycle.
   - name: Change Events
     description: |
       Change Events enable you to send informational events about recent changes such as code deploys and system config changes from any system that can make an outbound HTTP connection. These events do not create incidents and do not send notifications; they are shown in context with incidents on the same PagerDuty service.
+  - name: Custom Fields
+    description: |
+      Custom fields allow you to enrich PagerDuty incidents with critical and helpful metadata throughout the incident lifecycle.
   - name: Escalation Policies
     description: |
       Escalation policies define which user should be alerted at which time.
@@ -62,12 +57,12 @@ tags:
   - name: Extensions
     description: |
       Extensions are representations of Extension Schema objects that are attached to Services.
-  - name: Incidents
-    description: |
-      An incident represents a problem or an issue that needs to be addressed and resolved. Incidents trigger on a service, which prompts notifications to go out to on-call responders per the service's escalation policy.
   - name: Incident Workflows
     description: |
       An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
+  - name: Incidents
+    description: |
+      An incident represents a problem or an issue that needs to be addressed and resolved. Incidents trigger on a service, which prompts notifications to go out to on-call responders per the service's escalation policy.
   - name: Licenses
     description: |
       Licenses are allocated to Users to allow for per-User access to PagerDuty functionality within an Account.
@@ -83,6 +78,9 @@ tags:
   - name: On-Calls
     description: |
       An on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules
+  - name: Paused Incident Reports
+    description: |
+      Provides paused Incident reporting data on services and accounts that have paused Alerts.
   - name: Priorities
     description: |
       A priority is a label representing the importance and impact of an incident. This feature is only available on Standard and Enterprise plans.
@@ -98,13 +96,6 @@ tags:
   - name: Service Dependencies
     description: |
       Services are categorized into technical and business services. Dependencies can be created via any combination of these services.
-  - name: Services
-    description: |
-      A Service may represent an application, component, or team you wish to open incidents against.
-  - name: Webhooks
-    description: |
-      A webhook is a way to receive events that occur on the PagerDuty platform via an HTTP POST request.
-      V3 webhooks are set up by creating a webhook subscription.
   - name: Standards
     description: |
       Standards help provide a clear understanding of what a good service configuration looks like, allowing to share and enforce organization guidelines across services to ensure adherence to best practices.
@@ -114,9 +105,6 @@ tags:
   - name: Status Pages
     description: |
       Status Pages can be public or private read-only pages, that display the status of some predefined set of services, to be shared with customers or internal stakeholders.
-  - name: Tags
-    description: |
-      A Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.
   - name: Teams
     description: |
       A team is a collection of Users and Escalation Policies that represent a group of people within an organization.
@@ -129,6 +117,10 @@ tags:
   - name: Vendors
     description: |
       A PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors
+  - name: Webhooks
+    description: |
+      A webhook is a way to receive events that occur on the PagerDuty platform via an HTTP POST request.
+      V3 webhooks are set up by creating a webhook subscription.
 servers:
   - url: https://api.pagerduty.com
     description: PagerDuty V2 API.
@@ -11844,8 +11836,7 @@ paths:
   /{entity_type}/{id}/change_tags:
     post:
       x-pd-requires-scope: tags.write
-      tags:
-        - Tags
+      tags: []
       operationId: createEntityTypeByIdChangeTags
       description: |
         Assign existing or new tags.
@@ -11959,8 +11950,7 @@ paths:
   /{entity_type}/{id}/tags:
     get:
       x-pd-requires-scope: tags.read
-      tags:
-        - Tags
+      tags: []
       operationId: getEntityTypeByIdTags
       description: |
         Get related tags for Users, Teams or Escalation Policies.
@@ -12110,7 +12100,7 @@ paths:
     get:
       x-pd-requires-scope: addons.read
       tags:
-        - Add-ons
+        - Add-Ons
       operationId: listAddon
       description: |
         List all of the Add-ons installed on your account.
@@ -12173,7 +12163,7 @@ paths:
     post:
       x-pd-requires-scope: addons.write
       tags:
-        - Add-ons
+        - Add-Ons
       operationId: createAddon
       description: |
         Install an Add-on for your account.
@@ -12245,7 +12235,7 @@ paths:
     get:
       x-pd-requires-scope: addons.read
       tags:
-        - Add-ons
+        - Add-Ons
       operationId: getAddon
       description: |
         Get details about an existing Add-on.
@@ -12300,7 +12290,7 @@ paths:
     delete:
       x-pd-requires-scope: addons.write
       tags:
-        - Add-ons
+        - Add-Ons
       operationId: deleteAddon
       description: |
         Remove an existing Add-on.
@@ -12329,7 +12319,7 @@ paths:
     put:
       x-pd-requires-scope: addons.write
       tags:
-        - Add-ons
+        - Add-Ons
       operationId: updateAddon
       description: |
         Update an existing Add-on.
@@ -29034,8 +29024,7 @@ paths:
   /services:
     description: List and create services.
     get:
-      tags:
-        - Services
+      tags: []
       operationId: listServices
       x-pd-requires-scope: services.read
       description: |
@@ -29151,8 +29140,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: createService
       description: |
         Create a new service.
@@ -29313,8 +29301,7 @@ paths:
   /services/{id}:
     description: Manage a service.
     get:
-      tags:
-        - Services
+      tags: []
       operationId: getService
       x-pd-requires-scope: services.read
       description: |
@@ -29415,8 +29402,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: deleteService
       description: |
         Delete an existing service.
@@ -29442,8 +29428,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       description: |
         Update an existing service.
 
@@ -29608,8 +29593,7 @@ paths:
     description: List audit records for a service.
     get:
       x-pd-requires-scope: audit_records.read
-      tags:
-        - Services
+      tags: []
       operationId: listServiceAuditRecords
       summary: PagerDuty List audit records for a service
       description: |
@@ -29744,8 +29728,7 @@ paths:
     description: Create integrations belonging to a service.
     post:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: createServiceIntegration
       summary: PagerDuty Create a new integration
       description: |
@@ -29865,8 +29848,7 @@ paths:
     description: View or update integrations belonging to a service.
     put:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: updateServiceIntegration
       summary: PagerDuty Update an existing integration
       description: |
@@ -29953,8 +29935,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
     get:
       x-pd-requires-scope: services.read
-      tags:
-        - Services
+      tags: []
       operationId: getServiceIntegration
       summary: PagerDuty View an integration
       description: |
@@ -30018,8 +29999,7 @@ paths:
   /services/{id}/rules:
     get:
       x-pd-requires-scope: services.read
-      tags:
-        - Services
+      tags: []
       operationId: listServiceEventRules
       description: |
         List Event Rules on a Service.
@@ -30166,8 +30146,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: createServiceEventRule
       description: |
         Create a new Event Rule on a Service.
@@ -30276,8 +30255,7 @@ paths:
     description: Convert a Service's Event Rules into Event Orchestration Rules
     post:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: convertServiceEventRulesToEventOrchestration
       summary: PagerDuty Convert a Service's Event Rules into Event Orchestration Rules
       description: |
@@ -30388,8 +30366,7 @@ paths:
   /services/{id}/rules/{rule_id}:
     get:
       x-pd-requires-scope: services.read
-      tags:
-        - Services
+      tags: []
       operationId: getServiceEventRule
       description: |
         Get an Event Rule from a Service.
@@ -30455,8 +30432,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: updateServiceEventRule
       summary: PagerDuty Update an Event Rule on a Service
       description: |
@@ -30554,8 +30530,7 @@ paths:
           $ref: '#/components/responses/Conflict'
     delete:
       x-pd-requires-scope: services.write
-      tags:
-        - Services
+      tags: []
       operationId: deleteServiceEventRule
       description: |
         Delete an Event Rule from a Service.
@@ -32761,8 +32736,7 @@ paths:
   /tags:
     get:
       x-pd-requires-scope: tags.read
-      tags:
-        - Tags
+      tags: []
       operationId: listTags
       description: |
         List all of your account's tags.
@@ -32819,8 +32793,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
     post:
       x-pd-requires-scope: tags.write
-      tags:
-        - Tags
+      tags: []
       operationId: createTags
       description: |
         Create a Tag.
@@ -32885,8 +32858,7 @@ paths:
   /tags/{id}:
     get:
       x-pd-requires-scope: tags.read
-      tags:
-        - Tags
+      tags: []
       operationId: getTag
       description: |
         Get details about an existing Tag.
@@ -32934,8 +32906,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
     delete:
       x-pd-requires-scope: tags.write
-      tags:
-        - Tags
+      tags: []
       operationId: deleteTag
       description: |
         Remove an existing Tag.
@@ -32962,8 +32933,7 @@ paths:
   /tags/{id}/{entity_type}:
     get:
       x-pd-requires-scope: tags.read
-      tags:
-        - Tags
+      tags: []
       operationId: getTagsByEntityType
       description: |
         Get related Users, Teams or Escalation Policies for the Tag.
