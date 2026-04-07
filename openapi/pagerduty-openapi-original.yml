@@ -273,7 +273,7 @@ components:
                     - id: P4GTUMK
                       type: sms_contact_method_reference
                       summary: Mobile
-        next_cursor: null
+        next_cursor:
         limit: 10
     AuditRecordEscalationPolicyResponse:
       summary: Response Example
@@ -347,7 +347,7 @@ components:
               self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
               html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
         limit: 10
-        next_cursor: null
+        next_cursor:
     AuditRecordScheduleResponse:
       summary: Response Example
       value:
@@ -420,7 +420,7 @@ components:
               self: https://api.pagerduty.com/schedules/PD_SCHEDULE_ID
               html_url: https://mydomain.pagerduty.com/schedules/PD_SCHEDULE_ID
         limit: 10
-        next_cursor: null
+        next_cursor:
     AuditRecordServiceResponse:
       summary: Response Example
       value:
@@ -461,7 +461,7 @@ components:
                 - name: acknowledgement_timeout
                   value: ''
                 - name: alert_grouping
-                  value: null
+                  value:
                 - name: alert_grouping_timeout
                   value: ''
               references:
@@ -470,7 +470,7 @@ components:
                     - id: PD_SERVICE_ID
                       summary: Default
                       type: escalation_policy_reference
-        next_cursor: null
+        next_cursor:
         limit: 10
     AuditRecordTeamResponse:
       summary: Response Example
@@ -571,7 +571,7 @@ components:
                   value: MyDevOps Team
                 - name: default_role
                   value: manager
-        next_cursor: null
+        next_cursor:
         limit: 10
     AuditRecordUserResponse:
       summary: Response Example
@@ -793,9 +793,9 @@ components:
                 - name: time_zone
                   value: America/New_York
                 - name: description
-                  value: null
+                  value:
                 - name: job_title
-                  value: null
+                  value:
                 - name: color
                   value: brown
               resource:
@@ -816,7 +816,7 @@ components:
               self: https://api.pagerduty.com/users/PD_USER_999
               html_url: https://mydomain.pagerduty.com/users/PD_USER_999
         limit: 10
-        next_cursor: null
+        next_cursor:
     OrchestrationPathGlobalTypeResponse:
       summary: Example Response
       value:
@@ -926,7 +926,7 @@ components:
         webhook_subscription:
           delivery_method:
             id: PF9KMXH
-            secret: null
+            secret:
             temporarily_disabled: false
             type: http_delivery_method
             url: https://example.com/receive_a_pagerduty_webhook
@@ -959,7 +959,7 @@ components:
         webhook_subscriptions:
           - delivery_method:
               id: PF9KMXH
-              secret: null
+              secret:
               type: http_delivery_method
               url: https://example.com/receive_a_pagerduty_webhook
               custom_headers:
@@ -986,7 +986,7 @@ components:
             active: true
         limit: 25
         offset: 0
-        total: null
+        total:
         more: false
     PutSubscriptionExample:
       summary: Update Subscribed Events
@@ -8660,7 +8660,7 @@ components:
                 type: resolve_log_entry
                 summary: Resolved by Earline Greenholt
                 self: https://api.pagerduty.com/log_entries/R0FFIOTKIU30MN7XWR99SI0
-                html_url: null
+                html_url:
                 created_at: '2017-09-22T18:37:29+00:00'
                 agent:
                   id: PLMUP47
@@ -9440,7 +9440,7 @@ components:
             - time
             - intelligent
             - content_based
-            - null
+            - 
         config:
           anyOf:
             - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
@@ -11855,7 +11855,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.write`
-      summary: Assign tags
+      summary: PagerDuty Assign tags
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -11970,7 +11970,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.read`
-      summary: Get tags for entities
+      summary: PagerDuty Get tags for entities
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12005,7 +12005,7 @@ paths:
                         self: https://api.pagerduty.com/tags/P5IYCNZ
                         label: Batman
                         id: P5IYCNZ
-                        html_url: null
+                        html_url:
                     limit: 100
                     offset: 0
                     total: 1
@@ -12033,7 +12033,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#abilities)
 
         Scoped OAuth requires: `abilities.read`
-      summary: List abilities
+      summary: PagerDuty List abilities
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12087,7 +12087,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#abilities)
 
         Scoped OAuth requires: `abilities.read`
-      summary: Test an ability
+      summary: PagerDuty Test an ability
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12120,7 +12120,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)
 
         Scoped OAuth requires: `addons.read`
-      summary: List installed Add-ons
+      summary: PagerDuty List installed Add-ons
       parameters:
         - $ref: '#/components/parameters/offset_limit'
         - $ref: '#/components/parameters/offset_offset'
@@ -12155,13 +12155,13 @@ paths:
                         type: full_page_addon_reference
                         summary: Internal Status Page
                         self: https://api.pagerduty.com/addons/PKX7619
-                        html_url: null
+                        html_url:
                         name: Internal Status Page
                         src: https://intranet.example.com/status
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -12185,7 +12185,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)
 
         Scoped OAuth requires: `addons.write`
-      summary: Install an Add-on
+      summary: PagerDuty Install an Add-on
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12229,7 +12229,7 @@ paths:
                       type: full_page_addon_reference
                       summary: Internal Status Page
                       self: https://api.pagerduty.com/addons/PKX7619
-                      html_url: null
+                      html_url:
                       name: Internal Status Page
                       src: https://intranet.example.com/status
         '400':
@@ -12255,7 +12255,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)
 
         Scoped OAuth requires: `addons.read`
-      summary: Get an Add-on
+      summary: PagerDuty Get an Add-on
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12310,7 +12310,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)
 
         Scoped OAuth requires: `addons.write`
-      summary: Delete an Add-on
+      summary: PagerDuty Delete an Add-on
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12341,7 +12341,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)
 
         Scoped OAuth requires: `addons.write`
-      summary: Update an Add-on
+      summary: PagerDuty Update an Add-on
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12415,7 +12415,7 @@ paths:
         The settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.
 
         Scoped OAuth requires: `services.read`
-      summary: List alert grouping settings
+      summary: PagerDuty List alert grouping settings
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12467,7 +12467,7 @@ paths:
                     after: g3QAAAACZAACaWRhB2QAC2luc2VydGVkX2F0dAAAAAlkAApfX3N0cnVjdF9fZAAURWxpeGlyLk5haXZlRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhA2QABGhvdXJhFGQAC21pY3Jvc2Vjb25kaAJiAAL81WEGZAAGbWludXRlYR5kAAVtb250aGEIZAAGc2Vjb25kYR5kAAR5ZWFyYgAAB
                     before: g3QAAAACZAACaWRhCGQAC2luc2VydGVkX2F0dAAAAAlkAApfX3N0cnVjdF9fZAAURWxpeGlyLk5haXZlRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhA2QABGhvdXJhFGQAC21pY3Jvc2Vjb25kaAJiAANYzWEGZAAGbWludXRlYR5kAAVtb250aGEIZAAGc2Vjb25kYR5kAAR5ZWFyYgAAB
                     limit: 25
-                    total: null
+                    total:
         '401':
           $ref: '#/components/responses/Unauthorized'
     post:
@@ -12483,7 +12483,7 @@ paths:
         This endpoint will be used to create an instance of AlertGroupingSettings for either one service or many services that are in the alert group setting.
 
         Scoped OAuth requires: `services.write`
-      summary: Create an Alert Grouping Setting
+      summary: PagerDuty Create an Alert Grouping Setting
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12572,7 +12572,7 @@ paths:
         The settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.
 
         Scoped OAuth requires: `services.read`
-      summary: Get an Alert Grouping Setting
+      summary: PagerDuty Get an Alert Grouping Setting
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12628,7 +12628,7 @@ paths:
         The settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.
 
         Scoped OAuth requires: `services.write`
-      summary: Delete an Alert Grouping Setting
+      summary: PagerDuty Delete an Alert Grouping Setting
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12653,7 +12653,7 @@ paths:
         if `services` are not provided in the request, then the existing services will not be removed from the setting.
 
         Scoped OAuth requires: `services.write`
-      summary: Update an Alert Grouping Setting
+      summary: PagerDuty Update an Alert Grouping Setting
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -12733,7 +12733,7 @@ paths:
   /analytics/metrics/incidents/all:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated incident data
+      summary: PagerDuty Get aggregated incident data
       operationId: getAnalyticsMetricsIncidentsAll
       responses:
         '200':
@@ -12986,7 +12986,7 @@ paths:
   /analytics/metrics/incidents/escalation_policies:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated escalation policy data
+      summary: PagerDuty Get aggregated escalation policy data
       operationId: getAnalyticsMetricsIncidentsEscalationPolicy
       responses:
         '200':
@@ -13113,7 +13113,7 @@ paths:
   /analytics/metrics/incidents/escalation_policies/all:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated metrics for all escalation policies
+      summary: PagerDuty Get aggregated metrics for all escalation policies
       operationId: getAnalyticsMetricsIncidentsEscalationPolicyAll
       responses:
         '200':
@@ -13203,7 +13203,7 @@ paths:
   /analytics/metrics/incidents/services:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated service data
+      summary: PagerDuty Get aggregated service data
       operationId: getAnalyticsMetricsIncidentsService
       responses:
         '200':
@@ -13333,7 +13333,7 @@ paths:
   /analytics/metrics/incidents/services/all:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated metrics for all services
+      summary: PagerDuty Get aggregated metrics for all services
       operationId: getAnalyticsMetricsIncidentsServiceAll
       responses:
         '200':
@@ -13424,7 +13424,7 @@ paths:
   /analytics/metrics/incidents/teams:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated team data
+      summary: PagerDuty Get aggregated team data
       operationId: getAnalyticsMetricsIncidentsTeam
       responses:
         '200':
@@ -13550,7 +13550,7 @@ paths:
   /analytics/metrics/incidents/teams/all:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated metrics for all teams
+      summary: PagerDuty Get aggregated metrics for all teams
       operationId: getAnalyticsMetricsIncidentsTeamAll
       responses:
         '200':
@@ -13642,7 +13642,7 @@ paths:
   /analytics/metrics/responders/all:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get aggregated metrics for all responders
+      summary: PagerDuty Get aggregated metrics for all responders
       operationId: getAnalyticsMetricsRespondersAll
       responses:
         '200':
@@ -13728,7 +13728,7 @@ paths:
   /analytics/metrics/responders/teams:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get responder data aggregated by team
+      summary: PagerDuty Get responder data aggregated by team
       operationId: getAnalyticsMetricsRespondersTeam
       responses:
         '200':
@@ -13841,7 +13841,7 @@ paths:
   /analytics/raw/incidents:
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get raw data - multiple incidents
+      summary: PagerDuty Get raw data - multiple incidents
       operationId: getAnalyticsIncidents
       responses:
         '200':
@@ -13973,9 +13973,9 @@ paths:
                         major: false
                         manual_escalation_count: 0
                         off_hour_interruptions: 4
-                        priority_id: null
-                        priority_name: null
-                        priority_order: null
+                        priority_id:
+                        priority_name:
+                        priority_order:
                         reassignment_count: 0
                         resolved_at: '2023-05-31T10:15:00'
                         resolved_by_user_id: PRJ4208
@@ -13989,13 +13989,13 @@ paths:
                         sleep_hour_interruptions: 3
                         snoozed_seconds: 604
                         status: resolved
-                        team_id: null
-                        team_name: null
+                        team_id:
+                        team_name:
                         timeout_escalation_count: 0
-                        total_interruptions": null
+                        total_interruptions":
                         total_notifications: 2
                         urgency: low
-                        user_defined_effort_seconds: null
+                        user_defined_effort_seconds:
                       - acknowledged_user_ids:
                           - PMT4102
                         acknowledged_user_names:
@@ -14027,7 +14027,7 @@ paths:
                         off_hour_interruptions: 3
                         priority_id: POTCOTX
                         priority_name: SEV-2
-                        priority_order: null
+                        priority_order:
                         reassignment_count: 0
                         resolved_at: '2023-05-30T10:00:05'
                         resolved_by_user_id: PMT4102
@@ -14041,14 +14041,14 @@ paths:
                         sleep_hour_interruptions: 1
                         snoozed_seconds: 698
                         status: resolved
-                        team_id: null
+                        team_id:
                         team_name: Marketing
                         timeout_escalation_count: 0
-                        total_interruptions": null
+                        total_interruptions":
                         total_notifications: 2
                         urgency: low
-                        user_defined_effort_seconds: null
-                    ending_before: null
+                        user_defined_effort_seconds:
+                    ending_before:
                     filters: {}
                     first: PYC0H08
                     last: PCOOHCY
@@ -14056,7 +14056,7 @@ paths:
                     more: true
                     order: desc
                     order_by: created_at
-                    starting_after: null
+                    starting_after:
                     time_zone: Etc/UTC
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -14204,7 +14204,7 @@ paths:
       - $ref: '#/components/parameters/id'
     get:
       x-pd-requires-scope: analytics.read
-      summary: Get raw data - single incident
+      summary: PagerDuty Get raw data - single incident
       tags:
         - Analytics
       responses:
@@ -14272,10 +14272,10 @@ paths:
                       team_id: PNVU4UR
                       team_name: Engineering team 7
                       timeout_escalation_count: 0
-                      total_interruptions: null
+                      total_interruptions:
                       total_notifications: 2
                       urgency: high
-                      user_defined_effort_seconds: null
+                      user_defined_effort_seconds:
         '404':
           $ref: '#/components/responses/NotFound'
         '429':
@@ -14298,7 +14298,7 @@ paths:
       - $ref: '#/components/parameters/id'
     get:
       x-pd-requires-scope: analytics.read
-      summary: Get raw responses from a single incident
+      summary: PagerDuty Get raw responses from a single incident
       tags:
         - Analytics
       responses:
@@ -14409,7 +14409,7 @@ paths:
       - $ref: '#/components/parameters/responder_id'
     post:
       x-pd-requires-scope: analytics.read
-      summary: Get raw incidents for a single responder_id
+      summary: PagerDuty Get raw incidents for a single responder_id
       operationId: getAnalyticsResponderIncidents
       responses:
         '200':
@@ -14680,7 +14680,7 @@ paths:
     description: List audit records.
     get:
       x-pd-requires-scope: audit_records.read
-      summary: List audit records
+      summary: PagerDuty List audit records
       tags:
         - Audit
       operationId: listAuditRecords
@@ -14738,7 +14738,7 @@ paths:
   /automation_actions/actions:
     description: List and create Automation Actions
     post:
-      summary: Create an Automation Action
+      summary: PagerDuty Create an Automation Action
       tags:
         - Automation Actions
       description: |
@@ -14840,7 +14840,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     get:
-      summary: List Automation Actions
+      summary: PagerDuty List Automation Actions
       tags:
         - Automation Actions
       operationId: getAllAutomationActions
@@ -14925,7 +14925,7 @@ paths:
                             - read
                             - update
                     limit: 2
-                    next_cursor: null
+                    next_cursor:
                     privileges:
                       permissions:
                         - read
@@ -14947,7 +14947,7 @@ paths:
   /automation_actions/actions/{id}:
     description: View, Update and Delete Automation Actions
     get:
-      summary: Get an Automation Action
+      summary: PagerDuty Get an Automation Action
       tags:
         - Automation Actions
       operationId: getAutomationAction
@@ -15016,7 +15016,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     delete:
-      summary: Delete an Automation Action
+      summary: PagerDuty Delete an Automation Action
       tags:
         - Automation Actions
       operationId: deleteAutomationAction
@@ -15044,7 +15044,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     put:
-      summary: Update an Automation Action
+      summary: PagerDuty Update an Automation Action
       tags:
         - Automation Actions
       operationId: updateAutomationAction
@@ -15133,7 +15133,7 @@ paths:
   /automation_actions/actions/{id}/invocations:
     description: Create an Invocation
     post:
-      summary: Create an Invocation
+      summary: PagerDuty Create an Invocation
       tags:
         - Automation Actions
       description: |
@@ -15228,7 +15228,7 @@ paths:
   /automation_actions/actions/{id}/services:
     description: Manage Action-Service associations
     get:
-      summary: Get all service references associated with an Automation Action
+      summary: PagerDuty Get all service references associated with an Automation Action
       tags:
         - Automation Actions
       operationId: getAutomationActionsActionServiceAssociations
@@ -15270,7 +15270,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     post:
-      summary: Associate an Automation Action with a service
+      summary: PagerDuty Associate an Automation Action with a service
       tags:
         - Automation Actions
       operationId: createAutomationActionServiceAssocation
@@ -15332,7 +15332,7 @@ paths:
   /automation_actions/actions/{id}/services/{service_id}:
     description: Manage Action-Service associations
     get:
-      summary: Get the details of an Automation Action / service relation
+      summary: PagerDuty Get the details of an Automation Action / service relation
       tags:
         - Automation Actions
       operationId: getAutomationActionsActionServiceAssociation
@@ -15373,7 +15373,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     delete:
-      summary: Disassociate an Automation Action from a service
+      summary: PagerDuty Disassociate an Automation Action from a service
       tags:
         - Automation Actions
       operationId: deleteAutomationActionServiceAssociation
@@ -15404,7 +15404,7 @@ paths:
   /automation_actions/actions/{id}/teams:
     description: Manage Action-Team associations
     post:
-      summary: Associate an Automation Action with a team
+      summary: PagerDuty Associate an Automation Action with a team
       tags:
         - Automation Actions
       operationId: createAutomationActionTeamAssociation
@@ -15464,7 +15464,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     get:
-      summary: Get all team references associated with an Automation Action
+      summary: PagerDuty Get all team references associated with an Automation Action
       tags:
         - Automation Actions
       operationId: getAutomationActionsActionTeamAssociations
@@ -15508,7 +15508,7 @@ paths:
   /automation_actions/actions/{id}/teams/{team_id}:
     description: Manage Action-Team associations
     delete:
-      summary: Disassociate an Automation Action from a team
+      summary: PagerDuty Disassociate an Automation Action from a team
       tags:
         - Automation Actions
       operationId: deleteAutomationActionTeamAssociation
@@ -15537,7 +15537,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     get:
-      summary: Get the details of an Automation Action / team relation
+      summary: PagerDuty Get the details of an Automation Action / team relation
       tags:
         - Automation Actions
       operationId: getAutomationActionsActionTeamAssociation
@@ -15580,7 +15580,7 @@ paths:
   /automation_actions/invocations:
     description: List Invocations
     get:
-      summary: List Invocations
+      summary: PagerDuty List Invocations
       tags:
         - Automation Actions
       description: |
@@ -15658,7 +15658,7 @@ paths:
   /automation_actions/invocations/{id}:
     description: View an Automation Actions Invocation
     get:
-      summary: Get an Invocation
+      summary: PagerDuty Get an Invocation
       tags:
         - Automation Actions
       operationId: getAutomationActionsInvocation
@@ -15731,7 +15731,7 @@ paths:
   /automation_actions/runners:
     description: List and create Automation Action runners.
     post:
-      summary: Create an Automation Action runner.
+      summary: PagerDuty Create an Automation Action runner.
       tags:
         - Automation Actions
       description: |
@@ -15819,7 +15819,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     get:
-      summary: List Automation Action runners
+      summary: PagerDuty List Automation Action runners
       tags:
         - Automation Actions
       operationId: getAutomationActionsRunners
@@ -15901,7 +15901,7 @@ paths:
   /automation_actions/runners/{id}:
     description: View, Update and Delete Automation Action runners
     get:
-      summary: Get an Automation Action runner
+      summary: PagerDuty Get an Automation Action runner
       tags:
         - Automation Actions
       operationId: getAutomationActionsRunner
@@ -15958,7 +15958,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     put:
-      summary: Update an Automation Action runner
+      summary: PagerDuty Update an Automation Action runner
       tags:
         - Automation Actions
       operationId: updateAutomationActionsRunner
@@ -16036,7 +16036,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     delete:
-      summary: Delete an Automation Action runner
+      summary: PagerDuty Delete an Automation Action runner
       tags:
         - Automation Actions
       operationId: deleteAutomationActionsRunner
@@ -16066,7 +16066,7 @@ paths:
   /automation_actions/runners/{id}/teams:
     description: Manage Runner-Team associations
     post:
-      summary: Associate a runner with a team
+      summary: PagerDuty Associate a runner with a team
       tags:
         - Automation Actions
       operationId: createAutomationActionsRunnerTeamAssociation
@@ -16127,7 +16127,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     get:
-      summary: Get all team references associated with a runner
+      summary: PagerDuty Get all team references associated with a runner
       tags:
         - Automation Actions
       operationId: getAutomationActionsRunnerTeamAssociations
@@ -16171,7 +16171,7 @@ paths:
   /automation_actions/runners/{id}/teams/{team_id}:
     description: Manage Runner-Team associations
     delete:
-      summary: Disassociate a runner from a team
+      summary: PagerDuty Disassociate a runner from a team
       tags:
         - Automation Actions
       operationId: deleteAutomationActionsRunnerTeamAssociation
@@ -16200,7 +16200,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
     get:
-      summary: Get the details of a runner / team relation
+      summary: PagerDuty Get the details of a runner / team relation
       tags:
         - Automation Actions
       operationId: getAutomationActionsRunnerTeamAssociation
@@ -16255,7 +16255,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
 
         Scoped OAuth requires: `services.read`
-      summary: List Business Services
+      summary: PagerDuty List Business Services
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -16285,16 +16285,16 @@ paths:
                     business_services:
                       - type: business_service
                         self: https://api.pagerduty.com/business_services/P3U7V58
-                        html_url: null
+                        html_url:
                         point_of_contact: PagerDuty Admin
                         name: stand-alone node
-                        team: null
+                        team:
                         id: P3U7V58
                         description: Very important business function
                         summary: stand-alone node
                       - type: business_service
                         self: https://api.pagerduty.com/business_services/P1L1YEE
-                        html_url: null
+                        html_url:
                         point_of_contact: PagerDuty Admin
                         name: Cross-tier business service
                         id: P1L1YEE
@@ -16305,7 +16305,7 @@ paths:
                           self: https://api.pagerduty.com/teams/PQ9K7I8
                     limit: 100
                     offset: 0
-                    total: null
+                    total:
                     more: false
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -16328,7 +16328,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
 
         Scoped OAuth requires: `services.write`
-      summary: Create a Business Service
+      summary: PagerDuty Create a Business Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -16389,7 +16389,7 @@ paths:
                       id: P1L1YEE
                       type: business_service
                       self: https://api.pagerduty.com/business_services/P1L1YEE
-                      html_url: null
+                      html_url:
                       point_of_contact: PagerDuty Admin
                       name: Self-serve mobile checkout
                       description: Checkout service for our mobile clients.
@@ -16421,7 +16421,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
 
         Scoped OAuth requires: `services.read`
-      summary: Get a Business Service
+      summary: PagerDuty Get a Business Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -16446,7 +16446,7 @@ paths:
                       id: P1L1YEE
                       type: business_service
                       self: https://api.pagerduty.com/business_services/P1L1YEE
-                      html_url: null
+                      html_url:
                       name: Cross-tier business service
                       description: Business service affected by multiple teams
                       point_of_contact: PagerDuty Admin
@@ -16478,7 +16478,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
 
         Scoped OAuth requires: `services.write`
-      summary: Delete a Business Service
+      summary: PagerDuty Delete a Business Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -16505,7 +16505,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
 
         Scoped OAuth requires: `services.write`
-      summary: Update a Business Service
+      summary: PagerDuty Update a Business Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -16567,7 +16567,7 @@ paths:
                       id: P1L1YEE
                       type: business_service
                       self: https://api.pagerduty.com/business_services/P1L1YEE
-                      html_url: null
+                      html_url:
                       point_of_contact: PagerDuty Admin
                       name: Self-serve mobile checkout
                       description: Checkout service for our mobile clients.
@@ -16585,7 +16585,7 @@ paths:
   /business_services/{id}/account_subscription:
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Create Business Service Account Subscription
+      summary: PagerDuty Create Business Service Account Subscription
       tags:
         - Business Services
       responses:
@@ -16623,7 +16623,7 @@ paths:
         - $ref: '#/components/parameters/id'
     delete:
       x-pd-requires-scope: subscribers.write
-      summary: Delete Business Service Account Subscription
+      summary: PagerDuty Delete Business Service Account Subscription
       tags:
         - Business Services
       operationId: removeBusinessServiceAccountSubscription
@@ -16648,7 +16648,7 @@ paths:
   /business_services/{id}/subscribers:
     get:
       x-pd-requires-scope: subscribers.read
-      summary: List Business Service Subscribers
+      summary: PagerDuty List Business Service Subscribers
       tags:
         - Business Services
       responses:
@@ -16706,7 +16706,7 @@ paths:
         - $ref: '#/components/parameters/id'
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Create Business Service Subscribers
+      summary: PagerDuty Create Business Service Subscribers
       tags:
         - Business Services
       operationId: createBusinessServiceNotificationSubscribers
@@ -16789,7 +16789,7 @@ paths:
   /business_services/{id}/supporting_services/impacts:
     get:
       x-pd-requires-scope: services.read
-      summary: List the supporting Business Services for the given Business Service Id, sorted by impacted status.
+      summary: PagerDuty List the supporting Business Services for the given Business Service Id, sorted by impacted status.
       tags:
         - Business Services
       responses:
@@ -16833,7 +16833,7 @@ paths:
                         type: business_service
                         status: not_impacted
                         additional_fields:
-                          highest_impacting_priority: null
+                          highest_impacting_priority:
                     additional_fields:
                       total_impacted_count: 1
         '400':
@@ -16863,7 +16863,7 @@ paths:
   /business_services/{id}/unsubscribe:
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Remove Business Service Subscribers
+      summary: PagerDuty Remove Business Service Subscribers
       tags:
         - Business Services
       operationId: removeBusinessServiceNotificationSubscriber
@@ -16934,7 +16934,7 @@ paths:
   /business_services/impactors:
     get:
       x-pd-requires-scope: services.read
-      summary: List Impactors affecting Business Services
+      summary: PagerDuty List Impactors affecting Business Services
       tags:
         - Business Services
       responses:
@@ -16988,7 +16988,7 @@ paths:
   /business_services/impacts:
     get:
       x-pd-requires-scope: services.read
-      summary: List Business Services sorted by impacted status
+      summary: PagerDuty List Business Services sorted by impacted status
       tags:
         - Business Services
       responses:
@@ -17032,7 +17032,7 @@ paths:
                         type: business_service
                         status: not_impacted
                         additional_fields:
-                          highest_impacting_priority: null
+                          highest_impacting_priority:
                     additional_fields:
                       total_impacted_count: 1
         '400':
@@ -17061,7 +17061,7 @@ paths:
   /business_services/priority_thresholds:
     get:
       x-pd-requires-scope: services.read
-      summary: Get the global priority threshold for a Business Service to be considered impacted by an Incident
+      summary: PagerDuty Get the global priority threshold for a Business Service to be considered impacted by an Incident
       tags:
         - Business Services
       responses:
@@ -17086,7 +17086,7 @@ paths:
                   value:
                     limit: 100
                     more: false
-                    global_threshold: null
+                    global_threshold:
                     type: object
                     properties:
                       id: string
@@ -17109,7 +17109,7 @@ paths:
         - $ref: '#/components/parameters/header_Accept'
     delete:
       x-pd-requires-scope: services.write
-      summary: Deletes the account-level priority threshold for Business Service impact
+      summary: PagerDuty Deletes the account-level priority threshold for Business Service impact
       tags:
         - Business Services
       responses:
@@ -17129,7 +17129,7 @@ paths:
         - $ref: '#/components/parameters/header_Accept'
     put:
       x-pd-requires-scope: services.write
-      summary: Set the Account-level priority threshold for Business Service impact.
+      summary: PagerDuty Set the Account-level priority threshold for Business Service impact.
       tags:
         - Business Services
       responses:
@@ -17219,7 +17219,7 @@ paths:
         List all of the existing Change Events.
 
         Scoped OAuth requires: `change_events.read`
-      summary: List Change Events
+      summary: PagerDuty List Change Events
       parameters:
         - $ref: '#/components/parameters/offset_limit'
         - $ref: '#/components/parameters/offset_offset'
@@ -17283,9 +17283,9 @@ paths:
                         links:
                           - href: https://acme.pagerduty.dev/build/1
                             text: View more details in Acme!
-                    limit: null
-                    offset: null
-                    total: null
+                    limit:
+                    offset:
+                    total:
                     more: false
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -17294,7 +17294,7 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
     post:
-      summary: Create a Change Event
+      summary: PagerDuty Create a Change Event
       description: |
         Sending Change Events is documented as part of the V2 Events API. See [`Send Change Event`](https://developer.pagerduty.com/api-reference/b3A6Mjc0ODI2Ng-send-change-events-to-the-pager-duty-events-api).
       operationId: createChangeEvent
@@ -17317,7 +17317,7 @@ paths:
         Get details about an existing Change Event.
 
         Scoped OAuth requires: `change_events.read`
-      summary: Get a Change Event
+      summary: PagerDuty Get a Change Event
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -17364,7 +17364,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       x-pd-requires-scope: change_events.write
-      summary: Update a Change Event
+      summary: PagerDuty Update a Change Event
       description: |
         Update an existing Change Event
 
@@ -17453,7 +17453,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)
 
         Scoped OAuth requires: `escalation_policies.read`
-      summary: List escalation policies
+      summary: PagerDuty List escalation policies
       parameters:
         - $ref: '#/components/parameters/offset_limit'
         - $ref: '#/components/parameters/offset_offset'
@@ -17523,7 +17523,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -17545,7 +17545,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)
 
         Scoped OAuth requires: `escalation_policies.write`
-      summary: Create an escalation policy
+      summary: PagerDuty Create an escalation policy
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -17660,7 +17660,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)
 
         Scoped OAuth requires: `escalation_policies.read`
-      summary: Get an escalation policy
+      summary: PagerDuty Get an escalation policy
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -17737,7 +17737,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)
 
         Scoped OAuth requires: `escalation_policies.write`
-      summary: Delete an escalation policy
+      summary: PagerDuty Delete an escalation policy
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -17766,7 +17766,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)
 
         Scoped OAuth requires: `escalation_policies.write`
-      summary: Update an escalation policy
+      summary: PagerDuty Update an escalation policy
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -17874,7 +17874,7 @@ paths:
       tags:
         - Escalation Policies
       operationId: listEscalationPolicyAuditRecords
-      summary: List audit records for an escalation policy
+      summary: PagerDuty List audit records for an escalation policy
       description: |
         The returned records are sorted by the `execution_time` from newest to oldest.
 
@@ -17930,7 +17930,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.read`
-      summary: List Event Orchestrations
+      summary: PagerDuty List Event Orchestrations
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -18081,7 +18081,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Create an Orchestration
+      summary: PagerDuty Create an Orchestration
       operationId: postOrchestration
       requestBody:
         content:
@@ -18173,7 +18173,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.read`
-      summary: Get an Orchestration
+      summary: PagerDuty Get an Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -18240,7 +18240,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Update an Orchestration
+      summary: PagerDuty Update an Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -18339,7 +18339,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Delete an Orchestration
+      summary: PagerDuty Delete an Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -18373,7 +18373,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.read`
-      summary: List Integrations for an Event Orchestration
+      summary: PagerDuty List Integrations for an Event Orchestration
       operationId: listOrchestrationIntegrations
       parameters:
         - $ref: '#/components/parameters/header_Accept'
@@ -18429,7 +18429,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Create an Integration for an Event Orchestration
+      summary: PagerDuty Create an Integration for an Event Orchestration
       operationId: postOrchestrationIntegration
       requestBody:
         content:
@@ -18503,7 +18503,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.read`
-      summary: Get an Integration for an Event Orchestration
+      summary: PagerDuty Get an Integration for an Event Orchestration
       operationId: getOrchestrationIntegration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
@@ -18549,7 +18549,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Update an Integration for an Event Orchestration
+      summary: PagerDuty Update an Integration for an Event Orchestration
       operationId: updateOrchestrationIntegration
       requestBody:
         content:
@@ -18622,7 +18622,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Delete an Integration for an Event Orchestration
+      summary: PagerDuty Delete an Integration for an Event Orchestration
       operationId: deleteOrchestrationIntegration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
@@ -18656,7 +18656,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Migrate an Integration from one Event Orchestration to another
+      summary: PagerDuty Migrate an Integration from one Event Orchestration to another
       operationId: migrateOrchestrationIntegration
       requestBody:
         content:
@@ -18739,7 +18739,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: getOrchPathGlobal
-      summary: Get the Global Orchestration for an Event Orchestration
+      summary: PagerDuty Get the Global Orchestration for an Event Orchestration
       description: |
         Get the Global Orchestration for an Event Orchestration.
 
@@ -18775,7 +18775,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: updateOrchPathGlobal
-      summary: Update the Global Orchestration for an Event Orchestration
+      summary: PagerDuty Update the Global Orchestration for an Event Orchestration
       description: |
         Update the Global Orchestration for an Event Orchestration.
 
@@ -18949,7 +18949,7 @@ paths:
                       - feature: nested_rules
                         feature_type: nested_rules
                         message: This orchestration contains Nested Rules, which is not available on your account plan. The orchestration will be updated, however, only rules in the 'start' set will be evaluated
-                        rule_id: null
+                        rule_id:
                         warning_type: forbidden_feature
                       - feature: variables
                         feature_type: actions
@@ -18990,7 +18990,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: getOrchPathRouter
-      summary: Get the Router for an Event Orchestration
+      summary: PagerDuty Get the Router for an Event Orchestration
       description: |
         Get a Global Orchestration's Routing Rules.
 
@@ -19019,7 +19019,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: updateOrchPathRouter
-      summary: Update the Router for an Event Orchestration
+      summary: PagerDuty Update the Router for an Event Orchestration
       description: |
         Update a Global Orchestration's Routing Rules.
 
@@ -19153,7 +19153,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: getOrchPathUnrouted
-      summary: Get the Unrouted Orchestration for an Event Orchestration
+      summary: PagerDuty Get the Unrouted Orchestration for an Event Orchestration
       description: |
         Get a Global Event Orchestration's Rules for Unrouted events.
 
@@ -19184,7 +19184,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: updateOrchPathUnrouted
-      summary: Update the Unrouted Orchestration for an Event Orchestration
+      summary: PagerDuty Update the Unrouted Orchestration for an Event Orchestration
       description: |
         Update a Global Event Orchestration's Rules for Unrouted events.
 
@@ -19311,7 +19311,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: getOrchPathService
-      summary: Get the Service Orchestration for a Service
+      summary: PagerDuty Get the Service Orchestration for a Service
       description: |
         Get a Service Orchestration.
 
@@ -19341,7 +19341,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: updateOrchPathService
-      summary: Update the Service Orchestration for a Service
+      summary: PagerDuty Update the Service Orchestration for a Service
       description: |
         Update a Service Orchestration.
 
@@ -19546,7 +19546,7 @@ paths:
                       - feature: nested_rules
                         feature_type: nested_rules
                         message: This orchestration contains Nested Rules, which is not available on your account plan. The orchestration will be updated, however, only rules in the 'start' set will be evaluated
-                        rule_id: null
+                        rule_id:
                         warning_type: forbidden_feature
                       - feature: variables
                         feature_type: actions
@@ -19597,7 +19597,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: getOrchActiveStatus
-      summary: Get the Service Orchestration active status for a Service
+      summary: PagerDuty Get the Service Orchestration active status for a Service
       description: |
         Get a Service Orchestration's active status.
 
@@ -19626,7 +19626,7 @@ paths:
       tags:
         - Event Orchestrations
       operationId: updateOrchActiveStatus
-      summary: Update the Service Orchestration active status for a Service
+      summary: PagerDuty Update the Service Orchestration active status for a Service
       description: |
         Update a Service Orchestration's active status.
 
@@ -19680,7 +19680,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.read`
-      summary: List Cache Variables for a Global Event Orchestration
+      summary: PagerDuty List Cache Variables for a Global Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19709,7 +19709,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Create a Cache Variable for a Global Event Orchestration
+      summary: PagerDuty Create a Cache Variable for a Global Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19744,7 +19744,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.read`
-      summary: Get a Cache Variable for a Global Event Orchestration
+      summary: PagerDuty Get a Cache Variable for a Global Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19774,7 +19774,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Update a Cache Variable for a Global Event Orchestration
+      summary: PagerDuty Update a Cache Variable for a Global Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19808,7 +19808,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `event_orchestrations.write`
-      summary: Delete a Cache Variable for a Global Event Orchestration
+      summary: PagerDuty Delete a Cache Variable for a Global Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19840,7 +19840,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `services.read`
-      summary: List Cache Variables for a Service Event Orchestration
+      summary: PagerDuty List Cache Variables for a Service Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19869,7 +19869,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `services.write`
-      summary: Create a Cache Variable for a Service Event Orchestration
+      summary: PagerDuty Create a Cache Variable for a Service Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19904,7 +19904,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `services.read`
-      summary: Get a Cache Variable for a Service Event Orchestration
+      summary: PagerDuty Get a Cache Variable for a Service Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19934,7 +19934,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `services.write`
-      summary: Update a Cache Variable for a Service Event Orchestration
+      summary: PagerDuty Update a Cache Variable for a Service Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -19968,7 +19968,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
 
         Scoped OAuth requires: `services.write`
-      summary: Delete a Cache Variable for a Service Event Orchestration
+      summary: PagerDuty Delete a Cache Variable for a Service Event Orchestration
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20000,7 +20000,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extension-schemas)
 
         Scoped OAuth requires: `extension_schemas.read`
-      summary: List extension schemas
+      summary: PagerDuty List extension schemas
       parameters:
         - $ref: '#/components/parameters/offset_limit'
         - $ref: '#/components/parameters/offset_offset'
@@ -20050,7 +20050,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -20074,7 +20074,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extension-schemas)
 
         Scoped OAuth requires: `extension_schemas.read`
-      summary: Get an extension vendor
+      summary: PagerDuty Get an extension vendor
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20140,7 +20140,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)
 
         Scoped OAuth requires: `extensions.read`
-      summary: List extensions
+      summary: PagerDuty List extensions
       parameters:
         - $ref: '#/components/parameters/offset_limit'
         - $ref: '#/components/parameters/offset_offset'
@@ -20192,7 +20192,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -20212,7 +20212,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)
 
         Scoped OAuth requires: `extensions.write`
-      summary: Create an extension
+      summary: PagerDuty Create an extension
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20358,7 +20358,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)
 
         Scoped OAuth requires: `extensions.read`
-      summary: Get an extension
+      summary: PagerDuty Get an extension
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20422,7 +20422,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)
 
         Scoped OAuth requires: `extensions.write`
-      summary: Delete an extension
+      summary: PagerDuty Delete an extension
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20449,7 +20449,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)
 
         Scoped OAuth requires: `extensions.write`
-      summary: Update an extension
+      summary: PagerDuty Update an extension
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20551,7 +20551,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)
 
         Scoped OAuth requires: `extensions.write`
-      summary: Enable an extension
+      summary: PagerDuty Enable an extension
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20613,7 +20613,7 @@ paths:
         An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
 
         Scoped OAuth requires: `incident_workflows.read`
-      summary: List Incident Workflows
+      summary: PagerDuty List Incident Workflows
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20674,7 +20674,7 @@ paths:
         An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Create an Incident Workflow
+      summary: PagerDuty Create an Incident Workflow
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20770,7 +20770,7 @@ paths:
         An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
 
         Scoped OAuth requires: `incident_workflows.read`
-      summary: Get an Incident Workflow
+      summary: PagerDuty Get an Incident Workflow
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20844,7 +20844,7 @@ paths:
         An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Delete an Incident Workflow
+      summary: PagerDuty Delete an Incident Workflow
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20875,7 +20875,7 @@ paths:
         An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Update an Incident Workflow
+      summary: PagerDuty Update an Incident Workflow
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -20975,7 +20975,7 @@ paths:
         An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
 
         Scoped OAuth requires: `incident_workflows:instances.write`
-      summary: Start an Incident Workflow Instance
+      summary: PagerDuty Start an Incident Workflow Instance
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21058,7 +21058,7 @@ paths:
         List Incident Workflow Actions
 
         Scoped OAuth requires: `incident_workflows.read`
-      summary: List Actions
+      summary: PagerDuty List Actions
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21149,7 +21149,7 @@ paths:
         Get an Incident Workflow Action
 
         Scoped OAuth requires: `incident_workflows.read`
-      summary: Get an Action
+      summary: PagerDuty Get an Action
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21227,7 +21227,7 @@ paths:
         List existing Incident Workflow Triggers
 
         Scoped OAuth requires: `incident_workflows.read`
-      summary: List Triggers
+      summary: PagerDuty List Triggers
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21305,7 +21305,7 @@ paths:
         Create new Incident Workflow Trigger
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Create a Trigger
+      summary: PagerDuty Create a Trigger
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21395,7 +21395,7 @@ paths:
         Retrieve an existing Incident Workflows Trigger
 
         Scoped OAuth requires: `incident_workflows.read`
-      summary: Get a Trigger
+      summary: PagerDuty Get a Trigger
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21455,7 +21455,7 @@ paths:
         Update an existing Incident Workflow Trigger
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Update a Trigger
+      summary: PagerDuty Update a Trigger
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21541,7 +21541,7 @@ paths:
         Delete an existing Incident Workflow Trigger
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Delete a Trigger
+      summary: PagerDuty Delete a Trigger
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21572,7 +21572,7 @@ paths:
         Associate a Service with an existing Incident Workflow Trigger
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Associate a Trigger and Service
+      summary: PagerDuty Associate a Trigger and Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21660,7 +21660,7 @@ paths:
         Remove a an existing Service from an Incident Workflow Trigger
 
         Scoped OAuth requires: `incident_workflows.write`
-      summary: Dissociate a Trigger and Service
+      summary: PagerDuty Dissociate a Trigger and Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21729,7 +21729,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: List incidents
+      summary: PagerDuty List incidents
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -21818,7 +21818,7 @@ paths:
                         alert_grouping:
                           grouping_type: advanced
                           started_at: '2015-10-06T21:30:42Z'
-                          ended_at: null
+                          ended_at:
                           alert_grouping_active: true
                         last_status_change_by:
                           id: PXPGF42
@@ -21831,7 +21831,7 @@ paths:
                           type: priority_reference
                           summary: P2
                           self: https://api.pagerduty.com/priorities/P53ZZH5
-                        resolve_reason: null
+                        resolve_reason:
                         conference_bridge:
                           conference_number: +1-415-555-1212,,,,1234#
                           conference_url: https://example.com/acb-123
@@ -21869,7 +21869,7 @@ paths:
         Scoped OAuth requires: `incidents.write`
 
         This API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more information.
-      summary: Manage incidents
+      summary: PagerDuty Manage incidents
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22069,7 +22069,7 @@ paths:
         Scoped OAuth requires: `incidents.write`
 
         This API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more information.
-      summary: Create an Incident
+      summary: PagerDuty Create an Incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22192,7 +22192,7 @@ paths:
                             summary: Earline Greenholt
                             self: https://api.pagerduty.com/users/PXPGF42
                             html_url: https://subdomain.pagerduty.com/users/PXPGF42
-                      resolved_at: null
+                      resolved_at:
                       last_status_change_at: '2015-10-06T21:38:23Z'
                       last_status_change_by:
                         id: PXPGF42
@@ -22242,7 +22242,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get an incident
+      summary: PagerDuty Get an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22292,7 +22292,7 @@ paths:
                             html_url: https://subdomain.pagerduty.com/users/PXPGF42
                       assigned_via: escalation_policy
                       last_status_change_at: '2015-10-06T21:38:23Z'
-                      resolved_at: null
+                      resolved_at:
                       first_trigger_log_entry:
                         id: Q02JTSNZWHSEKV
                         type: trigger_log_entry_reference
@@ -22332,7 +22332,7 @@ paths:
                       alert_grouping:
                         grouping_type: advanced
                         started_at: '2015-10-06T21:30:42Z'
-                        ended_at: null
+                        ended_at:
                         alert_grouping_active: true
                       last_status_change_by:
                         id: PXPGF42
@@ -22345,7 +22345,7 @@ paths:
                         type: priority_reference
                         summary: P2
                         self: https://api.pagerduty.com/priorities/P53ZZH5
-                      resolve_reason: null
+                      resolve_reason:
                       conference_bridge:
                         conference_number: +1-415-555-1212,,,,1234#
                         conference_url: https://example.com/acb-123
@@ -22451,7 +22451,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Update an incident
+      summary: PagerDuty Update an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22630,7 +22630,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: List alerts for an incident
+      summary: PagerDuty List alerts for an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22721,7 +22721,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Manage alerts
+      summary: PagerDuty Manage alerts
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22833,7 +22833,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get an alert
+      summary: PagerDuty Get an alert
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22909,7 +22909,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Update an alert
+      summary: PagerDuty Update an alert
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -22984,7 +22984,7 @@ paths:
   /incidents/{id}/business_services/{business_service_id}/impacts:
     put:
       x-pd-requires-scope: incidents.write
-      summary: Manually change an Incident's Impact on a Business Service.
+      summary: PagerDuty Manually change an Incident's Impact on a Business Service.
       tags:
         - Incidents
       responses:
@@ -23047,7 +23047,7 @@ paths:
   /incidents/{id}/business_services/impacts:
     get:
       x-pd-requires-scope: incidents.read
-      summary: List Business Services impacted by the given Incident
+      summary: PagerDuty List Business Services impacted by the given Incident
       tags:
         - Incidents
       responses:
@@ -23069,7 +23069,7 @@ paths:
                   summary: Response Example
                   value:
                     limit: 100
-                    next_cursor: null
+                    next_cursor:
                     services:
                       - id: PD1234
                         name: Web API
@@ -23109,7 +23109,7 @@ paths:
         <!-- theme: warning -->
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get Custom Field Values
+      summary: PagerDuty Get Custom Field Values
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -23168,7 +23168,7 @@ paths:
         Set custom field values for an incident.
 
         Scoped OAuth requires: `incidents.write`
-      summary: Update Custom Field Values
+      summary: PagerDuty Update Custom Field Values
       parameters:
         - $ref: '#/components/parameters/id'
       requestBody:
@@ -23281,7 +23281,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: List log entries for an incident
+      summary: PagerDuty List log entries for an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -23384,7 +23384,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Merge incidents
+      summary: PagerDuty Merge incidents
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -23459,7 +23459,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: List notes for an incident
+      summary: PagerDuty List notes for an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -23534,7 +23534,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Create a note on an incident
+      summary: PagerDuty Create a note on an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -23613,7 +23613,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#outlier-incident)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get Outlier Incident
+      summary: PagerDuty Get Outlier Incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -23686,7 +23686,7 @@ paths:
       - $ref: '#/components/parameters/id'
     get:
       x-pd-requires-scope: incidents.read
-      summary: Get Past Incidents
+      summary: PagerDuty Get Past Incidents
       tags:
         - Incidents
       responses:
@@ -23787,7 +23787,7 @@ paths:
         The Change Correlation feature provides incident responders with recent change events that are most relevant to that incident. Change Correlation informs the responder why a particular change event was surfaced and correlated to an incident based on three key factors which include time, related service, or intelligence (machine learning).
 
         Scoped OAuth requires: `incidents.read`
-      summary: List related Change Events for an Incident
+      summary: PagerDuty List related Change Events for an Incident
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/offset_limit'
@@ -23864,9 +23864,9 @@ paths:
                             text: View more details in Acme!
                         correlation_reason:
                           reason: related_service
-                    limit: null
-                    offset: null
-                    total: null
+                    limit:
+                    offset:
+                    total:
                     more: false
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -23889,7 +23889,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#related_incidents)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get Related Incidents
+      summary: PagerDuty Get Related Incidents
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -23978,7 +23978,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Create a responder request for an incident
+      summary: PagerDuty Create a responder request for an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -24099,7 +24099,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Snooze an incident
+      summary: PagerDuty Snooze an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -24230,7 +24230,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Create a status update on an incident
+      summary: PagerDuty Create a status update on an incident
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -24301,7 +24301,7 @@ paths:
   /incidents/{id}/status_updates/subscribers:
     get:
       x-pd-requires-scope: subscribers.read
-      summary: List Notification Subscribers
+      summary: PagerDuty List Notification Subscribers
       tags:
         - Incidents
       responses:
@@ -24334,7 +24334,7 @@ paths:
                       - subscriber_id: PD1234
                         subscriber_type: user
                         has_indirect_subscription: false
-                        subscribed_via: null
+                        subscribed_via:
                       - subscriber_id: PD1234
                         subscriber_type: team
                         has_indirect_subscription: true
@@ -24365,7 +24365,7 @@ paths:
         - $ref: '#/components/parameters/id'
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Add Notification Subscribers
+      summary: PagerDuty Add Notification Subscribers
       operationId: createIncidentNotificationSubscribers
       tags:
         - Incidents
@@ -24448,7 +24448,7 @@ paths:
   /incidents/{id}/status_updates/unsubscribe:
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Remove Notification Subscriber
+      summary: PagerDuty Remove Notification Subscriber
       tags:
         - Incidents
       responses:
@@ -24529,7 +24529,7 @@ paths:
         Create a new Field, along with the Field Options if provided. An account may have up to 10 Fields.
 
         Scoped OAuth requires: `custom_fields.write`
-      summary: Create a Field
+      summary: PagerDuty Create a Field
       requestBody:
         content:
           application/json:
@@ -24695,7 +24695,7 @@ paths:
         List fields.
 
         Scoped OAuth requires: `custom_fields.read`
-      summary: List Fields
+      summary: PagerDuty List Fields
       parameters:
         - $ref: '#/components/parameters/include_customfields_field'
       responses:
@@ -24729,7 +24729,7 @@ paths:
                         field_type: single_value_fixed
                         created_at: '2021-06-01T21:30:42Z'
                         updated_at: '2021-06-01T21:30:42Z'
-                        default_value: null
+                        default_value:
                         field_options:
                           - id: PT4KHEE
                             type: field_option
@@ -24753,7 +24753,7 @@ paths:
         Show detailed information about a field.
 
         Scoped OAuth requires: `custom_fields.read`
-      summary: Get a Field
+      summary: PagerDuty Get a Field
       parameters:
         - $ref: '#/components/parameters/field_id'
         - $ref: '#/components/parameters/include_customfields_field'
@@ -24783,7 +24783,7 @@ paths:
                       display_name: Environment
                       description: The environment that the issue occurred in
                       field_type: multi_value
-                      default_value: null
+                      default_value:
                       created_at: '2021-06-01T21:30:42Z'
                       updated_at: '2021-06-01T21:30:42Z'
                 response2:
@@ -24801,7 +24801,7 @@ paths:
                       field_type: single_value_fixed
                       created_at: '2021-06-01T21:30:42Z'
                       updated_at: '2021-06-01T21:30:42Z'
-                      default_value: null
+                      default_value:
                       field_options:
                         - id: PT4KHEE
                           type: field_option
@@ -24832,7 +24832,7 @@ paths:
         Update a field.
 
         Scoped OAuth requires: `custom_fields.write`
-      summary: Update a Field
+      summary: PagerDuty Update a Field
       parameters:
         - $ref: '#/components/parameters/field_id'
       requestBody:
@@ -24878,7 +24878,7 @@ paths:
                       display_name: New Display Name!
                       description: New description!
                       field_type: single_value
-                      default_value: null
+                      default_value:
                       created_at: '2021-06-01T21:30:42Z'
                       updated_at: '2021-06-01T21:30:42Z'
         '400':
@@ -24898,7 +24898,7 @@ paths:
         Delete a Field. Fields may not be deleted if they are used by a Field Schema.
 
         Scoped OAuth requires: `custom_fields.write`
-      summary: Delete a Field
+      summary: PagerDuty Delete a Field
       parameters:
         - $ref: '#/components/parameters/field_id'
       responses:
@@ -24923,7 +24923,7 @@ paths:
         Create a new Field Option. Field Options may only be created for Fields that have `field_options`. A Field may have no more than 10 enabled options.
 
         Scoped OAuth requires: `custom_fields.write`
-      summary: Create a Field Option
+      summary: PagerDuty Create a Field Option
       parameters:
         - $ref: '#/components/parameters/field_id'
       requestBody:
@@ -24985,7 +24985,7 @@ paths:
         List all enabled Field Options for a Field.
 
         Scoped OAuth requires: `custom_fields.read`
-      summary: List Field Options
+      summary: PagerDuty List Field Options
       parameters:
         - $ref: '#/components/parameters/field_id'
       responses:
@@ -25029,7 +25029,7 @@ paths:
         Update Field Option for a Field.
 
         Scoped OAuth requires: `custom_fields.write`
-      summary: Update a Field Option
+      summary: PagerDuty Update a Field Option
       parameters:
         - $ref: '#/components/parameters/field_id'
         - $ref: '#/components/parameters/field_option_id'
@@ -25092,7 +25092,7 @@ paths:
         Delete a Field Option.
 
         Scoped OAuth requires: `custom_fields.write`
-      summary: Delete a Field Option
+      summary: PagerDuty Delete a Field Option
       parameters:
         - $ref: '#/components/parameters/field_id'
         - $ref: '#/components/parameters/field_option_id'
@@ -25118,7 +25118,7 @@ paths:
         List the Licenses allocated to Users within your Account
 
         Scoped OAuth requires: `licenses.read`
-      summary: List License Allocations
+      summary: PagerDuty List License Allocations
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25170,8 +25170,8 @@ paths:
                           role_group: FullUser
                           summary: Business (Full User)
                           type: license
-                          self: null
-                          html_url: null
+                          self:
+                          html_url:
                         user:
                           id: PIP248H
                           type: user_reference
@@ -25197,7 +25197,7 @@ paths:
         List the Licenses associated with your Account
 
         Scoped OAuth requires: `licenses.read`
-      summary: List Licenses
+      summary: PagerDuty List Licenses
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25233,8 +25233,8 @@ paths:
                         role_group: FullUser
                         summary: Business (Full User)
                         type: license
-                        self: null
-                        html_url: null
+                        self:
+                        html_url:
                       - id: PTHH1SQ
                         name: Business (Full User)
                         description: ''
@@ -25250,8 +25250,8 @@ paths:
                         role_group: FullUser
                         summary: Business (Full User)
                         type: license
-                        self: null
-                        html_url: null
+                        self:
+                        html_url:
                       - id: PQ8W0D0
                         name: Business (Stakeholder)
                         description: ''
@@ -25263,8 +25263,8 @@ paths:
                         role_group: Stakeholder
                         summary: Business (Stakeholder)
                         type: license
-                        self: null
-                        html_url: null
+                        self:
+                        html_url:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -25286,7 +25286,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#log-entries)
 
         Scoped OAuth requires: `incidents.read`
-      summary: List log entries
+      summary: PagerDuty List log entries
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25390,7 +25390,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#log-entries)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get a log entry
+      summary: PagerDuty Get a log entry
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25481,7 +25481,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#log-entries)
 
         Scoped OAuth requires: `incidents.write`
-      summary: Update log entry channel information.
+      summary: PagerDuty Update log entry channel information.
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25547,7 +25547,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)
 
         Scoped OAuth requires: `services.read`
-      summary: List maintenance windows
+      summary: PagerDuty List maintenance windows
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25610,7 +25610,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -25632,7 +25632,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)
 
         Scoped OAuth requires: `services.write`
-      summary: Create a maintenance window
+      summary: PagerDuty Create a maintenance window
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25727,7 +25727,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)
 
         Scoped OAuth requires: `services.read`
-      summary: Get a maintenance window
+      summary: PagerDuty Get a maintenance window
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25798,7 +25798,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)
 
         Scoped OAuth requires: `services.write`
-      summary: Delete or end a maintenance window
+      summary: PagerDuty Delete or end a maintenance window
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25829,7 +25829,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)
 
         Scoped OAuth requires: `services.write`
-      summary: Update a maintenance window
+      summary: PagerDuty Update a maintenance window
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25926,7 +25926,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#notifications)
 
         Scoped OAuth requires: `users:notifications.read`
-      summary: List notifications
+      summary: PagerDuty List notifications
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -25981,7 +25981,7 @@ paths:
                     limit: 100
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -26014,7 +26014,7 @@ paths:
         Scoped OAuth requires: `oncalls.read`
 
         This API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more information.
-      summary: List all of the on-calls
+      summary: PagerDuty List all of the on-calls
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26074,7 +26074,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -26096,7 +26096,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get Paused Incident Reporting on Alerts
+      summary: PagerDuty Get Paused Incident Reporting on Alerts
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26192,7 +26192,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)
 
         Scoped OAuth requires: `incidents.read`
-      summary: Get Paused Incident Reporting counts
+      summary: PagerDuty Get Paused Incident Reporting counts
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26263,7 +26263,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#priorities)
 
         Scoped OAuth requires: `priorities.read`
-      summary: List priorities
+      summary: PagerDuty List priorities
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26324,7 +26324,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -26353,7 +26353,7 @@ paths:
         When using a Global API token, the `From` header is required.
 
         Scoped OAuth requires: `response_plays.read`
-      summary: List Response Plays
+      summary: PagerDuty List Response Plays
       parameters:
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/filter_for_manual_run'
@@ -26378,23 +26378,23 @@ paths:
                   value:
                     response_plays:
                       - type: response_play
-                        team: null
+                        team:
                         summary: An Existing Response Play For Responders
                         self: https://api.pagerduty.com/response_plays/15b4b27e-2448-adf9-c5a5-85382304ff37
                         name: An Existing Response Play For Responders
                         id: 15b4b27e-2448-adf9-c5a5-85382304ff37
-                        html_url: null
+                        html_url:
                         description: A Response Play that adds responders.
                       - type: response_play
-                        team: null
+                        team:
                         summary: An Existing Response Play For Subscribers
                         self: https://api.pagerduty.com/response_plays/15b4b27e-2771-abe5-t6m9-81234304ff37
                         name: An Existing Response Play For Subscribers
                         id: 15b4b27e-2771-abe5-t6m9-81234304ff37
-                        html_url: null
+                        html_url:
                         description: A Response Play that adds subscribers.
-                    limit: null
-                    offset: null
+                    limit:
+                    offset:
                     total: 2
                     more: false
         '400':
@@ -26417,7 +26417,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)
 
         Scoped OAuth requires: `response_plays.write`
-      summary: Create a Response Play
+      summary: PagerDuty Create a Response Play
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26438,11 +26438,11 @@ paths:
                 value:
                   response_play:
                     type: response_play
-                    team: null
+                    team:
                     name: Standard NOC-EP
                     description: A Response Play to add NOC EP on Run
                     subscribers: []
-                    subscribers_message: null
+                    subscribers_message:
                     responders:
                       - type: user_reference
                         id: PROW72A
@@ -26478,35 +26478,35 @@ paths:
                   value:
                     response_play:
                       type: response_play
-                      team: null
+                      team:
                       summary: A New Response Play
                       subscribers_message: Please view the attached incident.
                       subscribers:
                         - type: user_reference
-                          summary: null
+                          summary:
                           self: https://api.pagerduty.com/users/PSEJLIN
                           id: PSEJLIN
-                          html_url: null
+                          html_url:
                         - type: team_reference
-                          summary: null
+                          summary:
                           self: https://api.pagerduty.com/teams/P12TU3X
                           id: P12TU3X
-                          html_url: null
+                          html_url:
                       self: https://api.pagerduty.com/response_plays/15b4b27e-2448-adf9-c5a5-85382304ff37
                       runnability: services
                       responders_message: We need executive attention on this incident.
                       responders:
                         - type: user_reference
-                          summary: null
+                          summary:
                           self: https://api.pagerduty.com/users/PZOW51A
                           id: PZOW51A
-                          html_url: null
+                          html_url:
                       name: A New Response Play
                       id: 15b4b27e-2448-adf9-c5a5-85382304ff37
-                      html_url: null
+                      html_url:
                       description: A Response Play that adds subscribers and responders
-                      conference_url: null
-                      conference_number: null
+                      conference_url:
+                      conference_number:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -26530,7 +26530,7 @@ paths:
 
         When using a Global API token, the `From` header is required.
         Scoped OAuth requires: `response_plays.read`
-      summary: Get a Response Play
+      summary: PagerDuty Get a Response Play
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/header_Accept'
@@ -26552,25 +26552,25 @@ paths:
                   value:
                     response_play:
                       type: response_play
-                      team: null
+                      team:
                       summary: Email Service Response Play
-                      subscribers_message: null
-                      subscribers: null
+                      subscribers_message:
+                      subscribers:
                       self: https://api.pagerduty.com/response_plays/15b4b27e-2448-adf9-c5a5-85382304ff37
                       runnability: services
-                      responders_message: null
+                      responders_message:
                       responders:
                         - type: escalation_policy_reference
-                          summary: null
+                          summary:
                           self: https://api.pagerduty.com/escalation_policies/PZOW51A
                           id: PZOW51A
-                          html_url: null
+                          html_url:
                       name: Email Service Response Play
                       id: 15b4b27e-2448-adf9-c5a5-85382304ff37
-                      html_url: null
-                      description: null
-                      conference_url: null
-                      conference_number: null
+                      html_url:
+                      description:
+                      conference_url:
+                      conference_number:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -26593,7 +26593,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)
 
         Scoped OAuth requires: `response_plays.write`
-      summary: Update a Response Play
+      summary: PagerDuty Update a Response Play
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/header_Accept'
@@ -26615,7 +26615,7 @@ paths:
                 value:
                   response_play:
                     type: response_play
-                    team: null
+                    team:
                     summary: Test Response Play
                     subscribers_message: Please view the attached incident.
                     subscribers:
@@ -26623,14 +26623,14 @@ paths:
                         id: PFS9QZZ
                     self: https://api.pagerduty.com/response_plays/153d9e1f-9008-ee4e-fa70-0d70cdf92f27
                     runnability: responders
-                    responders_message: null
+                    responders_message:
                     responders: []
                     name: Test Response Play
                     id: 153d9e1f-9008-ee4e-fa70-0d70cdf92f27
-                    html_url: null
+                    html_url:
                     description: An updated description of this Response Play.
-                    conference_url: null
-                    conference_number: null
+                    conference_url:
+                    conference_number:
         description: The Response Play to be updated.
       responses:
         '200':
@@ -26648,25 +26648,25 @@ paths:
                   value:
                     response_play:
                       type: response_play
-                      team: null
+                      team:
                       summary: Test Response Play
                       subscribers_message: Please view the attached incident.
                       subscribers:
                         - type: user_reference
-                          summary: null
+                          summary:
                           self: https://api.pagerduty.com/users/PFS9QZZ
                           id: PFS9QZZ
-                          html_url: null
+                          html_url:
                       self: https://api.pagerduty.com/response_plays/153d9e1f-9008-ee4e-fa70-0d70cdf92f27
                       runnability: services
-                      responders_message: null
+                      responders_message:
                       responders: []
                       name: Test Response Play
                       id: 153d9e1f-9008-ee4e-fa70-0d70cdf92f27
-                      html_url: null
-                      description: null
-                      conference_url: null
-                      conference_number: null
+                      html_url:
+                      description:
+                      conference_url:
+                      conference_number:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '402':
@@ -26691,7 +26691,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)
 
         Scoped OAuth requires: `response_plays.write`
-      summary: Delete a Response Play
+      summary: PagerDuty Delete a Response Play
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/header_Accept'
@@ -26722,7 +26722,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)
 
         Scoped OAuth requires: `response_plays.write`
-      summary: Run a response play
+      summary: PagerDuty Run a response play
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26786,7 +26786,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#rulesets)
 
         Scoped OAuth requires: `event_rules.read`
-      summary: List Rulesets
+      summary: PagerDuty List Rulesets
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26835,7 +26835,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -26858,7 +26858,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#rulesets)
 
         Scoped OAuth requires: `event_rules.write`
-      summary: Create a Ruleset
+      summary: PagerDuty Create a Ruleset
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -26946,7 +26946,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#rulesets)
 
         Scoped OAuth requires: `event_rules.read`
-      summary: Get a Ruleset
+      summary: PagerDuty Get a Ruleset
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27010,7 +27010,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#rulesets)
 
         Scoped OAuth requires: `event_rules.write`
-      summary: Update a Ruleset
+      summary: PagerDuty Update a Ruleset
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27101,7 +27101,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#rulesets)
 
         Scoped OAuth requires: `event_rules.write`
-      summary: Delete a Ruleset
+      summary: PagerDuty Delete a Ruleset
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27141,7 +27141,7 @@ paths:
         Note: Create and Update on rules will accept 'description' or 'summary' interchangeably as an extraction action target. Get and List on rules will always return 'summary' as the target. If you are expecting 'description' please change your automation code to expect 'summary' instead.
 
         Scoped OAuth requires: `event_rules.read`
-      summary: List Event Rules
+      summary: PagerDuty List Event Rules
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27206,16 +27206,16 @@ paths:
                         actions:
                           suppress:
                             value: true
-                          severity: null
-                          route: null
-                          priority: null
+                          severity:
+                          route:
+                          priority:
                           extractions: []
-                          event_action: null
-                          annotate: null
+                          event_action:
+                          annotate:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -27240,7 +27240,7 @@ paths:
         Note: Create and Update on rules will accept 'description' or 'summary' interchangeably as an extraction action target. Get and List on rules will always return 'summary' as the target. If you are expecting 'description' please change your automation code to expect 'summary' instead.
 
         Scoped OAuth requires: `event_rules.write`
-      summary: Create an Event Rule
+      summary: PagerDuty Create an Event Rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27362,7 +27362,7 @@ paths:
         Note: Create and Update on rules will accept 'description' or 'summary' interchangeably as an extraction action target. Get and List on rules will always return 'summary' as the target. If you are expecting 'description' please change your automation code to expect 'summary' instead.
 
         Scoped OAuth requires: `event_rules.read`
-      summary: Get an Event Rule
+      summary: PagerDuty Get an Event Rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27435,7 +27435,7 @@ paths:
       tags:
         - Rulesets
       operationId: updateRulesetEventRule
-      summary: Update an Event Rule
+      summary: PagerDuty Update an Event Rule
       description: |
         Update an Event Rule. Note that the endpoint supports partial updates, so any number of the writable fields can be provided.
         <!-- theme: warning -->
@@ -27557,7 +27557,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#rulesets)
 
         Scoped OAuth requires: `event_rules.write`
-      summary: Delete an Event Rule
+      summary: PagerDuty Delete an Event Rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27593,7 +27593,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.read`
-      summary: List schedules
+      summary: PagerDuty List schedules
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27646,7 +27646,7 @@ paths:
                     limit: 100
                     offset: 0
                     more: false
-                    total: null
+                    total:
                 With Schedule Layers:
                   summary: With Schedule Layers Included
                   value:
@@ -27691,7 +27691,7 @@ paths:
                     limit: 100
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -27713,7 +27713,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.write`
-      summary: Create a schedule
+      summary: PagerDuty Create a schedule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27831,7 +27831,7 @@ paths:
       description: |
         Show detailed information about a schedule, including entries for each layer.
         Scoped OAuth requires: `schedules.read`
-      summary: Get a schedule
+      summary: PagerDuty Get a schedule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27949,7 +27949,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.write`
-      summary: Delete a schedule
+      summary: PagerDuty Delete a schedule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -27980,7 +27980,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.write`
-      summary: Update a schedule
+      summary: PagerDuty Update a schedule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -28104,7 +28104,7 @@ paths:
       tags:
         - Schedules
       operationId: listSchedulesAuditRecords
-      summary: List audit records for a schedule
+      summary: PagerDuty List audit records for a schedule
       description: |
         The returned records are sorted by the `execution_time` from newest to oldest.
 
@@ -28160,7 +28160,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.read`
-      summary: List overrides
+      summary: PagerDuty List overrides
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -28222,7 +28222,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.write`
-      summary: Create one or more overrides
+      summary: PagerDuty Create one or more overrides
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -28351,7 +28351,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.write`
-      summary: Delete an override
+      summary: PagerDuty Delete an override
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -28385,7 +28385,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `users.read`
-      summary: List users on call.
+      summary: PagerDuty List users on call.
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -28435,7 +28435,7 @@ paths:
                             type: assignment_notification_rule_reference
                             summary: Default
                             self: https://api.pagerduty.com/users/PAM4FGS/notification_rules/P8GRWKZ
-                            html_url: null
+                            html_url:
                         job_title: Senior Engineer
                         teams:
                           - id: PQ9K7I8
@@ -28466,7 +28466,7 @@ paths:
                             type: assignment_notification_rule_reference
                             summary: Default
                             self: https://api.pagerduty.com/users/PXPGF42/notification_rules/P8GRWKK
-                            html_url: null
+                            html_url:
                         job_title: Director of Engineering
                         teams:
                           - id: PQ9K7I8
@@ -28499,7 +28499,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#schedules)
 
         Scoped OAuth requires: `schedules.write`
-      summary: Preview a schedule
+      summary: PagerDuty Preview a schedule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -28617,7 +28617,7 @@ paths:
       tags:
         - Service Dependencies
       operationId: createServiceDependency
-      summary: Associate service dependencies
+      summary: PagerDuty Associate service dependencies
       description: |
         Create new dependencies between two services.
 
@@ -28746,7 +28746,7 @@ paths:
       tags:
         - Service Dependencies
       operationId: getBusinessServiceServiceDependencies
-      summary: Get Business Service dependencies
+      summary: PagerDuty Get Business Service dependencies
       description: |
         Get all immediate dependencies of any Business Service.
 
@@ -28829,7 +28829,7 @@ paths:
       tags:
         - Service Dependencies
       operationId: deleteServiceDependency
-      summary: Disassociate service dependencies
+      summary: PagerDuty Disassociate service dependencies
       description: |
         Disassociate dependencies between two services.
 
@@ -28956,7 +28956,7 @@ paths:
       tags:
         - Service Dependencies
       operationId: getTechnicalServiceServiceDependencies
-      summary: Get technical service dependencies
+      summary: PagerDuty Get technical service dependencies
       description: |
         Get all immediate dependencies of any technical service.
         Technical services are also known as `services`.
@@ -29046,7 +29046,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
 
         Scoped OAuth requires: `services.read`
-      summary: List services
+      summary: PagerDuty List services
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -29142,7 +29142,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -29166,7 +29166,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
 
         Scoped OAuth requires: `services.write`
-      summary: Create a service
+      summary: PagerDuty Create a service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -29325,7 +29325,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
 
         Scoped OAuth requires: `services.read`
-      summary: Get a service
+      summary: PagerDuty Get a service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -29428,7 +29428,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
 
         Scoped OAuth requires: `services.write`
-      summary: Delete a service
+      summary: PagerDuty Delete a service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -29454,7 +29454,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
 
         Scoped OAuth requires: `services.write`
-      summary: Update a service
+      summary: PagerDuty Update a service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -29611,7 +29611,7 @@ paths:
       tags:
         - Services
       operationId: listServiceAuditRecords
-      summary: List audit records for a service
+      summary: PagerDuty List audit records for a service
       description: |
         The returned records are sorted by the `execution_time` from newest to oldest.
 
@@ -29663,7 +29663,7 @@ paths:
         List all of the existing Change Events for a service.
 
         Scoped OAuth requires: `services.read`
-      summary: List Change Events for a service
+      summary: PagerDuty List Change Events for a service
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/change_since'
@@ -29728,9 +29728,9 @@ paths:
                         links:
                           - href: https://acme.pagerduty.dev/build/1
                             text: View more details in Acme!
-                    limit: null
-                    offset: null
-                    total: null
+                    limit:
+                    offset:
+                    total:
                     more: false
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -29747,7 +29747,7 @@ paths:
       tags:
         - Services
       operationId: createServiceIntegration
-      summary: Create a new integration
+      summary: PagerDuty Create a new integration
       description: |
         Create a new integration belonging to a Service.
 
@@ -29868,7 +29868,7 @@ paths:
       tags:
         - Services
       operationId: updateServiceIntegration
-      summary: Update an existing integration
+      summary: PagerDuty Update an existing integration
       description: |
         Update an integration belonging to a Service.
 
@@ -29956,7 +29956,7 @@ paths:
       tags:
         - Services
       operationId: getServiceIntegration
-      summary: View an integration
+      summary: PagerDuty View an integration
       description: |
         Get details about an integration belonging to a service.
 
@@ -30028,7 +30028,7 @@ paths:
         > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
         Scoped OAuth requires: `services.read`
-      summary: List Service's Event Rules
+      summary: PagerDuty List Service's Event Rules
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -30157,7 +30157,7 @@ paths:
                     migrated_via: API
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -30176,7 +30176,7 @@ paths:
         > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
         Scoped OAuth requires: `services.write`
-      summary: Create an Event Rule on a Service
+      summary: PagerDuty Create an Event Rule on a Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -30279,7 +30279,7 @@ paths:
       tags:
         - Services
       operationId: convertServiceEventRulesToEventOrchestration
-      summary: Convert a Service's Event Rules into Event Orchestration Rules
+      summary: PagerDuty Convert a Service's Event Rules into Event Orchestration Rules
       description: |
         Convert this Service's Event Rules into functionally equivalent Event Orchestration Rules.
 
@@ -30398,7 +30398,7 @@ paths:
         > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
         Scoped OAuth requires: `services.read`
-      summary: Get an Event Rule from a Service
+      summary: PagerDuty Get an Event Rule from a Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -30458,7 +30458,7 @@ paths:
       tags:
         - Services
       operationId: updateServiceEventRule
-      summary: Update an Event Rule on a Service
+      summary: PagerDuty Update an Event Rule on a Service
       description: |
         Update an Event Rule on a Service. Note that the endpoint supports partial updates, so any number of the writable fields can be provided.
         <!-- theme: warning -->
@@ -30564,7 +30564,7 @@ paths:
         > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
         Scoped OAuth requires: `services.write`
-      summary: Delete an Event Rule from a Service
+      summary: PagerDuty Delete an Event Rule from a Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -30591,7 +30591,7 @@ paths:
       tags:
         - Standards
       operationId: listStandards
-      summary: List Standards
+      summary: PagerDuty List Standards
       description: |
         Get all standards of an account.
 
@@ -30655,7 +30655,7 @@ paths:
       x-pd-requires-scope: standards.write
       tags:
         - Standards
-      summary: Update a standard
+      summary: PagerDuty Update a standard
       operationId: updateStandard
       description: |
         Updates a standard
@@ -30726,7 +30726,7 @@ paths:
       x-pd-requires-scope: standards.read
       tags:
         - Standards
-      summary: List resources' standards scores
+      summary: PagerDuty List resources' standards scores
       operationId: listResourceStandardsManyServices
       description: |
         List standards applied to a set of resources
@@ -30777,7 +30777,7 @@ paths:
       x-pd-requires-scope: standards.read
       tags:
         - Standards
-      summary: List a resource's standards scores
+      summary: PagerDuty List a resource's standards scores
       operationId: listResourceStandards
       description: |
         List standards applied to a specific resource
@@ -30826,7 +30826,7 @@ paths:
         Get all your account's custom Status Dashboard views.
 
         Scoped OAuth requires: `status_dashboards.read`
-      summary: List Status Dashboards
+      summary: PagerDuty List Status Dashboards
       responses:
         '200':
           description: OK
@@ -30846,7 +30846,7 @@ paths:
                   summary: Response Example
                   value:
                     limit: 100
-                    next_cursor: null
+                    next_cursor:
                     status_dashboards:
                       - id: PFCVPS0
                         url_slug: analytics-api
@@ -30869,7 +30869,7 @@ paths:
         Get a Status Dashboard by its PagerDuty `id`.
 
         Scoped OAuth requires: `status_dashboards.read`
-      summary: Get a single Status Dashboard by `id`
+      summary: PagerDuty Get a single Status Dashboard by `id`
       responses:
         '200':
           description: OK
@@ -30917,7 +30917,7 @@ paths:
         To get Impact information about a specific Business Service on the Status Dashboard that does not appear in the Impact-sorted response, use the `ids[]` parameter on the `/business_services/impacts` endpoint.
 
         Scoped OAuth requires: `status_dashboards.read`
-      summary: Get impacted Business Services for a Status Dashboard by `id`.
+      summary: PagerDuty Get impacted Business Services for a Status Dashboard by `id`.
       responses:
         '200':
           description: OK
@@ -30959,7 +30959,7 @@ paths:
                         type: business_service
                         status: not_impacted
                         additional_fields:
-                          highest_impacting_priority: null
+                          highest_impacting_priority:
                     additional_fields:
                       total_impacted_count: 1
         '400':
@@ -30987,7 +30987,7 @@ paths:
         for a custom Status Dashboard that may be created or changed in the UI. It will generally be a `dash-separated-string-like-this`.
 
         Scoped OAuth requires: `status_dashboards.read`
-      summary: Get a single Status Dashboard by `url_slug`
+      summary: PagerDuty Get a single Status Dashboard by `url_slug`
       responses:
         '200':
           description: OK
@@ -31036,7 +31036,7 @@ paths:
         To get impact information about a specific Business Service on the Status Dashboard that does not appear in the Impact-sored response, use the `ids[]` parameter on the `/business_services/impacts` endpoint.
 
         Scoped OAuth requires: `status_dashboards.read`
-      summary: Get impacted Business Services for a  Status Dashboard by `url_slug`
+      summary: PagerDuty Get impacted Business Services for a  Status Dashboard by `url_slug`
       responses:
         '200':
           description: OK
@@ -31078,7 +31078,7 @@ paths:
                         type: business_service
                         status: not_impacted
                         additional_fields:
-                          highest_impacting_priority: null
+                          highest_impacting_priority:
                     additional_fields:
                       total_impacted_count: 1
         '400':
@@ -31105,7 +31105,7 @@ paths:
         List Status Pages.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Pages
+      summary: PagerDuty List Status Pages
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/status_page_type'
@@ -31157,7 +31157,7 @@ paths:
         List Impacts for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Impacts
+      summary: PagerDuty List Status Page Impacts
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31228,7 +31228,7 @@ paths:
         Get an Impact for a Status Page by Status Page ID and Impact ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Impact
+      summary: PagerDuty Get a Status Page Impact
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31274,7 +31274,7 @@ paths:
         List Services for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Services
+      summary: PagerDuty List Status Page Services
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31331,7 +31331,7 @@ paths:
         Get a Service for a Status Page by Status Page ID and Service ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Service
+      summary: PagerDuty Get a Status Page Service
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31379,7 +31379,7 @@ paths:
         List Severities for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Severities
+      summary: PagerDuty List Status Page Severities
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31451,7 +31451,7 @@ paths:
         Get a Severity for a Status Page by Status Page ID and Severity ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Severity
+      summary: PagerDuty Get a Status Page Severity
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31496,7 +31496,7 @@ paths:
         List Statuses for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Statuses
+      summary: PagerDuty List Status Page Statuses
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31568,7 +31568,7 @@ paths:
         Get a Status for a Status Page by Status Page ID and Status ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Status
+      summary: PagerDuty Get a Status Page Status
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31614,7 +31614,7 @@ paths:
         List Posts for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Posts
+      summary: PagerDuty List Status Page Posts
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31681,7 +31681,7 @@ paths:
         Create a Post for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Create a Status Page Post
+      summary: PagerDuty Create a Status Page Post
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31714,7 +31714,7 @@ paths:
                           id: PYHMEI3
                           type: status_page_service
                     message: <p>Message</p>
-                    update_frequency_ms: null
+                    update_frequency_ms:
                     notify_subscribers: false
                     severity:
                       id: PY5OM08
@@ -31773,7 +31773,7 @@ paths:
         Get a Post for a Status Page by Status Page ID and Post ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Post
+      summary: PagerDuty Get a Status Page Post
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31829,7 +31829,7 @@ paths:
         Update a Post for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Update a Status Page Post
+      summary: PagerDuty Update a Status Page Post
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31886,7 +31886,7 @@ paths:
                                 id: PYHMEI3
                                 type: status_page_service
                           message: <p>Message</p>
-                          update_frequency_ms: null
+                          update_frequency_ms:
                           notify_subscribers: false
                           severity:
                             id: PY5OM08
@@ -31914,7 +31914,7 @@ paths:
         Delete a Post for a Status Page by Status Page ID and Post ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Delete a Status Page Post
+      summary: PagerDuty Delete a Status Page Post
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -31940,7 +31940,7 @@ paths:
         List Post Updates for a Status Page by Status Page ID and Post ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Post Updates
+      summary: PagerDuty List Status Page Post Updates
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32016,7 +32016,7 @@ paths:
         Create a Post Update for a Post by Post ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Create a Status Page Post Update
+      summary: PagerDuty Create a Status Page Post Update
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32112,7 +32112,7 @@ paths:
         Get a Post Update for a Post by Post ID and Post Update ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Post Update
+      summary: PagerDuty Get a Status Page Post Update
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32178,7 +32178,7 @@ paths:
         Update a Post Update for a Post by Post ID and Post Update ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Update a Status Page Post Update
+      summary: PagerDuty Update a Status Page Post Update
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32277,7 +32277,7 @@ paths:
         Delete a Post Update for a Post by Post ID and Post Update ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Delete a Status Page Post Update
+      summary: PagerDuty Delete a Status Page Post Update
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32304,7 +32304,7 @@ paths:
         Get a Postmortem for a Post by Post ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Post Postmortem
+      summary: PagerDuty Get a Post Postmortem
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32351,7 +32351,7 @@ paths:
         Create a Postmortem for a Post by Post ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Create a Post Postmortem
+      summary: PagerDuty Create a Post Postmortem
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32416,7 +32416,7 @@ paths:
         Update a Postmortem for a Post by Post ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Update a Post Postmortem
+      summary: PagerDuty Update a Post Postmortem
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32484,7 +32484,7 @@ paths:
         Delete a Postmortem for a Post by Post ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Delete a Post Postmortem
+      summary: PagerDuty Delete a Post Postmortem
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32510,7 +32510,7 @@ paths:
         List Subscriptions for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: List Status Page Subscriptions
+      summary: PagerDuty List Status Page Subscriptions
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32570,7 +32570,7 @@ paths:
         Create a Subscription for a Status Page by Status Page ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Create a Status Page Subscription
+      summary: PagerDuty Create a Status Page Subscription
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32693,7 +32693,7 @@ paths:
         Get a Subscription for a Status Page by Status Page ID and Subscription ID.
 
         Scoped OAuth requires: `status_pages.read`
-      summary: Get a Status Page Subscription
+      summary: PagerDuty Get a Status Page Subscription
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32742,7 +32742,7 @@ paths:
         Delete a Subscription for a Status Page by Status Page ID and Subscription ID.
 
         Scoped OAuth requires: `status_pages.write`
-      summary: Delete a Status Page Subscription
+      summary: PagerDuty Delete a Status Page Subscription
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -32772,7 +32772,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.read`
-      summary: List tags
+      summary: PagerDuty List tags
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -32806,7 +32806,7 @@ paths:
                         self: https://api.pagerduty.com/tags/P5IYCNZ
                         label: Batman
                         id: P5IYCNZ
-                        html_url: null
+                        html_url:
                     limit: 100
                     offset: 0
                     total: 1
@@ -32830,7 +32830,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.write`
-      summary: Create a tag
+      summary: PagerDuty Create a tag
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -32873,7 +32873,7 @@ paths:
                       self: https://api.pagerduty.com/tags/P5IYCNZ
                       label: Batman
                       id: P5IYCNZ
-                      html_url: null
+                      html_url:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -32896,7 +32896,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.read`
-      summary: Get a tag
+      summary: PagerDuty Get a tag
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -32923,7 +32923,7 @@ paths:
                       self: https://api.pagerduty.com/tags/P5IYCNZ
                       label: Batman
                       id: P5IYCNZ
-                      html_url: null
+                      html_url:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -32945,7 +32945,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.write`
-      summary: Delete a tag
+      summary: PagerDuty Delete a tag
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -32973,7 +32973,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)
 
         Scoped OAuth requires: `tags.read`
-      summary: Get connected entities
+      summary: PagerDuty Get connected entities
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33038,7 +33038,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Create a team
+      summary: PagerDuty Create a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33109,7 +33109,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.read`
-      summary: List teams
+      summary: PagerDuty List teams
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33148,7 +33148,7 @@ paths:
                     limit: 100
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -33174,7 +33174,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.read`
-      summary: Get a team
+      summary: PagerDuty Get a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33236,7 +33236,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Delete a team
+      summary: PagerDuty Delete a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33266,7 +33266,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Update a team
+      summary: PagerDuty Update a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33332,7 +33332,7 @@ paths:
       tags:
         - Teams
       operationId: listTeamsAuditRecords
-      summary: List audit records for a team
+      summary: PagerDuty List audit records for a team
       description: |
         The returned records are sorted by the `execution_time` from newest to oldest.
 
@@ -33388,7 +33388,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Remove an escalation policy from a team
+      summary: PagerDuty Remove an escalation policy from a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33422,7 +33422,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Add an escalation policy to a team
+      summary: PagerDuty Add an escalation policy to a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33458,7 +33458,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.read`
-      summary: List members of a team
+      summary: PagerDuty List members of a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33502,7 +33502,7 @@ paths:
                     limit: 100
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -33516,7 +33516,7 @@ paths:
   /teams/{id}/notification_subscriptions:
     get:
       x-pd-requires-scope: subscribers.read
-      summary: List Team Notification Subscriptions
+      summary: PagerDuty List Team Notification Subscriptions
       tags:
         - Teams
       operationId: getTeamNotificationSubscriptions
@@ -33563,7 +33563,7 @@ paths:
                           subscriber_type: team
                           subscribable_id: PD1234
                           subscribable_type: incident
-                          subscribable_name: null
+                          subscribable_name:
                           account_id: PD1234
                       - subscription:
                           subscriber_id: PD1234
@@ -33588,7 +33588,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Create Team Notification Subscriptions
+      summary: PagerDuty Create Team Notification Subscriptions
       tags:
         - Teams
       operationId: createTeamNotificationSubscriptions
@@ -33754,7 +33754,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Remove a user from a team
+      summary: PagerDuty Remove a user from a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33788,7 +33788,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)
 
         Scoped OAuth requires: `teams.write`
-      summary: Add a user to a team
+      summary: PagerDuty Add a user to a team
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -33839,7 +33839,7 @@ paths:
         Get a list of all the template on an account
 
         Scoped OAuth requires: `templates.read`
-      summary: List templates
+      summary: PagerDuty List templates
       parameters:
         - $ref: '#/components/parameters/offset_limit'
         - $ref: '#/components/parameters/offset_offset'
@@ -33887,7 +33887,7 @@ paths:
                           id: PGY287N
                           self: https://api.pagerduty.com/users/PGY287N
                           type: user_reference
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '402':
@@ -33905,7 +33905,7 @@ paths:
         Create a new template
 
         Scoped OAuth requires: `templates.write`
-      summary: Create a template
+      summary: PagerDuty Create a template
       requestBody:
         content:
           application/json:
@@ -33986,7 +33986,7 @@ paths:
         Get a single template on the account
 
         Scoped OAuth requires: `templates.read`
-      summary: Get a template
+      summary: PagerDuty Get a template
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -34045,7 +34045,7 @@ paths:
         Update an existing template
 
         Scoped OAuth requires: `templates.write`
-      summary: Update a template
+      summary: PagerDuty Update a template
       parameters:
         - $ref: '#/components/parameters/id'
       requestBody:
@@ -34127,7 +34127,7 @@ paths:
         Delete a specific of templates on the account
 
         Scoped OAuth requires: `templates.write`
-      summary: Delete a template
+      summary: PagerDuty Delete a template
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -34149,7 +34149,7 @@ paths:
       tags:
         - Templates
       operationId: renderTemplate
-      summary: Render a template
+      summary: PagerDuty Render a template
       description: |
         Render a template. This endpoint has a variable request body depending on the template type. For the `status_update` template type, the caller will provide the incident id, and a status update message.
 
@@ -34208,7 +34208,7 @@ paths:
         Get a list of fields that can be used on the account templates.
 
         Scoped OAuth requires: `templates.read`
-      summary: List template fields
+      summary: PagerDuty List template fields
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34275,17 +34275,17 @@ paths:
                   value:
                     fields:
                       - data_type: datetime
-                        default_value: null
+                        default_value:
                         description: The time the incident was created.
                         domain:
                           order: 1
                           summary: Incident
                         example: '2023-11-22T07:12:50Z'
-                        keyword: null
+                        keyword:
                         summary: incident.created_at
                         type: standard_field
                       - data_type: string
-                        default_value: null
+                        default_value:
                         description: The name of the escalation policy attached to the service that the incident is on
                         domain:
                           order: 1
@@ -34300,8 +34300,8 @@ paths:
                         domain:
                           order: 1
                           summary: Incident
-                        example: null
-                        keyword: null
+                        example:
+                        keyword:
                         summary: incident.custom_field
                         type: custom_field
         '400':
@@ -34327,7 +34327,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.read`
-      summary: List users
+      summary: PagerDuty List users
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34381,7 +34381,7 @@ paths:
                             type: assignment_notification_rule_reference
                             summary: Default
                             self: https://api.pagerduty.com/users/PXPGF42/notification_rules/P8GRWKK
-                            html_url: null
+                            html_url:
                         job_title: Director of Engineering
                         teams:
                           - id: PQ9K7I8
@@ -34412,7 +34412,7 @@ paths:
                             type: assignment_notification_rule_reference
                             summary: Default
                             self: https://api.pagerduty.com/users/PXPGF42/notification_rules/P8GRWKK
-                            html_url: null
+                            html_url:
                         job_title: Senior Engineer
                         teams:
                           - id: PQ9K7I8
@@ -34423,7 +34423,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -34445,7 +34445,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Create a user
+      summary: PagerDuty Create a user
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34524,7 +34524,7 @@ paths:
                           type: assignment_notification_rule_reference
                           summary: Default
                           self: https://api.pagerduty.com/users/PXPGF42/notification_rules/P8GRWKK
-                          html_url: null
+                          html_url:
                       job_title: Director of Engineering
                       teams:
                         - id: PQ9K7I8
@@ -34557,7 +34557,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.read`
-      summary: Get a user
+      summary: PagerDuty Get a user
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34603,7 +34603,7 @@ paths:
                           type: assignment_notification_rule_reference
                           summary: Default
                           self: https://api.pagerduty.com/users/PXPGF42/notification_rules/P8GRWKK
-                          html_url: null
+                          html_url:
                       job_title: Director of Engineering
                       teams:
                         - id: PQ9K7I8
@@ -34640,7 +34640,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Delete a user
+      summary: PagerDuty Delete a user
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34669,7 +34669,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Update a user
+      summary: PagerDuty Update a user
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34748,7 +34748,7 @@ paths:
                           type: assignment_notification_rule_reference
                           summary: Default
                           self: https://api.pagerduty.com/users/PXPGF42/notification_rules/P8GRWKK
-                          html_url: null
+                          html_url:
                       job_title: Director of Engineering
                       teams:
                         - id: PQ9K7I8
@@ -34775,7 +34775,7 @@ paths:
       tags:
         - Users
       operationId: listUsersAuditRecords
-      summary: List audit records for a user
+      summary: PagerDuty List audit records for a user
       description: |
         The response will include audit records with changes that are made to the identified user not changes made by the identified user.
 
@@ -34834,7 +34834,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.read`
-      summary: List a user's contact methods
+      summary: PagerDuty List a user's contact methods
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34887,7 +34887,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.write`
-      summary: Create a user contact method
+      summary: PagerDuty Create a user contact method
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -34966,7 +34966,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.read`
-      summary: Get a user's contact method
+      summary: PagerDuty Get a user's contact method
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35020,7 +35020,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.write`
-      summary: Delete a user's contact method
+      summary: PagerDuty Delete a user's contact method
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35050,7 +35050,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.write`
-      summary: Update a user's contact method
+      summary: PagerDuty Update a user's contact method
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35128,7 +35128,7 @@ paths:
         Get the License allocated to a User
 
         Scoped OAuth requires: `licenses.read`
-      summary: Get the License allocated to a User
+      summary: PagerDuty Get the License allocated to a User
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35163,8 +35163,8 @@ paths:
                       role_group: FullUser
                       summary: Business (Full User)
                       type: license
-                      self: null
-                      html_url: null
+                      self:
+                      html_url:
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -35186,7 +35186,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.read`
-      summary: List a user's notification rules
+      summary: PagerDuty List a user's notification rules
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35222,7 +35222,7 @@ paths:
                           type: email_contact_method_reference
                           summary: Work
                           self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PXPGF42
-                          html_url: null
+                          html_url:
                         created_at: '2016-02-01T16:06:27-05:00'
                         urgency: high
         '400':
@@ -35246,7 +35246,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.write`
-      summary: Create a user notification rule
+      summary: PagerDuty Create a user notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35300,7 +35300,7 @@ paths:
                         type: email_contact_method_reference
                         summary: Work
                         self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PXPGF42
-                        html_url: null
+                        html_url:
                       created_at: '2016-02-01T16:06:27-05:00'
                       urgency: high
         '400':
@@ -35328,7 +35328,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.read`
-      summary: Get a user's notification rule
+      summary: PagerDuty Get a user's notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35387,7 +35387,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.write`
-      summary: Delete a user's notification rule
+      summary: PagerDuty Delete a user's notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35417,7 +35417,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:contact_methods.write`
-      summary: Update a user's notification rule
+      summary: PagerDuty Update a user's notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35497,7 +35497,7 @@ paths:
         > Users must be added through `POST /users/{id}/notification_subscriptions` to be returned from this endpoint.
 
         Scoped OAuth requires: `subscribers.read`
-      summary: List Notification Subscriptions
+      summary: PagerDuty List Notification Subscriptions
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/id'
@@ -35534,7 +35534,7 @@ paths:
                           subscriber_type: user
                           subscribable_id: PD1234
                           subscribable_type: incident
-                          subscribable_name: null
+                          subscribable_name:
                           account_id: PD1234
                       - subscription:
                           subscriber_id: PD1234
@@ -35559,7 +35559,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Create Notification Subcriptions
+      summary: PagerDuty Create Notification Subcriptions
       operationId: createUserNotificationSubscriptions
       tags:
         - Users
@@ -35642,7 +35642,7 @@ paths:
   /users/{id}/notification_subscriptions/unsubscribe:
     post:
       x-pd-requires-scope: subscribers.write
-      summary: Remove Notification Subscriptions
+      summary: PagerDuty Remove Notification Subscriptions
       tags:
         - Users
       responses:
@@ -35723,7 +35723,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.read`
-      summary: List a User's Handoff Notification Rules
+      summary: PagerDuty List a User's Handoff Notification Rules
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35774,7 +35774,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Create a User Handoff Notification Rule
+      summary: PagerDuty Create a User Handoff Notification Rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35849,7 +35849,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.read`
-      summary: Get a user's handoff notification rule
+      summary: PagerDuty Get a user's handoff notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35901,7 +35901,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Delete a User's Handoff Notification rule
+      summary: PagerDuty Delete a User's Handoff Notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -35929,7 +35929,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Update a User's Handoff Notification Rule
+      summary: PagerDuty Update a User's Handoff Notification Rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36009,7 +36009,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:sessions.read`
-      summary: List a user's active sessions
+      summary: PagerDuty List a user's active sessions
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36063,7 +36063,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:sessions.write`
-      summary: Delete all user sessions
+      summary: PagerDuty Delete all user sessions
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36096,7 +36096,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:sessions.read`
-      summary: Get a user's session
+      summary: PagerDuty Get a user's session
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36150,7 +36150,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users:sessions.write`
-      summary: Delete a user's session
+      summary: PagerDuty Delete a user's session
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36187,7 +36187,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.read`
-      summary: List a user's status update notification rules
+      summary: PagerDuty List a user's status update notification rules
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36222,7 +36222,7 @@ paths:
                           type: email_contact_method_reference
                           summary: Work
                           self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PXPGF42
-                          html_url: null
+                          html_url:
                         created_at: '2016-02-01T16:06:27-05:00'
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -36249,7 +36249,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Create a user status update notification rule
+      summary: PagerDuty Create a user status update notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36299,7 +36299,7 @@ paths:
                         type: email_contact_method_reference
                         summary: Work
                         self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PXPGF42
-                        html_url: null
+                        html_url:
                       created_at: '2016-02-01T16:06:27-05:00'
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -36330,7 +36330,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.read`
-      summary: Get a user's status update notification rule
+      summary: PagerDuty Get a user's status update notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36364,7 +36364,7 @@ paths:
                         type: email_contact_method_reference
                         summary: Default
                         self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PTDVERC
-                        html_url: null
+                        html_url:
                       created_at: '2016-02-01T16:06:27-05:00'
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -36393,7 +36393,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Delete a user's status update notification rule
+      summary: PagerDuty Delete a user's status update notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36428,7 +36428,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
 
         Scoped OAuth requires: `users.write`
-      summary: Update a user's status update notification rule
+      summary: PagerDuty Update a user's status update notification rule
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36478,7 +36478,7 @@ paths:
                         type: email_contact_method_reference
                         summary: Work
                         self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PXPGF42
-                        html_url: null
+                        html_url:
                       created_at: '2016-02-01T16:06:27-05:00'
         '400':
           $ref: '#/components/responses/ArgumentError'
@@ -36506,7 +36506,7 @@ paths:
         Users are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.
 
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)
-      summary: Get the current user
+      summary: PagerDuty Get the current user
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36539,7 +36539,7 @@ paths:
                       color: green
                       role: admin
                       avatar_url: https://secure.gravatar.com/avatar/a8b714a39626f2444ee05990b078995f.png?d=mm&r=PG
-                      description: null
+                      description:
                       invitation_sent: false
                       job_title: Director of Engineering
                       contact_methods:
@@ -36547,13 +36547,13 @@ paths:
                           type: email_contact_method_reference
                           summary: Default
                           self: https://api.pagerduty.com/users/PXPGF42/contact_methods/PTDVERC
-                          html_url: null
+                          html_url:
                       notification_rules:
                         - id: P8GRWKK
                           type: assignment_notification_rule_reference
                           summary: Default
                           self: https://api.pagerduty.com/users/PXPGF42/notification_rules/PTDVERC
-                          html_url: null
+                          html_url:
                       teams:
                         - id: PQ9K7I8
                           type: team_reference
@@ -36579,7 +36579,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#vendors)
 
         Scoped OAuth requires: `vendors.read`
-      summary: List vendors
+      summary: PagerDuty List vendors
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36620,7 +36620,7 @@ paths:
                     limit: 25
                     offset: 0
                     more: false
-                    total: null
+                    total:
         '400':
           $ref: '#/components/responses/ArgumentError'
         '401':
@@ -36644,7 +36644,7 @@ paths:
         For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#vendors)
 
         Scoped OAuth requires: `vendors.read`
-      summary: Get a vendor
+      summary: PagerDuty Get a vendor
       parameters:
         - $ref: '#/components/parameters/header_Accept'
         - $ref: '#/components/parameters/header_Content-Type'
@@ -36694,7 +36694,7 @@ paths:
       tags:
         - Webhooks
       operationId: listWebhookSubscriptions
-      summary: List webhook subscriptions
+      summary: PagerDuty List webhook subscriptions
       description: |
         List existing webhook subscriptions.
 
@@ -36742,7 +36742,7 @@ paths:
       tags:
         - Webhooks
       operationId: createWebhookSubscription
-      summary: Create a webhook subscription
+      summary: PagerDuty Create a webhook subscription
       description: |
         Creates a new webhook subscription.
 
@@ -36793,7 +36793,7 @@ paths:
       tags:
         - Webhooks
       operationId: getWebhookSubscription
-      summary: Get a webhook subscription
+      summary: PagerDuty Get a webhook subscription
       description: |
         Gets details about an existing webhook subscription.
 
@@ -36829,7 +36829,7 @@ paths:
       tags:
         - Webhooks
       operationId: updateWebhookSubscription
-      summary: Update a webhook subscription
+      summary: PagerDuty Update a webhook subscription
       description: |
         Updates an existing webhook subscription.
 
@@ -36877,7 +36877,7 @@ paths:
       tags:
         - Webhooks
       operationId: deleteWebhookSubscription
-      summary: Delete a webhook subscription
+      summary: PagerDuty Delete a webhook subscription
       description: |
         Deletes a webhook subscription.
 
@@ -36902,7 +36902,7 @@ paths:
       tags:
         - Webhooks
       operationId: enableWebhookSubscription
-      summary: Enable a webhook subscription
+      summary: PagerDuty Enable a webhook subscription
       description: |
         Enable a webhook subscription that is temporarily disabled. (This API does not require a request body.)
 
@@ -36939,7 +36939,7 @@ paths:
       tags:
         - Webhooks
       operationId: testWebhookSubscription
-      summary: Test a webhook subscription
+      summary: PagerDuty Test a webhook subscription
       description: |
         Test a webhook subscription.
 
