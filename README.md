@@ -16,7 +16,7 @@ PagerDuty is a digital operations management platform that helps teams detect pr
 ## Timestamps
 
 - **Created:** 2026-03-16 
-- **Modified:** 2026-03-16 
+- **Modified:** 2026-04-28 
 
 ## APIs
 
@@ -33,7 +33,7 @@ The PagerDuty REST API provides programmatic access to PagerDuty incidents, serv
 #### Properties
 
 - [Documentation](https://developer.pagerduty.com/api-reference/)
-- [OpenAPI](https://raw.githubusercontent.com/PagerDuty/api-schema/main/reference/REST/openapiv3.json)
+- [OpenAPI](openapi/pagerduty-openapi-original.yml)
 - [Authentication](https://developer.pagerduty.com/docs/authentication)
 - [Getting Started](https://developer.pagerduty.com/docs/rest-api-v2/rest-api/)
 
