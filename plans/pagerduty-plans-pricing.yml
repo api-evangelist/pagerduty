@@ -1,0 +1,115 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: PagerDuty
+providerId: pagerduty
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Incident Response
+  - On-Call
+  - Observability
+description: PagerDuty per-user-per-month pricing across four tiers. Annual billing saves ~25%.
+sources:
+  - https://www.pagerduty.com/pricing/
+plans:
+  - id: pagerduty-free
+    name: Free
+    type: freemium
+    description: Up to 5 users; basic on-call.
+    entries:
+      - label: Users
+        name: users
+        type: quota
+        metric: user
+        limit: 5
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: International phone/SMS notifications
+        name: intl_notifications
+        type: quota
+        metric: notification
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: 1 on-call schedule
+      - name: 1 escalation policy
+      - name: 750+ integrations
+      - name: Email and push notifications
+  - id: pagerduty-professional
+    name: Professional
+    type: paid
+    description: $21/user/month annual.
+    entries:
+      - label: Per user
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '21.00'
+        userMultiplied: true
+    elements:
+      - name: Basic chat experience (Slack, Microsoft Teams)
+      - name: Major Incident Workflow Template
+      - name: External Status Page (up to 250 subscribers)
+      - name: 2 predefined Incident Roles
+      - name: 3 predefined Incident Types
+      - name: PagerDuty Advance (1,000 credits)
+  - id: pagerduty-business
+    name: Business
+    type: paid
+    description: $41/user/month annual.
+    entries:
+      - label: Per user
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '41.00'
+        userMultiplied: true
+    elements:
+      - name: Custom Fields
+      - name: Up to 3 custom Incident Types
+      - name: Advanced ITSM integrations
+      - name: Multi-year historical data access
+      - name: Internal Status Pages
+      - name: External Status Page (up to 500 subscribers)
+      - name: PagerDuty Advance (5,000 credits)
+  - id: pagerduty-enterprise
+    name: Enterprise
+    type: enterprise
+    description: Custom pricing.
+    entries:
+      - label: Per user (custom)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: true
+    elements:
+      - name: Full chat experience with premium Slack actions
+      - name: Incident workflows with conditionals/loops/delays
+      - name: 10 custom Incident Roles
+      - name: Incident Tasks
+      - name: Up to 100 custom Incident Types
+      - name: Post-Incident Reviews
+      - name: PagerDuty Advance (20,000 credits)
+      - name: Bi-directional ServiceNow custom field sync

@@ -1,0 +1,37 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: PagerDuty
+providerId: pagerduty
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Incident Response
+description: PagerDuty REST API rate limits enforced per token; raise via support.
+sources:
+  - https://www.pagerduty.com/pricing/
+  - https://developer.pagerduty.com/docs/rest-api-rate-limits/
+headers:
+  limit: X-Rate-Limit-Limit
+  remaining: X-Rate-Limit-Remaining
+  reset: X-Rate-Limit-Reset
+responseCodes:
+  throttled: 429
+limits:
+  - name: REST API (default)
+    scope: token
+    metric: requests_per_minute
+    limit: 960
+    timeFrame: minute
+  - name: Events API v2
+    scope: integration_key
+    metric: events_per_minute
+    limit: 480
+    timeFrame: minute
+  - name: Analytics API
+    scope: token
+    metric: requests_per_minute
+    limit: 5
+    timeFrame: minute
