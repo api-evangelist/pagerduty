@@ -97,6 +97,15 @@ common:
     sources:
       - https://www.pagerduty.com/pricing/
     updated: '2026-05-04'
+  - type: Integrations
+    url: https://www.pagerduty.com/integrations/
+integrations:
+  - name: AWS
+  - name: Slack
+  - name: Zoom PagerDuty Built and Supported
+  - name: Microsoft Teams PagerDuty Built and Supported
+  - name: Salesforce PagerDuty Built and Supported
+  - name: Datadog Partner Built and Supported
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
