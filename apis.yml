@@ -31,7 +31,7 @@ apis:
         url: openapi/pagerduty-openapi-original.yml
       - type: Authentication
         url: https://developer.pagerduty.com/docs/authentication
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - aid: pagerduty:pagerduty-events-api
     name: PagerDuty Events API
@@ -46,18 +46,18 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.pagerduty.com/docs/events-api-v2/overview/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developer.pagerduty.com/docs/events-api-v2/send-an-alert/
 common:
   - type: Portal
     url: https://developer.pagerduty.com/
   - type: Documentation
     url: https://developer.pagerduty.com/docs/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developer.pagerduty.com/docs/getting-started/
   - type: Authentication
     url: https://developer.pagerduty.com/docs/authentication
-  - type: Sign Up
+  - type: SignUp
     url: https://www.pagerduty.com/sign-up-free/
   - type: Login
     url: https://identity.pagerduty.com/sign_in
@@ -67,13 +67,13 @@ common:
     url: https://community.pagerduty.com/
   - type: Support
     url: https://support.pagerduty.com/
-  - type: Status
+  - type: StatusPage
     url: https://status.pagerduty.com/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.pagerduty.com/terms-of-service/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.pagerduty.com/privacy-policy/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/PagerDuty
   - type: Website
     url: https://www.pagerduty.com/
