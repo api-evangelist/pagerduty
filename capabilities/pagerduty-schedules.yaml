@@ -1,0 +1,404 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Schedules
+  description: 'PagerDuty API — Schedules. 11 operations. Lead operation: PagerDuty List schedules. Self-contained Naftiko
+    capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Schedules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-schedules
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Schedules business capability. Self-contained, no shared references.
+    resources:
+    - name: schedules
+      path: /schedules
+      operations:
+      - name: listschedules
+        method: GET
+        description: PagerDuty List schedules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createschedule
+        method: POST
+        description: PagerDuty Create a schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: schedules-preview
+      path: /schedules/preview
+      operations:
+      - name: createschedulepreview
+        method: POST
+        description: PagerDuty Preview a schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: schedules-id
+      path: /schedules/{id}
+      operations:
+      - name: getschedule
+        method: GET
+        description: PagerDuty Get a schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteschedule
+        method: DELETE
+        description: PagerDuty Delete a schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateschedule
+        method: PUT
+        description: PagerDuty Update a schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: schedules-id-audit-records
+      path: /schedules/{id}/audit/records
+      operations:
+      - name: listschedulesauditrecords
+        method: GET
+        description: PagerDuty List audit records for a schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: schedules-id-overrides
+      path: /schedules/{id}/overrides
+      operations:
+      - name: listscheduleoverrides
+        method: GET
+        description: PagerDuty List overrides
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createscheduleoverride
+        method: POST
+        description: PagerDuty Create one or more overrides
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: schedules-id-overrides-override_id
+      path: /schedules/{id}/overrides/{override_id}
+      operations:
+      - name: deletescheduleoverride
+        method: DELETE
+        description: PagerDuty Delete an override
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: schedules-id-users
+      path: /schedules/{id}/users
+      operations:
+      - name: listscheduleusers
+        method: GET
+        description: PagerDuty List users on call.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-schedules-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Schedules. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/schedules
+      name: schedules
+      description: REST surface for schedules.
+      operations:
+      - method: GET
+        name: listschedules
+        description: PagerDuty List schedules
+        call: pagerduty-schedules.listschedules
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createschedule
+        description: PagerDuty Create a schedule
+        call: pagerduty-schedules.createschedule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules/preview
+      name: schedules-preview
+      description: REST surface for schedules-preview.
+      operations:
+      - method: POST
+        name: createschedulepreview
+        description: PagerDuty Preview a schedule
+        call: pagerduty-schedules.createschedulepreview
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules/{id}
+      name: schedules-id
+      description: REST surface for schedules-id.
+      operations:
+      - method: GET
+        name: getschedule
+        description: PagerDuty Get a schedule
+        call: pagerduty-schedules.getschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteschedule
+        description: PagerDuty Delete a schedule
+        call: pagerduty-schedules.deleteschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateschedule
+        description: PagerDuty Update a schedule
+        call: pagerduty-schedules.updateschedule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules/{id}/audit/records
+      name: schedules-id-audit-records
+      description: REST surface for schedules-id-audit-records.
+      operations:
+      - method: GET
+        name: listschedulesauditrecords
+        description: PagerDuty List audit records for a schedule
+        call: pagerduty-schedules.listschedulesauditrecords
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules/{id}/overrides
+      name: schedules-id-overrides
+      description: REST surface for schedules-id-overrides.
+      operations:
+      - method: GET
+        name: listscheduleoverrides
+        description: PagerDuty List overrides
+        call: pagerduty-schedules.listscheduleoverrides
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createscheduleoverride
+        description: PagerDuty Create one or more overrides
+        call: pagerduty-schedules.createscheduleoverride
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules/{id}/overrides/{override-id}
+      name: schedules-id-overrides-override-id
+      description: REST surface for schedules-id-overrides-override_id.
+      operations:
+      - method: DELETE
+        name: deletescheduleoverride
+        description: PagerDuty Delete an override
+        call: pagerduty-schedules.deletescheduleoverride
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules/{id}/users
+      name: schedules-id-users
+      description: REST surface for schedules-id-users.
+      operations:
+      - method: GET
+        name: listscheduleusers
+        description: PagerDuty List users on call.
+        call: pagerduty-schedules.listscheduleusers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-schedules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Schedules. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: pagerduty-list-schedules
+      description: PagerDuty List schedules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-schedules.listschedules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-schedule
+      description: PagerDuty Create a schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-schedules.createschedule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-preview-schedule
+      description: PagerDuty Preview a schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-schedules.createschedulepreview
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-schedule
+      description: PagerDuty Get a schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-schedules.getschedule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-schedule
+      description: PagerDuty Delete a schedule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-schedules.deleteschedule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-schedule
+      description: PagerDuty Update a schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-schedules.updateschedule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-audit-records-schedule
+      description: PagerDuty List audit records for a schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-schedules.listschedulesauditrecords
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-overrides
+      description: PagerDuty List overrides
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-schedules.listscheduleoverrides
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-one-more-overrides
+      description: PagerDuty Create one or more overrides
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-schedules.createscheduleoverride
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-override
+      description: PagerDuty Delete an override
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-schedules.deletescheduleoverride
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-users-call
+      description: PagerDuty List users on call.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-schedules.listscheduleusers
+      outputParameters:
+      - type: object
+        mapping: $.

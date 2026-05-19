@@ -1,0 +1,836 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Automation Actions
+  description: 'PagerDuty API — Automation Actions. 25 operations. Lead operation: PagerDuty Create an Automation Action.
+    Self-contained Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Automation Actions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-automation-actions
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Automation Actions business capability. Self-contained, no shared references.
+    resources:
+    - name: automation_actions-actions
+      path: /automation_actions/actions
+      operations:
+      - name: createautomationaction
+        method: POST
+        description: PagerDuty Create an Automation Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getallautomationactions
+        method: GET
+        description: PagerDuty List Automation Actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-actions-id
+      path: /automation_actions/actions/{id}
+      operations:
+      - name: getautomationaction
+        method: GET
+        description: PagerDuty Get an Automation Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteautomationaction
+        method: DELETE
+        description: PagerDuty Delete an Automation Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateautomationaction
+        method: PUT
+        description: PagerDuty Update an Automation Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: automation_actions-actions-id-invocations
+      path: /automation_actions/actions/{id}/invocations
+      operations:
+      - name: createautomationactioninvocation
+        method: POST
+        description: PagerDuty Create an Invocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: automation_actions-actions-id-services
+      path: /automation_actions/actions/{id}/services
+      operations:
+      - name: getautomationactionsactionserviceassociations
+        method: GET
+        description: PagerDuty Get all service references associated with an Automation Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createautomationactionserviceassocation
+        method: POST
+        description: PagerDuty Associate an Automation Action with a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: automation_actions-actions-id-services-service_id
+      path: /automation_actions/actions/{id}/services/{service_id}
+      operations:
+      - name: getautomationactionsactionserviceassociation
+        method: GET
+        description: PagerDuty Get the details of an Automation Action / service relation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteautomationactionserviceassociation
+        method: DELETE
+        description: PagerDuty Disassociate an Automation Action from a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-actions-id-teams
+      path: /automation_actions/actions/{id}/teams
+      operations:
+      - name: createautomationactionteamassociation
+        method: POST
+        description: PagerDuty Associate an Automation Action with a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getautomationactionsactionteamassociations
+        method: GET
+        description: PagerDuty Get all team references associated with an Automation Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-actions-id-teams-team_id
+      path: /automation_actions/actions/{id}/teams/{team_id}
+      operations:
+      - name: deleteautomationactionteamassociation
+        method: DELETE
+        description: PagerDuty Disassociate an Automation Action from a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getautomationactionsactionteamassociation
+        method: GET
+        description: PagerDuty Get the details of an Automation Action / team relation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-invocations
+      path: /automation_actions/invocations
+      operations:
+      - name: listautomationactioninvocations
+        method: GET
+        description: PagerDuty List Invocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-invocations-id
+      path: /automation_actions/invocations/{id}
+      operations:
+      - name: getautomationactionsinvocation
+        method: GET
+        description: PagerDuty Get an Invocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-runners
+      path: /automation_actions/runners
+      operations:
+      - name: createautomationactionsrunner
+        method: POST
+        description: PagerDuty Create an Automation Action runner.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getautomationactionsrunners
+        method: GET
+        description: PagerDuty List Automation Action runners
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-runners-id
+      path: /automation_actions/runners/{id}
+      operations:
+      - name: getautomationactionsrunner
+        method: GET
+        description: PagerDuty Get an Automation Action runner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateautomationactionsrunner
+        method: PUT
+        description: PagerDuty Update an Automation Action runner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteautomationactionsrunner
+        method: DELETE
+        description: PagerDuty Delete an Automation Action runner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-runners-id-teams
+      path: /automation_actions/runners/{id}/teams
+      operations:
+      - name: createautomationactionsrunnerteamassociation
+        method: POST
+        description: PagerDuty Associate a runner with a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getautomationactionsrunnerteamassociations
+        method: GET
+        description: PagerDuty Get all team references associated with a runner
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: automation_actions-runners-id-teams-team_id
+      path: /automation_actions/runners/{id}/teams/{team_id}
+      operations:
+      - name: deleteautomationactionsrunnerteamassociation
+        method: DELETE
+        description: PagerDuty Disassociate a runner from a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getautomationactionsrunnerteamassociation
+        method: GET
+        description: PagerDuty Get the details of a runner / team relation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-automation-actions-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Automation Actions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/automation-actions/actions
+      name: automation-actions-actions
+      description: REST surface for automation_actions-actions.
+      operations:
+      - method: POST
+        name: createautomationaction
+        description: PagerDuty Create an Automation Action
+        call: pagerduty-automation-actions.createautomationaction
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallautomationactions
+        description: PagerDuty List Automation Actions
+        call: pagerduty-automation-actions.getallautomationactions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/actions/{id}
+      name: automation-actions-actions-id
+      description: REST surface for automation_actions-actions-id.
+      operations:
+      - method: GET
+        name: getautomationaction
+        description: PagerDuty Get an Automation Action
+        call: pagerduty-automation-actions.getautomationaction
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteautomationaction
+        description: PagerDuty Delete an Automation Action
+        call: pagerduty-automation-actions.deleteautomationaction
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateautomationaction
+        description: PagerDuty Update an Automation Action
+        call: pagerduty-automation-actions.updateautomationaction
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/actions/{id}/invocations
+      name: automation-actions-actions-id-invocations
+      description: REST surface for automation_actions-actions-id-invocations.
+      operations:
+      - method: POST
+        name: createautomationactioninvocation
+        description: PagerDuty Create an Invocation
+        call: pagerduty-automation-actions.createautomationactioninvocation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/actions/{id}/services
+      name: automation-actions-actions-id-services
+      description: REST surface for automation_actions-actions-id-services.
+      operations:
+      - method: GET
+        name: getautomationactionsactionserviceassociations
+        description: PagerDuty Get all service references associated with an Automation Action
+        call: pagerduty-automation-actions.getautomationactionsactionserviceassociations
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createautomationactionserviceassocation
+        description: PagerDuty Associate an Automation Action with a service
+        call: pagerduty-automation-actions.createautomationactionserviceassocation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/actions/{id}/services/{service-id}
+      name: automation-actions-actions-id-services-service-id
+      description: REST surface for automation_actions-actions-id-services-service_id.
+      operations:
+      - method: GET
+        name: getautomationactionsactionserviceassociation
+        description: PagerDuty Get the details of an Automation Action / service relation
+        call: pagerduty-automation-actions.getautomationactionsactionserviceassociation
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteautomationactionserviceassociation
+        description: PagerDuty Disassociate an Automation Action from a service
+        call: pagerduty-automation-actions.deleteautomationactionserviceassociation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/actions/{id}/teams
+      name: automation-actions-actions-id-teams
+      description: REST surface for automation_actions-actions-id-teams.
+      operations:
+      - method: POST
+        name: createautomationactionteamassociation
+        description: PagerDuty Associate an Automation Action with a team
+        call: pagerduty-automation-actions.createautomationactionteamassociation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getautomationactionsactionteamassociations
+        description: PagerDuty Get all team references associated with an Automation Action
+        call: pagerduty-automation-actions.getautomationactionsactionteamassociations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/actions/{id}/teams/{team-id}
+      name: automation-actions-actions-id-teams-team-id
+      description: REST surface for automation_actions-actions-id-teams-team_id.
+      operations:
+      - method: DELETE
+        name: deleteautomationactionteamassociation
+        description: PagerDuty Disassociate an Automation Action from a team
+        call: pagerduty-automation-actions.deleteautomationactionteamassociation
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getautomationactionsactionteamassociation
+        description: PagerDuty Get the details of an Automation Action / team relation
+        call: pagerduty-automation-actions.getautomationactionsactionteamassociation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/invocations
+      name: automation-actions-invocations
+      description: REST surface for automation_actions-invocations.
+      operations:
+      - method: GET
+        name: listautomationactioninvocations
+        description: PagerDuty List Invocations
+        call: pagerduty-automation-actions.listautomationactioninvocations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/invocations/{id}
+      name: automation-actions-invocations-id
+      description: REST surface for automation_actions-invocations-id.
+      operations:
+      - method: GET
+        name: getautomationactionsinvocation
+        description: PagerDuty Get an Invocation
+        call: pagerduty-automation-actions.getautomationactionsinvocation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/runners
+      name: automation-actions-runners
+      description: REST surface for automation_actions-runners.
+      operations:
+      - method: POST
+        name: createautomationactionsrunner
+        description: PagerDuty Create an Automation Action runner.
+        call: pagerduty-automation-actions.createautomationactionsrunner
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getautomationactionsrunners
+        description: PagerDuty List Automation Action runners
+        call: pagerduty-automation-actions.getautomationactionsrunners
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/runners/{id}
+      name: automation-actions-runners-id
+      description: REST surface for automation_actions-runners-id.
+      operations:
+      - method: GET
+        name: getautomationactionsrunner
+        description: PagerDuty Get an Automation Action runner
+        call: pagerduty-automation-actions.getautomationactionsrunner
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateautomationactionsrunner
+        description: PagerDuty Update an Automation Action runner
+        call: pagerduty-automation-actions.updateautomationactionsrunner
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteautomationactionsrunner
+        description: PagerDuty Delete an Automation Action runner
+        call: pagerduty-automation-actions.deleteautomationactionsrunner
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/runners/{id}/teams
+      name: automation-actions-runners-id-teams
+      description: REST surface for automation_actions-runners-id-teams.
+      operations:
+      - method: POST
+        name: createautomationactionsrunnerteamassociation
+        description: PagerDuty Associate a runner with a team
+        call: pagerduty-automation-actions.createautomationactionsrunnerteamassociation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getautomationactionsrunnerteamassociations
+        description: PagerDuty Get all team references associated with a runner
+        call: pagerduty-automation-actions.getautomationactionsrunnerteamassociations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/automation-actions/runners/{id}/teams/{team-id}
+      name: automation-actions-runners-id-teams-team-id
+      description: REST surface for automation_actions-runners-id-teams-team_id.
+      operations:
+      - method: DELETE
+        name: deleteautomationactionsrunnerteamassociation
+        description: PagerDuty Disassociate a runner from a team
+        call: pagerduty-automation-actions.deleteautomationactionsrunnerteamassociation
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getautomationactionsrunnerteamassociation
+        description: PagerDuty Get the details of a runner / team relation
+        call: pagerduty-automation-actions.getautomationactionsrunnerteamassociation
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-automation-actions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Automation Actions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: pagerduty-create-automation-action
+      description: PagerDuty Create an Automation Action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-automation-actions.createautomationaction
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-automation-actions
+      description: PagerDuty List Automation Actions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getallautomationactions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-automation-action
+      description: PagerDuty Get an Automation Action
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationaction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-automation-action
+      description: PagerDuty Delete an Automation Action
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-automation-actions.deleteautomationaction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-automation-action
+      description: PagerDuty Update an Automation Action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.updateautomationaction
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-invocation
+      description: PagerDuty Create an Invocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-automation-actions.createautomationactioninvocation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-all-service-references
+      description: PagerDuty Get all service references associated with an Automation Action
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsactionserviceassociations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-associate-automation-action-service
+      description: PagerDuty Associate an Automation Action with a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-automation-actions.createautomationactionserviceassocation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-details-automation-action
+      description: PagerDuty Get the details of an Automation Action / service relation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsactionserviceassociation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-disassociate-automation-action-service
+      description: PagerDuty Disassociate an Automation Action from a service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-automation-actions.deleteautomationactionserviceassociation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-associate-automation-action-team
+      description: PagerDuty Associate an Automation Action with a team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-automation-actions.createautomationactionteamassociation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-all-team-references
+      description: PagerDuty Get all team references associated with an Automation Action
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsactionteamassociations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-disassociate-automation-action-team
+      description: PagerDuty Disassociate an Automation Action from a team
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-automation-actions.deleteautomationactionteamassociation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-details-automation-action-2
+      description: PagerDuty Get the details of an Automation Action / team relation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsactionteamassociation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-invocations
+      description: PagerDuty List Invocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.listautomationactioninvocations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-invocation
+      description: PagerDuty Get an Invocation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsinvocation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-automation-action-runner
+      description: PagerDuty Create an Automation Action runner.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-automation-actions.createautomationactionsrunner
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-automation-action-runners
+      description: PagerDuty List Automation Action runners
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsrunners
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-automation-action-runner
+      description: PagerDuty Get an Automation Action runner
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsrunner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-automation-action-runner
+      description: PagerDuty Update an Automation Action runner
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.updateautomationactionsrunner
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-automation-action-runner
+      description: PagerDuty Delete an Automation Action runner
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-automation-actions.deleteautomationactionsrunner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-associate-runner-team
+      description: PagerDuty Associate a runner with a team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-automation-actions.createautomationactionsrunnerteamassociation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-all-team-references-2
+      description: PagerDuty Get all team references associated with a runner
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsrunnerteamassociations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-disassociate-runner-team
+      description: PagerDuty Disassociate a runner from a team
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-automation-actions.deleteautomationactionsrunnerteamassociation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-details-runner-team
+      description: PagerDuty Get the details of a runner / team relation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-automation-actions.getautomationactionsrunnerteamassociation
+      outputParameters:
+      - type: object
+        mapping: $.

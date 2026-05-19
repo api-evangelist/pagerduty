@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Extension Schemas
+  description: 'PagerDuty API — Extension Schemas. 2 operations. Lead operation: PagerDuty List extension schemas. Self-contained
+    Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Extension Schemas
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-extension-schemas
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Extension Schemas business capability. Self-contained, no shared references.
+    resources:
+    - name: extension_schemas
+      path: /extension_schemas
+      operations:
+      - name: listextensionschemas
+        method: GET
+        description: PagerDuty List extension schemas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extension_schemas-id
+      path: /extension_schemas/{id}
+      operations:
+      - name: getextensionschema
+        method: GET
+        description: PagerDuty Get an extension vendor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-extension-schemas-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Extension Schemas. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extension-schemas
+      name: extension-schemas
+      description: REST surface for extension_schemas.
+      operations:
+      - method: GET
+        name: listextensionschemas
+        description: PagerDuty List extension schemas
+        call: pagerduty-extension-schemas.listextensionschemas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extension-schemas/{id}
+      name: extension-schemas-id
+      description: REST surface for extension_schemas-id.
+      operations:
+      - method: GET
+        name: getextensionschema
+        description: PagerDuty Get an extension vendor
+        call: pagerduty-extension-schemas.getextensionschema
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-extension-schemas-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Extension Schemas. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: pagerduty-list-extension-schemas
+      description: PagerDuty List extension schemas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-extension-schemas.listextensionschemas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-extension-vendor
+      description: PagerDuty Get an extension vendor
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-extension-schemas.getextensionschema
+      outputParameters:
+      - type: object
+        mapping: $.

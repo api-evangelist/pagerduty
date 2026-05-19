@@ -1,0 +1,200 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Status Dashboards
+  description: 'PagerDuty API — Status Dashboards. 5 operations. Lead operation: PagerDuty List Status Dashboards. Self-contained
+    Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Status Dashboards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-status-dashboards
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Status Dashboards business capability. Self-contained, no shared references.
+    resources:
+    - name: status_dashboards
+      path: /status_dashboards
+      operations:
+      - name: liststatusdashboards
+        method: GET
+        description: PagerDuty List Status Dashboards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status_dashboards-url_slugs-url_slug
+      path: /status_dashboards/url_slugs/{url_slug}
+      operations:
+      - name: getstatusdashboardbyurlslug
+        method: GET
+        description: PagerDuty Get a single Status Dashboard by `url_slug`
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status_dashboards-url_slugs-url_slug-service_impacts
+      path: /status_dashboards/url_slugs/{url_slug}/service_impacts
+      operations:
+      - name: getstatusdashboardserviceimpactsbyurlslug
+        method: GET
+        description: PagerDuty Get impacted Business Services for a  Status Dashboard by `url_slug`
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status_dashboards-id
+      path: /status_dashboards/{id}
+      operations:
+      - name: getstatusdashboardbyid
+        method: GET
+        description: PagerDuty Get a single Status Dashboard by `id`
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status_dashboards-id-service_impacts
+      path: /status_dashboards/{id}/service_impacts
+      operations:
+      - name: getstatusdashboardserviceimpactsbyid
+        method: GET
+        description: PagerDuty Get impacted Business Services for a Status Dashboard by `id`.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-status-dashboards-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Status Dashboards. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/status-dashboards
+      name: status-dashboards
+      description: REST surface for status_dashboards.
+      operations:
+      - method: GET
+        name: liststatusdashboards
+        description: PagerDuty List Status Dashboards
+        call: pagerduty-status-dashboards.liststatusdashboards
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status-dashboards/url-slugs/{url-slug}
+      name: status-dashboards-url-slugs-url-slug
+      description: REST surface for status_dashboards-url_slugs-url_slug.
+      operations:
+      - method: GET
+        name: getstatusdashboardbyurlslug
+        description: PagerDuty Get a single Status Dashboard by `url_slug`
+        call: pagerduty-status-dashboards.getstatusdashboardbyurlslug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status-dashboards/url-slugs/{url-slug}/service-impacts
+      name: status-dashboards-url-slugs-url-slug-service-impacts
+      description: REST surface for status_dashboards-url_slugs-url_slug-service_impacts.
+      operations:
+      - method: GET
+        name: getstatusdashboardserviceimpactsbyurlslug
+        description: PagerDuty Get impacted Business Services for a  Status Dashboard by `url_slug`
+        call: pagerduty-status-dashboards.getstatusdashboardserviceimpactsbyurlslug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status-dashboards/{id}
+      name: status-dashboards-id
+      description: REST surface for status_dashboards-id.
+      operations:
+      - method: GET
+        name: getstatusdashboardbyid
+        description: PagerDuty Get a single Status Dashboard by `id`
+        call: pagerduty-status-dashboards.getstatusdashboardbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status-dashboards/{id}/service-impacts
+      name: status-dashboards-id-service-impacts
+      description: REST surface for status_dashboards-id-service_impacts.
+      operations:
+      - method: GET
+        name: getstatusdashboardserviceimpactsbyid
+        description: PagerDuty Get impacted Business Services for a Status Dashboard by `id`.
+        call: pagerduty-status-dashboards.getstatusdashboardserviceimpactsbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-status-dashboards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Status Dashboards. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: pagerduty-list-status-dashboards
+      description: PagerDuty List Status Dashboards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-status-dashboards.liststatusdashboards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-single-status-dashboard
+      description: PagerDuty Get a single Status Dashboard by `url_slug`
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-status-dashboards.getstatusdashboardbyurlslug
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-impacted-business-services
+      description: PagerDuty Get impacted Business Services for a  Status Dashboard by `url_slug`
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-status-dashboards.getstatusdashboardserviceimpactsbyurlslug
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-single-status-dashboard-2
+      description: PagerDuty Get a single Status Dashboard by `id`
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-status-dashboards.getstatusdashboardbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-impacted-business-services-2
+      description: PagerDuty Get impacted Business Services for a Status Dashboard by `id`.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-status-dashboards.getstatusdashboardserviceimpactsbyid
+      outputParameters:
+      - type: object
+        mapping: $.

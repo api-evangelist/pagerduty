@@ -1,0 +1,241 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Response Plays
+  description: 'PagerDuty API — Response Plays. 6 operations. Lead operation: PagerDuty List Response Plays. Self-contained
+    Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Response Plays
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-response-plays
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Response Plays business capability. Self-contained, no shared references.
+    resources:
+    - name: response_plays
+      path: /response_plays
+      operations:
+      - name: listresponseplays
+        method: GET
+        description: PagerDuty List Response Plays
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createresponseplay
+        method: POST
+        description: PagerDuty Create a Response Play
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: response_plays-id
+      path: /response_plays/{id}
+      operations:
+      - name: getresponseplay
+        method: GET
+        description: PagerDuty Get a Response Play
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateresponseplay
+        method: PUT
+        description: PagerDuty Update a Response Play
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteresponseplay
+        method: DELETE
+        description: PagerDuty Delete a Response Play
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: response_plays-response_play_id-run
+      path: /response_plays/{response_play_id}/run
+      operations:
+      - name: runresponseplay
+        method: POST
+        description: PagerDuty Run a response play
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-response-plays-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Response Plays. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/response-plays
+      name: response-plays
+      description: REST surface for response_plays.
+      operations:
+      - method: GET
+        name: listresponseplays
+        description: PagerDuty List Response Plays
+        call: pagerduty-response-plays.listresponseplays
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createresponseplay
+        description: PagerDuty Create a Response Play
+        call: pagerduty-response-plays.createresponseplay
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/response-plays/{id}
+      name: response-plays-id
+      description: REST surface for response_plays-id.
+      operations:
+      - method: GET
+        name: getresponseplay
+        description: PagerDuty Get a Response Play
+        call: pagerduty-response-plays.getresponseplay
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateresponseplay
+        description: PagerDuty Update a Response Play
+        call: pagerduty-response-plays.updateresponseplay
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteresponseplay
+        description: PagerDuty Delete a Response Play
+        call: pagerduty-response-plays.deleteresponseplay
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/response-plays/{response-play-id}/run
+      name: response-plays-response-play-id-run
+      description: REST surface for response_plays-response_play_id-run.
+      operations:
+      - method: POST
+        name: runresponseplay
+        description: PagerDuty Run a response play
+        call: pagerduty-response-plays.runresponseplay
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-response-plays-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Response Plays. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: pagerduty-list-response-plays
+      description: PagerDuty List Response Plays
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-response-plays.listresponseplays
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-response-play
+      description: PagerDuty Create a Response Play
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-response-plays.createresponseplay
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-response-play
+      description: PagerDuty Get a Response Play
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-response-plays.getresponseplay
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-response-play
+      description: PagerDuty Update a Response Play
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-response-plays.updateresponseplay
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-response-play
+      description: PagerDuty Delete a Response Play
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-response-plays.deleteresponseplay
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-run-response-play
+      description: PagerDuty Run a response play
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-response-plays.runresponseplay
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

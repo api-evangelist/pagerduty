@@ -1,0 +1,231 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Escalation Policies
+  description: 'PagerDuty API — Escalation Policies. 6 operations. Lead operation: PagerDuty List escalation policies. Self-contained
+    Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Escalation Policies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-escalation-policies
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Escalation Policies business capability. Self-contained, no shared references.
+    resources:
+    - name: escalation_policies
+      path: /escalation_policies
+      operations:
+      - name: listescalationpolicies
+        method: GET
+        description: PagerDuty List escalation policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createescalationpolicy
+        method: POST
+        description: PagerDuty Create an escalation policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: escalation_policies-id
+      path: /escalation_policies/{id}
+      operations:
+      - name: getescalationpolicy
+        method: GET
+        description: PagerDuty Get an escalation policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteescalationpolicy
+        method: DELETE
+        description: PagerDuty Delete an escalation policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateescalationpolicy
+        method: PUT
+        description: PagerDuty Update an escalation policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: escalation_policies-id-audit-records
+      path: /escalation_policies/{id}/audit/records
+      operations:
+      - name: listescalationpolicyauditrecords
+        method: GET
+        description: PagerDuty List audit records for an escalation policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-escalation-policies-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Escalation Policies. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/escalation-policies
+      name: escalation-policies
+      description: REST surface for escalation_policies.
+      operations:
+      - method: GET
+        name: listescalationpolicies
+        description: PagerDuty List escalation policies
+        call: pagerduty-escalation-policies.listescalationpolicies
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createescalationpolicy
+        description: PagerDuty Create an escalation policy
+        call: pagerduty-escalation-policies.createescalationpolicy
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/escalation-policies/{id}
+      name: escalation-policies-id
+      description: REST surface for escalation_policies-id.
+      operations:
+      - method: GET
+        name: getescalationpolicy
+        description: PagerDuty Get an escalation policy
+        call: pagerduty-escalation-policies.getescalationpolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteescalationpolicy
+        description: PagerDuty Delete an escalation policy
+        call: pagerduty-escalation-policies.deleteescalationpolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateescalationpolicy
+        description: PagerDuty Update an escalation policy
+        call: pagerduty-escalation-policies.updateescalationpolicy
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/escalation-policies/{id}/audit/records
+      name: escalation-policies-id-audit-records
+      description: REST surface for escalation_policies-id-audit-records.
+      operations:
+      - method: GET
+        name: listescalationpolicyauditrecords
+        description: PagerDuty List audit records for an escalation policy
+        call: pagerduty-escalation-policies.listescalationpolicyauditrecords
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-escalation-policies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Escalation Policies. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: pagerduty-list-escalation-policies
+      description: PagerDuty List escalation policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-escalation-policies.listescalationpolicies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-escalation-policy
+      description: PagerDuty Create an escalation policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-escalation-policies.createescalationpolicy
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-escalation-policy
+      description: PagerDuty Get an escalation policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-escalation-policies.getescalationpolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-escalation-policy
+      description: PagerDuty Delete an escalation policy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-escalation-policies.deleteescalationpolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-escalation-policy
+      description: PagerDuty Update an escalation policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-escalation-policies.updateescalationpolicy
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-audit-records-escalation
+      description: PagerDuty List audit records for an escalation policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-escalation-policies.listescalationpolicyauditrecords
+      outputParameters:
+      - type: object
+        mapping: $.

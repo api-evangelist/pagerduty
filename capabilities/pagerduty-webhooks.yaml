@@ -1,0 +1,263 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Webhooks
+  description: 'PagerDuty API — Webhooks. 7 operations. Lead operation: PagerDuty List webhook subscriptions. Self-contained
+    Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Webhooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-webhooks
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Webhooks business capability. Self-contained, no shared references.
+    resources:
+    - name: webhook_subscriptions
+      path: /webhook_subscriptions
+      operations:
+      - name: listwebhooksubscriptions
+        method: GET
+        description: PagerDuty List webhook subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createwebhooksubscription
+        method: POST
+        description: PagerDuty Create a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: webhook_subscriptions-id
+      path: /webhook_subscriptions/{id}
+      operations:
+      - name: getwebhooksubscription
+        method: GET
+        description: PagerDuty Get a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatewebhooksubscription
+        method: PUT
+        description: PagerDuty Update a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deletewebhooksubscription
+        method: DELETE
+        description: PagerDuty Delete a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: webhook_subscriptions-id-enable
+      path: /webhook_subscriptions/{id}/enable
+      operations:
+      - name: enablewebhooksubscription
+        method: POST
+        description: PagerDuty Enable a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: webhook_subscriptions-id-ping
+      path: /webhook_subscriptions/{id}/ping
+      operations:
+      - name: testwebhooksubscription
+        method: POST
+        description: PagerDuty Test a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-webhooks-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Webhooks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/webhook-subscriptions
+      name: webhook-subscriptions
+      description: REST surface for webhook_subscriptions.
+      operations:
+      - method: GET
+        name: listwebhooksubscriptions
+        description: PagerDuty List webhook subscriptions
+        call: pagerduty-webhooks.listwebhooksubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createwebhooksubscription
+        description: PagerDuty Create a webhook subscription
+        call: pagerduty-webhooks.createwebhooksubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhook-subscriptions/{id}
+      name: webhook-subscriptions-id
+      description: REST surface for webhook_subscriptions-id.
+      operations:
+      - method: GET
+        name: getwebhooksubscription
+        description: PagerDuty Get a webhook subscription
+        call: pagerduty-webhooks.getwebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatewebhooksubscription
+        description: PagerDuty Update a webhook subscription
+        call: pagerduty-webhooks.updatewebhooksubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletewebhooksubscription
+        description: PagerDuty Delete a webhook subscription
+        call: pagerduty-webhooks.deletewebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhook-subscriptions/{id}/enable
+      name: webhook-subscriptions-id-enable
+      description: REST surface for webhook_subscriptions-id-enable.
+      operations:
+      - method: POST
+        name: enablewebhooksubscription
+        description: PagerDuty Enable a webhook subscription
+        call: pagerduty-webhooks.enablewebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhook-subscriptions/{id}/ping
+      name: webhook-subscriptions-id-ping
+      description: REST surface for webhook_subscriptions-id-ping.
+      operations:
+      - method: POST
+        name: testwebhooksubscription
+        description: PagerDuty Test a webhook subscription
+        call: pagerduty-webhooks.testwebhooksubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Webhooks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: pagerduty-list-webhook-subscriptions
+      description: PagerDuty List webhook subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-webhooks.listwebhooksubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-webhook-subscription
+      description: PagerDuty Create a webhook subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-webhooks.createwebhooksubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-webhook-subscription
+      description: PagerDuty Get a webhook subscription
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-webhooks.getwebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-webhook-subscription
+      description: PagerDuty Update a webhook subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-webhooks.updatewebhooksubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-webhook-subscription
+      description: PagerDuty Delete a webhook subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-webhooks.deletewebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-enable-webhook-subscription
+      description: PagerDuty Enable a webhook subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-webhooks.enablewebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-test-webhook-subscription
+      description: PagerDuty Test a webhook subscription
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: pagerduty-webhooks.testwebhooksubscription
+      outputParameters:
+      - type: object
+        mapping: $.

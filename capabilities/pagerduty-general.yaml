@@ -1,0 +1,759 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API
+  description: 'PagerDuty API. 22 operations. Lead operation: PagerDuty List services. Self-contained Naftiko capability covering
+    one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-general
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API business capability. Self-contained, no shared references.
+    resources:
+    - name: services
+      path: /services
+      operations:
+      - name: listservices
+        method: GET
+        description: PagerDuty List services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createservice
+        method: POST
+        description: PagerDuty Create a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: services-id
+      path: /services/{id}
+      operations:
+      - name: getservice
+        method: GET
+        description: PagerDuty Get a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteservice
+        method: DELETE
+        description: PagerDuty Delete a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateservice
+        method: PUT
+        description: PagerDuty Update a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: services-id-audit-records
+      path: /services/{id}/audit/records
+      operations:
+      - name: listserviceauditrecords
+        method: GET
+        description: PagerDuty List audit records for a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-id-integrations
+      path: /services/{id}/integrations
+      operations:
+      - name: createserviceintegration
+        method: POST
+        description: PagerDuty Create a new integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: services-id-integrations-integration_id
+      path: /services/{id}/integrations/{integration_id}
+      operations:
+      - name: updateserviceintegration
+        method: PUT
+        description: PagerDuty Update an existing integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: getserviceintegration
+        method: GET
+        description: PagerDuty View an integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-id-rules
+      path: /services/{id}/rules
+      operations:
+      - name: listserviceeventrules
+        method: GET
+        description: PagerDuty List Service's Event Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createserviceeventrule
+        method: POST
+        description: PagerDuty Create an Event Rule on a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: services-id-rules-convert
+      path: /services/{id}/rules/convert
+      operations:
+      - name: convertserviceeventrulestoeventorchestration
+        method: POST
+        description: PagerDuty Convert a Service's Event Rules into Event Orchestration Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-id-rules-rule_id
+      path: /services/{id}/rules/{rule_id}
+      operations:
+      - name: getserviceeventrule
+        method: GET
+        description: PagerDuty Get an Event Rule from a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateserviceeventrule
+        method: PUT
+        description: PagerDuty Update an Event Rule on a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deleteserviceeventrule
+        method: DELETE
+        description: PagerDuty Delete an Event Rule from a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tags
+      path: /tags
+      operations:
+      - name: listtags
+        method: GET
+        description: PagerDuty List tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createtags
+        method: POST
+        description: PagerDuty Create a tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: tags-id
+      path: /tags/{id}
+      operations:
+      - name: gettag
+        method: GET
+        description: PagerDuty Get a tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletetag
+        method: DELETE
+        description: PagerDuty Delete a tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tags-id-entity_type
+      path: /tags/{id}/{entity_type}
+      operations:
+      - name: gettagsbyentitytype
+        method: GET
+        description: PagerDuty Get connected entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entity_type-id-change_tags
+      path: /{entity_type}/{id}/change_tags
+      operations:
+      - name: createentitytypebyidchangetags
+        method: POST
+        description: PagerDuty Assign tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: entity_type-id-tags
+      path: /{entity_type}/{id}/tags
+      operations:
+      - name: getentitytypebyidtags
+        method: GET
+        description: PagerDuty Get tags for entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-general-rest
+    port: 8080
+    description: REST adapter for PagerDuty API. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/services
+      name: services
+      description: REST surface for services.
+      operations:
+      - method: GET
+        name: listservices
+        description: PagerDuty List services
+        call: pagerduty-general.listservices
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createservice
+        description: PagerDuty Create a service
+        call: pagerduty-general.createservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}
+      name: services-id
+      description: REST surface for services-id.
+      operations:
+      - method: GET
+        name: getservice
+        description: PagerDuty Get a service
+        call: pagerduty-general.getservice
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteservice
+        description: PagerDuty Delete a service
+        call: pagerduty-general.deleteservice
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateservice
+        description: PagerDuty Update a service
+        call: pagerduty-general.updateservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}/audit/records
+      name: services-id-audit-records
+      description: REST surface for services-id-audit-records.
+      operations:
+      - method: GET
+        name: listserviceauditrecords
+        description: PagerDuty List audit records for a service
+        call: pagerduty-general.listserviceauditrecords
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}/integrations
+      name: services-id-integrations
+      description: REST surface for services-id-integrations.
+      operations:
+      - method: POST
+        name: createserviceintegration
+        description: PagerDuty Create a new integration
+        call: pagerduty-general.createserviceintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}/integrations/{integration-id}
+      name: services-id-integrations-integration-id
+      description: REST surface for services-id-integrations-integration_id.
+      operations:
+      - method: PUT
+        name: updateserviceintegration
+        description: PagerDuty Update an existing integration
+        call: pagerduty-general.updateserviceintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getserviceintegration
+        description: PagerDuty View an integration
+        call: pagerduty-general.getserviceintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}/rules
+      name: services-id-rules
+      description: REST surface for services-id-rules.
+      operations:
+      - method: GET
+        name: listserviceeventrules
+        description: PagerDuty List Service's Event Rules
+        call: pagerduty-general.listserviceeventrules
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createserviceeventrule
+        description: PagerDuty Create an Event Rule on a Service
+        call: pagerduty-general.createserviceeventrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}/rules/convert
+      name: services-id-rules-convert
+      description: REST surface for services-id-rules-convert.
+      operations:
+      - method: POST
+        name: convertserviceeventrulestoeventorchestration
+        description: PagerDuty Convert a Service's Event Rules into Event Orchestration Rules
+        call: pagerduty-general.convertserviceeventrulestoeventorchestration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{id}/rules/{rule-id}
+      name: services-id-rules-rule-id
+      description: REST surface for services-id-rules-rule_id.
+      operations:
+      - method: GET
+        name: getserviceeventrule
+        description: PagerDuty Get an Event Rule from a Service
+        call: pagerduty-general.getserviceeventrule
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateserviceeventrule
+        description: PagerDuty Update an Event Rule on a Service
+        call: pagerduty-general.updateserviceeventrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteserviceeventrule
+        description: PagerDuty Delete an Event Rule from a Service
+        call: pagerduty-general.deleteserviceeventrule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags
+      name: tags
+      description: REST surface for tags.
+      operations:
+      - method: GET
+        name: listtags
+        description: PagerDuty List tags
+        call: pagerduty-general.listtags
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtags
+        description: PagerDuty Create a tag
+        call: pagerduty-general.createtags
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/{id}
+      name: tags-id
+      description: REST surface for tags-id.
+      operations:
+      - method: GET
+        name: gettag
+        description: PagerDuty Get a tag
+        call: pagerduty-general.gettag
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetag
+        description: PagerDuty Delete a tag
+        call: pagerduty-general.deletetag
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/{id}/{entity-type}
+      name: tags-id-entity-type
+      description: REST surface for tags-id-entity_type.
+      operations:
+      - method: GET
+        name: gettagsbyentitytype
+        description: PagerDuty Get connected entities
+        call: pagerduty-general.gettagsbyentitytype
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{entity-type}/{id}/change-tags
+      name: entity-type-id-change-tags
+      description: REST surface for entity_type-id-change_tags.
+      operations:
+      - method: POST
+        name: createentitytypebyidchangetags
+        description: PagerDuty Assign tags
+        call: pagerduty-general.createentitytypebyidchangetags
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{entity-type}/{id}/tags
+      name: entity-type-id-tags
+      description: REST surface for entity_type-id-tags.
+      operations:
+      - method: GET
+        name: getentitytypebyidtags
+        description: PagerDuty Get tags for entities
+        call: pagerduty-general.getentitytypebyidtags
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API. One tool per consumed operation, routed inline through this capability's consumes
+      block.
+    tools:
+    - name: pagerduty-list-services
+      description: PagerDuty List services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.listservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-service
+      description: PagerDuty Create a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-general.createservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-service
+      description: PagerDuty Get a service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.getservice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-service
+      description: PagerDuty Delete a service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-general.deleteservice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-service
+      description: PagerDuty Update a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.updateservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-audit-records-service
+      description: PagerDuty List audit records for a service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.listserviceauditrecords
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-new-integration
+      description: PagerDuty Create a new integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-general.createserviceintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-existing-integration
+      description: PagerDuty Update an existing integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.updateserviceintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-view-integration
+      description: PagerDuty View an integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.getserviceintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-service-s-event-rules
+      description: PagerDuty List Service's Event Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.listserviceeventrules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-event-rule-service
+      description: PagerDuty Create an Event Rule on a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-general.createserviceeventrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-convert-service-s-event-rules
+      description: PagerDuty Convert a Service's Event Rules into Event Orchestration Rules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-general.convertserviceeventrulestoeventorchestration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-event-rule-service
+      description: PagerDuty Get an Event Rule from a Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.getserviceeventrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-event-rule-service
+      description: PagerDuty Update an Event Rule on a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.updateserviceeventrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-event-rule-service
+      description: PagerDuty Delete an Event Rule from a Service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-general.deleteserviceeventrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-tags
+      description: PagerDuty List tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.listtags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-tag
+      description: PagerDuty Create a tag
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-general.createtags
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-tag
+      description: PagerDuty Get a tag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.gettag
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-tag
+      description: PagerDuty Delete a tag
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-general.deletetag
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-connected-entities
+      description: PagerDuty Get connected entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.gettagsbyentitytype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-assign-tags
+      description: PagerDuty Assign tags
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-general.createentitytypebyidchangetags
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-tags-entities
+      description: PagerDuty Get tags for entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-general.getentitytypebyidtags
+      outputParameters:
+      - type: object
+        mapping: $.

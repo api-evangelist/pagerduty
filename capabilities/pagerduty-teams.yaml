@@ -1,0 +1,496 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Teams
+  description: 'PagerDuty API — Teams. 14 operations. Lead operation: PagerDuty Create a team. Self-contained Naftiko capability
+    covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Teams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-teams
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Teams business capability. Self-contained, no shared references.
+    resources:
+    - name: teams
+      path: /teams
+      operations:
+      - name: createteam
+        method: POST
+        description: PagerDuty Create a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: listteams
+        method: GET
+        description: PagerDuty List teams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: teams-id
+      path: /teams/{id}
+      operations:
+      - name: getteam
+        method: GET
+        description: PagerDuty Get a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteteam
+        method: DELETE
+        description: PagerDuty Delete a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateteam
+        method: PUT
+        description: PagerDuty Update a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: teams-id-audit-records
+      path: /teams/{id}/audit/records
+      operations:
+      - name: listteamsauditrecords
+        method: GET
+        description: PagerDuty List audit records for a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: teams-id-escalation_policies-escalation_policy_id
+      path: /teams/{id}/escalation_policies/{escalation_policy_id}
+      operations:
+      - name: deleteteamescalationpolicy
+        method: DELETE
+        description: PagerDuty Remove an escalation policy from a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateteamescalationpolicy
+        method: PUT
+        description: PagerDuty Add an escalation policy to a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: teams-id-members
+      path: /teams/{id}/members
+      operations:
+      - name: listteamusers
+        method: GET
+        description: PagerDuty List members of a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: teams-id-notification_subscriptions
+      path: /teams/{id}/notification_subscriptions
+      operations:
+      - name: getteamnotificationsubscriptions
+        method: GET
+        description: PagerDuty List Team Notification Subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createteamnotificationsubscriptions
+        method: POST
+        description: PagerDuty Create Team Notification Subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: teams-id-notification_subscriptions-unsubscribe
+      path: /teams/{id}/notification_subscriptions/unsubscribe
+      operations:
+      - name: removeteamnotificationsubscriptions
+        method: POST
+        description: Unsubscribe the given Team from Notifications on the matching Subscribable entities.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: teams-id-users-user_id
+      path: /teams/{id}/users/{user_id}
+      operations:
+      - name: deleteteamuser
+        method: DELETE
+        description: PagerDuty Remove a user from a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateteamuser
+        method: PUT
+        description: PagerDuty Add a user to a team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-teams-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Teams. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/teams
+      name: teams
+      description: REST surface for teams.
+      operations:
+      - method: POST
+        name: createteam
+        description: PagerDuty Create a team
+        call: pagerduty-teams.createteam
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listteams
+        description: PagerDuty List teams
+        call: pagerduty-teams.listteams
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}
+      name: teams-id
+      description: REST surface for teams-id.
+      operations:
+      - method: GET
+        name: getteam
+        description: PagerDuty Get a team
+        call: pagerduty-teams.getteam
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteteam
+        description: PagerDuty Delete a team
+        call: pagerduty-teams.deleteteam
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateteam
+        description: PagerDuty Update a team
+        call: pagerduty-teams.updateteam
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/audit/records
+      name: teams-id-audit-records
+      description: REST surface for teams-id-audit-records.
+      operations:
+      - method: GET
+        name: listteamsauditrecords
+        description: PagerDuty List audit records for a team
+        call: pagerduty-teams.listteamsauditrecords
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/escalation-policies/{escalation-policy-id}
+      name: teams-id-escalation-policies-escalation-policy-id
+      description: REST surface for teams-id-escalation_policies-escalation_policy_id.
+      operations:
+      - method: DELETE
+        name: deleteteamescalationpolicy
+        description: PagerDuty Remove an escalation policy from a team
+        call: pagerduty-teams.deleteteamescalationpolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateteamescalationpolicy
+        description: PagerDuty Add an escalation policy to a team
+        call: pagerduty-teams.updateteamescalationpolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/members
+      name: teams-id-members
+      description: REST surface for teams-id-members.
+      operations:
+      - method: GET
+        name: listteamusers
+        description: PagerDuty List members of a team
+        call: pagerduty-teams.listteamusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/notification-subscriptions
+      name: teams-id-notification-subscriptions
+      description: REST surface for teams-id-notification_subscriptions.
+      operations:
+      - method: GET
+        name: getteamnotificationsubscriptions
+        description: PagerDuty List Team Notification Subscriptions
+        call: pagerduty-teams.getteamnotificationsubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createteamnotificationsubscriptions
+        description: PagerDuty Create Team Notification Subscriptions
+        call: pagerduty-teams.createteamnotificationsubscriptions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/notification-subscriptions/unsubscribe
+      name: teams-id-notification-subscriptions-unsubscribe
+      description: REST surface for teams-id-notification_subscriptions-unsubscribe.
+      operations:
+      - method: POST
+        name: removeteamnotificationsubscriptions
+        description: Unsubscribe the given Team from Notifications on the matching Subscribable entities.
+        call: pagerduty-teams.removeteamnotificationsubscriptions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{id}/users/{user-id}
+      name: teams-id-users-user-id
+      description: REST surface for teams-id-users-user_id.
+      operations:
+      - method: DELETE
+        name: deleteteamuser
+        description: PagerDuty Remove a user from a team
+        call: pagerduty-teams.deleteteamuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateteamuser
+        description: PagerDuty Add a user to a team
+        call: pagerduty-teams.updateteamuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-teams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Teams. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: pagerduty-create-team
+      description: PagerDuty Create a team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-teams.createteam
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-teams
+      description: PagerDuty List teams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.listteams
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-team
+      description: PagerDuty Get a team
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.getteam
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-team
+      description: PagerDuty Delete a team
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-teams.deleteteam
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-team
+      description: PagerDuty Update a team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.updateteam
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-audit-records-team
+      description: PagerDuty List audit records for a team
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.listteamsauditrecords
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-remove-escalation-policy-team
+      description: PagerDuty Remove an escalation policy from a team
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-teams.deleteteamescalationpolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-add-escalation-policy-team
+      description: PagerDuty Add an escalation policy to a team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.updateteamescalationpolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-members-team
+      description: PagerDuty List members of a team
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.listteamusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-list-team-notification-subscriptions
+      description: PagerDuty List Team Notification Subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.getteamnotificationsubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-team-notification-subscriptions
+      description: PagerDuty Create Team Notification Subscriptions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-teams.createteamnotificationsubscriptions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unsubscribe-given-team-notifications-matching
+      description: Unsubscribe the given Team from Notifications on the matching Subscribable entities.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-teams.removeteamnotificationsubscriptions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-remove-user-team
+      description: PagerDuty Remove a user from a team
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-teams.deleteteamuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-add-user-team
+      description: PagerDuty Add a user to a team
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-teams.updateteamuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

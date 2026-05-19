@@ -1,0 +1,231 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Extensions
+  description: 'PagerDuty API — Extensions. 6 operations. Lead operation: PagerDuty List extensions. Self-contained Naftiko
+    capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-extensions
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Extensions business capability. Self-contained, no shared references.
+    resources:
+    - name: extensions
+      path: /extensions
+      operations:
+      - name: listextensions
+        method: GET
+        description: PagerDuty List extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createextension
+        method: POST
+        description: PagerDuty Create an extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: extensions-id
+      path: /extensions/{id}
+      operations:
+      - name: getextension
+        method: GET
+        description: PagerDuty Get an extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteextension
+        method: DELETE
+        description: PagerDuty Delete an extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateextension
+        method: PUT
+        description: PagerDuty Update an extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: extensions-id-enable
+      path: /extensions/{id}/enable
+      operations:
+      - name: enableextension
+        method: POST
+        description: PagerDuty Enable an extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-extensions-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Extensions. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/extensions
+      name: extensions
+      description: REST surface for extensions.
+      operations:
+      - method: GET
+        name: listextensions
+        description: PagerDuty List extensions
+        call: pagerduty-extensions.listextensions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createextension
+        description: PagerDuty Create an extension
+        call: pagerduty-extensions.createextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{id}
+      name: extensions-id
+      description: REST surface for extensions-id.
+      operations:
+      - method: GET
+        name: getextension
+        description: PagerDuty Get an extension
+        call: pagerduty-extensions.getextension
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteextension
+        description: PagerDuty Delete an extension
+        call: pagerduty-extensions.deleteextension
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateextension
+        description: PagerDuty Update an extension
+        call: pagerduty-extensions.updateextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions/{id}/enable
+      name: extensions-id-enable
+      description: REST surface for extensions-id-enable.
+      operations:
+      - method: POST
+        name: enableextension
+        description: PagerDuty Enable an extension
+        call: pagerduty-extensions.enableextension
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Extensions. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: pagerduty-list-extensions
+      description: PagerDuty List extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-extensions.listextensions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-create-extension
+      description: PagerDuty Create an extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-extensions.createextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-get-extension
+      description: PagerDuty Get an extension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-extensions.getextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-delete-extension
+      description: PagerDuty Delete an extension
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pagerduty-extensions.deleteextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-update-extension
+      description: PagerDuty Update an extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pagerduty-extensions.updateextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pagerduty-enable-extension
+      description: PagerDuty Enable an extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pagerduty-extensions.enableextension
+      outputParameters:
+      - type: object
+        mapping: $.

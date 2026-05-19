@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Priorities
+  description: 'PagerDuty API — Priorities. 1 operations. Lead operation: PagerDuty List priorities. Self-contained Naftiko
+    capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Priorities
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-priorities
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Priorities business capability. Self-contained, no shared references.
+    resources:
+    - name: priorities
+      path: /priorities
+      operations:
+      - name: listpriorities
+        method: GET
+        description: PagerDuty List priorities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-priorities-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Priorities. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/priorities
+      name: priorities
+      description: REST surface for priorities.
+      operations:
+      - method: GET
+        name: listpriorities
+        description: PagerDuty List priorities
+        call: pagerduty-priorities.listpriorities
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-priorities-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Priorities. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: pagerduty-list-priorities
+      description: PagerDuty List priorities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-priorities.listpriorities
+      outputParameters:
+      - type: object
+        mapping: $.

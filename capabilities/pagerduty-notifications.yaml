@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: PagerDuty API — Notifications
+  description: 'PagerDuty API — Notifications. 1 operations. Lead operation: PagerDuty List notifications. Self-contained
+    Naftiko capability covering one Pagerduty business surface.'
+  tags:
+  - Pagerduty
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PAGERDUTY_API_KEY: PAGERDUTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pagerduty-notifications
+    baseUri: https://api.pagerduty.com
+    description: PagerDuty API — Notifications business capability. Self-contained, no shared references.
+    resources:
+    - name: notifications
+      path: /notifications
+      operations:
+      - name: listnotifications
+        method: GET
+        description: PagerDuty List notifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.PAGERDUTY_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pagerduty-notifications-rest
+    port: 8080
+    description: REST adapter for PagerDuty API — Notifications. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/notifications
+      name: notifications
+      description: REST surface for notifications.
+      operations:
+      - method: GET
+        name: listnotifications
+        description: PagerDuty List notifications
+        call: pagerduty-notifications.listnotifications
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pagerduty-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for PagerDuty API — Notifications. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: pagerduty-list-notifications
+      description: PagerDuty List notifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pagerduty-notifications.listnotifications
+      outputParameters:
+      - type: object
+        mapping: $.
