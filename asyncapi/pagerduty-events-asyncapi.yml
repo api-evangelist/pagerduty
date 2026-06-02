@@ -1,0 +1,763 @@
+asyncapi: 2.6.0
+info:
+  title: PagerDuty Events
+  version: '1.0.0'
+  description: |-
+    AsyncAPI description of PagerDuty's event-driven surface. Two complementary
+    channels are modelled:
+
+      1. Outbound V3 Webhooks — PagerDuty POSTs a JSON envelope to subscriber
+         URLs whenever a configured incident, service, or system event occurs.
+         Subscribers register an HTTP delivery method, an event type filter,
+         and optional account, team, or service filter via the REST
+         `/webhook_subscriptions` endpoint. Each delivery includes the
+         `X-PagerDuty-Signature` HMAC-SHA256 header and an
+         `X-Webhook-Subscription` header.
+
+      2. Inbound Events API v2 — third-party tools POST PD-CEF formatted alert
+         and change events to `https://events.pagerduty.com/v2/enqueue` and
+         `https://events.pagerduty.com/v2/change/enqueue`. Requests are
+         authenticated by a 32-character routing key (integration key) embedded
+         in the JSON body.
+
+    Source documentation:
+      - REST API reference:        https://developer.pagerduty.com/api-reference/
+      - Webhooks overview:         https://developer.pagerduty.com/docs/webhooks-overview
+      - Verifying signatures:      https://developer.pagerduty.com/docs/verifying-signatures
+      - Events API v2 overview:    https://developer.pagerduty.com/docs/events-api-v2/overview/
+      - Send an event:             https://developer.pagerduty.com/docs/events-api-v2/trigger-events/
+      - Send a Change Event:       https://developer.pagerduty.com/docs/events-api-v2/send-change-events/
+
+    Event type enumeration is sourced from PagerDuty's V3 webhook support
+    article and the in-repo REST OpenAPI document. Event action and severity
+    enumerations are sourced from the in-repo REST OpenAPI document.
+  contact:
+    name: PagerDuty Developer Support
+    url: https://developer.pagerduty.com/
+  license:
+    name: PagerDuty Terms of Service
+    url: https://www.pagerduty.com/terms-of-service/
+
+defaultContentType: application/json
+
+servers:
+  subscriber:
+    url: '{webhookUrl}'
+    protocol: https
+    description: |-
+      Customer-hosted HTTPS endpoint that receives V3 webhook POSTs from
+      PagerDuty. The full URL is configured on the webhook subscription's
+      `delivery_method.url` field.
+    variables:
+      webhookUrl:
+        default: https://example.com/pagerduty/webhook
+        description: Fully-qualified HTTPS URL of the subscriber endpoint.
+    security:
+      - hmacSignature: []
+  eventsApi:
+    url: events.pagerduty.com
+    protocol: https
+    description: |-
+      PagerDuty Events API v2 ingestion host. Third-party tools and
+      integrations POST PD-CEF alert and change events to the
+      `/v2/enqueue` and `/v2/change/enqueue` paths.
+    security:
+      - routingKey: []
+
+channels:
+  /pagerduty/webhook:
+    description: |-
+      Single subscriber endpoint that receives every V3 webhook event delivered
+      to a `webhook_subscription`. The envelope's `event.event_type` field
+      identifies the event class. PagerDuty sends one event per HTTP POST and
+      retries on non-2xx responses.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receivePagerDutyWebhook
+      summary: Receive a PagerDuty V3 webhook event
+      description: |-
+        PagerDuty POSTs a JSON envelope wrapping a single event to the
+        subscriber endpoint. Subscribers should respond with a 2xx status
+        code; non-2xx responses cause the subscription to be retried and
+        eventually `temporarily_disabled` after repeated failures.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/IncidentTriggered'
+          - $ref: '#/components/messages/IncidentAcknowledged'
+          - $ref: '#/components/messages/IncidentUnacknowledged'
+          - $ref: '#/components/messages/IncidentEscalated'
+          - $ref: '#/components/messages/IncidentDelegated'
+          - $ref: '#/components/messages/IncidentReassigned'
+          - $ref: '#/components/messages/IncidentResolved'
+          - $ref: '#/components/messages/IncidentReopened'
+          - $ref: '#/components/messages/IncidentAnnotated'
+          - $ref: '#/components/messages/IncidentPriorityUpdated'
+          - $ref: '#/components/messages/IncidentResponderAdded'
+          - $ref: '#/components/messages/IncidentResponderReplied'
+          - $ref: '#/components/messages/IncidentStatusUpdatePublished'
+          - $ref: '#/components/messages/IncidentConferenceBridgeUpdated'
+          - $ref: '#/components/messages/IncidentCustomFieldValuesUpdated'
+          - $ref: '#/components/messages/IncidentTypeChanged'
+          - $ref: '#/components/messages/IncidentServiceUpdated'
+          - $ref: '#/components/messages/IncidentWorkflowStarted'
+          - $ref: '#/components/messages/IncidentWorkflowCompleted'
+          - $ref: '#/components/messages/ServiceCreated'
+          - $ref: '#/components/messages/ServiceUpdated'
+          - $ref: '#/components/messages/ServiceDeleted'
+          - $ref: '#/components/messages/ServiceCustomFieldValuesUpdated'
+          - $ref: '#/components/messages/PageyPing'
+
+  /v2/enqueue:
+    servers:
+      - eventsApi
+    description: |-
+      PagerDuty Events API v2 alert ingestion endpoint. Third-party tools POST
+      a PD-CEF formatted JSON body to trigger, acknowledge, or resolve alerts
+      on the integration identified by `routing_key`. Default rate limit is
+      480 events per minute per integration key.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    subscribe:
+      operationId: sendEventV2
+      summary: Send an alert event to PagerDuty
+      description: |-
+        POSTs a single PD-CEF event to PagerDuty. The `event_action` field
+        determines whether the request triggers a new alert, acknowledges an
+        existing alert, or resolves it. `dedup_key` correlates subsequent
+        events to the same alert.
+      message:
+        $ref: '#/components/messages/EventsApiV2Request'
+
+  /v2/change/enqueue:
+    servers:
+      - eventsApi
+    description: |-
+      PagerDuty Events API v2 change event ingestion endpoint. Change events
+      are informational signals from build, deploy, and configuration tooling
+      that are not paged on but appear on the service timeline.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    subscribe:
+      operationId: sendChangeEventV2
+      summary: Send a change event to PagerDuty
+      description: |-
+        POSTs a single PD-CEF change event to PagerDuty for display on the
+        target service's activity timeline.
+      message:
+        $ref: '#/components/messages/EventsApiV2ChangeRequest'
+
+components:
+  securitySchemes:
+    hmacSignature:
+      type: httpApiKey
+      description: |-
+        HMAC-SHA256 signature delivered in the `X-PagerDuty-Signature`
+        request header. PagerDuty computes the signature using the
+        webhook subscription's `delivery_method.secret` and the raw
+        request body. Multiple signatures may be present, separated by
+        commas, each prefixed with a version label (e.g. `v1=...`).
+      name: X-PagerDuty-Signature
+      in: header
+    routingKey:
+      type: userPassword
+      description: |-
+        Integration key (a.k.a. routing key) — a 32-character token bound
+        to a single service or event orchestration integration. The key is
+        carried in the request body's `routing_key` property, not as an
+        HTTP header.
+
+  messages:
+    IncidentTriggered:
+      name: IncidentTriggered
+      title: incident.triggered
+      summary: A new incident has been created on a service.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentAcknowledged:
+      name: IncidentAcknowledged
+      title: incident.acknowledged
+      summary: A user or responder has acknowledged an incident.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentUnacknowledged:
+      name: IncidentUnacknowledged
+      title: incident.unacknowledged
+      summary: An acknowledged incident has timed out and returned to triggered.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentEscalated:
+      name: IncidentEscalated
+      title: incident.escalated
+      summary: An incident escalated to the next level of its escalation policy.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentDelegated:
+      name: IncidentDelegated
+      title: incident.delegated
+      summary: An incident was reassigned to a different escalation policy.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentReassigned:
+      name: IncidentReassigned
+      title: incident.reassigned
+      summary: An incident was reassigned to a different user.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentResolved:
+      name: IncidentResolved
+      title: incident.resolved
+      summary: An incident has been resolved.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentReopened:
+      name: IncidentReopened
+      title: incident.reopened
+      summary: A previously resolved incident has been reopened.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentAnnotated:
+      name: IncidentAnnotated
+      title: incident.annotated
+      summary: A note has been added to an incident.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentPriorityUpdated:
+      name: IncidentPriorityUpdated
+      title: incident.priority_updated
+      summary: The priority of an incident has been changed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentResponderAdded:
+      name: IncidentResponderAdded
+      title: incident.responder.added
+      summary: A responder has been requested to join an incident.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentResponderReplied:
+      name: IncidentResponderReplied
+      title: incident.responder.replied
+      summary: A responder has accepted or declined an incident response request.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentStatusUpdatePublished:
+      name: IncidentStatusUpdatePublished
+      title: incident.status_update_published
+      summary: A status update has been posted to an incident.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentConferenceBridgeUpdated:
+      name: IncidentConferenceBridgeUpdated
+      title: incident.conference_bridge.updated
+      summary: The conference bridge details on an incident have been modified.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentCustomFieldValuesUpdated:
+      name: IncidentCustomFieldValuesUpdated
+      title: incident.custom_field_values.updated
+      summary: One or more custom field values on an incident have been changed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentTypeChanged:
+      name: IncidentTypeChanged
+      title: incident.incident_type.changed
+      summary: The incident type assigned to an incident has been changed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentServiceUpdated:
+      name: IncidentServiceUpdated
+      title: incident.service_updated
+      summary: The service an incident belongs to has been updated.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentWorkflowStarted:
+      name: IncidentWorkflowStarted
+      title: incident.workflow.started
+      summary: An incident workflow has started executing on an incident.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    IncidentWorkflowCompleted:
+      name: IncidentWorkflowCompleted
+      title: incident.workflow.completed
+      summary: An incident workflow has finished executing on an incident.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/IncidentWebhookEnvelope'
+    ServiceCreated:
+      name: ServiceCreated
+      title: service.created
+      summary: A new service has been created.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ServiceWebhookEnvelope'
+    ServiceUpdated:
+      name: ServiceUpdated
+      title: service.updated
+      summary: A service has been modified.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ServiceWebhookEnvelope'
+    ServiceDeleted:
+      name: ServiceDeleted
+      title: service.deleted
+      summary: A service has been deleted.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ServiceWebhookEnvelope'
+    ServiceCustomFieldValuesUpdated:
+      name: ServiceCustomFieldValuesUpdated
+      title: service.custom_field_values.updated
+      summary: One or more custom field values on a service have been changed.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ServiceWebhookEnvelope'
+    PageyPing:
+      name: PageyPing
+      title: pagey.ping
+      summary: |-
+        Test event delivered when a webhook subscription is pinged via
+        `POST /webhook_subscriptions/{id}/ping`. The `data` object is empty.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PingWebhookEnvelope'
+
+    EventsApiV2Request:
+      name: EventsApiV2Request
+      title: PD-CEF Alert Event
+      summary: Trigger, acknowledge, or resolve a PagerDuty alert.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EventsApiV2Body'
+
+    EventsApiV2ChangeRequest:
+      name: EventsApiV2ChangeRequest
+      title: PD-CEF Change Event
+      summary: Record a change event on a service timeline.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/EventsApiV2ChangeBody'
+
+  schemas:
+    WebhookEventEnvelope:
+      type: object
+      description: |-
+        Common envelope wrapping every V3 webhook delivery. The concrete
+        `data` payload depends on `event_type` / `resource_type`.
+      required: [event]
+      properties:
+        event:
+          type: object
+          required: [id, event_type, resource_type, occurred_at]
+          properties:
+            id:
+              type: string
+              description: ULID uniquely identifying this delivery.
+              example: 01CH754SM17TWPE2V2H4VPBRO7
+            event_type:
+              type: string
+              description: The class of event being delivered.
+            resource_type:
+              type: string
+              description: The kind of resource the event concerns.
+              enum:
+                - incident
+                - service
+                - pagey
+            occurred_at:
+              type: string
+              format: date-time
+              description: ISO-8601 timestamp at which the event occurred.
+            agent:
+              description: |-
+                The entity that performed the action that produced this event.
+                Null for system-generated events.
+              type: object
+              nullable: true
+              properties:
+                id: { type: string }
+                type: { type: string }
+                summary: { type: string }
+                self: { type: string, format: uri }
+                html_url: { type: string, format: uri }
+            client:
+              description: |-
+                The client through which the action was performed (e.g. the
+                PagerDuty web UI, the API, a mobile app). Null when unknown.
+              type: object
+              nullable: true
+              properties:
+                name: { type: string }
+                type: { type: string }
+            data:
+              type: object
+              description: |-
+                Resource-specific payload. Shape varies by `resource_type`
+                (incident, service, pagey ping).
+
+    IncidentWebhookEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEventEnvelope'
+        - type: object
+          properties:
+            event:
+              type: object
+              properties:
+                event_type:
+                  type: string
+                  enum:
+                    - incident.triggered
+                    - incident.acknowledged
+                    - incident.unacknowledged
+                    - incident.escalated
+                    - incident.delegated
+                    - incident.reassigned
+                    - incident.resolved
+                    - incident.reopened
+                    - incident.annotated
+                    - incident.priority_updated
+                    - incident.responder.added
+                    - incident.responder.replied
+                    - incident.status_update_published
+                    - incident.conference_bridge.updated
+                    - incident.custom_field_values.updated
+                    - incident.incident_type.changed
+                    - incident.service_updated
+                    - incident.workflow.started
+                    - incident.workflow.completed
+                resource_type:
+                  type: string
+                  const: incident
+                data:
+                  $ref: '#/components/schemas/IncidentEventData'
+
+    ServiceWebhookEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEventEnvelope'
+        - type: object
+          properties:
+            event:
+              type: object
+              properties:
+                event_type:
+                  type: string
+                  enum:
+                    - service.created
+                    - service.updated
+                    - service.deleted
+                    - service.custom_field_values.updated
+                resource_type:
+                  type: string
+                  const: service
+                data:
+                  $ref: '#/components/schemas/ServiceEventData'
+
+    PingWebhookEnvelope:
+      allOf:
+        - $ref: '#/components/schemas/WebhookEventEnvelope'
+        - type: object
+          properties:
+            event:
+              type: object
+              properties:
+                event_type:
+                  type: string
+                  const: pagey.ping
+                resource_type:
+                  type: string
+                  const: pagey
+                data:
+                  type: object
+                  description: Always empty on a ping event.
+
+    IncidentEventData:
+      type: object
+      description: |-
+        Incident resource snapshot at the time the webhook was emitted. Only
+        the broadly stable fields are modelled here; additional keys are
+        permitted because PagerDuty extends the payload over time.
+      properties:
+        id:
+          type: string
+          description: PagerDuty incident ID.
+        type:
+          type: string
+          enum: [incident]
+        self:
+          type: string
+          format: uri
+        html_url:
+          type: string
+          format: uri
+        number:
+          type: integer
+          description: Account-unique incident number.
+        status:
+          type: string
+          enum:
+            - triggered
+            - acknowledged
+            - resolved
+        incident_key:
+          type: string
+          description: The incident's de-duplication key.
+        created_at:
+          type: string
+          format: date-time
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        title:
+          type: string
+        description:
+          type: string
+        urgency:
+          type: string
+          enum:
+            - high
+            - low
+        service:
+          $ref: '#/components/schemas/ResourceReference'
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+        escalation_policy:
+          $ref: '#/components/schemas/ResourceReference'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+        priority:
+          $ref: '#/components/schemas/ResourceReference'
+          nullable: true
+        conference_bridge:
+          type: object
+          nullable: true
+          properties:
+            conference_number: { type: string }
+            conference_url:    { type: string }
+        resolve_reason:
+          type: string
+          nullable: true
+
+    ServiceEventData:
+      type: object
+      description: Service resource snapshot at the time the webhook was emitted.
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [service]
+        self:
+          type: string
+          format: uri
+        html_url:
+          type: string
+          format: uri
+        name:
+          type: string
+        description:
+          type: string
+        auto_resolve_timeout:
+          type: integer
+          nullable: true
+        acknowledgement_timeout:
+          type: integer
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - active
+            - warning
+            - critical
+            - maintenance
+            - disabled
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+        escalation_policy:
+          $ref: '#/components/schemas/ResourceReference'
+
+    ResourceReference:
+      type: object
+      description: Minimal reference to another PagerDuty resource.
+      properties:
+        id: { type: string }
+        type: { type: string }
+        summary: { type: string }
+        self: { type: string, format: uri }
+        html_url: { type: string, format: uri }
+
+    EventsApiV2Body:
+      type: object
+      description: |-
+        Common envelope for Events API v2 alert events. `payload` is required
+        only when `event_action` is `trigger`; for acknowledge and resolve
+        only `routing_key`, `event_action`, and `dedup_key` are required.
+      required: [routing_key, event_action]
+      properties:
+        routing_key:
+          type: string
+          minLength: 32
+          maxLength: 32
+          description: 32-character integration key for the receiving service.
+        event_action:
+          type: string
+          description: |-
+            Whether this event triggers a new alert, acknowledges an existing
+            alert, or resolves an existing alert.
+          enum:
+            - trigger
+            - acknowledge
+            - resolve
+        dedup_key:
+          type: string
+          maxLength: 255
+          description: |-
+            Correlates trigger, acknowledge, and resolve events for the same
+            alert. Returned by PagerDuty on trigger when not supplied.
+        client:
+          type: string
+          description: |-
+            The name of the monitoring client that is triggering this event.
+            Optional, only sent with `trigger` actions.
+        client_url:
+          type: string
+          format: uri
+          description: |-
+            The URL of the monitoring client. Optional, only sent with
+            `trigger` actions.
+        links:
+          type: array
+          description: List of links to add to the resulting incident.
+          items:
+            type: object
+            required: [href]
+            properties:
+              href: { type: string, format: uri }
+              text: { type: string }
+        images:
+          type: array
+          description: List of images to attach to the resulting incident.
+          items:
+            type: object
+            required: [src]
+            properties:
+              src: { type: string, format: uri }
+              href: { type: string, format: uri }
+              alt: { type: string }
+        payload:
+          type: object
+          description: |-
+            PD-CEF payload describing the alert. Required when
+            `event_action` is `trigger`.
+          required: [summary, source, severity]
+          properties:
+            summary:
+              type: string
+              maxLength: 1024
+              description: A high-level, text summary message of the event.
+            source:
+              type: string
+              description: |-
+                Unique identifier of the affected system, preferably a
+                hostname or FQDN.
+            severity:
+              type: string
+              description: Perceived severity of the affected system.
+              enum:
+                - critical
+                - error
+                - warning
+                - info
+            timestamp:
+              type: string
+              format: date-time
+              description: ISO-8601 timestamp at which the event occurred.
+            component:
+              type: string
+              description: Component of the source machine that is responsible.
+            group:
+              type: string
+              description: Logical grouping of components of a service.
+            class:
+              type: string
+              description: Class or type of the event.
+            custom_details:
+              type: object
+              description: |-
+                Free-form object of additional details about the event.
+
+    EventsApiV2ChangeBody:
+      type: object
+      description: Request body for `POST /v2/change/enqueue`.
+      required: [routing_key, payload]
+      properties:
+        routing_key:
+          type: string
+          minLength: 32
+          maxLength: 32
+          description: 32-character integration key for the receiving service.
+        links:
+          type: array
+          description: List of links to add to the change event.
+          items:
+            type: object
+            required: [href]
+            properties:
+              href: { type: string, format: uri }
+              text: { type: string }
+        payload:
+          type: object
+          required: [summary, source]
+          properties:
+            summary:
+              type: string
+              maxLength: 1024
+              description: Brief text summary of the change event.
+            source:
+              type: string
+              description: Source system that emitted the change event.
+            timestamp:
+              type: string
+              format: date-time
+              description: ISO-8601 timestamp the change was detected or generated.
+            custom_details:
+              type: object
+              description: Free-form additional details about the change event.

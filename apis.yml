@@ -11,7 +11,7 @@ tags:
 - On-Call Management
 url: https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-05-19'
+modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
 - aid: pagerduty:pagerduty-rest-api
@@ -103,6 +103,8 @@ apis:
     url: capabilities/pagerduty-vendors.yaml
   - type: NaftikoCapability
     url: capabilities/pagerduty-webhooks.yaml
+  - type: AsyncAPI
+    url: asyncapi/pagerduty-events-asyncapi.yml
 - aid: pagerduty:pagerduty-events-api
   name: PagerDuty Events API
   description: The PagerDuty Events API is a system for triggering, acknowledging, and resolving alerts from monitoring tools
@@ -118,6 +120,8 @@ apis:
     url: https://developer.pagerduty.com/docs/events-api-v2/overview/
   - type: GettingStarted
     url: https://developer.pagerduty.com/docs/events-api-v2/send-an-alert/
+  - type: AsyncAPI
+    url: asyncapi/pagerduty-events-asyncapi.yml
 common:
 - type: LinkedIn
   url: https://www.linkedin.com/company/pagerduty

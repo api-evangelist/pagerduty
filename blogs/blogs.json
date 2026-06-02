@@ -2,12 +2,17 @@
   "repo": "pagerduty",
   "feeds": [
     {
-      "source": "https://www.pagerduty.com/blog/",
+      "source": "https://www.pagerduty.com/feed/",
       "feed_url": "https://www.pagerduty.com/feed/",
-      "title": "PagerDuty",
-      "saved": 3
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://identity.pagerduty.com/sign_in",
+      "error": "HTTPError"
     }
   ],
   "post_count": 18,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
