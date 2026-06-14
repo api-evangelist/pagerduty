@@ -1,7 +1,8 @@
 aid: pagerduty
 name: PagerDuty
-description: PagerDuty is a digital operations management platform that helps teams detect problems and resolve incidents
-  with automated alerting, on-call management, and incident response workflows.
+description: PagerDuty is a digital operations management platform that helps teams
+  detect problems and resolve incidents with automated alerting, on-call management,
+  and incident response workflows.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -16,8 +17,8 @@ specificationVersion: '0.19'
 apis:
 - aid: pagerduty:pagerduty-rest-api
   name: PagerDuty REST API
-  description: The PagerDuty REST API provides programmatic access to PagerDuty incidents, services, escalation policies,
-    schedules, and users.
+  description: The PagerDuty REST API provides programmatic access to PagerDuty incidents,
+    services, escalation policies, schedules, and users.
   humanURL: https://developer.pagerduty.com/api-reference/
   baseURL: https://api.pagerduty.com
   tags:
@@ -105,10 +106,12 @@ apis:
     url: capabilities/pagerduty-webhooks.yaml
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
+  - url: graphql/pagerduty-graphql.md
+    type: GraphQL
 - aid: pagerduty:pagerduty-events-api
   name: PagerDuty Events API
-  description: The PagerDuty Events API is a system for triggering, acknowledging, and resolving alerts from monitoring tools
-    and other data sources.
+  description: The PagerDuty Events API is a system for triggering, acknowledging,
+    and resolving alerts from monitoring tools and other data sources.
   humanURL: https://developer.pagerduty.com/docs/events-api-v2/overview/
   baseURL: https://events.pagerduty.com
   tags:

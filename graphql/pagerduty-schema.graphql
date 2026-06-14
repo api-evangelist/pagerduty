@@ -1,0 +1,1471 @@
+"""
+PagerDuty Conceptual GraphQL Schema
+Derived from PagerDuty REST API v2: https://developer.pagerduty.com/api-reference/
+This is a conceptual schema representing the PagerDuty domain model.
+"""
+
+scalar DateTime
+scalar JSON
+
+# ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum IncidentStatus {
+  TRIGGERED
+  ACKNOWLEDGED
+  RESOLVED
+}
+
+enum IncidentUrgency {
+  HIGH
+  LOW
+  SUPPRESS
+}
+
+enum AlertStatus {
+  TRIGGERED
+  RESOLVED
+}
+
+enum ContactMethodType {
+  EMAIL
+  PHONE
+  SMS
+  PUSH_NOTIFICATION
+}
+
+enum ExtensionType {
+  WEBHOOK
+  GENERIC_EMAIL
+  SLACK
+  MICROSOFT_TEAMS
+  SERVICENOW
+  JIRA
+}
+
+enum OnCallHandoffType {
+  ONCALL
+  OFFCALL
+}
+
+enum ScheduleLayerRestrictionType {
+  DAILY_RESTRICTION
+  WEEKLY_RESTRICTION
+}
+
+enum WebhookEventType {
+  INCIDENT_TRIGGERED
+  INCIDENT_ACKNOWLEDGED
+  INCIDENT_RESOLVED
+  INCIDENT_ASSIGNED
+  INCIDENT_ANNOTATED
+  INCIDENT_ESCALATED
+  INCIDENT_PRIORITY_UPDATED
+  INCIDENT_RESPONDER_ADDED
+  INCIDENT_RESPONDER_REPLIED
+  INCIDENT_UNACKNOWLEDGED
+  SERVICE_CREATED
+  SERVICE_UPDATED
+  SERVICE_DELETED
+}
+
+enum AuditRecordAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  EXPORT
+  ACCESS
+}
+
+enum WorkflowTriggerType {
+  INCIDENT_TRIGGERED
+  INCIDENT_ESCALATED
+  INCIDENT_ACKNOWLEDGED
+  INCIDENT_RESOLVED
+  MANUAL
+}
+
+enum StatusPageStatusCode {
+  OPERATIONAL
+  DEGRADED_PERFORMANCE
+  PARTIAL_OUTAGE
+  MAJOR_OUTAGE
+  UNDER_MAINTENANCE
+}
+
+# ─── Interfaces ───────────────────────────────────────────────────────────────
+
+interface Node {
+  id: ID!
+}
+
+interface Timestamped {
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Core Incident Types ──────────────────────────────────────────────────────
+
+"""An incident represents a problem or an outage that needs to be resolved."""
+type Incident implements Node & Timestamped {
+  id: ID!
+  incidentNumber: Int!
+  title: String!
+  description: String
+  status: IncidentStatus!
+  urgency: IncidentUrgency!
+  htmlUrl: String!
+  incidentKey: String
+  service: Service!
+  assignedTo: [User!]
+  escalationPolicy: EscalationPolicy!
+  teams: [Team!]
+  priority: Priority
+  resolvedAt: DateTime
+  acknowledgedAt: DateTime
+  lastStatusChangeAt: DateTime
+  lastStatusChangeBy: User
+  timeouts: JSON
+  alerts: [Alert!]
+  logEntries: [IncidentLogEntry!]
+  notes: [Note!]
+  actions: [IncidentAction!]
+  conference: ConferenceBridge
+  resolveReason: String
+  incidentWorkflow: IncidentWorkflow
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""An action taken on an incident (acknowledge, resolve, annotate, etc.)."""
+type IncidentAction implements Node {
+  id: ID!
+  type: String!
+  at: DateTime!
+  agent: User
+  channel: JSON
+}
+
+"""A log entry recording an event on an incident."""
+type IncidentLogEntry implements Node & Timestamped {
+  id: ID!
+  type: String!
+  summary: String!
+  htmlUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+  incident: Incident!
+  service: Service
+  user: User
+  teams: [Team!]
+  agent: JSON
+  channel: JSON
+  notification: JSON
+}
+
+"""An alert is a groupable unit of noise associated with an incident."""
+type Alert implements Node & Timestamped {
+  id: ID!
+  summary: String!
+  status: AlertStatus!
+  severity: String
+  alertKey: AlertDedupKey!
+  integration: Integration
+  service: Service!
+  incident: Incident
+  suppressed: Boolean!
+  body: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""The deduplication key uniquely identifying an alert within a service."""
+type AlertDedupKey {
+  key: String!
+  integration: Integration
+}
+
+"""An acknowledgment of an incident by a user or integration."""
+type Acknowledgment {
+  at: DateTime!
+  acknowledger: User
+}
+
+"""A note (annotation) added to an incident."""
+type Note implements Node {
+  id: ID!
+  content: String!
+  createdAt: DateTime!
+  user: User!
+}
+
+"""A resolution record for an incident."""
+type Resolution {
+  at: DateTime!
+  resolvedBy: User
+  reason: String
+}
+
+# ─── Services ─────────────────────────────────────────────────────────────────
+
+"""A service represents a logical component, microservice, or system."""
+type Service implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  status: String!
+  htmlUrl: String!
+  escalationPolicy: EscalationPolicy!
+  teams: [Team!]
+  integrations: [Integration!]
+  incidentUrgencyRule: IncidentUrgencyRule
+  scheduledActions: [JSON]
+  supportHours: SupportHours
+  alertCreation: String!
+  alertGroupingParameters: AlertGroupingParameters
+  autoResolveTimeout: Int
+  acknowledgementTimeout: Int
+  dependencies: [ServiceDependency!]
+  maintenanceWindows: [MaintenanceWindow!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""Defines urgency rules for incidents on a service."""
+type IncidentUrgencyRule {
+  type: String!
+  urgency: IncidentUrgency
+  duringSupportHours: IncidentUrgency
+  outsideSupportHours: IncidentUrgency
+}
+
+"""Defines support hours for a service."""
+type SupportHours {
+  type: String!
+  timeZone: String!
+  daysOfWeek: [Int!]!
+  startTime: String!
+  endTime: String!
+}
+
+"""Parameters controlling alert grouping on a service."""
+type AlertGroupingParameters {
+  type: String!
+  config: JSON
+  timeout: Int
+}
+
+"""A dependency relationship between two services."""
+type ServiceDependency implements Node {
+  id: ID!
+  type: String!
+  supportingService: Service!
+  dependentService: Service!
+}
+
+# ─── Escalation Policies ──────────────────────────────────────────────────────
+
+"""An escalation policy routes incidents through ordered rules."""
+type EscalationPolicy implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  numLoops: Int!
+  htmlUrl: String!
+  rules: [EscalationRule!]!
+  services: [Service!]
+  teams: [Team!]
+  onCallHandoffNotifications: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""One step in an escalation policy."""
+type EscalationRule implements Node {
+  id: ID!
+  escalationDelayInMinutes: Int!
+  targets: [EscalationTarget!]!
+}
+
+"""A user or schedule targeted by an escalation rule."""
+union EscalationTarget = User | Schedule
+
+# ─── Schedules ────────────────────────────────────────────────────────────────
+
+"""A schedule defines who is on-call over time."""
+type Schedule implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  timeZone: String!
+  htmlUrl: String!
+  layers: [ScheduleLayer!]!
+  overrides: [Override!]
+  teams: [Team!]
+  finalSchedule: RenderedScheduleLayer
+  overridesSubschedule: RenderedScheduleLayer
+  users: [User!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""One rotation layer within a schedule."""
+type ScheduleLayer implements Node {
+  id: ID!
+  name: String!
+  start: DateTime!
+  end: DateTime
+  rotationTurnLengthSeconds: Int!
+  rotationVirtualStart: DateTime!
+  users: [RotationUser!]!
+  restrictions: [Restriction!]
+}
+
+"""A rendered (computed) schedule layer showing actual on-call periods."""
+type RenderedScheduleLayer {
+  name: String!
+  renderedCoveragePercentage: Float
+  renderedScheduleEntries: [RenderedScheduleEntry!]
+}
+
+"""A specific on-call entry in a rendered schedule."""
+type RenderedScheduleEntry {
+  start: DateTime!
+  end: DateTime!
+  user: User!
+}
+
+"""A user entry within a rotation layer."""
+type RotationUser {
+  user: User!
+  memberOrder: Int!
+}
+
+"""A time restriction within a schedule layer."""
+type Restriction {
+  type: ScheduleLayerRestrictionType!
+  startTimeOfDay: String!
+  durationSeconds: Int!
+  startDayOfWeek: Int
+}
+
+"""A rotation group for complex rotations."""
+type RotationGroup {
+  id: ID!
+  users: [User!]!
+}
+
+"""An on-call override replacing a scheduled user for a time window."""
+type Override implements Node {
+  id: ID!
+  start: DateTime!
+  end: DateTime!
+  user: User!
+}
+
+# ─── Users and Contact ────────────────────────────────────────────────────────
+
+"""A PagerDuty user."""
+type User implements Node & Timestamped {
+  id: ID!
+  name: String!
+  email: String!
+  role: String!
+  description: String
+  jobTitle: String
+  htmlUrl: String!
+  avatarUrl: String
+  timeZone: String
+  color: String
+  invitationSent: Boolean
+  contactMethods: [ContactMethod!]!
+  notificationRules: [UserNotificationRule!]!
+  teams: [Team!]
+  onCallSummaries: [OnCallSummary!]
+  licenseId: ID
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A user's contact method (email, phone, SMS, push)."""
+type ContactMethod implements Node {
+  id: ID!
+  type: ContactMethodType!
+  label: String!
+  address: String!
+  countryCode: Int
+  enabled: Boolean!
+  blacklisted: Boolean
+  user: User!
+}
+
+"""A rule defining when and how to notify a user."""
+type UserNotificationRule implements Node {
+  id: ID!
+  startDelayInMinutes: Int!
+  urgency: IncidentUrgency!
+  contactMethod: ContactMethod!
+  user: User!
+}
+
+# ─── Teams ────────────────────────────────────────────────────────────────────
+
+"""A team groups users and can own services, escalation policies, and schedules."""
+type Team implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  htmlUrl: String!
+  defaultRole: String
+  members: [TeamMember!]
+  services: [Service!]
+  escalationPolicies: [EscalationPolicy!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A user's membership in a team with a role."""
+type TeamMember {
+  user: User!
+  role: String!
+}
+
+# ─── On-Call ──────────────────────────────────────────────────────────────────
+
+"""A summary of on-call assignments for a user or schedule."""
+type OnCallSummary {
+  user: User!
+  schedule: Schedule
+  escalationPolicy: EscalationPolicy!
+  escalationLevel: Int!
+  start: DateTime
+  end: DateTime
+}
+
+"""A handoff event in on-call rotation."""
+type OnCallHandoff {
+  type: OnCallHandoffType!
+  handoffTime: DateTime!
+  userFrom: User
+  userTo: User!
+  schedule: Schedule!
+  escalationPolicy: EscalationPolicy!
+}
+
+# ─── Maintenance Windows ──────────────────────────────────────────────────────
+
+"""A maintenance window suppresses incident notifications for services."""
+type MaintenanceWindow implements Node & Timestamped {
+  id: ID!
+  summary: String!
+  description: String
+  startTime: DateTime!
+  endTime: DateTime!
+  services: [Service!]!
+  teams: [Team!]
+  createdBy: User
+  htmlUrl: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Extensions ───────────────────────────────────────────────────────────────
+
+"""An extension connects a PagerDuty service to an external tool."""
+type Extension implements Node & Timestamped {
+  id: ID!
+  name: String!
+  htmlUrl: String
+  endpointUrl: String
+  config: JSON
+  services: [Service!]!
+  extensionSchema: ExtensionSchema!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A schema describing an available extension type."""
+type ExtensionSchema implements Node {
+  id: ID!
+  name: String!
+  label: String!
+  type: ExtensionType!
+  sendTypes: [String!]
+  config: JSON
+  htmlUrl: String!
+}
+
+# ─── Webhooks ─────────────────────────────────────────────────────────────────
+
+"""A webhook v3 subscription delivering signed outbound notifications."""
+type WebhookSubscription implements Node & Timestamped {
+  id: ID!
+  deliveryMethod: WebhookDeliveryMethod!
+  events: [WebhookEventType!]!
+  filter: WebhookFilter!
+  active: Boolean!
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""Delivery configuration for a webhook subscription."""
+type WebhookDeliveryMethod {
+  type: String!
+  url: String!
+  customHeaders: [WebhookCustomHeader!]
+  secret: String
+}
+
+"""A custom HTTP header sent with webhook deliveries."""
+type WebhookCustomHeader {
+  name: String!
+  value: String!
+}
+
+"""A filter scoping webhook delivery to specific services or teams."""
+type WebhookFilter {
+  type: String!
+  id: ID
+}
+
+"""A webhook v3 payload envelope."""
+type WebhookV3 {
+  id: ID!
+  sentAt: DateTime!
+  event: WebhookEvent!
+}
+
+"""The event data within a webhook v3 payload."""
+type WebhookEvent {
+  id: ID!
+  eventType: WebhookEventType!
+  resourceType: String!
+  occurredAt: DateTime!
+  agent: JSON
+  client: JSON
+  data: JSON
+}
+
+# ─── Event Orchestration ──────────────────────────────────────────────────────
+
+"""An event orchestration pipeline for routing, enriching, and suppressing events."""
+type EventOrchestration implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  routes: Int
+  integrations: [OrchestrationIngest!]
+  router: OrchestrationRouter
+  unrouted: OrchestrationService
+  team: Team
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""The global router within an event orchestration."""
+type OrchestrationRouter {
+  type: String!
+  rules: [Rule!]!
+  catchAll: RuleAction!
+}
+
+"""A service-level orchestration within an event orchestration pipeline."""
+type OrchestrationService {
+  type: String!
+  rules: [Rule!]!
+  catchAll: RuleAction!
+}
+
+"""An ingest endpoint (integration) for an event orchestration."""
+type OrchestrationIngest implements Node {
+  id: ID!
+  parameters: JSON
+}
+
+# ─── Rulesets (Legacy) ────────────────────────────────────────────────────────
+
+"""A ruleset (legacy) for routing inbound events."""
+type Ruleset implements Node & Timestamped {
+  id: ID!
+  name: String!
+  isDefault: Boolean!
+  team: Team
+  rules: [Rule!]!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A rule within a ruleset or orchestration."""
+type Rule implements Node {
+  id: ID!
+  position: Int
+  disabled: Boolean!
+  conditions: [JSON!]
+  actions: RuleAction!
+  catchAll: Boolean
+  timeFrame: JSON
+}
+
+"""Actions to execute when a rule matches."""
+type RuleAction {
+  suppress: Boolean
+  suspend: Int
+  priority: ID
+  annotate: String
+  severity: String
+  extractions: [JSON!]
+  eventAction: String
+  route: ID
+}
+
+# ─── Tags ─────────────────────────────────────────────────────────────────────
+
+"""A tag for labeling PagerDuty entities."""
+type Tag implements Node {
+  id: ID!
+  label: String!
+  htmlUrl: String!
+}
+
+# ─── Priority ─────────────────────────────────────────────────────────────────
+
+"""An incident priority level."""
+type Priority implements Node {
+  id: ID!
+  name: String!
+  description: String
+  color: String!
+  order: Int!
+  schema: PrioritySchema!
+}
+
+"""The priority schema defining available priority levels."""
+type PrioritySchema implements Node {
+  id: ID!
+  priorities: [Priority!]!
+}
+
+# ─── Response Plays ───────────────────────────────────────────────────────────
+
+"""A response play defines a coordinated response to major incidents."""
+type ResponsePlay implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  teamId: ID
+  subscribers: [ResponsePlaySubscriber!]
+  subscribersMessage: String
+  responders: [User!]
+  respondersMessage: String
+  runnability: String!
+  conferenceNumber: String
+  conferenceUrl: String
+  conferenceType: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A subscriber notified when a response play runs."""
+type ResponsePlaySubscriber {
+  user: User
+  team: Team
+}
+
+# ─── Business Services ────────────────────────────────────────────────────────
+
+"""A business service represents a customer-facing capability."""
+type BusinessService implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  pointOfContact: String
+  team: Team
+  htmlUrl: String!
+  dependencies: [BusinessServiceDependency!]
+  impactMetrics: ImpactMetrics
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A dependency between two business services."""
+type BusinessServiceDependency {
+  supportingService: BusinessService!
+  dependentService: BusinessService!
+}
+
+"""Impact metrics for a business service."""
+type ImpactMetrics {
+  impactedCount: Int!
+  totalCount: Int!
+  impactedServices: [Service!]
+}
+
+# ─── Analytics ────────────────────────────────────────────────────────────────
+
+"""Aggregated analytics metrics for incidents and on-call operations."""
+type Analytics {
+  meanTimeToAcknowledge: Float
+  meanTimeToResolve: Float
+  meanTimeToFirstAcknowledge: Float
+  totalIncidentCount: Int
+  totalInterruptionCount: Int
+  totalNotificationCount: Int
+  totalEscalationCount: Int
+  teamId: ID
+  serviceId: ID
+  rangeStart: DateTime!
+  rangeEnd: DateTime!
+}
+
+# ─── Incident Workflows ───────────────────────────────────────────────────────
+
+"""An incident workflow automates response actions triggered by incident events."""
+type IncidentWorkflow implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  triggers: [WorkflowTrigger!]!
+  steps: [WorkflowStep!]!
+  team: Team
+  isEnabled: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A trigger that starts an incident workflow."""
+type WorkflowTrigger {
+  type: WorkflowTriggerType!
+  condition: String
+}
+
+"""A step within an incident workflow."""
+type WorkflowStep {
+  id: ID!
+  name: String!
+  actionId: String!
+  inputs: JSON
+}
+
+# ─── Automation ───────────────────────────────────────────────────────────────
+
+"""An automation action (Rundeck job or script) that can be triggered from PagerDuty."""
+type Automation implements Node & Timestamped {
+  id: ID!
+  name: String!
+  description: String
+  type: String!
+  actionClassification: String
+  services: [Service!]
+  teams: [Team!]
+  runner: AutomationRunner
+  actionDataReference: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A runner that executes automation actions."""
+type AutomationRunner implements Node {
+  id: ID!
+  name: String!
+  type: String!
+  lastSeenAt: DateTime
+  status: String
+}
+
+"""A runbook action linked to an automation."""
+type RunbookAction implements Node {
+  id: ID!
+  name: String!
+  description: String
+  automationId: ID
+  runbookUrl: String
+}
+
+# ─── Status Pages ─────────────────────────────────────────────────────────────
+
+"""A status page communicating operational status to stakeholders."""
+type StatusPage implements Node & Timestamped {
+  id: ID!
+  name: String!
+  url: String!
+  type: String!
+  subscriberLimit: Int
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A status update posted to a status page."""
+type StatusUpdate implements Node {
+  id: ID!
+  message: String!
+  status: StatusPageStatusCode!
+  postedAt: DateTime!
+  affectedServices: [String!]
+  statusPage: StatusPage!
+}
+
+# ─── Audit Records ────────────────────────────────────────────────────────────
+
+"""An audit record capturing a change or access event."""
+type AuditRecord implements Node {
+  id: ID!
+  action: AuditRecordAction!
+  executionTime: DateTime!
+  executionContext: AuditExecutionContext
+  actors: [AuditActor!]!
+  method: AuditMethod!
+  root_resource: AuditResource!
+  details: JSON
+}
+
+"""Context of an audit record execution."""
+type AuditExecutionContext {
+  requestId: String
+  remoteAddress: String
+  userAgent: String
+}
+
+"""An actor (user or API key) performing an audited action."""
+type AuditActor {
+  id: ID!
+  type: String!
+  summary: String!
+  htmlUrl: String
+}
+
+"""The method used in an audited action."""
+type AuditMethod {
+  description: String!
+  trunkslated: Boolean
+}
+
+"""The resource affected by an audited action."""
+type AuditResource {
+  id: ID!
+  type: String!
+  summary: String!
+  htmlUrl: String
+}
+
+# ─── API Keys and Integrations ────────────────────────────────────────────────
+
+"""An API key for authenticating REST API requests."""
+type APIKey implements Node & Timestamped {
+  id: ID!
+  description: String!
+  truncatedKey: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  user: User
+}
+
+"""An integration connecting a service to an external monitoring tool."""
+type Integration implements Node & Timestamped {
+  id: ID!
+  name: String!
+  type: String!
+  htmlUrl: String!
+  integrationKey: String
+  integrationEmail: String
+  service: Service
+  vendor: Vendor
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""An email integration ingesting alerts via a dedicated address."""
+type EmailIntegration implements Node & Timestamped {
+  id: ID!
+  name: String!
+  integrationEmail: String!
+  emailFilter: JSON
+  emailParserType: String
+  emailParsers: [JSON!]
+  service: Service!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A generic inbound webhook integration."""
+type GenericWebhook implements Node & Timestamped {
+  id: ID!
+  name: String!
+  integrationKey: String!
+  service: Service!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A vendor (monitoring tool) supported by PagerDuty integrations."""
+type Vendor implements Node {
+  id: ID!
+  name: String!
+  description: String
+  logoUrl: String
+  websiteUrl: String
+  genericServiceType: String
+}
+
+# ─── Conference Bridge ────────────────────────────────────────────────────────
+
+"""Conference bridge details attached to an incident."""
+type ConferenceBridge {
+  conferenceNumber: String
+  conferenceUrl: String
+}
+
+# ─── Connections (Pagination) ─────────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type IncidentConnection {
+  nodes: [Incident!]!
+  pageInfo: PageInfo!
+  total: Int!
+}
+
+type ServiceConnection {
+  nodes: [Service!]!
+  pageInfo: PageInfo!
+  total: Int!
+}
+
+type UserConnection {
+  nodes: [User!]!
+  pageInfo: PageInfo!
+  total: Int!
+}
+
+type TeamConnection {
+  nodes: [Team!]!
+  pageInfo: PageInfo!
+  total: Int!
+}
+
+type ScheduleConnection {
+  nodes: [Schedule!]!
+  pageInfo: PageInfo!
+  total: Int!
+}
+
+# ─── Query ────────────────────────────────────────────────────────────────────
+
+type Query {
+  # Incidents
+  incident(id: ID!): Incident
+  incidents(
+    statuses: [IncidentStatus!]
+    serviceIds: [ID!]
+    teamIds: [ID!]
+    urgencies: [IncidentUrgency!]
+    since: DateTime
+    until: DateTime
+    sortBy: String
+    first: Int
+    after: String
+  ): IncidentConnection!
+
+  # Alerts
+  alert(incidentId: ID!, alertId: ID!): Alert
+  alerts(incidentId: ID!): [Alert!]!
+
+  # Log Entries
+  logEntries(since: DateTime, until: DateTime, teamIds: [ID!], first: Int, after: String): [IncidentLogEntry!]!
+  logEntry(id: ID!): IncidentLogEntry
+
+  # Services
+  service(id: ID!): Service
+  services(teamIds: [ID!], query: String, first: Int, after: String): ServiceConnection!
+
+  # Escalation Policies
+  escalationPolicy(id: ID!): EscalationPolicy
+  escalationPolicies(query: String, teamIds: [ID!], first: Int, after: String): [EscalationPolicy!]!
+
+  # Schedules
+  schedule(id: ID!, since: DateTime, until: DateTime): Schedule
+  schedules(query: String, first: Int, after: String): ScheduleConnection!
+
+  # Users
+  user(id: ID!): User
+  users(query: String, teamIds: [ID!], first: Int, after: String): UserConnection!
+  currentUser: User
+
+  # Teams
+  team(id: ID!): Team
+  teams(query: String, first: Int, after: String): TeamConnection!
+
+  # On-Call
+  onCalls(
+    escalationPolicyIds: [ID!]
+    scheduleIds: [ID!]
+    userIds: [ID!]
+    since: DateTime
+    until: DateTime
+  ): [OnCallSummary!]!
+
+  # Maintenance Windows
+  maintenanceWindow(id: ID!): MaintenanceWindow
+  maintenanceWindows(serviceIds: [ID!], teamIds: [ID!], filter: String): [MaintenanceWindow!]!
+
+  # Extensions
+  extension(id: ID!): Extension
+  extensions(first: Int, after: String): [Extension!]!
+  extensionSchema(id: ID!): ExtensionSchema
+  extensionSchemas: [ExtensionSchema!]!
+
+  # Webhooks
+  webhookSubscription(id: ID!): WebhookSubscription
+  webhookSubscriptions(first: Int, after: String): [WebhookSubscription!]!
+
+  # Event Orchestration
+  eventOrchestration(id: ID!): EventOrchestration
+  eventOrchestrations(first: Int, after: String): [EventOrchestration!]!
+
+  # Rulesets
+  ruleset(id: ID!): Ruleset
+  rulesets: [Ruleset!]!
+
+  # Tags
+  tags(query: String): [Tag!]!
+
+  # Priorities
+  priorities: [Priority!]!
+
+  # Response Plays
+  responsePlay(id: ID!): ResponsePlay
+  responsePlays(filterForManualRun: Boolean): [ResponsePlay!]!
+
+  # Business Services
+  businessService(id: ID!): BusinessService
+  businessServices: [BusinessService!]!
+
+  # Analytics
+  analytics(
+    teamIds: [ID!]
+    serviceIds: [ID!]
+    rangeStart: DateTime!
+    rangeEnd: DateTime!
+  ): Analytics!
+
+  # Incident Workflows
+  incidentWorkflow(id: ID!): IncidentWorkflow
+  incidentWorkflows(serviceId: ID): [IncidentWorkflow!]!
+
+  # Automation
+  automation(id: ID!): Automation
+  automations(serviceIds: [ID!], teamIds: [ID!]): [Automation!]!
+
+  # Status Pages
+  statusPage(id: ID!): StatusPage
+  statusPages: [StatusPage!]!
+
+  # Audit
+  auditRecords(
+    since: DateTime!
+    until: DateTime!
+    actors: [ID!]
+    methods: [String!]
+    actions: [AuditRecordAction!]
+    resourceTypes: [String!]
+    first: Int
+    cursor: String
+  ): [AuditRecord!]!
+
+  # Integrations
+  integration(serviceId: ID!, integrationId: ID!): Integration
+  vendor(id: ID!): Vendor
+  vendors: [Vendor!]!
+}
+
+# ─── Mutation ─────────────────────────────────────────────────────────────────
+
+type Mutation {
+  # Incidents
+  createIncident(input: CreateIncidentInput!): Incident!
+  updateIncident(id: ID!, input: UpdateIncidentInput!): Incident!
+  acknowledgeIncident(id: ID!): Incident!
+  resolveIncident(id: ID!, reason: String): Incident!
+  snoozeIncident(id: ID!, duration: Int!): Incident!
+  mergeIncidents(parentId: ID!, childIds: [ID!]!): Incident!
+  addIncidentNote(incidentId: ID!, content: String!): Note!
+  assignIncident(incidentId: ID!, assignments: [AssignmentInput!]!): Incident!
+  runResponsePlay(incidentId: ID!, responsePlayId: ID!): Boolean!
+
+  # Services
+  createService(input: CreateServiceInput!): Service!
+  updateService(id: ID!, input: UpdateServiceInput!): Service!
+  deleteService(id: ID!): Boolean!
+
+  # Escalation Policies
+  createEscalationPolicy(input: CreateEscalationPolicyInput!): EscalationPolicy!
+  updateEscalationPolicy(id: ID!, input: UpdateEscalationPolicyInput!): EscalationPolicy!
+  deleteEscalationPolicy(id: ID!): Boolean!
+
+  # Schedules
+  createSchedule(input: CreateScheduleInput!): Schedule!
+  updateSchedule(id: ID!, input: UpdateScheduleInput!): Schedule!
+  deleteSchedule(id: ID!): Boolean!
+  createOverride(scheduleId: ID!, input: CreateOverrideInput!): Override!
+  deleteOverride(scheduleId: ID!, overrideId: ID!): Boolean!
+
+  # Users
+  createUser(input: CreateUserInput!): User!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+  deleteUser(id: ID!): Boolean!
+  createContactMethod(userId: ID!, input: CreateContactMethodInput!): ContactMethod!
+  deleteContactMethod(userId: ID!, contactMethodId: ID!): Boolean!
+  createNotificationRule(userId: ID!, input: CreateNotificationRuleInput!): UserNotificationRule!
+  deleteNotificationRule(userId: ID!, notificationRuleId: ID!): Boolean!
+
+  # Teams
+  createTeam(input: CreateTeamInput!): Team!
+  updateTeam(id: ID!, input: UpdateTeamInput!): Team!
+  deleteTeam(id: ID!): Boolean!
+  addUserToTeam(teamId: ID!, userId: ID!, role: String): Boolean!
+  removeUserFromTeam(teamId: ID!, userId: ID!): Boolean!
+
+  # Maintenance Windows
+  createMaintenanceWindow(input: CreateMaintenanceWindowInput!): MaintenanceWindow!
+  updateMaintenanceWindow(id: ID!, input: UpdateMaintenanceWindowInput!): MaintenanceWindow!
+  deleteMaintenanceWindow(id: ID!): Boolean!
+
+  # Webhooks
+  createWebhookSubscription(input: CreateWebhookSubscriptionInput!): WebhookSubscription!
+  updateWebhookSubscription(id: ID!, input: UpdateWebhookSubscriptionInput!): WebhookSubscription!
+  deleteWebhookSubscription(id: ID!): Boolean!
+
+  # Event Orchestration
+  createEventOrchestration(input: CreateEventOrchestrationInput!): EventOrchestration!
+  updateEventOrchestration(id: ID!, input: UpdateEventOrchestrationInput!): EventOrchestration!
+  deleteEventOrchestration(id: ID!): Boolean!
+
+  # Tags
+  createTag(label: String!): Tag!
+  deleteTag(id: ID!): Boolean!
+  assignTagToEntity(tagId: ID!, entityType: String!, entityId: ID!): Boolean!
+  removeTagFromEntity(tagId: ID!, entityType: String!, entityId: ID!): Boolean!
+
+  # Response Plays
+  createResponsePlay(input: CreateResponsePlayInput!): ResponsePlay!
+  updateResponsePlay(id: ID!, input: UpdateResponsePlayInput!): ResponsePlay!
+  deleteResponsePlay(id: ID!): Boolean!
+
+  # Business Services
+  createBusinessService(input: CreateBusinessServiceInput!): BusinessService!
+  updateBusinessService(id: ID!, input: UpdateBusinessServiceInput!): BusinessService!
+  deleteBusinessService(id: ID!): Boolean!
+
+  # Incident Workflows
+  createIncidentWorkflow(input: CreateIncidentWorkflowInput!): IncidentWorkflow!
+  updateIncidentWorkflow(id: ID!, input: UpdateIncidentWorkflowInput!): IncidentWorkflow!
+  deleteIncidentWorkflow(id: ID!): Boolean!
+
+  # Status Pages
+  createStatusUpdate(statusPageId: ID!, input: CreateStatusUpdateInput!): StatusUpdate!
+
+  # Integrations
+  createIntegration(serviceId: ID!, input: CreateIntegrationInput!): Integration!
+  updateIntegration(serviceId: ID!, integrationId: ID!, input: UpdateIntegrationInput!): Integration!
+  deleteIntegration(serviceId: ID!, integrationId: ID!): Boolean!
+}
+
+# ─── Input Types ──────────────────────────────────────────────────────────────
+
+input CreateIncidentInput {
+  title: String!
+  serviceId: ID!
+  urgency: IncidentUrgency
+  body: String
+  escalationPolicyId: ID
+  assignments: [AssignmentInput!]
+  priorityId: ID
+  incidentKey: String
+  conferenceNumber: String
+  conferenceUrl: String
+}
+
+input UpdateIncidentInput {
+  title: String
+  status: IncidentStatus
+  urgency: IncidentUrgency
+  assignments: [AssignmentInput!]
+  escalationPolicyId: ID
+  priorityId: ID
+  conferenceNumber: String
+  conferenceUrl: String
+}
+
+input AssignmentInput {
+  userId: ID!
+}
+
+input CreateServiceInput {
+  name: String!
+  description: String
+  escalationPolicyId: ID!
+  alertCreation: String
+  acknowledgementTimeout: Int
+  autoResolveTimeout: Int
+}
+
+input UpdateServiceInput {
+  name: String
+  description: String
+  escalationPolicyId: ID
+  alertCreation: String
+  acknowledgementTimeout: Int
+  autoResolveTimeout: Int
+}
+
+input CreateEscalationPolicyInput {
+  name: String!
+  description: String
+  numLoops: Int
+  rules: [EscalationRuleInput!]!
+  teamIds: [ID!]
+}
+
+input UpdateEscalationPolicyInput {
+  name: String
+  description: String
+  numLoops: Int
+  rules: [EscalationRuleInput!]
+  teamIds: [ID!]
+}
+
+input EscalationRuleInput {
+  escalationDelayInMinutes: Int!
+  targets: [EscalationTargetInput!]!
+}
+
+input EscalationTargetInput {
+  id: ID!
+  type: String!
+}
+
+input CreateScheduleInput {
+  name: String!
+  description: String
+  timeZone: String!
+  layers: [ScheduleLayerInput!]!
+  teamIds: [ID!]
+}
+
+input UpdateScheduleInput {
+  name: String
+  description: String
+  timeZone: String
+  layers: [ScheduleLayerInput!]
+}
+
+input ScheduleLayerInput {
+  name: String
+  start: DateTime!
+  end: DateTime
+  rotationTurnLengthSeconds: Int!
+  rotationVirtualStart: DateTime!
+  userIds: [ID!]!
+  restrictions: [RestrictionInput!]
+}
+
+input RestrictionInput {
+  type: ScheduleLayerRestrictionType!
+  startTimeOfDay: String!
+  durationSeconds: Int!
+  startDayOfWeek: Int
+}
+
+input CreateOverrideInput {
+  start: DateTime!
+  end: DateTime!
+  userId: ID!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  role: String
+  jobTitle: String
+  description: String
+  timeZone: String
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  role: String
+  jobTitle: String
+  description: String
+  timeZone: String
+}
+
+input CreateContactMethodInput {
+  type: ContactMethodType!
+  label: String!
+  address: String!
+  countryCode: Int
+}
+
+input CreateNotificationRuleInput {
+  startDelayInMinutes: Int!
+  urgency: IncidentUrgency!
+  contactMethodId: ID!
+}
+
+input CreateTeamInput {
+  name: String!
+  description: String
+}
+
+input UpdateTeamInput {
+  name: String
+  description: String
+}
+
+input CreateMaintenanceWindowInput {
+  summary: String!
+  description: String
+  startTime: DateTime!
+  endTime: DateTime!
+  serviceIds: [ID!]!
+  teamIds: [ID!]
+}
+
+input UpdateMaintenanceWindowInput {
+  summary: String
+  description: String
+  startTime: DateTime
+  endTime: DateTime
+  serviceIds: [ID!]
+  teamIds: [ID!]
+}
+
+input CreateWebhookSubscriptionInput {
+  deliveryMethod: WebhookDeliveryMethodInput!
+  events: [WebhookEventType!]!
+  filter: WebhookFilterInput!
+  description: String
+  active: Boolean
+}
+
+input UpdateWebhookSubscriptionInput {
+  deliveryMethod: WebhookDeliveryMethodInput
+  events: [WebhookEventType!]
+  active: Boolean
+  description: String
+}
+
+input WebhookDeliveryMethodInput {
+  type: String!
+  url: String!
+  customHeaders: [WebhookCustomHeaderInput!]
+}
+
+input WebhookCustomHeaderInput {
+  name: String!
+  value: String!
+}
+
+input WebhookFilterInput {
+  type: String!
+  id: ID
+}
+
+input CreateEventOrchestrationInput {
+  name: String!
+  description: String
+  teamId: ID
+}
+
+input UpdateEventOrchestrationInput {
+  name: String
+  description: String
+  teamId: ID
+}
+
+input CreateResponsePlayInput {
+  name: String!
+  description: String
+  teamId: ID
+  runnability: String!
+  respondersMessage: String
+  subscribersMessage: String
+  responderIds: [ID!]
+  conferenceNumber: String
+  conferenceUrl: String
+}
+
+input UpdateResponsePlayInput {
+  name: String
+  description: String
+  runnability: String
+  respondersMessage: String
+  subscribersMessage: String
+}
+
+input CreateBusinessServiceInput {
+  name: String!
+  description: String
+  pointOfContact: String
+  teamId: ID
+}
+
+input UpdateBusinessServiceInput {
+  name: String
+  description: String
+  pointOfContact: String
+  teamId: ID
+}
+
+input CreateIncidentWorkflowInput {
+  name: String!
+  description: String
+  teamId: ID
+  triggers: [WorkflowTriggerInput!]!
+  steps: [WorkflowStepInput!]!
+}
+
+input UpdateIncidentWorkflowInput {
+  name: String
+  description: String
+  isEnabled: Boolean
+  triggers: [WorkflowTriggerInput!]
+  steps: [WorkflowStepInput!]
+}
+
+input WorkflowTriggerInput {
+  type: WorkflowTriggerType!
+  condition: String
+}
+
+input WorkflowStepInput {
+  name: String!
+  actionId: String!
+  inputs: JSON
+}
+
+input CreateStatusUpdateInput {
+  message: String!
+  status: StatusPageStatusCode!
+  affectedServices: [String!]
+}
+
+input CreateIntegrationInput {
+  name: String!
+  type: String!
+  vendorId: ID
+  integrationEmail: String
+}
+
+input UpdateIntegrationInput {
+  name: String
+  integrationEmail: String
+  emailFilter: JSON
+}
