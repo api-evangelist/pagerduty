@@ -4,7 +4,7 @@ description: PagerDuty is a digital operations management platform that helps te
   detect problems and resolve incidents with automated alerting, on-call management,
   and incident response workflows.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Alerting
 - DevOps
