@@ -34,75 +34,75 @@ apis:
     url: https://developer.pagerduty.com/docs/authentication
   - type: GettingStarted
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-general.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-abilities.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-add-ons.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-alert-grouping-settings.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-analytics.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-audit.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-automation-actions.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-business-services.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-change-events.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-custom-fields.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-escalation-policies.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-event-orchestrations.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-extension-schemas.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-extensions.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-incident-workflows.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-incidents.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-licenses.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-log-entries.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-maintenance-windows.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-notifications.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-on-calls.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-paused-incident-reports.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-priorities.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-response-plays.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-rulesets.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-schedules.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-service-dependencies.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-standards.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-status-dashboards.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-status-pages.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-teams.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-templates.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-users.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-vendors.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/pagerduty-webhooks.yaml
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
@@ -136,7 +136,7 @@ common:
   url: https://developer.pagerduty.com/docs/getting-started/
 - type: Authentication
   url: https://developer.pagerduty.com/docs/authentication
-- type: SignUp
+- type: Signup
   url: https://www.pagerduty.com/sign-up-free/
 - type: Login
   url: https://identity.pagerduty.com/sign_in
@@ -181,7 +181,7 @@ common:
 - name: MCP Server
   url: https://github.com/PagerDuty/pagerduty-mcp-server
   type: MCPServer
-- type: LLMsTxt
+- type: LlmsText
   url: https://developer.pagerduty.com/llms.txt
 integrations:
 - name: AWS
