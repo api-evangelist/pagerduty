@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/pagerduty-openapi-original.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: The API Key with format `Token token=<API_KEY>`
+  sources:
+  - openapi/pagerduty-openapi-original.yml

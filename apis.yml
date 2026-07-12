@@ -126,6 +126,10 @@ apis:
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
 common:
+- type: DomainSecurity
+  url: security/pagerduty-domain-security.yml
+- type: Authentication
+  url: authentication/pagerduty-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/pagerduty
 - type: Portal
