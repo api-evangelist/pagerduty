@@ -126,6 +126,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
 common:
+- type: AgenticAccess
+  url: agentic-access/pagerduty-agentic-access.yml
 - type: DomainSecurity
   url: security/pagerduty-domain-security.yml
 - type: Authentication
