@@ -1,0 +1,318 @@
+openapi: 3.0.2
+info:
+  description: 'This document describes the PagerDuty REST APIs.
+
+
+    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+
+
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+
+
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
+
+    '
+  contact:
+    name: PagerDuty Support
+    url: http://www.pagerduty.com/support
+    email: support@pagerduty.com
+  title: PagerDuty Abilities Paused Incident Reports API
+  version: 2.0.0
+servers:
+- url: https://api.pagerduty.com
+  description: PagerDuty V2 API.
+security:
+- api_key: []
+tags:
+- name: Paused Incident Reports
+  description: 'Provides paused Incident reporting data on services and accounts that have paused Alerts.
+
+    '
+paths:
+  /paused_incident_reports/alerts:
+    description: Get reporting on Alerts for paused Incident usage
+    get:
+      x-pd-requires-scope: incidents.read
+      tags:
+      - Paused Incident Reports
+      operationId: getPausedIncidentReportAlerts
+      description: 'Returns the 5 most recent alerts that were triggered after being paused and the 5 most recent alerts that were resolved after being paused for a given reporting period (maximum 6 months lookback period).  Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.
+
+
+        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)
+
+
+        Scoped OAuth requires: `incidents.read`
+
+        '
+      summary: PagerDuty Get Paused Incident Reporting on Alerts
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/since'
+      - $ref: '#/components/parameters/until'
+      - $ref: '#/components/parameters/paused_incident_reports_service_id'
+      - $ref: '#/components/parameters/paused_incident_reports_suspended_by'
+      responses:
+        '200':
+          description: Paused Incident Reporting on Alerts for the Account or scoped to a Service.
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  paused_incident_reporting_alerts:
+                    type: object
+                    description: A list of the 5 most recent paused Alerts that weere triggered and 5 most recent Alerts that were reesolved before being triggerd.
+                    properties:
+                      since:
+                        type: string
+                        description: The start of the date range over which the report data is represented.
+                      until:
+                        type: string
+                        description: The end of the date range over which the report data is represented.
+                      triggered_after_pause_alerts:
+                        type: array
+                        description: An array of Alerts that were triggered after being paused.
+                        items:
+                          properties:
+                            id:
+                              type: string
+                              description: The Alert ID
+                            service_id:
+                              type: string
+                              description: The Alert's Service ID
+                            created_at:
+                              type: string
+                              description: The date/time the Alert was created
+                      resolved_after_pause_alerts:
+                        type: array
+                        description: An array of Alerts that were resolved after being paused.
+                        items:
+                          properties:
+                            id:
+                              type: string
+                              description: The Alert ID
+                            service_id:
+                              type: string
+                              description: The Alert's Service ID
+                            created_at:
+                              type: string
+                              description: The date/time the Alert was created
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    paused_incident_reporting_counts:
+                      since: 2021-06-01TT13:08:14Z
+                      until: '2021-08-01T13:08:14Z'
+                      triggered_after_pause_alerts:
+                      - id: PR2P3RW
+                        service_id: PPSCXAN
+                        created_at: '2020-10-18T12:01:11Z'
+                      resolved_after_pause_alerts:
+                      - id: PS2R1RZ
+                        service_id: PRS12XW
+                        created_at: '2020-10-17T02:02:10Z'
+                      - id: PS1S1SX
+                        service_id: PRS12XW
+                        created_at: '2020-10-16T15:02:19Z'
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /paused_incident_reports/counts:
+    description: Get reporting on counts for paused Incident usage
+    get:
+      x-pd-requires-scope: incidents.read
+      tags:
+      - Paused Incident Reports
+      operationId: getPausedIncidentReportCounts
+      description: 'Returns reporting counts for paused Incident usage for a given reporting period (maximum 6 months lookback period).  Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.
+
+
+        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)
+
+
+        Scoped OAuth requires: `incidents.read`
+
+        '
+      summary: PagerDuty Get Paused Incident Reporting counts
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/since'
+      - $ref: '#/components/parameters/until'
+      - $ref: '#/components/parameters/paused_incident_reports_service_id'
+      - $ref: '#/components/parameters/paused_incident_reports_suspended_by'
+      responses:
+        '200':
+          description: Paused Incident Reporting counts for the Account or scoped to a Service.
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  paused_incident_reporting_counts:
+                    type: object
+                    description: A representation of Alerts that were paused, triggered after pause, and resolved after pause.
+                    properties:
+                      since:
+                        type: string
+                        description: The start of the date range over which the report data is represented.
+                      until:
+                        type: string
+                        description: The end of the date range over which the report data is represented.
+                      paused_count:
+                        type: number
+                        description: The total number of paused Alerts for the Account or Servce.
+                      triggered_after_pause_count:
+                        type: number
+                        description: The total number of paused Alerts for the Account or Service that were triggerd after being paused (non-transient Alerts).
+                      resolved_after_pause_count:
+                        type: number
+                        description: The total number of paused Alerts for the Account or Service that were resolved after being paused and not triggered (transient Alerts).
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    paused_incident_reporting_counts:
+                      since: 2021-06-01TT13:08:14Z
+                      until: '2021-08-01T13:08:14Z'
+                      paused_count: 50
+                      triggered_after_pause_count: 12
+                      resolved_after_pause_count: 38
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  parameters:
+    paused_incident_reports_service_id:
+      name: service_id
+      in: query
+      description: Specifies a filter to limit the scope of reporting to a particular service
+      schema:
+        type: string
+        example: P123456
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    paused_incident_reports_suspended_by:
+      name: suspended_by
+      in: query
+      description: Specifies a filter to scope the response to either alerts suspended by Auto Pause or Event Rules.
+      schema:
+        enum:
+        - auto_pause
+        - rules
+  responses:
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: The API Key with format `Token token=<API_KEY>`

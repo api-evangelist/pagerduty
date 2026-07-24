@@ -1,0 +1,787 @@
+openapi: 3.0.2
+info:
+  description: 'This document describes the PagerDuty REST APIs.
+
+
+    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+
+
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+
+
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
+
+    '
+  contact:
+    name: PagerDuty Support
+    url: http://www.pagerduty.com/support
+    email: support@pagerduty.com
+  title: PagerDuty Abilities Change Events API
+  version: 2.0.0
+servers:
+- url: https://api.pagerduty.com
+  description: PagerDuty V2 API.
+security:
+- api_key: []
+tags:
+- name: Change Events
+  description: 'Change Events enable you to send informational events about recent changes such as code deploys and system config changes from any system that can make an outbound HTTP connection. These events do not create incidents and do not send notifications; they are shown in context with incidents on the same PagerDuty service.
+
+    '
+paths:
+  /change_events:
+    description: List change events.
+    get:
+      x-pd-requires-scope: change_events.read
+      tags:
+      - Change Events
+      operationId: listChangeEvents
+      description: 'List all of the existing Change Events.
+
+
+        Scoped OAuth requires: `change_events.read`
+
+        '
+      summary: PagerDuty List Change Events
+      parameters:
+      - $ref: '#/components/parameters/offset_limit'
+      - $ref: '#/components/parameters/offset_offset'
+      - $ref: '#/components/parameters/offset_total'
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/team_ids'
+      - $ref: '#/components/parameters/integration_ids'
+      - $ref: '#/components/parameters/change_since'
+      - $ref: '#/components/parameters/change_until'
+      responses:
+        '200':
+          description: The array of Change Events returned by the query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change_events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeEvent'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    change_events:
+                    - summary: Build Success - Increase snapshot create timeout to 30 seconds
+                      id: 01BBYA6PEVW6A852BUO6QYUE7O
+                      timestamp: '2020-07-17T08:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '2'
+                        run_time: 1236s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/2
+                        text: View more details in Acme!
+                    - summary: Build Success - Increase snapshot create timeout to 15 seconds
+                      id: 01BBYA6PDIXPL8KO1HPIUL9CZN
+                      timestamp: '2020-07-17T07:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '1'
+                        run_time: 1233s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/1
+                        text: View more details in Acme!
+                    limit: null
+                    offset: null
+                    total: null
+                    more: false
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      summary: PagerDuty Create a Change Event
+      description: 'Sending Change Events is documented as part of the V2 Events API. See [`Send Change Event`](https://developer.pagerduty.com/api-reference/b3A6Mjc0ODI2Ng-send-change-events-to-the-pager-duty-events-api).
+
+        '
+      operationId: createChangeEvent
+      tags:
+      - Change Events
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      responses:
+        '202':
+          description: See [`Send Change Event`](https://developer.pagerduty.com/api-reference/b3A6Mjc0ODI2Ng-send-change-events-to-the-pager-duty-events-api) in the V2 Events API reference.
+  /change_events/{id}:
+    description: Read and update a Change Event.
+    get:
+      x-pd-requires-scope: change_events.read
+      tags:
+      - Change Events
+      operationId: getChangeEvent
+      description: 'Get details about an existing Change Event.
+
+
+        Scoped OAuth requires: `change_events.read`
+
+        '
+      summary: PagerDuty Get a Change Event
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: The Change Event requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change_event:
+                    $ref: '#/components/schemas/ChangeEvent'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    change_event:
+                      summary: Build Success - Increase snapshot create timeout to 30 seconds
+                      timestamp: '2020-07-17T08:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '2'
+                        run_time: 1236s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/2
+                        text: View more details in Acme!
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      x-pd-requires-scope: change_events.write
+      summary: PagerDuty Update a Change Event
+      description: 'Update an existing Change Event
+
+
+        Scoped OAuth requires: `change_events.write`
+
+        '
+      tags:
+      - Change Events
+      operationId: updateChangeEvent
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                change_event:
+                  $ref: '#/components/schemas/ChangeEvent'
+              required:
+              - change_event
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  change_event:
+                    summary: Build Success - Increase snapshot create timeout to 30 seconds
+                    type: change_event
+                    custom_details:
+                      build_state: passed
+                      build_number: '2'
+                      run_time: 1236s
+        description: The Change Event to be updated.
+      responses:
+        '200':
+          description: The Change Event that was updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change_event:
+                    $ref: '#/components/schemas/ChangeEvent'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    change_event:
+                      summary: Build Success - Increase snapshot create timeout to 30 seconds
+                      timestamp: '2020-07-17T08:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '2'
+                        run_time: 1236s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/2
+                        text: View more details in Acme!
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /incidents/{id}/related_change_events:
+    description: List change events related to an incident.
+    get:
+      x-pd-requires-scope: incidents.read
+      tags:
+      - Change Events
+      operationId: listIncidentRelatedChangeEvents
+      description: 'List related Change Events for an Incident, as well as the reason these changes are correlated with the incident.
+
+
+        Change events represent service changes such as deploys, build completion, and configuration changes, providing information that is critical during incident triage or hypercare. For more information on change events, see [Change Events](https://support.pagerduty.com/docs/change-events).
+
+
+        The Change Correlation feature provides incident responders with recent change events that are most relevant to that incident. Change Correlation informs the responder why a particular change event was surfaced and correlated to an incident based on three key factors which include time, related service, or intelligence (machine learning).
+
+
+        Scoped OAuth requires: `incidents.read`
+
+        '
+      summary: PagerDuty List related Change Events for an Incident
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/offset_limit'
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      responses:
+        '200':
+          description: The array of Change Events returned by the query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change_events:
+                    type: array
+                    items:
+                      allOf:
+                      - $ref: '#/components/schemas/ChangeEvent'
+                      - type: object
+                        properties:
+                          correlation_reason:
+                            type: object
+                            properties:
+                              reason:
+                                type: string
+                                enum:
+                                - most_recent
+                                - related_service
+                                - intelligent
+                                readOnly: true
+                                description: The reason a change event was determined to be related to the given incident.
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    change_events:
+                    - summary: Build Success - Increase snapshot create timeout to 30 seconds
+                      id: 01BBYA6PEVW6A852BUO6QYUE7O
+                      timestamp: '2020-07-17T08:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '2'
+                        run_time: 1236s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/2
+                        text: View more details in Acme!
+                      correlation_reason:
+                        reason: most_recent
+                    - summary: Build Success - Increase snapshot create timeout to 15 seconds
+                      id: 01BBYA6PDIXPL8KO1HPIUL9CZN
+                      timestamp: '2020-07-17T07:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '1'
+                        run_time: 1233s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/1
+                        text: View more details in Acme!
+                      correlation_reason:
+                        reason: related_service
+                    limit: null
+                    offset: null
+                    total: null
+                    more: false
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /services/{id}/change_events:
+    description: List change events for a service.
+    get:
+      x-pd-requires-scope: services.read
+      tags:
+      - Change Events
+      operationId: listServiceChangeEvents
+      description: 'List all of the existing Change Events for a service.
+
+
+        Scoped OAuth requires: `services.read`
+
+        '
+      summary: PagerDuty List Change Events for a service
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/change_since'
+      - $ref: '#/components/parameters/change_until'
+      - $ref: '#/components/parameters/offset_limit'
+      - $ref: '#/components/parameters/offset_offset'
+      - $ref: '#/components/parameters/offset_total'
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/team_ids'
+      - $ref: '#/components/parameters/integration_ids'
+      responses:
+        '200':
+          description: The array of Change Events returned by the query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change_events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChangeEvent'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    change_events:
+                    - summary: Build Success - Increase snapshot create timeout to 30 seconds
+                      id: 01BBYA6PEVW6A852BUO6QYUE7O
+                      timestamp: '2020-07-17T08:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '2'
+                        run_time: 1236s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/2
+                        text: View more details in Acme!
+                    - summary: Build Success - Increase snapshot create timeout to 15 seconds
+                      id: 01BBYA6PDIXPL8KO1HPIUL9CZN
+                      timestamp: '2020-07-17T07:42:58Z'
+                      type: change_event
+                      source: acme-build-pipeline-tool-default-i-9999
+                      integration:
+                        id: PEYSGVF
+                        type: inbound_integration_reference
+                      services:
+                      - id: PEYSGRV
+                        type: service_reference
+                      custom_details:
+                        build_state: passed
+                        build_number: '1'
+                        run_time: 1233s
+                      links:
+                      - href: https://acme.pagerduty.dev/build/1
+                        text: View more details in Acme!
+                    limit: null
+                    offset: null
+                    total: null
+                    more: false
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    change_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes.
+      schema:
+        type: string
+        format: date-time
+        pattern: YYYY-MM-DDThh:mm:ssZ
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    integration_ids:
+      name: integration_ids[]
+      in: query
+      description: An array of integration IDs. Only results related to these integrations will be returned.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    change_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes.
+      schema:
+        type: string
+        format: date-time
+        pattern: YYYY-MM-DDThh:mm:ssZ
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+  schemas:
+    IntegrationReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - aws_cloudwatch_inbound_integration_reference
+            - cloudkick_inbound_integration_reference
+            - event_transformer_api_inbound_integration_reference
+            - generic_email_inbound_integration_reference
+            - generic_events_api_inbound_integration_reference
+            - keynote_inbound_integration_reference
+            - nagios_inbound_integration_reference
+            - pingdom_inbound_integration_reference
+            - sql_monitor_inbound_integration_reference
+            - events_api_v2_inbound_integration_reference
+            - inbound_integration_reference
+    ChangeEvent:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          timestamp:
+            type: string
+            format: date-time
+            readOnly: true
+            description: The time at which the emitting tool detected or generated the event.
+          type:
+            type: string
+            readOnly: true
+            default: change_event
+            description: The type of object being created.
+            enum:
+            - change_event
+          services:
+            type: array
+            readOnly: true
+            description: An array containing Service objects that this change event is associated with.
+            items:
+              $ref: '#/components/schemas/ServiceReference'
+          integration:
+            allOf:
+            - readOnly: true
+            - $ref: '#/components/schemas/IntegrationReference'
+          routing_key:
+            readOnly: true
+            title: Routing Key
+            description: This is the 32 character Integration Key for an Integration on a Service. The same Integration Key can be used for both alert and change events.
+            type: string
+          summary:
+            type: string
+            description: A brief text summary of the event. Displayed in PagerDuty to provide information about the change. The maximum permitted length of this property is 1024 characters.
+          source:
+            type: string
+            readOnly: true
+            description: The unique name of the location where the Change Event occurred.
+          links:
+            type: array
+            readOnly: true
+            description: List of links to include.
+            items:
+              type: object
+              properties:
+                href:
+                  type: string
+                text:
+                  type: string
+          images:
+            type: array
+            readOnly: true
+            items:
+              type: object
+              properties:
+                src:
+                  type: string
+                href:
+                  type: string
+                alt:
+                  type: string
+          custom_details:
+            type: object
+            description: Additional details about the change event.
+            title: Custom Details
+        example:
+          summary: Build Success - Increase snapshot create timeout to 30 seconds
+          timestamp: '2020-07-17T08:42:58Z'
+          type: change_event
+          source: acme-build-pipeline-tool-default-i-9999
+          integration:
+            id: PEYSGVF
+            type: inbound_integration_reference
+          services:
+          - id: PEYSGRV
+            type: service_reference
+          custom_details:
+            build_state: passed
+            build_number: '2'
+            run_time: 1236s
+          links:
+          - href: https://acme.pagerduty.dev/build/2
+            text: View more details in Acme!
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
+    Tag:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type: string
+            nullable: true
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          type:
+            type: string
+            readOnly: true
+            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          self:
+            type: string
+            nullable: true
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type: string
+            nullable: true
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: tag
+            enum:
+            - tag
+          label:
+            type: string
+            description: The label of the tag.
+            maxLength: 191
+        required:
+        - label
+        - type
+        example:
+          type: tag
+          label: Batman
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: The API Key with format `Token token=<API_KEY>`

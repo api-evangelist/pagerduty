@@ -1,0 +1,561 @@
+openapi: 3.0.2
+info:
+  description: 'This document describes the PagerDuty REST APIs.
+
+
+    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+
+
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+
+
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
+
+    '
+  contact:
+    name: PagerDuty Support
+    url: http://www.pagerduty.com/support
+    email: support@pagerduty.com
+  title: PagerDuty Abilities Service Dependencies API
+  version: 2.0.0
+servers:
+- url: https://api.pagerduty.com
+  description: PagerDuty V2 API.
+security:
+- api_key: []
+tags:
+- name: Service Dependencies
+  description: 'Services are categorized into technical and business services. Dependencies can be created via any combination of these services.
+
+    '
+paths:
+  /service_dependencies/associate:
+    description: Associate dependencies of services.
+    post:
+      x-pd-requires-scope: services.write
+      tags:
+      - Service Dependencies
+      operationId: createServiceDependency
+      summary: PagerDuty Associate service dependencies
+      description: 'Create new dependencies between two services.
+
+
+        Business services model capabilities that span multiple technical services and that may be owned by several different teams.
+
+
+        A service can have a maximum of 2,000 dependencies with a depth limit of 100. If the limit is reached, the API will respond with an error.
+
+
+        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
+
+
+        Scoped OAuth requires: `services.write`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                relationships:
+                  type: array
+                  description: List of all service dependencies to be created.
+                  items:
+                    type: object
+                    properties:
+                      supporting_service:
+                        type: object
+                        description: The reference to the service that supports the dependent service.
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                      dependent_service:
+                        type: object
+                        description: The reference to the service that is dependent on the supporting service.
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  relationships:
+                  - supporting_service:
+                      id: P7AD56
+                      type: service
+                    dependent_service:
+                      id: P99DJ6
+                      type: business_service
+                  - supporting_service:
+                      id: DT93K1
+                      type: business_service
+                    dependent_service:
+                      id: RS34D9
+                      type: service
+      responses:
+        '200':
+          description: An array of service relationships that were successfully associated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  relationships:
+                    type: array
+                    description: List of all the technical service's dependencies
+                    items:
+                      type: object
+                      properties:
+                        supporting_service:
+                          type: object
+                          description: The reference to the service that supports the technical service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        dependent_service:
+                          type: object
+                          description: The reference to the service that is dependent on the technical service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        id:
+                          type: string
+                        type:
+                          type: string
+              examples:
+                relationships:
+                  summary: Response Example
+                  value:
+                    relationships:
+                    - supporting_service:
+                        id: P7AD56
+                        type: technical_service_reference
+                      dependent_service:
+                        id: P99DJ6
+                        type: business_service_reference
+                      id: DQVP7E6G0E8AC3NR
+                      type: service_dependency
+                    - supporting_service:
+                        id: DT93K1
+                        type: business_service_reference
+                      dependent_service:
+                        id: RS34D9
+                        type: technical_service_reference
+                      id: D3PG0QVACE87RNE6
+                      type: service_dependency
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /service_dependencies/business_services/{id}:
+    description: Get the dependencies of a given Business Service.
+    get:
+      x-pd-requires-scope: services.read
+      tags:
+      - Service Dependencies
+      operationId: getBusinessServiceServiceDependencies
+      summary: PagerDuty Get Business Service dependencies
+      description: 'Get all immediate dependencies of any Business Service.
+
+
+        Business Services model capabilities that span multiple technical services and that may be owned by several different teams.
+
+
+        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
+
+
+        Scoped OAuth requires: `services.read`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: An array of service relationships.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  relationships:
+                    type: array
+                    description: List of all the Business Service's dependencies.
+                    items:
+                      type: object
+                      properties:
+                        supporting_service:
+                          type: object
+                          description: The reference to the service that supports the Business Service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        dependent_service:
+                          type: object
+                          description: The reference to the service that is dependent on the Business Service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        id:
+                          type: string
+                        type:
+                          type: string
+              examples:
+                relationships:
+                  summary: Response Example
+                  value:
+                    relationships:
+                    - supporting_service:
+                        id: P7AD56
+                        type: technical_service_reference
+                      dependent_service:
+                        id: P99DJ6
+                        type: business_service_reference
+                      id: DQVP7E6G0E8AC3NR
+                      type: service_dependency
+                    - supporting_service:
+                        id: P99DJ6
+                        type: business_service_reference
+                      dependent_service:
+                        id: RS34D9
+                        type: business_service_reference
+                      id: D3PG0QVACE87RNE6
+                      type: service_dependency
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /service_dependencies/disassociate:
+    description: Disassociate dependencies of services.
+    post:
+      x-pd-requires-scope: services.write
+      tags:
+      - Service Dependencies
+      operationId: deleteServiceDependency
+      summary: PagerDuty Disassociate service dependencies
+      description: 'Disassociate dependencies between two services.
+
+
+        Business services model capabilities that span multiple technical services and that may be owned by several different teams.
+
+
+        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)
+
+
+        Scoped OAuth requires: `services.write`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                relationships:
+                  type: array
+                  description: List of all service dependencies to be deleted.
+                  items:
+                    type: object
+                    properties:
+                      supporting_service:
+                        type: object
+                        description: The reference to the service that supports the dependent service.
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                      dependent_service:
+                        type: object
+                        description: The reference to the service that is dependent on the supporting service.
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  relationships:
+                  - supporting_service:
+                      id: P7AD56
+                      type: service
+                    dependent_service:
+                      id: P99DJ6
+                      type: business_service
+                  - supporting_service:
+                      id: DT93K1
+                      type: business_service
+                    dependent_service:
+                      id: RS34D9
+                      type: service
+      responses:
+        '200':
+          description: An array of service relationships that were successfully disassociated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  relationships:
+                    type: array
+                    description: List of all the technical service's dependencies
+                    items:
+                      type: object
+                      properties:
+                        supporting_service:
+                          type: object
+                          description: The reference to the service that supports the technical service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        dependent_service:
+                          type: object
+                          description: The reference to the service that is dependent on the technical service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        id:
+                          type: string
+                        type:
+                          type: string
+              examples:
+                relationships:
+                  summary: Example Response
+                  value:
+                    relationships:
+                    - supporting_service:
+                        id: P7AD56
+                        type: technical_service_reference
+                      dependent_service:
+                        id: P99DJ6
+                        type: business_service_reference
+                      id: DQVP7E6G0E8AC3NR
+                      type: service_dependency
+                    - supporting_service:
+                        id: DT93K1
+                        type: business_service_reference
+                      dependent_service:
+                        id: RS34D9
+                        type: technical_service_reference
+                      id: D3PG0QVACE87RNE6
+                      type: service_dependency
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /service_dependencies/technical_services/{id}:
+    description: Get the dependencies of a given technical service.
+    get:
+      x-pd-requires-scope: services.read
+      tags:
+      - Service Dependencies
+      operationId: getTechnicalServiceServiceDependencies
+      summary: PagerDuty Get technical service dependencies
+      description: 'Get all immediate dependencies of any technical service.
+
+        Technical services are also known as `services`.
+
+
+        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+
+
+        Scoped OAuth requires: `services.read`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: An array of service relationships.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  relationships:
+                    type: array
+                    description: List of all the technical service's dependencies
+                    items:
+                      type: object
+                      properties:
+                        supporting_service:
+                          type: object
+                          description: The reference to the service that supports the technical service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        dependent_service:
+                          type: object
+                          description: The reference to the service that is dependent on the technical service.
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: string
+                        id:
+                          type: string
+                        type:
+                          type: string
+              examples:
+                relationships:
+                  summary: Response Example
+                  value:
+                    relationships:
+                    - supporting_service:
+                        id: P7AD56
+                        type: technical_service_reference
+                      dependent_service:
+                        id: P99DJ6
+                        type: business_service_reference
+                      id: DQVP7E6G0E8AC3NR
+                      type: service_dependency
+                    - supporting_service:
+                        id: R87DK4
+                        type: technical_service_reference
+                      dependent_service:
+                        id: P7AD56
+                        type: technical_service_reference
+                      id: D3PG0QVACE87RNE6
+                      type: service_dependency
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: The API Key with format `Token token=<API_KEY>`

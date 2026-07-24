@@ -1,0 +1,965 @@
+openapi: 3.0.2
+info:
+  description: 'This document describes the PagerDuty REST APIs.
+
+
+    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+
+
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+
+
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
+
+    '
+  contact:
+    name: PagerDuty Support
+    url: http://www.pagerduty.com/support
+    email: support@pagerduty.com
+  title: PagerDuty Abilities Custom Fields API
+  version: 2.0.0
+servers:
+- url: https://api.pagerduty.com
+  description: PagerDuty V2 API.
+security:
+- api_key: []
+tags:
+- name: Custom Fields
+  description: 'Custom fields allow you to enrich PagerDuty incidents with critical and helpful metadata throughout the incident lifecycle.
+
+    '
+paths:
+  /incidents/custom_fields:
+    description: Create and list Fields on Incidents
+    post:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.write
+      operationId: createCustomFieldsField
+      description: 'Create a new Field, along with the Field Options if provided. An account may have up to 10 Fields.
+
+
+        Scoped OAuth requires: `custom_fields.write`
+
+        '
+      summary: PagerDuty Create a Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                field:
+                  $ref: '#/components/schemas/CustomFieldsFieldWithOptions'
+              required:
+              - field
+            examples:
+              request1:
+                summary: 'Example: With field_options and single-value'
+                value:
+                  field:
+                    data_type: string
+                    name: environment
+                    display_name: Environment
+                    description: The environment that the issue occurred in
+                    field_type: single_value_fixed
+                    default_value: production
+                    field_options:
+                    - data:
+                        data_type: string
+                        value: production
+                    - data:
+                        data_type: string
+                        value: staging
+              request2:
+                summary: 'Example: With field_options and multi-value'
+                value:
+                  field:
+                    data_type: string
+                    name: environment
+                    display_name: Environment
+                    description: The environment that the issue occurred in
+                    field_type: multi_value_fixed
+                    default_value:
+                    - production
+                    - staging
+                    field_options:
+                    - data:
+                        data_type: string
+                        value: production
+                    - data:
+                        data_type: string
+                        value: staging
+              request3:
+                summary: 'Example: Without field_options'
+                value:
+                  field:
+                    data_type: string
+                    name: environment
+                    display_name: Environment
+                    description: The environment that the issue occurred in
+                    field_type: single_value
+                    default_value: production
+      responses:
+        '201':
+          description: The field object created, along with the Field Options if provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  field:
+                    $ref: '#/components/schemas/CustomFieldsFieldWithOptions'
+                required:
+                - field
+              examples:
+                response1:
+                  summary: 'Example: With field_options and single-value'
+                  value:
+                    field:
+                      id: P5IYCNZ
+                      type: field
+                      summary: environment
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      name: environment
+                      display_name: Environment
+                      field_type: single_value_fixed
+                      description: The environment that the issue occurred in
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+                      default_value: staging
+                      field_options:
+                      - id: PT4KHEE
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: production
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+                      - id: P5IYCNZ
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: staging
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+                response2:
+                  summary: 'Example: With field_options and multi-value'
+                  value:
+                    field:
+                      id: P5IYCNZ
+                      type: field
+                      summary: environment
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      name: environment
+                      display_name: Environment
+                      field_type: multi_value_fixed
+                      description: The environment that the issue occurred in
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+                      default_value:
+                      - production
+                      - staging
+                      field_options:
+                      - id: PT4KHEE
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: production
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+                      - id: P5IYCNZ
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: staging
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+                response3:
+                  summary: 'Example: Without field_options'
+                  value:
+                    field:
+                      id: P5IYCNZ
+                      type: field
+                      summary: environment
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      field_type: single_value
+                      name: environment
+                      display_name: Environment
+                      description: The environment that the issue occurred in
+                      default_value: production
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.read
+      operationId: listCustomFieldsFields
+      description: 'List fields.
+
+
+        Scoped OAuth requires: `custom_fields.read`
+
+        '
+      summary: PagerDuty List Fields
+      parameters:
+      - $ref: '#/components/parameters/include_customfields_field'
+      responses:
+        '200':
+          description: A list of fields.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    fields:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/CustomFieldsFieldWithOptions'
+                  required:
+                  - fields
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    fields:
+                    - id: P5IYCNZ
+                      type: field
+                      summary: environment
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      name: environment
+                      display_name: Environment
+                      description: The environment that the issue occurred in
+                      field_type: single_value_fixed
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+                      default_value: null
+                      field_options:
+                      - id: PT4KHEE
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: abc
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/custom_fields/{field_id}:
+    description: Get, update and delete a field.
+    get:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.read
+      operationId: getCustomFieldsField
+      description: 'Show detailed information about a field.
+
+
+        Scoped OAuth requires: `custom_fields.read`
+
+        '
+      summary: PagerDuty Get a Field
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      - $ref: '#/components/parameters/include_customfields_field'
+      responses:
+        '200':
+          description: The field requested.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  field:
+                    $ref: '#/components/schemas/CustomFieldsFieldWithOptions'
+                required:
+                - field
+              examples:
+                response1:
+                  summary: 'Example: No query parameters'
+                  value:
+                    field:
+                      id: P5IYCNZ
+                      type: field
+                      summary: environment
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      name: environment
+                      display_name: Environment
+                      description: The environment that the issue occurred in
+                      field_type: multi_value
+                      default_value: null
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+                response2:
+                  summary: 'Example: Using include[]=field_options'
+                  value:
+                    field:
+                      id: P5IYCNZ
+                      type: field
+                      summary: environment
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      name: environment
+                      display_name: Environment
+                      description: The environment that the issue occurred in
+                      field_type: single_value_fixed
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+                      default_value: null
+                      field_options:
+                      - id: PT4KHEE
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: production
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+                      - id: P5IYCNZ
+                        type: field_option
+                        data:
+                          data_type: string
+                          value: staging
+                        created_at: '2021-06-01T21:30:42Z'
+                        updated_at: '2021-06-01T21:30:42Z'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.write
+      operationId: updateCustomFieldsField
+      description: 'Update a field.
+
+
+        Scoped OAuth requires: `custom_fields.write`
+
+        '
+      summary: PagerDuty Update a Field
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                field:
+                  $ref: '#/components/schemas/CustomFieldsEditableField'
+              required:
+              - field
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  field:
+                    display_name: New Display Name!
+                    description: New description!
+      responses:
+        '200':
+          description: The field object updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  field:
+                    $ref: '#/components/schemas/CustomFieldsField'
+                required:
+                - field
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    field:
+                      id: P5IYCNZ
+                      type: field
+                      summary: old_name
+                      self: https://api.pagerduty.com/incidents/custom_fields/P5IYCNZ
+                      data_type: string
+                      name: old_name
+                      display_name: New Display Name!
+                      description: New description!
+                      field_type: single_value
+                      default_value: null
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.write
+      operationId: deleteCustomFieldsField
+      description: 'Delete a Field. Fields may not be deleted if they are used by a Field Schema.
+
+
+        Scoped OAuth requires: `custom_fields.write`
+
+        '
+      summary: PagerDuty Delete a Field
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      responses:
+        '204':
+          description: The field was deleted successfully.
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/custom_fields/{field_id}/field_options:
+    description: Create new option for the given field_options (e.g., enum) field and list all options for the given field.
+    post:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.write
+      operationId: createCustomFieldsFieldOption
+      description: 'Create a new Field Option. Field Options may only be created for Fields that have `field_options`. A Field may have no more than 10 enabled options.
+
+
+        Scoped OAuth requires: `custom_fields.write`
+
+        '
+      summary: PagerDuty Create a Field Option
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                field_option:
+                  $ref: '#/components/schemas/CustomFieldsFieldOption'
+              required:
+              - field_option
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  field_option:
+                    data:
+                      data_type: string
+                      value: production
+      responses:
+        '201':
+          description: The field option created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  field_option:
+                    $ref: '#/components/schemas/CustomFieldsFieldOption'
+                required:
+                - field_option
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    field_option:
+                      id: PQ9K7I8
+                      type: field_option
+                      data:
+                        data_type: string
+                        value: production
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.read
+      operationId: listCustomFieldsFieldOptions
+      description: 'List all enabled Field Options for a Field.
+
+
+        Scoped OAuth requires: `custom_fields.read`
+
+        '
+      summary: PagerDuty List Field Options
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      responses:
+        '200':
+          description: A list of field options.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  field_options:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomFieldsFieldOption'
+                required:
+                - field_options
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    field_options:
+                    - id: PQ9K7I8
+                      type: field_option
+                      data:
+                        data_type: string
+                        value: production
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /incidents/custom_fields/{field_id}/field_options/{field_option_id}:
+    description: Update field option.
+    put:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.write
+      operationId: updateCustomFieldsFieldOption
+      description: 'Update Field Option for a Field.
+
+
+        Scoped OAuth requires: `custom_fields.write`
+
+        '
+      summary: PagerDuty Update a Field Option
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      - $ref: '#/components/parameters/field_option_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                field_option:
+                  $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
+              required:
+              - field_option
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  field_option:
+                    data:
+                      data_type: string
+                      value: prod
+      responses:
+        '200':
+          description: The field option object updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  field_option:
+                    $ref: '#/components/schemas/CustomFieldsFieldOption'
+                required:
+                - field_option
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    field_option:
+                      id: PQ9K7I8
+                      type: field_option
+                      data:
+                        data_type: string
+                        value: prod
+                      created_at: '2021-06-01T21:30:42Z'
+                      updated_at: '2021-06-01T21:30:42Z'
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+      - Custom Fields
+      x-pd-requires-scope: custom_fields.write
+      operationId: deleteCustomFieldsFieldOption
+      description: 'Delete a Field Option.
+
+
+        Scoped OAuth requires: `custom_fields.write`
+
+        '
+      summary: PagerDuty Delete a Field Option
+      parameters:
+      - $ref: '#/components/parameters/field_id'
+      - $ref: '#/components/parameters/field_option_id'
+      responses:
+        '204':
+          description: The field option was deleted successfully.
+        '400':
+          $ref: '#/components/responses/ArgumentError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  parameters:
+    field_id:
+      name: field_id
+      description: The ID of the field.
+      in: path
+      required: true
+      schema:
+        type: string
+    include_customfields_field:
+      name: include[]
+      description: Array of additional details to include.
+      in: query
+      explode: true
+      schema:
+        type: string
+        enum:
+        - field_options
+        uniqueItems: true
+    field_option_id:
+      name: field_option_id
+      description: The ID of the field option.
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    CustomFieldsFieldValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the field.
+        name:
+          type: string
+          title: Field Name
+          description: The name of the field. May include ASCII characters, specifically lowercase letters, digits, and underescores. The `name` for a Field must be unique.
+          maxLength: 50
+        type:
+          type: string
+          description: Determines the type of the reference.
+          enum:
+          - field_value
+        display_name:
+          type: string
+          description: The human-readable name of the field. This must be unique across an account.
+          maxLength: 50
+        field_type:
+          type: string
+          description: The type of data this field contains. In combination with the `data_type` field.
+          enum:
+          - single_value
+          - single_value_fixed
+          - multi_value
+          - multi_value_fixed
+        data_type:
+          type: string
+          description: The kind of data the custom field is allowed to contain.
+          enum:
+          - boolean
+          - integer
+          - float
+          - string
+          - datetime
+          - url
+        description:
+          type: string
+          nullable: true
+          description: A description of the data this field contains.
+          maxLength: 1000
+        value:
+          oneOf:
+          - type: object
+            title: Boolean
+            properties:
+              value:
+                type: boolean
+                nullable: true
+          - type: object
+            title: Float
+            properties:
+              value:
+                type: number
+                nullable: true
+          - type: object
+            title: Integer
+            properties:
+              value:
+                type: integer
+                nullable: true
+          - type: object
+            title: String
+            properties:
+              value:
+                oneOf:
+                - type: string
+                  maxLength: 200
+                  nullable: true
+                - type: array
+                  items:
+                    type: string
+                    maxLength: 200
+                  maxItems: 10
+                  uniqueItems: true
+                  nullable: true
+          - type: object
+            title: Datetime
+            properties:
+              value:
+                type: string
+                nullable: true
+                format: date-time
+          - type: object
+            title: Url
+            properties:
+              value:
+                type: string
+                format: uri
+                maxLength: 200
+                nullable: true
+      required:
+      - id
+      - type
+      - name
+      - value
+      - display_name
+      - data_type
+      - field_type
+      - description
+    CustomFieldsEditableField:
+      type: object
+      properties:
+        display_name:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
+        description:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
+        default_value:
+          oneOf:
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
+          nullable: true
+    CustomFieldsField:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableField'
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+            description: The ID of the resource.
+          name:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
+          summary:
+            type: string
+            nullable: true
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          self:
+            type: string
+            nullable: true
+            readOnly: true
+            format: url
+            description: The API show URL at which the object is accessible
+          type:
+            type: string
+            enum:
+            - field
+            readOnly: true
+          created_at:
+            type: string
+            format: date-time
+            description: The date/time the object was created at.
+            readOnly: true
+          updated_at:
+            type: string
+            format: date-time
+            description: The date/time the object was last updated.
+            readOnly: true
+          data_type:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/data_type'
+          field_type:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/field_type'
+      required:
+      - id
+      - summary
+      - self
+      - type
+      - created_at
+      - updated_at
+      - data_type
+      - namespace
+      - name
+      - display_name
+      - field_type
+    CustomFieldsFieldOption:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
+      - type: object
+        required:
+        - id
+        - type
+        - data
+        - created_at
+        - updated_at
+    CustomFieldsEditableFieldOption:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: The ID of the resource.
+        type:
+          type: string
+          enum:
+          - field_option
+        created_at:
+          type: string
+          format: date-time
+          description: The date/time the object was created at.
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: The date/time the object was last updated.
+          readOnly: true
+        data:
+          oneOf:
+          - type: object
+            properties:
+              data_type:
+                type: string
+                description: The kind of data represented by this option. Must match the Field's `data_type`.
+                enum:
+                - string
+              value:
+                type: string
+                maxLength: 200
+            required:
+            - data_type
+            - value
+          discriminator:
+            propertyName: data_type
+            mapping:
+              string: '#/paths/~1incidents~1custom_fields/get/responses/200/content/application~1json/schema/allOf/0/properties/fields/items/allOf/1/properties/field_options/items/allOf/0/properties/data/oneOf/0'
+      required:
+      - id
+      - type
+      - created_at
+      - updated_at
+      description: ''
+    CustomFieldsFieldWithOptions:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsField'
+      - type: object
+        properties:
+          field_options:
+            type: array
+            description: The fixed list of value options that may be stored in this field.
+            items:
+              $ref: '#/components/schemas/CustomFieldsFieldOption'
+            nullable: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: The API Key with format `Token token=<API_KEY>`

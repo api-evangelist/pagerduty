@@ -1,0 +1,470 @@
+openapi: 3.0.2
+info:
+  description: 'This document describes the PagerDuty REST APIs.
+
+
+    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+
+
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+
+
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
+
+    '
+  contact:
+    name: PagerDuty Support
+    url: http://www.pagerduty.com/support
+    email: support@pagerduty.com
+  title: PagerDuty Abilities Standards API
+  version: 2.0.0
+servers:
+- url: https://api.pagerduty.com
+  description: PagerDuty V2 API.
+security:
+- api_key: []
+tags:
+- name: Standards
+  description: 'Standards help provide a clear understanding of what a good service configuration looks like, allowing to share and enforce organization guidelines across services to ensure adherence to best practices.
+
+    '
+paths:
+  /standards:
+    get:
+      x-pd-requires-scope: standards.read
+      tags:
+      - Standards
+      operationId: listStandards
+      summary: PagerDuty List Standards
+      description: 'Get all standards of an account.
+
+
+        Scoped OAuth requires: `standards.read`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/active_standard'
+      - $ref: '#/components/parameters/query_resource_type_standard'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    standards:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Standard'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    standards:
+                    - active: true
+                      description: A description provides critical context about what a service represents or is used for to inform team members and responders. The description should be kept concise and understandable by those without deep knowledge of the service.
+                      exclusions: []
+                      id: 01CXX38Q0U8XKHO4LNKXUJTBFG
+                      inclusions:
+                      - type: technical_service_reference
+                        id: P0CPWBO
+                      name: Service has a description
+                      resource_type: technical_service
+                      type: has_technical_service_description
+                    - active: true
+                      description: Ensure that no incident goes unaddressed, even if the on-call responder on the first level of the escalation policy is unavailable.
+                      exclusions: []
+                      id: 01CXX38Q0Y8D9IYFAEDCH5F53L
+                      inclusions: []
+                      name: Service has an escalation policy with 2 or more unique levels
+                      resource_type: technical_service
+                      type: minimum_escalation_policy_rule_depth
+                    - active: true
+                      description: Extensions or add-ons streamline incident response and communication processes by connecting PagerDuty services to other tools that matter to your incident management workflow.
+                      exclusions: []
+                      id: 01CXX38Q11T19P0K1GFKHUZJ35
+                      inclusions: []
+                      name: Service has an extension or add-on (e.g. Slack, etc.)
+                      resource_type: technical_service
+                      type: minimum_outbound_integrations
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /standards/{id}:
+    put:
+      x-pd-requires-scope: standards.write
+      tags:
+      - Standards
+      summary: PagerDuty Update a standard
+      operationId: updateStandard
+      description: 'Updates a standard
+
+
+        Scoped OAuth requires: `standards.write`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/header_Content-Type'
+      - $ref: '#/components/parameters/id_standard'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  active:
+                    type: boolean
+                  values:
+                    type: object
+                    properties:
+                      regex:
+                        type: string
+                  description:
+                    type: string
+                  inclusions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StandardInclusionExclusion'
+                  exclusions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StandardInclusionExclusion'
+            examples:
+              request:
+                summary: Request Example
+                value:
+                  active: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Standard'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    active: false
+                    description: A description provides critical context about what a service represents or is used for to inform team members and responders. The description should be kept concise and understandable by those without deep knowledge of the service.
+                    exclusions: []
+                    id: 01CXX38Q0U8XKHO4LNKXUJTBFG
+                    inclusions: []
+                    name: Service has a description
+                    resource_type: technical_service
+                    type: has_technical_service_description
+        '400':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /standards/scores/{resource_type}:
+    get:
+      x-pd-requires-scope: standards.read
+      tags:
+      - Standards
+      summary: PagerDuty List resources' standards scores
+      operationId: listResourceStandardsManyServices
+      description: 'List standards applied to a set of resources
+
+
+        Scoped OAuth requires: `standards.read`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/resource_ids_standard'
+      - $ref: '#/components/parameters/resource_type_standard'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    resources:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/StandardApplied'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    resources:
+                    - resource_id: P0CPWBO
+                      resource_type: technical_service
+                      score:
+                        passing: 1
+                        total: 1
+                      standards:
+                      - active: true
+                        description: A description provides critical context about what a service represents or is used for to inform team members and responders. The description should be kept concise and understandable by those without deep knowledge of the service.
+                        id: 01CXX38Q0U8XKHO4LNKXUJTBFG
+                        pass: true
+                        name: Service has a description
+                        type: has_technical_service_description
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /standards/scores/{resource_type}/{id}:
+    get:
+      x-pd-requires-scope: standards.read
+      tags:
+      - Standards
+      summary: PagerDuty List a resource's standards scores
+      operationId: listResourceStandards
+      description: 'List standards applied to a specific resource
+
+
+        Scoped OAuth requires: `standards.read`
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/header_Accept'
+      - $ref: '#/components/parameters/resource_id_standard'
+      - $ref: '#/components/parameters/resource_type_standard'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApplied'
+              examples:
+                response:
+                  summary: Response Example
+                  value:
+                    resource_id: P0CPWBO
+                    resource_type: technical_service
+                    score:
+                      passing: 1
+                      total: 1
+                    standards:
+                    - active: true
+                      description: A description provides critical context about what a service represents or is used for to inform team members and responders. The description should be kept concise and understandable by those without deep knowledge of the service.
+                      id: 01CXX38Q0U8XKHO4LNKXUJTBFG
+                      pass: true
+                      name: Service has a description
+                      type: has_technical_service_description
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  parameters:
+    query_resource_type_standard:
+      in: query
+      name: resource_type
+      schema:
+        type: string
+        enum:
+        - technical_service
+    resource_type_standard:
+      in: path
+      name: resource_type
+      required: true
+      schema:
+        type: string
+        enum:
+        - technical_services
+    resource_ids_standard:
+      in: query
+      name: ids
+      required: true
+      description: Ids of resources to apply the standards. Maximum of 100 items
+      schema:
+        type: array
+        items:
+          type: string
+    resource_id_standard:
+      in: path
+      name: id
+      required: true
+      description: Id of the resource to apply the standards.
+      schema:
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    id_standard:
+      in: path
+      name: id
+      required: true
+      description: Id of the standard
+      schema:
+        type: string
+    active_standard:
+      in: query
+      name: active
+      required: false
+      schema:
+        type: boolean
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable Entity. Some arguments failed validation checks.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  schemas:
+    StandardApplied:
+      title: StandardApplied
+      type: object
+      properties:
+        resource_id:
+          type: string
+        resource_type:
+          type: string
+          enum:
+          - technical_service
+        score:
+          type: object
+          properties:
+            passing:
+              type: integer
+            total:
+              type: integer
+        standards:
+          type: array
+          items:
+            type: object
+            properties:
+              active:
+                type: boolean
+              description:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              type:
+                type: string
+              pass:
+                type: boolean
+    StandardInclusionExclusion:
+      title: StandardInclusionExclusion
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - technical_service_reference
+        id:
+          type: string
+    Standard:
+      title: Standard
+      type: object
+      properties:
+        active:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        resource_type:
+          type: string
+          enum:
+          - technical_service
+        exclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/StandardInclusionExclusion'
+        inclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/StandardInclusionExclusion'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: The API Key with format `Token token=<API_KEY>`
