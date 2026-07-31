@@ -761,3 +761,13 @@ components:
             custom_details:
               type: object
               description: Free-form additional details about the change event.
+
+# --- API Evangelist provenance -------------------------------------------
+x-superseded-by:
+  reason: >-
+    Provider publishes the webhook portion of this surface in as-published OpenAPI; the inbound Events API channels here are not covered by it. Partial supersession.
+  published_spec: all/pagerduty/openapi/_original/pagerduty-openapi-original.yml
+  published_event_object: callbacks
+  published_events: 2
+  status: partial
+  reviewed: '2026-07-31'
