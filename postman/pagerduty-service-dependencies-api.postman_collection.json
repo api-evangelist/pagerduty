@@ -1,0 +1,1337 @@
+{
+  "info": {
+    "_postman_id": "e8738ae7-4e77-4118-be60-9ae3ccc3f6e5",
+    "name": "PagerDuty Abilities Service Dependencies API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:29.000Z",
+    "updatedAt": "2026-07-28T02:31:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e8738ae7-4e77-4118-be60-9ae3ccc3f6e5"
+  },
+  "item": [
+    {
+      "name": "service_dependencies",
+      "item": [
+        {
+          "name": "associate",
+          "item": [
+            {
+              "name": "PagerDuty Associate service dependencies",
+              "id": "cf5007f5-e3a7-4b8e-9462-f7ca1487ea98",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/service_dependencies/associate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service_dependencies",
+                    "associate"
+                  ]
+                },
+                "description": "Create new dependencies between two services.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nA service can have a maximum of 2,000 dependencies with a depth limit of 100. If the limit is reached, the API will respond with an error.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.write`\n"
+              },
+              "response": [
+                {
+                  "id": "864ea73b-5644-4a30-a0c1-86c9cfafdb99",
+                  "name": "An array of service relationships that were successfully associated.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/associate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "associate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-864ea73b-5644-4a30-a0c1-86c9cfafdb99"
+                },
+                {
+                  "id": "a7decebe-3302-4c8e-a20e-9506b475bc06",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/associate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "associate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-a7decebe-3302-4c8e-a20e-9506b475bc06"
+                },
+                {
+                  "id": "5493691a-cc72-473d-b63c-66fa82fd23ca",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/associate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "associate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-5493691a-cc72-473d-b63c-66fa82fd23ca"
+                },
+                {
+                  "id": "b62f9b52-352c-4dc2-8573-da3e7f860c85",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/associate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "associate"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-b62f9b52-352c-4dc2-8573-da3e7f860c85"
+                },
+                {
+                  "id": "b18a6304-7da2-4252-a908-9994a6020d2b",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/associate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "associate"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-b18a6304-7da2-4252-a908-9994a6020d2b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:30.000Z",
+              "updatedAt": "2026-07-28T02:31:30.000Z",
+              "uid": "35240-cf5007f5-e3a7-4b8e-9462-f7ca1487ea98"
+            }
+          ],
+          "id": "a08c3f5a-43d3-4560-b79b-d457e6cda598",
+          "createdAt": "2026-07-28T02:31:30.000Z",
+          "updatedAt": "2026-07-28T02:31:30.000Z",
+          "uid": "35240-a08c3f5a-43d3-4560-b79b-d457e6cda598"
+        },
+        {
+          "name": "business_services",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "PagerDuty Get Business Service dependencies",
+                  "id": "6e8941c5-469d-46e0-ab60-55e78d60cbd4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/business_services/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "business_services",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a38b1fff-8b04-4066-9ffb-bed0400dc138",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        }
+                      ]
+                    },
+                    "description": "Get all immediate dependencies of any Business Service.\n\nBusiness Services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "45cc335a-edc1-4531-b9a8-3f9f64d2a12a",
+                      "name": "An array of service relationships.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/business_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "business_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-45cc335a-edc1-4531-b9a8-3f9f64d2a12a"
+                    },
+                    {
+                      "id": "b19bf84a-3dbf-4c98-9f2f-c2fb600e95ab",
+                      "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/business_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "business_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-b19bf84a-3dbf-4c98-9f2f-c2fb600e95ab"
+                    },
+                    {
+                      "id": "4beb1e47-2ac8-463e-a22a-fc4a22019624",
+                      "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/business_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "business_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-4beb1e47-2ac8-463e-a22a-fc4a22019624"
+                    },
+                    {
+                      "id": "c1260fba-44e2-4fea-8bae-052b2621ab71",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/business_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "business_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-c1260fba-44e2-4fea-8bae-052b2621ab71"
+                    },
+                    {
+                      "id": "486ad638-1d9e-4246-99a3-a38a1d053157",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/business_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "business_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-486ad638-1d9e-4246-99a3-a38a1d053157"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-6e8941c5-469d-46e0-ab60-55e78d60cbd4"
+                }
+              ],
+              "id": "073a01d1-98d7-43e0-895b-12f3396a2f7d",
+              "createdAt": "2026-07-28T02:31:30.000Z",
+              "updatedAt": "2026-07-28T02:31:30.000Z",
+              "uid": "35240-073a01d1-98d7-43e0-895b-12f3396a2f7d"
+            }
+          ],
+          "id": "21ac2c57-151f-4ef4-8098-ae69e71061dd",
+          "createdAt": "2026-07-28T02:31:30.000Z",
+          "updatedAt": "2026-07-28T02:31:30.000Z",
+          "uid": "35240-21ac2c57-151f-4ef4-8098-ae69e71061dd"
+        },
+        {
+          "name": "disassociate",
+          "item": [
+            {
+              "name": "PagerDuty Disassociate service dependencies",
+              "id": "9536ef3b-d800-4762-bfdf-bd1b727cb520",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/service_dependencies/disassociate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service_dependencies",
+                    "disassociate"
+                  ]
+                },
+                "description": "Disassociate dependencies between two services.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.write`\n"
+              },
+              "response": [
+                {
+                  "id": "3755515e-e532-4da3-ab75-16e6ad590e9b",
+                  "name": "An array of service relationships that were successfully disassociated.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/disassociate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "disassociate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-3755515e-e532-4da3-ab75-16e6ad590e9b"
+                },
+                {
+                  "id": "34eae87e-13f3-43f1-afae-12567cc53e93",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/disassociate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "disassociate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-34eae87e-13f3-43f1-afae-12567cc53e93"
+                },
+                {
+                  "id": "b382dea6-aeea-4850-858c-4afdb0a5f395",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/disassociate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "disassociate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-b382dea6-aeea-4850-858c-4afdb0a5f395"
+                },
+                {
+                  "id": "b3719490-bc9a-4e49-9b95-a17d06f5a6dc",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/disassociate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "disassociate"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-b3719490-bc9a-4e49-9b95-a17d06f5a6dc"
+                },
+                {
+                  "id": "b48c4f33-856f-4093-a856-6057fe56ef54",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/disassociate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "disassociate"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-b48c4f33-856f-4093-a856-6057fe56ef54"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:30.000Z",
+              "updatedAt": "2026-07-28T02:31:30.000Z",
+              "uid": "35240-9536ef3b-d800-4762-bfdf-bd1b727cb520"
+            }
+          ],
+          "id": "6de195a2-4d33-490e-963f-96d5dbd7200c",
+          "createdAt": "2026-07-28T02:31:30.000Z",
+          "updatedAt": "2026-07-28T02:31:30.000Z",
+          "uid": "35240-6de195a2-4d33-490e-963f-96d5dbd7200c"
+        },
+        {
+          "name": "technical_services",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "PagerDuty Get technical service dependencies",
+                  "id": "0ea96a7b-bcb4-4f60-b970-8bb9f9aeb237",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service_dependencies/technical_services/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_dependencies",
+                        "technical_services",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dc3d0873-4d0b-47e2-856c-5ac891f50527",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        }
+                      ]
+                    },
+                    "description": "Get all immediate dependencies of any technical service.\nTechnical services are also known as `services`.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)\n\nScoped OAuth requires: `services.read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "9d60576d-0edb-4169-9210-876b426af01f",
+                      "name": "An array of service relationships.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/technical_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "technical_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"relationships\": [\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"supporting_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"dependent_service\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-9d60576d-0edb-4169-9210-876b426af01f"
+                    },
+                    {
+                      "id": "5397e990-f6d1-4593-92b7-32d72c1768cf",
+                      "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/technical_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "technical_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-5397e990-f6d1-4593-92b7-32d72c1768cf"
+                    },
+                    {
+                      "id": "b7bb1d4d-8ed2-4dfa-928c-77caf819ca11",
+                      "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/technical_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "technical_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-b7bb1d4d-8ed2-4dfa-928c-77caf819ca11"
+                    },
+                    {
+                      "id": "e707f650-6243-43b2-bcef-29bdc5e3499c",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/technical_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "technical_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-e707f650-6243-43b2-bcef-29bdc5e3499c"
+                    },
+                    {
+                      "id": "445b18e0-8a36-4cee-bccc-196105e8492b",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_dependencies/technical_services/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_dependencies",
+                            "technical_services",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:30.000Z",
+                      "updatedAt": "2026-07-28T02:31:30.000Z",
+                      "uid": "35240-445b18e0-8a36-4cee-bccc-196105e8492b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:30.000Z",
+                  "updatedAt": "2026-07-28T02:31:30.000Z",
+                  "uid": "35240-0ea96a7b-bcb4-4f60-b970-8bb9f9aeb237"
+                }
+              ],
+              "id": "b8cb182b-4216-44d3-bc33-5371d0ffbf31",
+              "createdAt": "2026-07-28T02:31:30.000Z",
+              "updatedAt": "2026-07-28T02:31:30.000Z",
+              "uid": "35240-b8cb182b-4216-44d3-bc33-5371d0ffbf31"
+            }
+          ],
+          "id": "aecfa896-7dbb-482c-b845-8ce86f256c9d",
+          "createdAt": "2026-07-28T02:31:30.000Z",
+          "updatedAt": "2026-07-28T02:31:30.000Z",
+          "uid": "35240-aecfa896-7dbb-482c-b845-8ce86f256c9d"
+        }
+      ],
+      "id": "93fbb18d-a358-4562-aef9-c233ff34a5c0",
+      "createdAt": "2026-07-28T02:31:30.000Z",
+      "updatedAt": "2026-07-28T02:31:30.000Z",
+      "uid": "35240-93fbb18d-a358-4562-aef9-c233ff34a5c0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

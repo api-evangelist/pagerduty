@@ -1,0 +1,1833 @@
+{
+  "info": {
+    "_postman_id": "60087196-1251-4c40-b30a-549e155bf474",
+    "name": "PagerDuty Abilities Webhooks API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:44.000Z",
+    "updatedAt": "2026-07-28T02:31:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-60087196-1251-4c40-b30a-549e155bf474"
+  },
+  "item": [
+    {
+      "name": "webhook_subscriptions",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "enable",
+              "item": [
+                {
+                  "name": "PagerDuty Enable a webhook subscription",
+                  "id": "68af2867-b432-4f11-a2a5-2eb6d51c0a5b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id/enable",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id",
+                        "enable"
+                      ],
+                      "variable": [
+                        {
+                          "id": "43147e1d-4ae4-4d05-8ac6-2b9aa1f65388",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        }
+                      ]
+                    },
+                    "description": "Enable a webhook subscription that is temporarily disabled. (This API does not require a request body.)\n\nWebhook subscriptions can become temporarily disabled when the subscription's delivery method is repeatedly rejected by the server.\n\nScoped OAuth requires: `webhook_subscriptions.write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "6d802ea1-ee54-4db4-a0a1-a1afe45620d4",
+                      "name": "The webhook subscription that was successfully enabled.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-6d802ea1-ee54-4db4-a0a1-a1afe45620d4"
+                    },
+                    {
+                      "id": "3e242a54-a1ca-4858-960d-a991c154678f",
+                      "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-3e242a54-a1ca-4858-960d-a991c154678f"
+                    },
+                    {
+                      "id": "38ab0bd8-5cd7-4303-8109-c41ab685bb4b",
+                      "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-38ab0bd8-5cd7-4303-8109-c41ab685bb4b"
+                    },
+                    {
+                      "id": "15633724-aee4-4d1a-909d-6eceddaa8e48",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-15633724-aee4-4d1a-909d-6eceddaa8e48"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-68af2867-b432-4f11-a2a5-2eb6d51c0a5b"
+                }
+              ],
+              "id": "c12a6db0-6503-452d-ae37-ad751409ba3e",
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-c12a6db0-6503-452d-ae37-ad751409ba3e"
+            },
+            {
+              "name": "ping",
+              "item": [
+                {
+                  "name": "PagerDuty Test a webhook subscription",
+                  "id": "cd5af27f-9286-4243-9fca-a87229d2db56",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id/ping",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id",
+                        "ping"
+                      ],
+                      "variable": [
+                        {
+                          "id": "785c7320-799a-4db2-a602-6ff176870e2f",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        }
+                      ]
+                    },
+                    "description": "Test a webhook subscription.\n\nFires a test event against the webhook subscription.  If properly configured,\nthis will deliver the `pagey.ping` webhook event to the destination.\n\nScoped OAuth requires: `webhook_subscriptions.write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "2e0600ce-541e-4a74-b34a-f86fbb383f61",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/ping",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "ping"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-2e0600ce-541e-4a74-b34a-f86fbb383f61"
+                    },
+                    {
+                      "id": "1c8d1122-b82b-4182-88c4-8e743ff2760e",
+                      "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/ping",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "ping"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-1c8d1122-b82b-4182-88c4-8e743ff2760e"
+                    },
+                    {
+                      "id": "9593f90f-ddb4-40db-b85b-bb00954d36f9",
+                      "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/ping",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "ping"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-9593f90f-ddb4-40db-b85b-bb00954d36f9"
+                    },
+                    {
+                      "id": "412df8cc-441c-42d9-a061-2ee397be1144",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhook_subscriptions/:id/ping",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhook_subscriptions",
+                            ":id",
+                            "ping"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:31:44.000Z",
+                      "updatedAt": "2026-07-28T02:31:44.000Z",
+                      "uid": "35240-412df8cc-441c-42d9-a061-2ee397be1144"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-cd5af27f-9286-4243-9fca-a87229d2db56"
+                }
+              ],
+              "id": "226f7705-c9fb-4669-9b81-c8def2971c0f",
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-226f7705-c9fb-4669-9b81-c8def2971c0f"
+            },
+            {
+              "name": "PagerDuty Get a webhook subscription",
+              "id": "e7e43638-7735-4782-82d4-b9a0c5e4bc71",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bf00e7db-e9d6-42dc-82ce-edded58930e3",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Gets details about an existing webhook subscription.\n\nScoped OAuth requires: `webhook_subscriptions.read`\n"
+              },
+              "response": [
+                {
+                  "id": "6469cca8-08c9-4c99-aa02-e1b4b6710b0f",
+                  "name": "The webhook subscription that was requested.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-6469cca8-08c9-4c99-aa02-e1b4b6710b0f"
+                },
+                {
+                  "id": "26818b61-0013-4159-b7ae-e7ec0284a6d7",
+                  "name": "Caller provided invalid arguments. Please review the response for error\ndetails. Retrying with the same arguments will *not* work.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-26818b61-0013-4159-b7ae-e7ec0284a6d7"
+                },
+                {
+                  "id": "e82b0420-a7c6-4166-86b1-192ac983d745",
+                  "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-e82b0420-a7c6-4166-86b1-192ac983d745"
+                },
+                {
+                  "id": "c8e69a45-59f7-439a-aa92-63136e0dbb0c",
+                  "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-c8e69a45-59f7-439a-aa92-63136e0dbb0c"
+                },
+                {
+                  "id": "6b105d8f-37c9-49f1-b0c9-afd3f926aee7",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-6b105d8f-37c9-49f1-b0c9-afd3f926aee7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-e7e43638-7735-4782-82d4-b9a0c5e4bc71"
+            },
+            {
+              "name": "PagerDuty Update a webhook subscription",
+              "id": "25d4897a-a512-4921-8408-fd36686f59ef",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_subscription\": {\n    \"description\": \"<string>\",\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"id\": \"<string>\",\n      \"type\": \"team_reference\"\n    },\n    \"active\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dea089e5-5d74-4b6f-a68e-7f9d404dc6eb",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Updates an existing webhook subscription.\n\nOnly the fields being updated need to be included on the request.  This operation does not\nsupport updating the `delivery_method` of the webhook subscription.\n\nScoped OAuth requires: `webhook_subscriptions.write`\n"
+              },
+              "response": [
+                {
+                  "id": "56af9c32-3f01-4111-b142-9885e738289d",
+                  "name": "The updated webhook subscription.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"webhook_subscription\": {\n    \"description\": \"<string>\",\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"id\": \"<string>\",\n      \"type\": \"team_reference\"\n    },\n    \"active\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-56af9c32-3f01-4111-b142-9885e738289d"
+                },
+                {
+                  "id": "1b996d76-3781-4bc6-8f74-60d78e5baf36",
+                  "name": "Caller provided invalid arguments. Please review the response for error\ndetails. Retrying with the same arguments will *not* work.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"webhook_subscription\": {\n    \"description\": \"<string>\",\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"id\": \"<string>\",\n      \"type\": \"team_reference\"\n    },\n    \"active\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-1b996d76-3781-4bc6-8f74-60d78e5baf36"
+                },
+                {
+                  "id": "ab80e8ef-8fc3-41ba-b737-5dcdf9102fea",
+                  "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"webhook_subscription\": {\n    \"description\": \"<string>\",\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"id\": \"<string>\",\n      \"type\": \"team_reference\"\n    },\n    \"active\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-ab80e8ef-8fc3-41ba-b737-5dcdf9102fea"
+                },
+                {
+                  "id": "1a3e41cc-042c-404b-bb00-d5a1fd19baa3",
+                  "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"webhook_subscription\": {\n    \"description\": \"<string>\",\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"id\": \"<string>\",\n      \"type\": \"team_reference\"\n    },\n    \"active\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-1a3e41cc-042c-404b-bb00-d5a1fd19baa3"
+                },
+                {
+                  "id": "6361268c-e048-4deb-b941-df4b0e125f2a",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"webhook_subscription\": {\n    \"description\": \"<string>\",\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"id\": \"<string>\",\n      \"type\": \"team_reference\"\n    },\n    \"active\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-6361268c-e048-4deb-b941-df4b0e125f2a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-25d4897a-a512-4921-8408-fd36686f59ef"
+            },
+            {
+              "name": "PagerDuty Delete a webhook subscription",
+              "id": "a1aa73eb-3baa-4b02-b439-75760969b1db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a9773cdd-30e5-439e-b5f5-6bb600e6b5f1",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Deletes a webhook subscription.\n\nScoped OAuth requires: `webhook_subscriptions.write`\n"
+              },
+              "response": [
+                {
+                  "id": "2007915f-61ea-48a9-8c2b-58591dfcf793",
+                  "name": "The webhook subscription was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-2007915f-61ea-48a9-8c2b-58591dfcf793"
+                },
+                {
+                  "id": "88a20ca8-d413-4440-81df-55fba22c4bd5",
+                  "name": "Caller provided invalid arguments. Please review the response for error\ndetails. Retrying with the same arguments will *not* work.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-88a20ca8-d413-4440-81df-55fba22c4bd5"
+                },
+                {
+                  "id": "e809f802-a21d-484b-9600-fddf04894c44",
+                  "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-e809f802-a21d-484b-9600-fddf04894c44"
+                },
+                {
+                  "id": "97268626-f8ec-4177-9367-0a181c6b0f66",
+                  "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-97268626-f8ec-4177-9367-0a181c6b0f66"
+                },
+                {
+                  "id": "dd3e22fd-8eab-45b8-ba92-7254c1b04546",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhook_subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhook_subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:44.000Z",
+                  "updatedAt": "2026-07-28T02:31:44.000Z",
+                  "uid": "35240-dd3e22fd-8eab-45b8-ba92-7254c1b04546"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-a1aa73eb-3baa-4b02-b439-75760969b1db"
+            }
+          ],
+          "id": "376e1649-b0e0-4e6e-a879-7d81cdf8e583",
+          "createdAt": "2026-07-28T02:31:44.000Z",
+          "updatedAt": "2026-07-28T02:31:44.000Z",
+          "uid": "35240-376e1649-b0e0-4e6e-a879-7d81cdf8e583"
+        },
+        {
+          "name": "PagerDuty List webhook subscriptions",
+          "id": "2656c07c-c70d-495f-b2bc-962674cf88d3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhook_subscriptions?limit=<integer>&offset=<integer>&total=false&filter_type=team&filter_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhook_subscriptions"
+              ],
+              "query": [
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "The type of resource to filter upon.",
+                  "key": "filter_type",
+                  "value": "team"
+                },
+                {
+                  "description": "The id of the resource to filter upon.",
+                  "key": "filter_id",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List existing webhook subscriptions.\n\nThe `filter_type` and `filter_id` query parameters may be used to only show subscriptions\nfor a particular _service_ or _team_.\n\nFor more information on webhook subscriptions and how they are used to configure v3 webhooks\nsee the [Webhooks v3 Developer Documentation](https://developer.pagerduty.com/docs/webhooks/v3-overview/).\n\nScoped OAuth requires: `webhook_subscriptions.read`\n"
+          },
+          "response": [
+            {
+              "id": "3cd833d7-f559-4ae6-b407-7e2cc594349b",
+              "name": "A set of webhook subscriptions matching the request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?limit=<integer>&offset=<integer>&total=false&filter_type=team&filter_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The type of resource to filter upon.",
+                      "key": "filter_type",
+                      "value": "team"
+                    },
+                    {
+                      "description": "The id of the resource to filter upon.",
+                      "key": "filter_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"webhook_subscriptions\": [\n    {\n      \"type\": \"webhook_subscription\",\n      \"delivery_method\": {\n        \"type\": \"http_delivery_method\",\n        \"url\": \"<string>\",\n        \"id\": \"<string>\",\n        \"secret\": \"<string>\",\n        \"temporarily_disabled\": \"<boolean>\",\n        \"custom_headers\": \"<array>\"\n      },\n      \"events\": [\n        \"<string>\"\n      ],\n      \"filter\": {\n        \"type\": \"team_reference\",\n        \"id\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"active\": true,\n      \"description\": \"<string>\"\n    },\n    {\n      \"type\": \"webhook_subscription\",\n      \"delivery_method\": {\n        \"type\": \"http_delivery_method\",\n        \"url\": \"<string>\",\n        \"id\": \"<string>\",\n        \"secret\": \"<string>\",\n        \"temporarily_disabled\": \"<boolean>\",\n        \"custom_headers\": \"<array>\"\n      },\n      \"events\": [\n        \"<string>\"\n      ],\n      \"filter\": {\n        \"type\": \"service_reference\",\n        \"id\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"active\": true,\n      \"description\": \"<string>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-3cd833d7-f559-4ae6-b407-7e2cc594349b"
+            },
+            {
+              "id": "4d3cea80-ad98-4764-9009-c921e0c07bf4",
+              "name": "Caller provided invalid arguments. Please review the response for error\ndetails. Retrying with the same arguments will *not* work.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?limit=<integer>&offset=<integer>&total=false&filter_type=team&filter_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The type of resource to filter upon.",
+                      "key": "filter_type",
+                      "value": "team"
+                    },
+                    {
+                      "description": "The id of the resource to filter upon.",
+                      "key": "filter_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-4d3cea80-ad98-4764-9009-c921e0c07bf4"
+            },
+            {
+              "id": "631bda6c-04b3-4d93-af12-7b76ca315076",
+              "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?limit=<integer>&offset=<integer>&total=false&filter_type=team&filter_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The type of resource to filter upon.",
+                      "key": "filter_type",
+                      "value": "team"
+                    },
+                    {
+                      "description": "The id of the resource to filter upon.",
+                      "key": "filter_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-631bda6c-04b3-4d93-af12-7b76ca315076"
+            },
+            {
+              "id": "25a292b4-8761-46bd-87b7-92e5219b2914",
+              "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions?limit=<integer>&offset=<integer>&total=false&filter_type=team&filter_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The type of resource to filter upon.",
+                      "key": "filter_type",
+                      "value": "team"
+                    },
+                    {
+                      "description": "The id of the resource to filter upon.",
+                      "key": "filter_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-25a292b4-8761-46bd-87b7-92e5219b2914"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:44.000Z",
+          "updatedAt": "2026-07-28T02:31:44.000Z",
+          "uid": "35240-2656c07c-c70d-495f-b2bc-962674cf88d3"
+        },
+        {
+          "name": "PagerDuty Create a webhook subscription",
+          "id": "1f2cdc4d-599d-46a9-af37-fed88356f175",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhook_subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhook_subscriptions"
+              ]
+            },
+            "description": "Creates a new webhook subscription.\n\nFor more information on webhook subscriptions and how they are used to configure v3 webhooks\nsee the [Webhooks v3 Developer Documentation](https://developer.pagerduty.com/docs/webhooks/v3-overview/).\n\nScoped OAuth requires: `webhook_subscriptions.write`\n"
+          },
+          "response": [
+            {
+              "id": "a0aa9e3e-b747-4e27-801a-a9a76ad82beb",
+              "name": "The webhook subscription that was created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-a0aa9e3e-b747-4e27-801a-a9a76ad82beb"
+            },
+            {
+              "id": "e5135f1f-8f4e-41a7-aefe-50652ea7b6a3",
+              "name": "Caller provided invalid arguments. Please review the response for error\ndetails. Retrying with the same arguments will *not* work.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-e5135f1f-8f4e-41a7-aefe-50652ea7b6a3"
+            },
+            {
+              "id": "bdabc620-2247-41db-a5a8-9917d1aee8e7",
+              "name": "Caller did not supply credentials or did not provide the correct\ncredentials.\n\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-bdabc620-2247-41db-a5a8-9917d1aee8e7"
+            },
+            {
+              "id": "1af5d8b5-0a71-4718-8abd-1645c85a4f08",
+              "name": "Caller is not authorized to view the requested resource.\n\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_subscription\": {\n    \"type\": \"webhook_subscription\",\n    \"delivery_method\": {\n      \"type\": \"http_delivery_method\",\n      \"url\": \"<string>\",\n      \"id\": \"<string>\",\n      \"secret\": \"<string>\",\n      \"temporarily_disabled\": \"<boolean>\",\n      \"custom_headers\": \"<array>\"\n    },\n    \"events\": [\n      \"<string>\"\n    ],\n    \"filter\": {\n      \"type\": \"account_reference\",\n      \"id\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"active\": true,\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhook_subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhook_subscriptions"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:31:44.000Z",
+              "updatedAt": "2026-07-28T02:31:44.000Z",
+              "uid": "35240-1af5d8b5-0a71-4718-8abd-1645c85a4f08"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:44.000Z",
+          "updatedAt": "2026-07-28T02:31:44.000Z",
+          "uid": "35240-1f2cdc4d-599d-46a9-af37-fed88356f175"
+        }
+      ],
+      "id": "e78ade15-3a7d-4383-beae-398074883bdf",
+      "createdAt": "2026-07-28T02:31:44.000Z",
+      "updatedAt": "2026-07-28T02:31:44.000Z",
+      "uid": "35240-e78ade15-3a7d-4383-beae-398074883bdf"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

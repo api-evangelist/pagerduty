@@ -1,0 +1,647 @@
+{
+  "info": {
+    "_postman_id": "23e60573-ea4e-4be0-a475-edf67ff6fb1e",
+    "name": "PagerDuty Abilities On-Calls API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:21.000Z",
+    "updatedAt": "2026-07-28T02:31:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-23e60573-ea4e-4be0-a475-edf67ff6fb1e"
+  },
+  "item": [
+    {
+      "name": "oncalls",
+      "item": [
+        {
+          "name": "PagerDuty List all of the on-calls",
+          "id": "490f1ceb-07a0-43c3-b746-74e80e893724",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/oncalls?time_zone=<string>&limit=<integer>&offset=<integer>&total=false&include[]=schedules&user_ids[]=<string>&user_ids[]=<string>&escalation_policy_ids[]=<string>&escalation_policy_ids[]=<string>&schedule_ids[]=<string>&schedule_ids[]=<string>&since=<dateTime>&until=<dateTime>&earliest=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "oncalls"
+              ],
+              "query": [
+                {
+                  "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                  "key": "time_zone",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "Array of additional details to include.",
+                  "key": "include[]",
+                  "value": "schedules"
+                },
+                {
+                  "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                  "key": "user_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                  "key": "user_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                  "key": "escalation_policy_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                  "key": "escalation_policy_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                  "key": "schedule_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                  "key": "schedule_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.",
+                  "key": "since",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.",
+                  "key": "until",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters.",
+                  "key": "earliest",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "List the on-call entries during a given time range.\n\nAn on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#on-calls)\n\nScoped OAuth requires: `oncalls.read`\n\nThis API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more information.\n"
+          },
+          "response": [
+            {
+              "id": "1dd1bbbb-4bf1-43b2-a8ad-c2323624e01f",
+              "name": "A paginated array of on-call objects.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oncalls?time_zone=<string>&limit=<integer>&offset=<integer>&total=false&include[]=schedules&user_ids[]=<string>&escalation_policy_ids[]=<string>&schedule_ids[]=<string>&since=<dateTime>&until=<dateTime>&earliest=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oncalls"
+                  ],
+                  "query": [
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "schedules"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters.",
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"oncalls\": [\n    {\n      \"escalation_policy\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"user\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"schedule\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"escalation_level\": \"<integer>\",\n      \"start\": \"<dateTime>\",\n      \"end\": \"<dateTime>\"\n    },\n    {\n      \"escalation_policy\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"user\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"schedule\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"escalation_level\": \"<integer>\",\n      \"start\": \"<dateTime>\",\n      \"end\": \"<dateTime>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:31:22.000Z",
+              "updatedAt": "2026-07-28T02:31:22.000Z",
+              "uid": "35240-1dd1bbbb-4bf1-43b2-a8ad-c2323624e01f"
+            },
+            {
+              "id": "d5451ae9-ee7a-4abc-88b1-518853d51c94",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oncalls?time_zone=<string>&limit=<integer>&offset=<integer>&total=false&include[]=schedules&user_ids[]=<string>&escalation_policy_ids[]=<string>&schedule_ids[]=<string>&since=<dateTime>&until=<dateTime>&earliest=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oncalls"
+                  ],
+                  "query": [
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "schedules"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters.",
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:22.000Z",
+              "updatedAt": "2026-07-28T02:31:22.000Z",
+              "uid": "35240-d5451ae9-ee7a-4abc-88b1-518853d51c94"
+            },
+            {
+              "id": "2e6db09c-d425-416f-af13-a88a5dc3f02c",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oncalls?time_zone=<string>&limit=<integer>&offset=<integer>&total=false&include[]=schedules&user_ids[]=<string>&escalation_policy_ids[]=<string>&schedule_ids[]=<string>&since=<dateTime>&until=<dateTime>&earliest=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oncalls"
+                  ],
+                  "query": [
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "schedules"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters.",
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:22.000Z",
+              "updatedAt": "2026-07-28T02:31:22.000Z",
+              "uid": "35240-2e6db09c-d425-416f-af13-a88a5dc3f02c"
+            },
+            {
+              "id": "3553f871-2fec-4195-9911-1487e8738332",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oncalls?time_zone=<string>&limit=<integer>&offset=<integer>&total=false&include[]=schedules&user_ids[]=<string>&escalation_policy_ids[]=<string>&schedule_ids[]=<string>&since=<dateTime>&until=<dateTime>&earliest=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oncalls"
+                  ],
+                  "query": [
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "schedules"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters.",
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:22.000Z",
+              "updatedAt": "2026-07-28T02:31:22.000Z",
+              "uid": "35240-3553f871-2fec-4195-9911-1487e8738332"
+            },
+            {
+              "id": "0bdae420-7e0b-4beb-8b5f-ce5d9eb42644",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oncalls?time_zone=<string>&limit=<integer>&offset=<integer>&total=false&include[]=schedules&user_ids[]=<string>&escalation_policy_ids[]=<string>&schedule_ids[]=<string>&since=<dateTime>&until=<dateTime>&earliest=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oncalls"
+                  ],
+                  "query": [
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "schedules"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified user IDs.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified escalation policy IDs.",
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.",
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters.",
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:22.000Z",
+              "updatedAt": "2026-07-28T02:31:22.000Z",
+              "uid": "35240-0bdae420-7e0b-4beb-8b5f-ce5d9eb42644"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:22.000Z",
+          "updatedAt": "2026-07-28T02:31:22.000Z",
+          "uid": "35240-490f1ceb-07a0-43c3-b746-74e80e893724"
+        }
+      ],
+      "id": "d477b397-6afd-45ca-9d42-5066a39aa41c",
+      "createdAt": "2026-07-28T02:31:22.000Z",
+      "updatedAt": "2026-07-28T02:31:22.000Z",
+      "uid": "35240-d477b397-6afd-45ca-9d42-5066a39aa41c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

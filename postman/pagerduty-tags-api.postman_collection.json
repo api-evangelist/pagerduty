@@ -1,0 +1,1911 @@
+{
+  "info": {
+    "_postman_id": "a023b60e-7748-4edf-9bda-c1f3ec8f5f41",
+    "name": "PagerDuty Abilities Tags API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:37.000Z",
+    "updatedAt": "2026-07-28T02:31:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a023b60e-7748-4edf-9bda-c1f3ec8f5f41"
+  },
+  "item": [
+    {
+      "name": "{entity_type}",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "tags",
+              "item": [
+                {
+                  "name": "PagerDuty Get tags for entities",
+                  "id": "7aac0987-9a8a-4672-a029-ccdc41f0ab6a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:entity_type/:id/tags?limit=<integer>&offset=<integer>&total=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":entity_type",
+                        ":id",
+                        "tags"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of results per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Offset to start pagination search results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                          "key": "total",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "0e69133f-b4c8-4775-91e7-17ae8f756942",
+                          "key": "entity_type",
+                          "value": "escalation_policies",
+                          "description": "(Required) Type of entity related with the tag"
+                        },
+                        {
+                          "id": "841560b5-aa34-44eb-b16c-2443e346e158",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        }
+                      ]
+                    },
+                    "description": "Get related tags for Users, Teams or Escalation Policies.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "752cd26d-7fd1-469a-8ff9-1b4308a8ab69",
+                      "name": "An array of tags.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/tags?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "tags"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"tags\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-752cd26d-7fd1-469a-8ff9-1b4308a8ab69"
+                    },
+                    {
+                      "id": "1530a5cd-3047-4f11-9043-4f9ecae97df0",
+                      "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/tags?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "tags"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-1530a5cd-3047-4f11-9043-4f9ecae97df0"
+                    },
+                    {
+                      "id": "1a2f6db9-e16e-4eb6-8bb8-7dc75f22d2b2",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/tags?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "tags"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-1a2f6db9-e16e-4eb6-8bb8-7dc75f22d2b2"
+                    },
+                    {
+                      "id": "75bda3d0-cd5d-41a8-ab93-995d99b80127",
+                      "name": "Too many requests have been made, the rate limit has been reached.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/tags?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "tags"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-75bda3d0-cd5d-41a8-ab93-995d99b80127"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-7aac0987-9a8a-4672-a029-ccdc41f0ab6a"
+                }
+              ],
+              "id": "873a237d-a8da-4ccf-8e2d-454dd246fbc8",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-873a237d-a8da-4ccf-8e2d-454dd246fbc8"
+            }
+          ],
+          "id": "ca163371-6c06-4370-9cfe-f744eb1f42a1",
+          "createdAt": "2026-07-28T02:31:38.000Z",
+          "updatedAt": "2026-07-28T02:31:38.000Z",
+          "uid": "35240-ca163371-6c06-4370-9cfe-f744eb1f42a1"
+        }
+      ],
+      "id": "2c95c757-6a90-4922-b08d-91fa884f5161",
+      "createdAt": "2026-07-28T02:31:38.000Z",
+      "updatedAt": "2026-07-28T02:31:38.000Z",
+      "uid": "35240-2c95c757-6a90-4922-b08d-91fa884f5161"
+    },
+    {
+      "name": "tags",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "{entity_type}",
+              "item": [
+                {
+                  "name": "PagerDuty Get connected entities",
+                  "id": "51768ad8-fb65-4bb7-bada-f56f6dc6c5bb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id/:entity_type?limit=<integer>&offset=<integer>&total=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id",
+                        ":entity_type"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of results per page.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Offset to start pagination search results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                          "key": "total",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "d82c7971-bc29-4c4a-a131-b65ad2f89cee",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        },
+                        {
+                          "id": "b05bb605-b3b1-4037-8f6a-c58b50a164cb",
+                          "key": "entity_type",
+                          "value": "escalation_policies",
+                          "description": "(Required) Type of entity related with the tag"
+                        }
+                      ]
+                    },
+                    "description": "Get related Users, Teams or Escalation Policies for the Tag.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "9495bbc4-b73f-44fc-aafc-c98204227871",
+                      "name": "An array of connected entities.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tags/:id/:entity_type?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tags",
+                            ":id",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\",\n  \"users\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    }\n  ],\n  \"teams\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    }\n  ],\n  \"escalation_policies\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-9495bbc4-b73f-44fc-aafc-c98204227871"
+                    },
+                    {
+                      "id": "2585d890-b13a-43fa-8fd9-d75631b57d54",
+                      "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tags/:id/:entity_type?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tags",
+                            ":id",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-2585d890-b13a-43fa-8fd9-d75631b57d54"
+                    },
+                    {
+                      "id": "1d7d0d70-c09c-43cf-a5cf-e856da58498e",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tags/:id/:entity_type?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tags",
+                            ":id",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-1d7d0d70-c09c-43cf-a5cf-e856da58498e"
+                    },
+                    {
+                      "id": "5651d758-fd00-46e4-90a1-661dfa941ea1",
+                      "name": "Too many requests have been made, the rate limit has been reached.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tags/:id/:entity_type?limit=<integer>&offset=<integer>&total=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tags",
+                            ":id",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of results per page.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Offset to start pagination search results.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                              "key": "total",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:38.000Z",
+                      "updatedAt": "2026-07-28T02:31:38.000Z",
+                      "uid": "35240-5651d758-fd00-46e4-90a1-661dfa941ea1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-51768ad8-fb65-4bb7-bada-f56f6dc6c5bb"
+                }
+              ],
+              "id": "ce9fd8ec-1f04-4f0d-86da-c2e6172fd31e",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-ce9fd8ec-1f04-4f0d-86da-c2e6172fd31e"
+            },
+            {
+              "name": "PagerDuty Get a tag",
+              "id": "2345cea9-f156-4032-979b-9b1c353f0d5a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "40fa6ae7-9619-40bc-9ba7-967447434393",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Get details about an existing Tag.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.read`\n"
+              },
+              "response": [
+                {
+                  "id": "32534a23-1158-4925-8201-154531df6721",
+                  "name": "The tag requested.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-32534a23-1158-4925-8201-154531df6721"
+                },
+                {
+                  "id": "b6995be6-8c41-42f0-b920-4ec7af9bf610",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-b6995be6-8c41-42f0-b920-4ec7af9bf610"
+                },
+                {
+                  "id": "42b7b761-50b3-4730-9f17-024fa487004d",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-42b7b761-50b3-4730-9f17-024fa487004d"
+                },
+                {
+                  "id": "3e9d3b2f-409c-4f18-b455-fad7c8de615b",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-3e9d3b2f-409c-4f18-b455-fad7c8de615b"
+                },
+                {
+                  "id": "716bb654-3e18-463e-ab54-b6afa9263210",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-716bb654-3e18-463e-ab54-b6afa9263210"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-2345cea9-f156-4032-979b-9b1c353f0d5a"
+            },
+            {
+              "name": "PagerDuty Delete a tag",
+              "id": "44a4c3e1-3f5e-4cce-a204-dbcdcc084593",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "396f7167-1cde-490d-a5b6-5ba55f2faa6e",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Remove an existing Tag.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.write`\n"
+              },
+              "response": [
+                {
+                  "id": "aaea8272-0f2f-4778-901d-9b21d6b8b763",
+                  "name": "The tag was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-aaea8272-0f2f-4778-901d-9b21d6b8b763"
+                },
+                {
+                  "id": "1f05926c-bc7c-4d5b-bb28-b19299b95b42",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-1f05926c-bc7c-4d5b-bb28-b19299b95b42"
+                },
+                {
+                  "id": "9ea6c18a-5026-486a-8fa1-a64ed84ccc9b",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-9ea6c18a-5026-486a-8fa1-a64ed84ccc9b"
+                },
+                {
+                  "id": "eeca4885-4506-451d-9888-b0efe0f3498c",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tags/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tags",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:38.000Z",
+                  "updatedAt": "2026-07-28T02:31:38.000Z",
+                  "uid": "35240-eeca4885-4506-451d-9888-b0efe0f3498c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-44a4c3e1-3f5e-4cce-a204-dbcdcc084593"
+            }
+          ],
+          "id": "3aacfa79-e764-4c4c-8888-1035aab5dfa9",
+          "createdAt": "2026-07-28T02:31:38.000Z",
+          "updatedAt": "2026-07-28T02:31:38.000Z",
+          "uid": "35240-3aacfa79-e764-4c4c-8888-1035aab5dfa9"
+        },
+        {
+          "name": "PagerDuty List tags",
+          "id": "8a1d36dc-a497-417f-83e8-111f18f3cafd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tags?limit=<integer>&offset=<integer>&total=false&query=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tags"
+              ],
+              "query": [
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "Filters the result, showing only the tags whose label matches the query.",
+                  "key": "query",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List all of your account's tags.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.read`\n"
+          },
+          "response": [
+            {
+              "id": "1c82c757-580d-45ac-84ba-5202ff048483",
+              "name": "An array of tags names.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags?limit=<integer>&offset=<integer>&total=false&query=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the tags whose label matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tags\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-1c82c757-580d-45ac-84ba-5202ff048483"
+            },
+            {
+              "id": "4fe6b43d-3fba-41d5-a098-9fbdd0e9a60d",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags?limit=<integer>&offset=<integer>&total=false&query=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the tags whose label matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-4fe6b43d-3fba-41d5-a098-9fbdd0e9a60d"
+            },
+            {
+              "id": "40af7c4d-b97b-4f88-ab22-d53468e98d98",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags?limit=<integer>&offset=<integer>&total=false&query=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the tags whose label matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-40af7c4d-b97b-4f88-ab22-d53468e98d98"
+            },
+            {
+              "id": "382857f9-edfb-4a67-beeb-a81cdbb3e401",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tags?limit=<integer>&offset=<integer>&total=false&query=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the tags whose label matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-382857f9-edfb-4a67-beeb-a81cdbb3e401"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:38.000Z",
+          "updatedAt": "2026-07-28T02:31:38.000Z",
+          "uid": "35240-8a1d36dc-a497-417f-83e8-111f18f3cafd"
+        },
+        {
+          "name": "PagerDuty Create a tag",
+          "id": "16d5a4e1-2d6a-4dc8-93fb-a3b03773068d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tags",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tags"
+              ]
+            },
+            "description": "Create a Tag.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.write`\n"
+          },
+          "response": [
+            {
+              "id": "a4480c3e-6cad-4bec-9a35-db8427cf0658",
+              "name": "The tag that was created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-a4480c3e-6cad-4bec-9a35-db8427cf0658"
+            },
+            {
+              "id": "bd31328c-31cb-4e09-b531-ad7748da0e81",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-bd31328c-31cb-4e09-b531-ad7748da0e81"
+            },
+            {
+              "id": "063444c3-be70-4c49-9c6a-f01584c18ea8",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-063444c3-be70-4c49-9c6a-f01584c18ea8"
+            },
+            {
+              "id": "0b198be3-30aa-44a7-bd21-f78801dd2cc7",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-0b198be3-30aa-44a7-bd21-f78801dd2cc7"
+            },
+            {
+              "id": "d7802faa-1d95-49e8-a483-d35433437178",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": {\n    \"label\": \"<string>\",\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tags"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:38.000Z",
+              "updatedAt": "2026-07-28T02:31:38.000Z",
+              "uid": "35240-d7802faa-1d95-49e8-a483-d35433437178"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:38.000Z",
+          "updatedAt": "2026-07-28T02:31:38.000Z",
+          "uid": "35240-16d5a4e1-2d6a-4dc8-93fb-a3b03773068d"
+        }
+      ],
+      "id": "5f4a72da-5e7c-4235-94c6-bcdf176a6ca7",
+      "createdAt": "2026-07-28T02:31:38.000Z",
+      "updatedAt": "2026-07-28T02:31:38.000Z",
+      "uid": "35240-5f4a72da-5e7c-4235-94c6-bcdf176a6ca7"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

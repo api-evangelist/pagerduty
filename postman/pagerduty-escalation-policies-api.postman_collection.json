@@ -1,0 +1,2599 @@
+{
+  "info": {
+    "_postman_id": "c5ba10df-39bd-49e0-b84d-3db419077304",
+    "name": "PagerDuty Abilities Escalation Policies API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:30:49.000Z",
+    "updatedAt": "2026-07-28T02:30:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c5ba10df-39bd-49e0-b84d-3db419077304"
+  },
+  "item": [
+    {
+      "name": "escalation_policies",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "audit",
+              "item": [
+                {
+                  "name": "records",
+                  "item": [
+                    {
+                      "name": "PagerDuty List audit records for an escalation policy",
+                      "id": "87cd904e-2b35-481a-a8d9-1b32a83793b1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "escalation_policies",
+                            ":id",
+                            "audit",
+                            "records"
+                          ],
+                          "query": [
+                            {
+                              "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c8985d27-f05b-420a-9bff-0d621e7789d5",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the resource."
+                            }
+                          ]
+                        },
+                        "description": "The returned records are sorted by the `execution_time` from newest to oldest.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n\nFor more information see the [Audit API Document](https://developer.pagerduty.com/docs/rest-api-v2/audit-records-api/).\n\nScoped OAuth requires: `audit_records.read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "3f10b2e0-9392-42fa-b8d3-8f5d3a7fecc6",
+                          "name": "Records matching the query criteria.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"limit\": \"<integer>\",\n  \"next_cursor\": \"<string>\",\n  \"records\": [\n    {\n      \"id\": \"<string>\",\n      \"execution_time\": \"<dateTime>\",\n      \"method\": {\n        \"type\": \"oauth\",\n        \"description\": \"<string>\",\n        \"truncated_token\": \"<string>\"\n      },\n      \"root_resource\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"action\": \"<string>\",\n      \"self\": \"<string>\",\n      \"execution_context\": {\n        \"request_id\": \"<string>\",\n        \"remote_address\": \"<string>\"\n      },\n      \"actors\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"details\": {\n        \"resource\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        \"fields\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"value\": \"<string>\",\n            \"before_value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"value\": \"<string>\",\n            \"before_value\": \"<string>\"\n          }\n        ],\n        \"references\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"added\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ],\n            \"removed\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"added\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ],\n            \"removed\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"execution_time\": \"<dateTime>\",\n      \"method\": {\n        \"type\": \"browser\",\n        \"description\": \"<string>\",\n        \"truncated_token\": \"<string>\"\n      },\n      \"root_resource\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"action\": \"<string>\",\n      \"self\": \"<string>\",\n      \"execution_context\": {\n        \"request_id\": \"<string>\",\n        \"remote_address\": \"<string>\"\n      },\n      \"actors\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"details\": {\n        \"resource\": {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        \"fields\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"value\": \"<string>\",\n            \"before_value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"value\": \"<string>\",\n            \"before_value\": \"<string>\"\n          }\n        ],\n        \"references\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"added\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ],\n            \"removed\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"added\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ],\n            \"removed\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\",\n                \"summary\": \"<string>\",\n                \"self\": \"<string>\",\n                \"html_url\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"response_metadata\": {\n    \"messages\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-3f10b2e0-9392-42fa-b8d3-8f5d3a7fecc6"
+                        },
+                        {
+                          "id": "7c5f4ca9-0a0c-44bf-947d-2812da34e85a",
+                          "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-7c5f4ca9-0a0c-44bf-947d-2812da34e85a"
+                        },
+                        {
+                          "id": "2b78b384-cbe9-41d4-b5e8-af87bb892496",
+                          "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-2b78b384-cbe9-41d4-b5e8-af87bb892496"
+                        },
+                        {
+                          "id": "ee571a4b-fa03-48a3-bc01-e409dd566b8a",
+                          "name": "Account does not have the abilities to perform the action. Please review the response for the required abilities.\nYou can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Payment Required",
+                          "code": 402,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-ee571a4b-fa03-48a3-bc01-e409dd566b8a"
+                        },
+                        {
+                          "id": "d1d186aa-acd0-4080-8f03-82cf73af3c6e",
+                          "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-d1d186aa-acd0-4080-8f03-82cf73af3c6e"
+                        },
+                        {
+                          "id": "771e2ef3-2ab1-4a46-948f-6d9d9cd4b8e3",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-771e2ef3-2ab1-4a46-948f-6d9d9cd4b8e3"
+                        },
+                        {
+                          "id": "349c9526-4d7f-453d-9e5c-e8e78fe8254d",
+                          "name": "Too many requests have been made, the rate limit has been reached.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-349c9526-4d7f-453d-9e5c-e8e78fe8254d"
+                        },
+                        {
+                          "id": "cbc90a19-0a04-4578-88b8-4da9ffc20b52",
+                          "name": "Internal Server Error the PagerDuty server experienced an error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/escalation_policies/:id/audit/records?limit=<integer>&cursor=<string>&since=<dateTime>&until=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "escalation_policies",
+                                ":id",
+                                "audit",
+                                "records"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)",
+                                  "key": "since",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.",
+                                  "key": "until",
+                                  "value": "<dateTime>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:30:49.000Z",
+                          "updatedAt": "2026-07-28T02:30:49.000Z",
+                          "uid": "35240-cbc90a19-0a04-4578-88b8-4da9ffc20b52"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:30:49.000Z",
+                      "updatedAt": "2026-07-28T02:30:49.000Z",
+                      "uid": "35240-87cd904e-2b35-481a-a8d9-1b32a83793b1"
+                    }
+                  ],
+                  "id": "ecc162e0-1c90-4175-b0d2-bcbcd6ba76fb",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-ecc162e0-1c90-4175-b0d2-bcbcd6ba76fb"
+                }
+              ],
+              "id": "db88c105-a57a-4509-959c-154fe3139123",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-db88c105-a57a-4509-959c-154fe3139123"
+            },
+            {
+              "name": "PagerDuty Get an escalation policy",
+              "id": "34fd9fc6-42fa-48d5-805c-b75a8268984d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies/:id?include[]=targets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "targets"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "04670bdf-c2a9-49e8-8621-ceb547bdb813",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Get information about an existing escalation policy and its rules.\n\nEscalation policies define which user should be alerted at which time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)\n\nScoped OAuth requires: `escalation_policies.read`\n"
+              },
+              "response": [
+                {
+                  "id": "951e130e-69d0-4e79-a531-4f4c95f9dfe9",
+                  "name": "The escalation policy object.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id?include[]=targets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "targets"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-951e130e-69d0-4e79-a531-4f4c95f9dfe9"
+                },
+                {
+                  "id": "8951aa84-005f-4bb0-b5a1-80fb5f55795e",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id?include[]=targets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "targets"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-8951aa84-005f-4bb0-b5a1-80fb5f55795e"
+                },
+                {
+                  "id": "5c7506e1-9363-4764-8a23-55699720cab8",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id?include[]=targets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "targets"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-5c7506e1-9363-4764-8a23-55699720cab8"
+                },
+                {
+                  "id": "8549b40a-3c4c-4a20-9b8c-9d74019b8af7",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id?include[]=targets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "targets"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-8549b40a-3c4c-4a20-9b8c-9d74019b8af7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-34fd9fc6-42fa-48d5-805c-b75a8268984d"
+            },
+            {
+              "name": "PagerDuty Delete an escalation policy",
+              "id": "7e4b723a-ad88-4b9e-826c-03b247abc8fa",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cb833c0f-69c2-41be-a06f-0d472598ea67",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Deletes an existing escalation policy and rules. The escalation policy must not be in use by any services.\n\nEscalation policies define which user should be alerted at which time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)\n\nScoped OAuth requires: `escalation_policies.write`\n"
+              },
+              "response": [
+                {
+                  "id": "b3e4358f-a3b8-4e88-9aca-6befb90db179",
+                  "name": "The escalation policy was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-b3e4358f-a3b8-4e88-9aca-6befb90db179"
+                },
+                {
+                  "id": "03b2317d-0f72-47c7-b171-12940c8b94d0",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-03b2317d-0f72-47c7-b171-12940c8b94d0"
+                },
+                {
+                  "id": "65913831-4c5c-42d4-a50f-4ab120a461e2",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-65913831-4c5c-42d4-a50f-4ab120a461e2"
+                },
+                {
+                  "id": "ea1f5137-f479-4911-b084-a87ad39fbe6f",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-ea1f5137-f479-4911-b084-a87ad39fbe6f"
+                },
+                {
+                  "id": "5f162df9-de60-4ca6-9171-e0b2e28565e4",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-5f162df9-de60-4ca6-9171-e0b2e28565e4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-7e4b723a-ad88-4b9e-826c-03b247abc8fa"
+            },
+            {
+              "name": "PagerDuty Update an escalation policy",
+              "id": "cec99cca-68d9-4103-82ab-030d654f365e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2eb42409-26f0-4574-b075-6db55301b788",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Updates an existing escalation policy and rules.\n\nEscalation policies define which user should be alerted at which time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)\n\nScoped OAuth requires: `escalation_policies.write`\n"
+              },
+              "response": [
+                {
+                  "id": "f2f8713d-927f-465f-9e47-36786299fd6b",
+                  "name": "The escalation policy that was updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-f2f8713d-927f-465f-9e47-36786299fd6b"
+                },
+                {
+                  "id": "fb20af91-93b9-4c2b-afb8-7156286b1203",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-fb20af91-93b9-4c2b-afb8-7156286b1203"
+                },
+                {
+                  "id": "e803bcc4-debc-4392-b196-edd6f14e5592",
+                  "name": "Account does not have the abilities to perform the action. Please review the response for the required abilities.\nYou can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-e803bcc4-debc-4392-b196-edd6f14e5592"
+                },
+                {
+                  "id": "81e87406-faf0-4bb3-8d47-bea0ce3a7395",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-81e87406-faf0-4bb3-8d47-bea0ce3a7395"
+                },
+                {
+                  "id": "d555bbbb-9045-479c-833e-4832f36be9db",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-d555bbbb-9045-479c-833e-4832f36be9db"
+                },
+                {
+                  "id": "a2e8b02d-3c6d-4960-aa07-0e76e9baa167",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/escalation_policies/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "escalation_policies",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:49.000Z",
+                  "updatedAt": "2026-07-28T02:30:49.000Z",
+                  "uid": "35240-a2e8b02d-3c6d-4960-aa07-0e76e9baa167"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-cec99cca-68d9-4103-82ab-030d654f365e"
+            }
+          ],
+          "id": "614422fa-2724-443b-b8d3-389868b27bdb",
+          "createdAt": "2026-07-28T02:30:49.000Z",
+          "updatedAt": "2026-07-28T02:30:49.000Z",
+          "uid": "35240-614422fa-2724-443b-b8d3-389868b27bdb"
+        },
+        {
+          "name": "PagerDuty List escalation policies",
+          "id": "ef746186-5633-48d7-a3a3-00e4c022e7ba",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/escalation_policies?limit=<integer>&offset=<integer>&total=false&query=<string>&user_ids[]=<string>&user_ids[]=<string>&team_ids[]=<string>&team_ids[]=<string>&include[]=targets&sort_by=name",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "escalation_policies"
+              ],
+              "query": [
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "Filters the result, showing only the records whose name matches the query.",
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                  "key": "user_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                  "key": "user_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                  "key": "team_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                  "key": "team_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Array of additional Models to include in response.",
+                  "key": "include[]",
+                  "value": "targets"
+                },
+                {
+                  "description": "Used to specify the field you wish to sort the results on.",
+                  "key": "sort_by",
+                  "value": "name"
+                }
+              ]
+            },
+            "description": "List all of the existing escalation policies.\n\nEscalation policies define which user should be alerted at which time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)\n\nScoped OAuth requires: `escalation_policies.read`\n"
+          },
+          "response": [
+            {
+              "id": "50c11b26-824b-481c-a331-5422af871b5d",
+              "name": "A paginated array of escalation policy objects.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies?limit=<integer>&offset=<integer>&total=false&query=<string>&user_ids[]=<string>&team_ids[]=<string>&include[]=targets&sort_by=name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "targets"
+                    },
+                    {
+                      "description": "Used to specify the field you wish to sort the results on.",
+                      "key": "sort_by",
+                      "value": "name"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"escalation_policies\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"escalation_rules\": [\n        {\n          \"escalation_delay_in_minutes\": \"<integer>\",\n          \"targets\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\",\n              \"summary\": \"<string>\",\n              \"self\": \"<string>\",\n              \"html_url\": \"<string>\"\n            }\n          ],\n          \"id\": \"<string>\",\n          \"escalation_rule_assignment_strategy\": \"assign_to_everyone\"\n        },\n        {\n          \"escalation_delay_in_minutes\": \"<integer>\",\n          \"targets\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\",\n              \"summary\": \"<string>\",\n              \"self\": \"<string>\",\n              \"html_url\": \"<string>\"\n            }\n          ],\n          \"id\": \"<string>\",\n          \"escalation_rule_assignment_strategy\": \"round_robin\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"description\": \"<string>\",\n      \"num_loops\": 0,\n      \"on_call_handoff_notifications\": \"always\",\n      \"services\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"teams\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"escalation_rules\": [\n        {\n          \"escalation_delay_in_minutes\": \"<integer>\",\n          \"targets\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\",\n              \"summary\": \"<string>\",\n              \"self\": \"<string>\",\n              \"html_url\": \"<string>\"\n            }\n          ],\n          \"id\": \"<string>\",\n          \"escalation_rule_assignment_strategy\": \"assign_to_everyone\"\n        },\n        {\n          \"escalation_delay_in_minutes\": \"<integer>\",\n          \"targets\": [\n            {\n              \"type\": \"<string>\",\n              \"id\": \"<string>\",\n              \"summary\": \"<string>\",\n              \"self\": \"<string>\",\n              \"html_url\": \"<string>\"\n            }\n          ],\n          \"id\": \"<string>\",\n          \"escalation_rule_assignment_strategy\": \"round_robin\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"description\": \"<string>\",\n      \"num_loops\": 0,\n      \"on_call_handoff_notifications\": \"always\",\n      \"services\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"teams\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-50c11b26-824b-481c-a331-5422af871b5d"
+            },
+            {
+              "id": "31bb8e1c-7ecb-43e1-8f3d-20f91697d3a6",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies?limit=<integer>&offset=<integer>&total=false&query=<string>&user_ids[]=<string>&team_ids[]=<string>&include[]=targets&sort_by=name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "targets"
+                    },
+                    {
+                      "description": "Used to specify the field you wish to sort the results on.",
+                      "key": "sort_by",
+                      "value": "name"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-31bb8e1c-7ecb-43e1-8f3d-20f91697d3a6"
+            },
+            {
+              "id": "cc1f9a47-3332-4331-8902-c6460e586863",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies?limit=<integer>&offset=<integer>&total=false&query=<string>&user_ids[]=<string>&team_ids[]=<string>&include[]=targets&sort_by=name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "targets"
+                    },
+                    {
+                      "description": "Used to specify the field you wish to sort the results on.",
+                      "key": "sort_by",
+                      "value": "name"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-cc1f9a47-3332-4331-8902-c6460e586863"
+            },
+            {
+              "id": "7bbc687d-40fe-4cac-b36e-95599940ffc5",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies?limit=<integer>&offset=<integer>&total=false&query=<string>&user_ids[]=<string>&team_ids[]=<string>&include[]=targets&sort_by=name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "targets"
+                    },
+                    {
+                      "description": "Used to specify the field you wish to sort the results on.",
+                      "key": "sort_by",
+                      "value": "name"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-7bbc687d-40fe-4cac-b36e-95599940ffc5"
+            },
+            {
+              "id": "80cb2b2d-9e04-4d69-a5c3-6a6172635a2a",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies?limit=<integer>&offset=<integer>&total=false&query=<string>&user_ids[]=<string>&team_ids[]=<string>&include[]=targets&sort_by=name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only escalation policies on which any of the users is a target.",
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "targets"
+                    },
+                    {
+                      "description": "Used to specify the field you wish to sort the results on.",
+                      "key": "sort_by",
+                      "value": "name"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-80cb2b2d-9e04-4d69-a5c3-6a6172635a2a"
+            }
+          ],
+          "createdAt": "2026-07-28T02:30:49.000Z",
+          "updatedAt": "2026-07-28T02:30:49.000Z",
+          "uid": "35240-ef746186-5633-48d7-a3a3-00e4c022e7ba"
+        },
+        {
+          "name": "PagerDuty Create an escalation policy",
+          "id": "7879909a-df6d-45fb-b718-e4c187029107",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                "key": "From",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/escalation_policies",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "escalation_policies"
+              ]
+            },
+            "description": "Creates a new escalation policy. At least one escalation rule must be provided.\n\nEscalation policies define which user should be alerted at which time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#escalation-policies)\n\nScoped OAuth requires: `escalation_policies.write`\n"
+          },
+          "response": [
+            {
+              "id": "b2337a1f-8ca9-497a-806c-6247c882c274",
+              "name": "The escalation policy that was created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-b2337a1f-8ca9-497a-806c-6247c882c274"
+            },
+            {
+              "id": "ad166448-b821-4cb7-b3f9-76eafab50581",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-ad166448-b821-4cb7-b3f9-76eafab50581"
+            },
+            {
+              "id": "58643b2b-f7a8-4df9-901b-9bc3c823d8f1",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-58643b2b-f7a8-4df9-901b-9bc3c823d8f1"
+            },
+            {
+              "id": "69e5c1d0-a021-4558-8e36-ca148c7951fb",
+              "name": "Account does not have the abilities to perform the action. Please review the response for the required abilities.\nYou can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ]
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-69e5c1d0-a021-4558-8e36-ca148c7951fb"
+            },
+            {
+              "id": "4b7338da-41f4-4a7e-a744-1da534ecd2c0",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-4b7338da-41f4-4a7e-a744-1da534ecd2c0"
+            },
+            {
+              "id": "a6fc9e7a-aa72-411a-aed6-ddfa9f02bb65",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"escalation_policy\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"escalation_rules\": [\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      },\n      {\n        \"escalation_delay_in_minutes\": \"<integer>\",\n        \"targets\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\",\n            \"summary\": \"<string>\",\n            \"self\": \"<string>\",\n            \"html_url\": \"<string>\"\n          }\n        ],\n        \"id\": \"<string>\",\n        \"escalation_rule_assignment_strategy\": \"round_robin\"\n      }\n    ],\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"description\": \"<string>\",\n    \"num_loops\": 0,\n    \"on_call_handoff_notifications\": \"if_has_services\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/escalation_policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "escalation_policies"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:49.000Z",
+              "updatedAt": "2026-07-28T02:30:49.000Z",
+              "uid": "35240-a6fc9e7a-aa72-411a-aed6-ddfa9f02bb65"
+            }
+          ],
+          "createdAt": "2026-07-28T02:30:49.000Z",
+          "updatedAt": "2026-07-28T02:30:49.000Z",
+          "uid": "35240-7879909a-df6d-45fb-b718-e4c187029107"
+        }
+      ],
+      "id": "ace86428-0b7d-487f-8505-9cf3c65df4c0",
+      "createdAt": "2026-07-28T02:30:49.000Z",
+      "updatedAt": "2026-07-28T02:30:49.000Z",
+      "uid": "35240-ace86428-0b7d-487f-8505-9cf3c65df4c0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

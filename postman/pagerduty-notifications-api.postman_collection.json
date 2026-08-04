@@ -1,0 +1,542 @@
+{
+  "info": {
+    "_postman_id": "94ac7ba2-3bec-409d-bc22-84cc325ee109",
+    "name": "PagerDuty Abilities Notifications API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:05.000Z",
+    "updatedAt": "2026-07-28T02:31:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-94ac7ba2-3bec-409d-bc22-84cc325ee109"
+  },
+  "item": [
+    {
+      "name": "notifications",
+      "item": [
+        {
+          "name": "PagerDuty List notifications",
+          "id": "32fb0c81-f0e5-4f6c-a23b-d5713639ff21",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifications?limit=<integer>&offset=<integer>&total=false&time_zone=<string>&since=<dateTime>&until=<dateTime>&filter=phone_notification&include[]=users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications"
+              ],
+              "query": [
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                  "key": "time_zone",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The start of the date range over which you want to search. The time element is optional.",
+                  "key": "since",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months.",
+                  "key": "until",
+                  "value": "<dateTime>"
+                },
+                {
+                  "description": "Return notification of this type only.",
+                  "key": "filter",
+                  "value": "phone_notification"
+                },
+                {
+                  "description": "Array of additional details to include.",
+                  "key": "include[]",
+                  "value": "users"
+                }
+              ]
+            },
+            "description": "List notifications for a given time range, optionally filtered by type (sms_notification, email_notification, phone_notification, or push_notification).\n\nA Notification is created when an Incident is triggered or escalated.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#notifications)\n\nScoped OAuth requires: `users:notifications.read`\n"
+          },
+          "response": [
+            {
+              "id": "df15c275-57e9-4bca-84aa-9c2a793b0f2b",
+              "name": "A paginated array of notifications.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?limit=<integer>&offset=<integer>&total=false&time_zone=<string>&since=<dateTime>&until=<dateTime>&filter=phone_notification&include[]=users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start of the date range over which you want to search. The time element is optional.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return notification of this type only.",
+                      "key": "filter",
+                      "value": "phone_notification"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "users"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"notifications\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"phone_notification\",\n      \"started_at\": \"<dateTime>\",\n      \"address\": \"<string>\",\n      \"user\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"conferenceAddress\": \"<string>\",\n      \"status\": \"<string>\",\n      \"\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"email_notification\",\n      \"started_at\": \"<dateTime>\",\n      \"address\": \"<string>\",\n      \"user\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"conferenceAddress\": \"<string>\",\n      \"status\": \"<string>\",\n      \"\": \"<string>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-df15c275-57e9-4bca-84aa-9c2a793b0f2b"
+            },
+            {
+              "id": "a47c96e6-fc12-4773-b308-6d2b75714f0d",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?limit=<integer>&offset=<integer>&total=false&time_zone=<string>&since=<dateTime>&until=<dateTime>&filter=phone_notification&include[]=users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start of the date range over which you want to search. The time element is optional.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return notification of this type only.",
+                      "key": "filter",
+                      "value": "phone_notification"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "users"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-a47c96e6-fc12-4773-b308-6d2b75714f0d"
+            },
+            {
+              "id": "6dac4c6a-43b7-4e93-a072-a17cc0c3e604",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?limit=<integer>&offset=<integer>&total=false&time_zone=<string>&since=<dateTime>&until=<dateTime>&filter=phone_notification&include[]=users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start of the date range over which you want to search. The time element is optional.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return notification of this type only.",
+                      "key": "filter",
+                      "value": "phone_notification"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "users"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-6dac4c6a-43b7-4e93-a072-a17cc0c3e604"
+            },
+            {
+              "id": "8723594b-338e-448f-8d55-736a4e20d148",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?limit=<integer>&offset=<integer>&total=false&time_zone=<string>&since=<dateTime>&until=<dateTime>&filter=phone_notification&include[]=users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start of the date range over which you want to search. The time element is optional.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return notification of this type only.",
+                      "key": "filter",
+                      "value": "phone_notification"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "users"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-8723594b-338e-448f-8d55-736a4e20d148"
+            },
+            {
+              "id": "68240cc8-e54b-47ea-bd97-bb17312871eb",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifications?limit=<integer>&offset=<integer>&total=false&time_zone=<string>&since=<dateTime>&until=<dateTime>&filter=phone_notification&include[]=users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Time zone in which results will be rendered. This will default to the account time zone.",
+                      "key": "time_zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start of the date range over which you want to search. The time element is optional.",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months.",
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Return notification of this type only.",
+                      "key": "filter",
+                      "value": "phone_notification"
+                    },
+                    {
+                      "description": "Array of additional details to include.",
+                      "key": "include[]",
+                      "value": "users"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-68240cc8-e54b-47ea-bd97-bb17312871eb"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:05.000Z",
+          "updatedAt": "2026-07-28T02:31:05.000Z",
+          "uid": "35240-32fb0c81-f0e5-4f6c-a23b-d5713639ff21"
+        }
+      ],
+      "id": "ded77d18-5639-4d89-ab37-01e371a99dc6",
+      "createdAt": "2026-07-28T02:31:05.000Z",
+      "updatedAt": "2026-07-28T02:31:05.000Z",
+      "uid": "35240-ded77d18-5639-4d89-ab37-01e371a99dc6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

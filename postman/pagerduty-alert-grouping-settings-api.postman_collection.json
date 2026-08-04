@@ -1,0 +1,1189 @@
+{
+  "info": {
+    "_postman_id": "5aada63c-f3f2-42a3-a83d-0638da5c960b",
+    "name": "PagerDuty Abilities Alert Grouping Settings API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:30:36.000Z",
+    "updatedAt": "2026-07-28T02:30:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5aada63c-f3f2-42a3-a83d-0638da5c960b"
+  },
+  "item": [
+    {
+      "name": "alert_grouping_settings",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "PagerDuty Get an Alert Grouping Setting",
+              "id": "a0656c77-3775-4f74-84e6-e402078a810a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3f7dd687-7dc3-4a66-884b-7f5e4e31b7db",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Get an existing Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.read`\n"
+              },
+              "response": [
+                {
+                  "id": "8e3711d8-c10e-40e2-a584-fac08a1c2dd5",
+                  "name": "The Alert Grouping Setting.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-8e3711d8-c10e-40e2-a584-fac08a1c2dd5"
+                },
+                {
+                  "id": "a6df0e79-2e57-47cf-b957-a03e138cc39c",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-a6df0e79-2e57-47cf-b957-a03e138cc39c"
+                },
+                {
+                  "id": "ae550dfe-7d3d-4c6f-a6f1-0172e97595a2",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-ae550dfe-7d3d-4c6f-a6f1-0172e97595a2"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-a0656c77-3775-4f74-84e6-e402078a810a"
+            },
+            {
+              "name": "PagerDuty Delete an Alert Grouping Setting",
+              "id": "5e19d28e-6756-4b25-837b-8fc94fd93b28",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "515ce0b1-1155-459a-9039-0871f5bc6931",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Delete an existing Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.write`\n"
+              },
+              "response": [
+                {
+                  "id": "46523ad8-8a72-41c1-81e1-9ffb2442c25c",
+                  "name": "The Alert Grouping Setting was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-46523ad8-8a72-41c1-81e1-9ffb2442c25c"
+                },
+                {
+                  "id": "4f12d1e3-fb91-4a30-858d-1579d4cf015e",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-4f12d1e3-fb91-4a30-858d-1579d4cf015e"
+                },
+                {
+                  "id": "495ef05d-600b-4284-b58c-6f833752597f",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-495ef05d-600b-4284-b58c-6f833752597f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-5e19d28e-6756-4b25-837b-8fc94fd93b28"
+            },
+            {
+              "name": "PagerDuty Update an Alert Grouping Setting",
+              "id": "b4f93959-569b-41a5-9880-4c02bc0e48df",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ca0a03b2-9b6b-483c-88cd-032a4fdd170f",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Update an Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nif `services` are not provided in the request, then the existing services will not be removed from the setting.\n\nScoped OAuth requires: `services.write`\n"
+              },
+              "response": [
+                {
+                  "id": "92e8caba-5324-477c-a9c3-f8770bd29107",
+                  "name": "The updated Alert Grouping Setting.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-92e8caba-5324-477c-a9c3-f8770bd29107"
+                },
+                {
+                  "id": "61d06304-8f64-4a87-8a5c-7ef3fe3e9b6c",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-61d06304-8f64-4a87-8a5c-7ef3fe3e9b6c"
+                },
+                {
+                  "id": "2635ea80-8a02-41d4-9aba-5885857e0dec",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-2635ea80-8a02-41d4-9aba-5885857e0dec"
+                },
+                {
+                  "id": "49382a73-045d-4539-a2fe-d327e3c3bb20",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/alert_grouping_settings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alert_grouping_settings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:37.000Z",
+                  "updatedAt": "2026-07-28T02:30:37.000Z",
+                  "uid": "35240-49382a73-045d-4539-a2fe-d327e3c3bb20"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-b4f93959-569b-41a5-9880-4c02bc0e48df"
+            }
+          ],
+          "id": "63f380ca-0fc7-4f68-87f8-26b1d14619a3",
+          "createdAt": "2026-07-28T02:30:37.000Z",
+          "updatedAt": "2026-07-28T02:30:37.000Z",
+          "uid": "35240-63f380ca-0fc7-4f68-87f8-26b1d14619a3"
+        },
+        {
+          "name": "PagerDuty List alert grouping settings",
+          "id": "289bd648-b878-4604-9eb9-a361dd186fb5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/alert_grouping_settings?after=<string>&before=<string>&total=false&limit=<integer>&service_ids[]=<string>&service_ids[]=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alert_grouping_settings"
+              ],
+              "query": [
+                {
+                  "description": "Cursor to retrieve next page; only present if next page exists.",
+                  "key": "after",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor to retrieve previous page; only present if not on first page.",
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "An array of service IDs. Only results related to these services will be returned.",
+                  "key": "service_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An array of service IDs. Only results related to these services will be returned.",
+                  "key": "service_ids[]",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "List all of your alert grouping settings including both single service settings and global content based settings.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.read`\n"
+          },
+          "response": [
+            {
+              "id": "a2e8f415-dce1-4b52-9330-674d89e91aaf",
+              "name": "An array of alert grouping settings.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings?after=<string>&before=<string>&total=false&limit=<integer>&service_ids[]=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Cursor to retrieve next page; only present if next page exists.",
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor to retrieve previous page; only present if not on first page.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"alert_grouping_settings\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"content_based_intelligent\",\n      \"config\": {\n        \"aggregate\": \"all, any\",\n        \"fields\": \"<array>\",\n        \"time_window\": \"<integer>\",\n        \"recommended_time_window\": \"<integer>\"\n      },\n      \"services\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"content_based_intelligent\",\n      \"config\": {\n        \"aggregate\": \"all, any\",\n        \"fields\": \"<array>\",\n        \"time_window\": \"<integer>\",\n        \"recommended_time_window\": \"<integer>\"\n      },\n      \"services\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-a2e8f415-dce1-4b52-9330-674d89e91aaf"
+            },
+            {
+              "id": "c3c51221-3ebe-4f86-928b-18bee06e0e7a",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings?after=<string>&before=<string>&total=false&limit=<integer>&service_ids[]=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Cursor to retrieve next page; only present if next page exists.",
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor to retrieve previous page; only present if not on first page.",
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-c3c51221-3ebe-4f86-928b-18bee06e0e7a"
+            }
+          ],
+          "createdAt": "2026-07-28T02:30:37.000Z",
+          "updatedAt": "2026-07-28T02:30:37.000Z",
+          "uid": "35240-289bd648-b878-4604-9eb9-a361dd186fb5"
+        },
+        {
+          "name": "PagerDuty Create an Alert Grouping Setting",
+          "id": "a6fe13ca-4b91-4b09-8678-5afdf20863a2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alert_grouping_settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alert_grouping_settings"
+              ]
+            },
+            "description": "Create a new Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nThis endpoint will be used to create an instance of AlertGroupingSettings for either one service or many services that are in the alert group setting.\n\nScoped OAuth requires: `services.write`\n"
+          },
+          "response": [
+            {
+              "id": "5d80520d-9a08-4893-acd2-ad7f6570b8c7",
+              "name": "The new Alert Grouping Setting.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-5d80520d-9a08-4893-acd2-ad7f6570b8c7"
+            },
+            {
+              "id": "7230d88c-db86-4eb4-bdfe-585a84bd71d6",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-7230d88c-db86-4eb4-bdfe-585a84bd71d6"
+            },
+            {
+              "id": "4a1eb39e-6a31-47e5-9971-590ca42c0c08",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-4a1eb39e-6a31-47e5-9971-590ca42c0c08"
+            },
+            {
+              "id": "9fa32cf2-ce3c-4ffb-811c-291c7dfb65c6",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"content_based_intelligent\",\n    \"config\": {\n      \"aggregate\": \"all, any\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\",\n      \"recommended_time_window\": \"<integer>\"\n    },\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/alert_grouping_settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alert_grouping_settings"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:37.000Z",
+              "updatedAt": "2026-07-28T02:30:37.000Z",
+              "uid": "35240-9fa32cf2-ce3c-4ffb-811c-291c7dfb65c6"
+            }
+          ],
+          "createdAt": "2026-07-28T02:30:37.000Z",
+          "updatedAt": "2026-07-28T02:30:37.000Z",
+          "uid": "35240-a6fe13ca-4b91-4b09-8678-5afdf20863a2"
+        }
+      ],
+      "id": "58ed3da7-f6c3-44e7-9815-a06e687eac36",
+      "createdAt": "2026-07-28T02:30:37.000Z",
+      "updatedAt": "2026-07-28T02:30:37.000Z",
+      "uid": "35240-58ed3da7-f6c3-44e7-9815-a06e687eac36"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

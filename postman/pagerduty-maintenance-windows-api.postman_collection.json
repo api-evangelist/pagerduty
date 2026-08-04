@@ -1,0 +1,1974 @@
+{
+  "info": {
+    "_postman_id": "ec53544e-8658-4480-9c57-784192194e33",
+    "name": "PagerDuty Abilities Maintenance Windows API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:04.000Z",
+    "updatedAt": "2026-07-28T02:31:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ec53544e-8658-4480-9c57-784192194e33"
+  },
+  "item": [
+    {
+      "name": "maintenance_windows",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "PagerDuty Get a maintenance window",
+              "id": "1322138b-d1ab-46bc-a294-a1c34c16b8c8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows/:id?include[]=services",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "12537038-180e-441e-9447-42f3998db616",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Get an existing maintenance window.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.read`\n"
+              },
+              "response": [
+                {
+                  "id": "665f2441-ee69-41e1-9b61-53bd3f4ed0ed",
+                  "name": "The maintenance window that was updated.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id?include[]=services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "services"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-665f2441-ee69-41e1-9b61-53bd3f4ed0ed"
+                },
+                {
+                  "id": "c81797e6-73ba-457a-b861-c83f6c537ca1",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id?include[]=services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "services"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-c81797e6-73ba-457a-b861-c83f6c537ca1"
+                },
+                {
+                  "id": "81ed2ce8-92fc-4c2c-b5fa-056c0ca2d06a",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id?include[]=services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "services"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-81ed2ce8-92fc-4c2c-b5fa-056c0ca2d06a"
+                },
+                {
+                  "id": "2aa88f59-3414-4ed3-9e0c-bb9db54cc6fa",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id?include[]=services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "services"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-2aa88f59-3414-4ed3-9e0c-bb9db54cc6fa"
+                },
+                {
+                  "id": "f3d80d83-2d7d-4086-81a6-d12cd6129c97",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id?include[]=services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Array of additional Models to include in response.",
+                          "key": "include[]",
+                          "value": "services"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-f3d80d83-2d7d-4086-81a6-d12cd6129c97"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:04.000Z",
+              "updatedAt": "2026-07-28T02:31:04.000Z",
+              "uid": "35240-1322138b-d1ab-46bc-a294-a1c34c16b8c8"
+            },
+            {
+              "name": "PagerDuty Delete or end a maintenance window",
+              "id": "7d0e284f-0b6e-4757-848b-4e756a2299ab",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "25fbfdee-f476-4082-a41e-42b4424d0614",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Delete an existing maintenance window if it's in the future, or end it if it's currently on-going. If the maintenance window has already ended it cannot be deleted.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.write`\n"
+              },
+              "response": [
+                {
+                  "id": "04a50769-a6c8-41a1-94f2-d81f7d895051",
+                  "name": "The maintenance window was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-04a50769-a6c8-41a1-94f2-d81f7d895051"
+                },
+                {
+                  "id": "7727c1ac-d5b7-469f-a720-bc503aa9d910",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-7727c1ac-d5b7-469f-a720-bc503aa9d910"
+                },
+                {
+                  "id": "f09ea5b4-e0e2-4a3d-8b1c-77909e7bda05",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-f09ea5b4-e0e2-4a3d-8b1c-77909e7bda05"
+                },
+                {
+                  "id": "058ba9af-a6c9-41af-be97-2099dda634a0",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-058ba9af-a6c9-41af-be97-2099dda634a0"
+                },
+                {
+                  "id": "8dac939d-d8e8-4319-8d61-666c6788ec6b",
+                  "name": "The maintenance window can't be deleted because it has already ended.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Method Not Allowed",
+                  "code": 405,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-8dac939d-d8e8-4319-8d61-666c6788ec6b"
+                },
+                {
+                  "id": "b6242b4d-4f99-428f-aaab-abbfa734f518",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-b6242b4d-4f99-428f-aaab-abbfa734f518"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:04.000Z",
+              "updatedAt": "2026-07-28T02:31:04.000Z",
+              "uid": "35240-7d0e284f-0b6e-4757-848b-4e756a2299ab"
+            },
+            {
+              "name": "PagerDuty Update a maintenance window",
+              "id": "fe882861-1f9b-4402-b8b7-21d7a47b2c5d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ffe832e3-eaea-44db-af96-a61e51db59da",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Update an existing maintenance window.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.write`\n"
+              },
+              "response": [
+                {
+                  "id": "c98d4627-0df2-4ee3-bde4-b0241bf97b11",
+                  "name": "The maintenance window that was updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-c98d4627-0df2-4ee3-bde4-b0241bf97b11"
+                },
+                {
+                  "id": "4be0b6c3-34f3-4b96-8b48-8615122f6d6b",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-4be0b6c3-34f3-4b96-8b48-8615122f6d6b"
+                },
+                {
+                  "id": "3ef19259-139e-425e-9f45-0bd2d4ad6356",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-3ef19259-139e-425e-9f45-0bd2d4ad6356"
+                },
+                {
+                  "id": "fd055ec8-d1e2-4131-b596-67112e8d10eb",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-fd055ec8-d1e2-4131-b596-67112e8d10eb"
+                },
+                {
+                  "id": "45539ed7-5f43-4e7e-84c0-e1ca83afd762",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-45539ed7-5f43-4e7e-84c0-e1ca83afd762"
+                },
+                {
+                  "id": "33313417-8016-48a9-8767-2ea53f73ac04",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/maintenance_windows/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "maintenance_windows",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:05.000Z",
+                  "updatedAt": "2026-07-28T02:31:05.000Z",
+                  "uid": "35240-33313417-8016-48a9-8767-2ea53f73ac04"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:04.000Z",
+              "updatedAt": "2026-07-28T02:31:04.000Z",
+              "uid": "35240-fe882861-1f9b-4402-b8b7-21d7a47b2c5d"
+            }
+          ],
+          "id": "0ef4dd64-4e1a-4452-9adf-7e52435ed0ac",
+          "createdAt": "2026-07-28T02:31:04.000Z",
+          "updatedAt": "2026-07-28T02:31:04.000Z",
+          "uid": "35240-0ef4dd64-4e1a-4452-9adf-7e52435ed0ac"
+        },
+        {
+          "name": "PagerDuty List maintenance windows",
+          "id": "6420b08b-5dea-4433-b4b5-5c02c7303644",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/maintenance_windows?query=<string>&limit=<integer>&offset=<integer>&total=false&team_ids[]=<string>&team_ids[]=<string>&service_ids[]=<string>&service_ids[]=<string>&include[]=services&filter=ongoing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "maintenance_windows"
+              ],
+              "query": [
+                {
+                  "description": "Filters the result, showing only the records whose name matches the query.",
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                  "key": "team_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                  "key": "team_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An array of service IDs. Only results related to these services will be returned.",
+                  "key": "service_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An array of service IDs. Only results related to these services will be returned.",
+                  "key": "service_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Array of additional Models to include in response.",
+                  "key": "include[]",
+                  "value": "services"
+                },
+                {
+                  "description": "Only return maintenance windows in a given state.",
+                  "key": "filter",
+                  "value": "ongoing"
+                }
+              ]
+            },
+            "description": "List existing maintenance windows, optionally filtered by service and/or team, or whether they are from the past, present or future.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.read`\n"
+          },
+          "response": [
+            {
+              "id": "fe792a68-14d9-4e7d-abde-d721479f4c91",
+              "name": "A paginated array of maintenance windows.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows?query=<string>&limit=<integer>&offset=<integer>&total=false&team_ids[]=<string>&service_ids[]=<string>&include[]=services&filter=ongoing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Only return maintenance windows in a given state.",
+                      "key": "filter",
+                      "value": "ongoing"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"maintenance_windows\": [\n    {\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"services\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"sequence_number\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"created_by\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"teams\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"start_time\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"services\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"sequence_number\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"created_by\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"teams\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-fe792a68-14d9-4e7d-abde-d721479f4c91"
+            },
+            {
+              "id": "77bdb6d9-0149-4501-88cb-887deb85d571",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows?query=<string>&limit=<integer>&offset=<integer>&total=false&team_ids[]=<string>&service_ids[]=<string>&include[]=services&filter=ongoing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Only return maintenance windows in a given state.",
+                      "key": "filter",
+                      "value": "ongoing"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-77bdb6d9-0149-4501-88cb-887deb85d571"
+            },
+            {
+              "id": "d82475ac-57a5-468a-a1af-78e6cb851bdd",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows?query=<string>&limit=<integer>&offset=<integer>&total=false&team_ids[]=<string>&service_ids[]=<string>&include[]=services&filter=ongoing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Only return maintenance windows in a given state.",
+                      "key": "filter",
+                      "value": "ongoing"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-d82475ac-57a5-468a-a1af-78e6cb851bdd"
+            },
+            {
+              "id": "7045d27a-7204-421d-a33f-159bb0c164b3",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows?query=<string>&limit=<integer>&offset=<integer>&total=false&team_ids[]=<string>&service_ids[]=<string>&include[]=services&filter=ongoing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Only return maintenance windows in a given state.",
+                      "key": "filter",
+                      "value": "ongoing"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-7045d27a-7204-421d-a33f-159bb0c164b3"
+            },
+            {
+              "id": "ba6c9a94-6dbb-42d4-a123-ab428eff8454",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows?query=<string>&limit=<integer>&offset=<integer>&total=false&team_ids[]=<string>&service_ids[]=<string>&include[]=services&filter=ongoing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.",
+                      "key": "team_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An array of service IDs. Only results related to these services will be returned.",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Only return maintenance windows in a given state.",
+                      "key": "filter",
+                      "value": "ongoing"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-ba6c9a94-6dbb-42d4-a123-ab428eff8454"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:04.000Z",
+          "updatedAt": "2026-07-28T02:31:04.000Z",
+          "uid": "35240-6420b08b-5dea-4433-b4b5-5c02c7303644"
+        },
+        {
+          "name": "PagerDuty Create a maintenance window",
+          "id": "7a76ba4e-f36e-4657-afe0-df804f951955",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The email address of a valid user associated with the account making the request.",
+                "key": "From",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/maintenance_windows",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "maintenance_windows"
+              ]
+            },
+            "description": "Create a new maintenance window for the specified services. No new incidents will be created for a service that is in maintenance.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.write`\n"
+          },
+          "response": [
+            {
+              "id": "045f3867-92ed-4d47-87e1-10228902f293",
+              "name": "The maintenance window that was created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-045f3867-92ed-4d47-87e1-10228902f293"
+            },
+            {
+              "id": "456d20ed-0c05-4196-9ab0-e3ce015d2eb4",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-456d20ed-0c05-4196-9ab0-e3ce015d2eb4"
+            },
+            {
+              "id": "687dbd56-da8d-422c-8bf5-43fe786cf9ed",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-687dbd56-da8d-422c-8bf5-43fe786cf9ed"
+            },
+            {
+              "id": "8184b99f-5e31-489d-b6ed-5885606746f9",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-8184b99f-5e31-489d-b6ed-5885606746f9"
+            },
+            {
+              "id": "fe39afbd-013e-4378-8b1f-4c12bed04758",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenance_window\": {\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\",\n    \"services\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"sequence_number\": \"<integer>\",\n    \"description\": \"<string>\",\n    \"created_by\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"teams\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/maintenance_windows",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "maintenance_windows"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:05.000Z",
+              "updatedAt": "2026-07-28T02:31:05.000Z",
+              "uid": "35240-fe39afbd-013e-4378-8b1f-4c12bed04758"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:04.000Z",
+          "updatedAt": "2026-07-28T02:31:04.000Z",
+          "uid": "35240-7a76ba4e-f36e-4657-afe0-df804f951955"
+        }
+      ],
+      "id": "f6c5f5a8-acd4-4ed9-b758-c63fe7f35659",
+      "createdAt": "2026-07-28T02:31:04.000Z",
+      "updatedAt": "2026-07-28T02:31:04.000Z",
+      "uid": "35240-f6c5f5a8-acd4-4ed9-b758-c63fe7f35659"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

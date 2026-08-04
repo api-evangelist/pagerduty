@@ -1,0 +1,1235 @@
+{
+  "info": {
+    "_postman_id": "7f752ce1-fd06-4ee1-952a-337d7f7782dd",
+    "name": "PagerDuty Abilities Standards API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:32.000Z",
+    "updatedAt": "2026-07-28T02:31:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7f752ce1-fd06-4ee1-952a-337d7f7782dd"
+  },
+  "item": [
+    {
+      "name": "standards",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "PagerDuty Update a standard",
+              "id": "a3fc6c5c-d6ac-4c0e-b478-e51afd288c59",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": \"<boolean>\",\n  \"values\": {\n    \"regex\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/standards/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "standards",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dc8fc423-dd74-423e-893c-20931855f215",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Id of the standard"
+                    }
+                  ]
+                },
+                "description": "Updates a standard\n\nScoped OAuth requires: `standards.write`\n"
+              },
+              "response": [
+                {
+                  "id": "ab929c75-29cd-49c6-bca9-0864c52b2c96",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"values\": {\n    \"regex\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/standards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "standards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"active\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"resource_type\": \"technical_service\",\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-ab929c75-29cd-49c6-bca9-0864c52b2c96"
+                },
+                {
+                  "id": "0786cae9-2822-42eb-afb5-801dd66f7a4f",
+                  "name": "Unprocessable Entity. Some arguments failed validation checks.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"values\": {\n    \"regex\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/standards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "standards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-0786cae9-2822-42eb-afb5-801dd66f7a4f"
+                },
+                {
+                  "id": "bdf75293-62e2-43bf-9c5d-24cd34f18a82",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"values\": {\n    \"regex\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/standards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "standards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-bdf75293-62e2-43bf-9c5d-24cd34f18a82"
+                },
+                {
+                  "id": "18992098-4c59-4ff2-95c2-073b8a7199ec",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"values\": {\n    \"regex\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/standards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "standards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-18992098-4c59-4ff2-95c2-073b8a7199ec"
+                },
+                {
+                  "id": "66856c0f-3b5f-430b-b094-615a11e3ec2d",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"active\": \"<boolean>\",\n  \"values\": {\n    \"regex\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"inclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"technical_service_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/standards/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "standards",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-66856c0f-3b5f-430b-b094-615a11e3ec2d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:33.000Z",
+              "updatedAt": "2026-07-28T02:31:33.000Z",
+              "uid": "35240-a3fc6c5c-d6ac-4c0e-b478-e51afd288c59"
+            }
+          ],
+          "id": "a1d17aa6-4724-449c-96c3-c4637afc6f7b",
+          "createdAt": "2026-07-28T02:31:33.000Z",
+          "updatedAt": "2026-07-28T02:31:33.000Z",
+          "uid": "35240-a1d17aa6-4724-449c-96c3-c4637afc6f7b"
+        },
+        {
+          "name": "scores",
+          "item": [
+            {
+              "name": "{resource_type}",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "PagerDuty List a resource's standards scores",
+                      "id": "ed71b108-aeb2-4cb9-9ea4-8b54a1fa5ca7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/standards/scores/:resource_type/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "standards",
+                            "scores",
+                            ":resource_type",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d1a748a1-6697-4067-b618-be883d2f886d",
+                              "key": "resource_type",
+                              "value": "technical_services",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "14a85485-0fd8-489d-8049-dceed75d6b3d",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Id of the resource to apply the standards."
+                            }
+                          ]
+                        },
+                        "description": "List standards applied to a specific resource\n\nScoped OAuth requires: `standards.read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "4e65f18f-719d-4aaa-a235-21fdaf80657d",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/standards/scores/:resource_type/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "standards",
+                                "scores",
+                                ":resource_type",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource_type"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"resource_id\": \"<string>\",\n  \"resource_type\": \"technical_service\",\n  \"score\": {\n    \"passing\": \"<integer>\",\n    \"total\": \"<integer>\"\n  },\n  \"standards\": [\n    {\n      \"active\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"pass\": \"<boolean>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"pass\": \"<boolean>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:31:33.000Z",
+                          "updatedAt": "2026-07-28T02:31:33.000Z",
+                          "uid": "35240-4e65f18f-719d-4aaa-a235-21fdaf80657d"
+                        },
+                        {
+                          "id": "15fe1d22-fdff-41f9-9969-8020e01c4b09",
+                          "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/standards/scores/:resource_type/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "standards",
+                                "scores",
+                                ":resource_type",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource_type"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:31:33.000Z",
+                          "updatedAt": "2026-07-28T02:31:33.000Z",
+                          "uid": "35240-15fe1d22-fdff-41f9-9969-8020e01c4b09"
+                        },
+                        {
+                          "id": "3b3d4dc1-4664-44b8-94b4-dcf0fb3d0b70",
+                          "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/standards/scores/:resource_type/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "standards",
+                                "scores",
+                                ":resource_type",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource_type"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:31:33.000Z",
+                          "updatedAt": "2026-07-28T02:31:33.000Z",
+                          "uid": "35240-3b3d4dc1-4664-44b8-94b4-dcf0fb3d0b70"
+                        },
+                        {
+                          "id": "50caa717-573f-4e1c-a0bc-bad663780861",
+                          "name": "Too many requests have been made, the rate limit has been reached.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/standards/scores/:resource_type/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "standards",
+                                "scores",
+                                ":resource_type",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource_type"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:31:33.000Z",
+                          "updatedAt": "2026-07-28T02:31:33.000Z",
+                          "uid": "35240-50caa717-573f-4e1c-a0bc-bad663780861"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:31:33.000Z",
+                      "updatedAt": "2026-07-28T02:31:33.000Z",
+                      "uid": "35240-ed71b108-aeb2-4cb9-9ea4-8b54a1fa5ca7"
+                    }
+                  ],
+                  "id": "e1c081f7-cb40-414d-b730-44bccab3d776",
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-e1c081f7-cb40-414d-b730-44bccab3d776"
+                },
+                {
+                  "name": "PagerDuty List resources' standards scores",
+                  "id": "d74ed5b5-dc53-4215-a241-4dadc50bc710",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/standards/scores/:resource_type?ids=<string>&ids=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "standards",
+                        "scores",
+                        ":resource_type"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Ids of resources to apply the standards. Maximum of 100 items",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Ids of resources to apply the standards. Maximum of 100 items",
+                          "key": "ids",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "dc7d5c40-90a3-4d10-973e-0c6f98ccf67d",
+                          "key": "resource_type",
+                          "value": "technical_services",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "List standards applied to a set of resources\n\nScoped OAuth requires: `standards.read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "2eedb7dd-ddf6-4c6b-9487-601d1804e9e1",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/standards/scores/:resource_type?ids=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "standards",
+                            "scores",
+                            ":resource_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Ids of resources to apply the standards. Maximum of 100 items",
+                              "key": "ids",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "resource_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"resources\": [\n    {\n      \"resource_id\": \"<string>\",\n      \"resource_type\": \"technical_service\",\n      \"score\": {\n        \"passing\": \"<integer>\",\n        \"total\": \"<integer>\"\n      },\n      \"standards\": [\n        {\n          \"active\": \"<boolean>\",\n          \"description\": \"<string>\",\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"pass\": \"<boolean>\"\n        },\n        {\n          \"active\": \"<boolean>\",\n          \"description\": \"<string>\",\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"pass\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"resource_id\": \"<string>\",\n      \"resource_type\": \"technical_service\",\n      \"score\": {\n        \"passing\": \"<integer>\",\n        \"total\": \"<integer>\"\n      },\n      \"standards\": [\n        {\n          \"active\": \"<boolean>\",\n          \"description\": \"<string>\",\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"pass\": \"<boolean>\"\n        },\n        {\n          \"active\": \"<boolean>\",\n          \"description\": \"<string>\",\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"pass\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:31:33.000Z",
+                      "updatedAt": "2026-07-28T02:31:33.000Z",
+                      "uid": "35240-2eedb7dd-ddf6-4c6b-9487-601d1804e9e1"
+                    },
+                    {
+                      "id": "6122a6dc-f60a-4710-93ea-63f72e53eeed",
+                      "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/standards/scores/:resource_type?ids=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "standards",
+                            "scores",
+                            ":resource_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Ids of resources to apply the standards. Maximum of 100 items",
+                              "key": "ids",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "resource_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:33.000Z",
+                      "updatedAt": "2026-07-28T02:31:33.000Z",
+                      "uid": "35240-6122a6dc-f60a-4710-93ea-63f72e53eeed"
+                    },
+                    {
+                      "id": "6290eb3a-19b8-496d-85b4-2ba998f17fba",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/standards/scores/:resource_type?ids=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "standards",
+                            "scores",
+                            ":resource_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Ids of resources to apply the standards. Maximum of 100 items",
+                              "key": "ids",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "resource_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:33.000Z",
+                      "updatedAt": "2026-07-28T02:31:33.000Z",
+                      "uid": "35240-6290eb3a-19b8-496d-85b4-2ba998f17fba"
+                    },
+                    {
+                      "id": "940117d4-0060-4654-b675-5d73554faa7b",
+                      "name": "Too many requests have been made, the rate limit has been reached.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/standards/scores/:resource_type?ids=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "standards",
+                            "scores",
+                            ":resource_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Ids of resources to apply the standards. Maximum of 100 items",
+                              "key": "ids",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "resource_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:33.000Z",
+                      "updatedAt": "2026-07-28T02:31:33.000Z",
+                      "uid": "35240-940117d4-0060-4654-b675-5d73554faa7b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:33.000Z",
+                  "updatedAt": "2026-07-28T02:31:33.000Z",
+                  "uid": "35240-d74ed5b5-dc53-4215-a241-4dadc50bc710"
+                }
+              ],
+              "id": "7cfda8fb-b1d5-4770-b858-5d909c94a41d",
+              "createdAt": "2026-07-28T02:31:33.000Z",
+              "updatedAt": "2026-07-28T02:31:33.000Z",
+              "uid": "35240-7cfda8fb-b1d5-4770-b858-5d909c94a41d"
+            }
+          ],
+          "id": "51b74bfe-9238-414b-9cf0-5d84b9858ce4",
+          "createdAt": "2026-07-28T02:31:33.000Z",
+          "updatedAt": "2026-07-28T02:31:33.000Z",
+          "uid": "35240-51b74bfe-9238-414b-9cf0-5d84b9858ce4"
+        },
+        {
+          "name": "PagerDuty List Standards",
+          "id": "17661764-ec5b-4a8d-8e68-59e0b8c05b9f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/standards?active=<boolean>&resource_type=technical_service",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "standards"
+              ],
+              "query": [
+                {
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "key": "resource_type",
+                  "value": "technical_service"
+                }
+              ]
+            },
+            "description": "Get all standards of an account.\n\nScoped OAuth requires: `standards.read`\n"
+          },
+          "response": [
+            {
+              "id": "f627a6f8-51a7-4cbb-b4f5-2742d567c709",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/standards?active=<boolean>&resource_type=technical_service",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "standards"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "technical_service"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"standards\": [\n    {\n      \"active\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"technical_service\",\n      \"exclusions\": [\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"inclusions\": [\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"resource_type\": \"technical_service\",\n      \"exclusions\": [\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        }\n      ],\n      \"inclusions\": [\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        },\n        {\n          \"type\": \"technical_service_reference\",\n          \"id\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:31:33.000Z",
+              "updatedAt": "2026-07-28T02:31:33.000Z",
+              "uid": "35240-f627a6f8-51a7-4cbb-b4f5-2742d567c709"
+            },
+            {
+              "id": "b7fbbd51-2a6e-40c7-8634-284e7b00edb7",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/standards?active=<boolean>&resource_type=technical_service",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "standards"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "technical_service"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:33.000Z",
+              "updatedAt": "2026-07-28T02:31:33.000Z",
+              "uid": "35240-b7fbbd51-2a6e-40c7-8634-284e7b00edb7"
+            },
+            {
+              "id": "098795bf-af24-46b7-97c9-0123510a082e",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/standards?active=<boolean>&resource_type=technical_service",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "standards"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "technical_service"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:33.000Z",
+              "updatedAt": "2026-07-28T02:31:33.000Z",
+              "uid": "35240-098795bf-af24-46b7-97c9-0123510a082e"
+            },
+            {
+              "id": "f9f9599b-a83e-4fa8-b8df-b8aca8205609",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/standards?active=<boolean>&resource_type=technical_service",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "standards"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "resource_type",
+                      "value": "technical_service"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:33.000Z",
+              "updatedAt": "2026-07-28T02:31:33.000Z",
+              "uid": "35240-f9f9599b-a83e-4fa8-b8df-b8aca8205609"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:33.000Z",
+          "updatedAt": "2026-07-28T02:31:33.000Z",
+          "uid": "35240-17661764-ec5b-4a8d-8e68-59e0b8c05b9f"
+        }
+      ],
+      "id": "601daf3d-f1fd-4ff2-a812-38cc71c4d711",
+      "createdAt": "2026-07-28T02:31:33.000Z",
+      "updatedAt": "2026-07-28T02:31:33.000Z",
+      "uid": "35240-601daf3d-f1fd-4ff2-a812-38cc71c4d711"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

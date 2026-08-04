@@ -1,0 +1,516 @@
+{
+  "info": {
+    "_postman_id": "d8dc4318-c2ae-4fe4-b74c-74c02ab12239",
+    "name": "PagerDuty Abilities Licenses API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:02.000Z",
+    "updatedAt": "2026-07-28T02:31:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d8dc4318-c2ae-4fe4-b74c-74c02ab12239"
+  },
+  "item": [
+    {
+      "name": "license_allocations",
+      "item": [
+        {
+          "name": "PagerDuty List License Allocations",
+          "id": "4545ee61-e00d-406a-b366-cf1f03e3ae8d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/license_allocations?limit=<integer>&offset=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "license_allocations"
+              ],
+              "query": [
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List the Licenses allocated to Users within your Account\n\nScoped OAuth requires: `licenses.read`\n"
+          },
+          "response": [
+            {
+              "id": "3a2b5953-aaf3-4fbe-abd9-0e903ada9466",
+              "name": "License allocations to Users within your Account",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/license_allocations?limit=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "license_allocations"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"license_allocations\": [\n    {\n      \"user\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"license\": {\n        \"id\": \"<string>\",\n        \"description\": \"<string>\",\n        \"name\": \"<string>\",\n        \"valid_roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"role_group\": \"Stakeholder\",\n        \"type\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\",\n        \"summary\": \"<string>\"\n      },\n      \"allocated_at\": \"<dateTime>\"\n    },\n    {\n      \"user\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"license\": {\n        \"id\": \"<string>\",\n        \"description\": \"<string>\",\n        \"name\": \"<string>\",\n        \"valid_roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"role_group\": \"FullUser\",\n        \"type\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\",\n        \"summary\": \"<string>\"\n      },\n      \"allocated_at\": \"<dateTime>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-3a2b5953-aaf3-4fbe-abd9-0e903ada9466"
+            },
+            {
+              "id": "ae389805-f707-4c98-a356-3343b9a602da",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/license_allocations?limit=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "license_allocations"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-ae389805-f707-4c98-a356-3343b9a602da"
+            },
+            {
+              "id": "288d5d44-5a9b-4af4-b115-0a6069d97932",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/license_allocations?limit=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "license_allocations"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-288d5d44-5a9b-4af4-b115-0a6069d97932"
+            },
+            {
+              "id": "49921251-ba89-4ae2-b772-9c04d9db45c0",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/license_allocations?limit=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "license_allocations"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-49921251-ba89-4ae2-b772-9c04d9db45c0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:02.000Z",
+          "updatedAt": "2026-07-28T02:31:02.000Z",
+          "uid": "35240-4545ee61-e00d-406a-b366-cf1f03e3ae8d"
+        }
+      ],
+      "id": "d07fbba3-344c-4ab8-8095-2c3bb00a7838",
+      "createdAt": "2026-07-28T02:31:02.000Z",
+      "updatedAt": "2026-07-28T02:31:02.000Z",
+      "uid": "35240-d07fbba3-344c-4ab8-8095-2c3bb00a7838"
+    },
+    {
+      "name": "licenses",
+      "item": [
+        {
+          "name": "PagerDuty List Licenses",
+          "id": "23035431-9809-4909-9b8a-487b99587e43",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/licenses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "licenses"
+              ]
+            },
+            "description": "List the Licenses associated with your Account\n\nScoped OAuth requires: `licenses.read`\n"
+          },
+          "response": [
+            {
+              "id": "5cf4b0d0-e123-4536-8940-41dbd5238462",
+              "name": "Licenses associated with your Account",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/licenses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "licenses"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"licenses\": [\n    {\n      \"id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"valid_roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"role_group\": \"FullUser\",\n      \"type\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"current_value\": \"<integer>\",\n      \"allocations_available\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"valid_roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"role_group\": \"Stakeholder\",\n      \"type\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"current_value\": \"<integer>\",\n      \"allocations_available\": \"<integer>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-5cf4b0d0-e123-4536-8940-41dbd5238462"
+            },
+            {
+              "id": "87622282-3b40-4013-9a5f-306f2f459b0e",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/licenses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "licenses"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-87622282-3b40-4013-9a5f-306f2f459b0e"
+            },
+            {
+              "id": "3368cc09-31cf-434d-ab71-2f08c2db459b",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/licenses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "licenses"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-3368cc09-31cf-434d-ab71-2f08c2db459b"
+            },
+            {
+              "id": "3a9ff447-57cb-42f9-88b9-72b56595b921",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/licenses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "licenses"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:02.000Z",
+              "updatedAt": "2026-07-28T02:31:02.000Z",
+              "uid": "35240-3a9ff447-57cb-42f9-88b9-72b56595b921"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:02.000Z",
+          "updatedAt": "2026-07-28T02:31:02.000Z",
+          "uid": "35240-23035431-9809-4909-9b8a-487b99587e43"
+        }
+      ],
+      "id": "0dec4966-cd54-4950-8366-9c636c0c8bf7",
+      "createdAt": "2026-07-28T02:31:02.000Z",
+      "updatedAt": "2026-07-28T02:31:02.000Z",
+      "uid": "35240-0dec4966-cd54-4950-8366-9c636c0c8bf7"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

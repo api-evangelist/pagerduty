@@ -1,0 +1,1938 @@
+{
+  "info": {
+    "_postman_id": "d282f23b-ae5b-4a46-b08d-7e2d1e051ca5",
+    "name": "PagerDuty Abilities Response Plays API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:31:25.000Z",
+    "updatedAt": "2026-07-28T02:31:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d282f23b-ae5b-4a46-b08d-7e2d1e051ca5"
+  },
+  "item": [
+    {
+      "name": "response_plays",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "PagerDuty Get a Response Play",
+              "id": "67f9b2a2-5366-4c73-ba27-f7d5e7f977e3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c9b36a6d-1062-4bcf-953c-a2dee41731a6",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Get details about an existing Response Play.\n\nResponse Plays allow you to create packages of Incident Actions that can be applied during an Incident's life cycle.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)\n\nWhen using a Global API token, the `From` header is required.\nScoped OAuth requires: `response_plays.read`\n"
+              },
+              "response": [
+                {
+                  "id": "c94430bd-4827-43dc-9959-0919692f576c",
+                  "name": "The Response Play requested.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-c94430bd-4827-43dc-9959-0919692f576c"
+                },
+                {
+                  "id": "60ad103c-0b95-4732-aeb4-c3d658a72441",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-60ad103c-0b95-4732-aeb4-c3d658a72441"
+                },
+                {
+                  "id": "02919399-b3f4-4d3d-b2a3-eca52cd0b3e6",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-02919399-b3f4-4d3d-b2a3-eca52cd0b3e6"
+                },
+                {
+                  "id": "8c972d28-4daa-4814-8cb4-b19e9a81fdc5",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-8c972d28-4daa-4814-8cb4-b19e9a81fdc5"
+                },
+                {
+                  "id": "b045ada0-505a-46ca-9bd4-7d41d9d53f6a",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-b045ada0-505a-46ca-9bd4-7d41d9d53f6a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-67f9b2a2-5366-4c73-ba27-f7d5e7f977e3"
+            },
+            {
+              "name": "PagerDuty Update a Response Play",
+              "id": "681a50f4-8736-4455-a488-eef2241b7587",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "49ec0af2-7654-45b8-ae2c-e17aef63f2c2",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Updates an existing Response Play.\n\nResponse Plays allow you to create packages of Incident Actions that can be applied during an Incident's life cycle.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)\n\nScoped OAuth requires: `response_plays.write`\n"
+              },
+              "response": [
+                {
+                  "id": "e8dad07c-7619-42fa-bc87-05084d64a0e0",
+                  "name": "The Response Play that was updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-e8dad07c-7619-42fa-bc87-05084d64a0e0"
+                },
+                {
+                  "id": "502a17c7-cdca-48ef-bf38-f188cf5b54e2",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-502a17c7-cdca-48ef-bf38-f188cf5b54e2"
+                },
+                {
+                  "id": "7676743f-0071-49dc-a746-ba33d851b4cf",
+                  "name": "Account does not have the abilities to perform the action. Please review the response for the required abilities.\nYou can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Payment Required",
+                  "code": 402,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-7676743f-0071-49dc-a746-ba33d851b4cf"
+                },
+                {
+                  "id": "8b35fab1-a8cc-4d47-8533-abc125933e22",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-8b35fab1-a8cc-4d47-8533-abc125933e22"
+                },
+                {
+                  "id": "5e47ba23-2aa0-4735-9325-cff9dbdd75a5",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-5e47ba23-2aa0-4735-9325-cff9dbdd75a5"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-681a50f4-8736-4455-a488-eef2241b7587"
+            },
+            {
+              "name": "PagerDuty Delete a Response Play",
+              "id": "e1613bd2-844a-4537-b5e9-785d83e60ed9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2f10b793-3e8e-4a1d-9cbf-28c349f7a477",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Delete an existing Response Play. Once the Response Play is deleted, the action cannot be undone.\n\nWARNING: When the Response Play is deleted, it is also removed from any Services that were using it.\n\nResponse Plays allow you to create packages of Incident Actions that can be applied to an Incident.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)\n\nScoped OAuth requires: `response_plays.write`\n"
+              },
+              "response": [
+                {
+                  "id": "e487a3ef-9663-4beb-bde7-a929d886c6d0",
+                  "name": "The Response Play was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-e487a3ef-9663-4beb-bde7-a929d886c6d0"
+                },
+                {
+                  "id": "792b3f97-1790-489a-8cbb-5a5992d8c2fd",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-792b3f97-1790-489a-8cbb-5a5992d8c2fd"
+                },
+                {
+                  "id": "e8b672f7-4490-4eb8-996a-3dd3ce9aceea",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-e8b672f7-4490-4eb8-996a-3dd3ce9aceea"
+                },
+                {
+                  "id": "ffd60a94-e7f8-4bae-817d-7edc34186341",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-ffd60a94-e7f8-4bae-817d-7edc34186341"
+                }
+              ],
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-e1613bd2-844a-4537-b5e9-785d83e60ed9"
+            }
+          ],
+          "id": "6b7b699f-99d1-4895-9980-0fc12884fb28",
+          "createdAt": "2026-07-28T02:31:25.000Z",
+          "updatedAt": "2026-07-28T02:31:25.000Z",
+          "uid": "35240-6b7b699f-99d1-4895-9980-0fc12884fb28"
+        },
+        {
+          "name": "{response_play_id}",
+          "item": [
+            {
+              "name": "run",
+              "item": [
+                {
+                  "name": "PagerDuty Run a response play",
+                  "id": "d393bf31-b057-4449-8c55-3e4deee63117",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The email address of a valid user associated with the account making the request.",
+                        "key": "From",
+                        "value": "<email>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"incident\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/response_plays/:response_play_id/run",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "response_plays",
+                        ":response_play_id",
+                        "run"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1408474a-b20f-4b99-a6d5-1aa6e87e8df5",
+                          "key": "response_play_id",
+                          "value": "<string>",
+                          "description": "(Required) The response play ID of the response play associated with the request."
+                        }
+                      ]
+                    },
+                    "description": "Run a specified response play on a given incident.\n\nResponse Plays are a package of Incident Actions that can be applied during an Incident's life cycle.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)\n\nScoped OAuth requires: `response_plays.write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "8e4e3892-eb15-46c8-9fde-c692622c050d",
+                      "name": "Informs the user if the response play has been run successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The email address of a valid user associated with the account making the request.",
+                            "key": "From",
+                            "value": "<email>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"incident\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/response_plays/:response_play_id/run",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "response_plays",
+                            ":response_play_id",
+                            "run"
+                          ],
+                          "variable": [
+                            {
+                              "key": "response_play_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:31:25.000Z",
+                      "updatedAt": "2026-07-28T02:31:25.000Z",
+                      "uid": "35240-8e4e3892-eb15-46c8-9fde-c692622c050d"
+                    },
+                    {
+                      "id": "7a5bb80a-3979-4b90-8161-fa132ee499bf",
+                      "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The email address of a valid user associated with the account making the request.",
+                            "key": "From",
+                            "value": "<email>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"incident\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/response_plays/:response_play_id/run",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "response_plays",
+                            ":response_play_id",
+                            "run"
+                          ],
+                          "variable": [
+                            {
+                              "key": "response_play_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:25.000Z",
+                      "updatedAt": "2026-07-28T02:31:25.000Z",
+                      "uid": "35240-7a5bb80a-3979-4b90-8161-fa132ee499bf"
+                    },
+                    {
+                      "id": "98c85911-44e0-4e32-adea-4cf4059b325c",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The email address of a valid user associated with the account making the request.",
+                            "key": "From",
+                            "value": "<email>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"incident\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/response_plays/:response_play_id/run",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "response_plays",
+                            ":response_play_id",
+                            "run"
+                          ],
+                          "variable": [
+                            {
+                              "key": "response_play_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:25.000Z",
+                      "updatedAt": "2026-07-28T02:31:25.000Z",
+                      "uid": "35240-98c85911-44e0-4e32-adea-4cf4059b325c"
+                    },
+                    {
+                      "id": "5e2c8d10-f05a-4f75-850d-60a28fec464f",
+                      "name": "Too many requests have been made, the rate limit has been reached.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The email address of a valid user associated with the account making the request.",
+                            "key": "From",
+                            "value": "<email>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"incident\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/response_plays/:response_play_id/run",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "response_plays",
+                            ":response_play_id",
+                            "run"
+                          ],
+                          "variable": [
+                            {
+                              "key": "response_play_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:31:25.000Z",
+                      "updatedAt": "2026-07-28T02:31:25.000Z",
+                      "uid": "35240-5e2c8d10-f05a-4f75-850d-60a28fec464f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:31:25.000Z",
+                  "updatedAt": "2026-07-28T02:31:25.000Z",
+                  "uid": "35240-d393bf31-b057-4449-8c55-3e4deee63117"
+                }
+              ],
+              "id": "d466ecf5-2a90-4f40-b27c-ce127cef795d",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-d466ecf5-2a90-4f40-b27c-ce127cef795d"
+            }
+          ],
+          "id": "878414e4-14d4-4d56-85f0-7e258db2d4a7",
+          "createdAt": "2026-07-28T02:31:25.000Z",
+          "updatedAt": "2026-07-28T02:31:25.000Z",
+          "uid": "35240-878414e4-14d4-4d56-85f0-7e258db2d4a7"
+        },
+        {
+          "name": "PagerDuty List Response Plays",
+          "id": "7a077750-e550-44e4-ae7e-9d157d7389ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                "key": "From",
+                "value": "<email>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/response_plays?query=<string>&filter_for_manual_run=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "response_plays"
+              ],
+              "query": [
+                {
+                  "description": "Filters the result, showing only the records whose name matches the query.",
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "When this parameter is present, only those Response Plays that can be run manually will be returned.",
+                  "key": "filter_for_manual_run",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "List all of the existing Response Plays.\n\nResponse Plays allow you to create packages of Incident Actions that can be applied during an Incident's life cycle.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)\n\nWhen using a Global API token, the `From` header is required.\n\nScoped OAuth requires: `response_plays.read`\n"
+          },
+          "response": [
+            {
+              "id": "472cf92d-b18a-4828-ae92-a21a8fbf9c51",
+              "name": "The array of Response Plays returned by the query.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays?query=<string>&filter_for_manual_run=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When this parameter is present, only those Response Plays that can be run manually will be returned.",
+                      "key": "filter_for_manual_run",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"response_plays\": [\n    {\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"type\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"team\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"subscribers\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"subscribers_message\": \"<string>\",\n      \"responders\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"responders_message\": \"<string>\",\n      \"runnability\": \"services\",\n      \"conference_number\": \"<string>\",\n      \"conference_url\": \"<string>\",\n      \"conference_type\": \"none\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"type\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"team\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      \"subscribers\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"subscribers_message\": \"<string>\",\n      \"responders\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"summary\": \"<string>\",\n          \"self\": \"<string>\",\n          \"html_url\": \"<string>\"\n        }\n      ],\n      \"responders_message\": \"<string>\",\n      \"runnability\": \"services\",\n      \"conference_number\": \"<string>\",\n      \"conference_url\": \"<string>\",\n      \"conference_type\": \"none\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-472cf92d-b18a-4828-ae92-a21a8fbf9c51"
+            },
+            {
+              "id": "b2551102-eead-45a0-8609-3b16746be596",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays?query=<string>&filter_for_manual_run=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When this parameter is present, only those Response Plays that can be run manually will be returned.",
+                      "key": "filter_for_manual_run",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-b2551102-eead-45a0-8609-3b16746be596"
+            },
+            {
+              "id": "b80750a9-048e-4f8c-9d40-8252736c1da8",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays?query=<string>&filter_for_manual_run=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When this parameter is present, only those Response Plays that can be run manually will be returned.",
+                      "key": "filter_for_manual_run",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-b80750a9-048e-4f8c-9d40-8252736c1da8"
+            },
+            {
+              "id": "0b0f3291-0cb2-4ad2-8093-2fe257ffa7b9",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays?query=<string>&filter_for_manual_run=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters the result, showing only the records whose name matches the query.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When this parameter is present, only those Response Plays that can be run manually will be returned.",
+                      "key": "filter_for_manual_run",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-0b0f3291-0cb2-4ad2-8093-2fe257ffa7b9"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:25.000Z",
+          "updatedAt": "2026-07-28T02:31:25.000Z",
+          "uid": "35240-7a077750-e550-44e4-ae7e-9d157d7389ac"
+        },
+        {
+          "name": "PagerDuty Create a Response Play",
+          "id": "62bed86d-8e1f-4e2f-9c10-9e12dc226d54",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The email address of a valid user associated with the account making the request.",
+                "key": "From",
+                "value": "<email>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/response_plays",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "response_plays"
+              ]
+            },
+            "description": "Creates a new Response Plays.\n\nResponse Plays allow you to create packages of Incident Actions that can be applied during an Incident's life cycle.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#response-plays)\n\nScoped OAuth requires: `response_plays.write`\n"
+          },
+          "response": [
+            {
+              "id": "41537fd9-cbe4-473d-801f-a3f6ba80841a",
+              "name": "The Response Play that was created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-41537fd9-cbe4-473d-801f-a3f6ba80841a"
+            },
+            {
+              "id": "920eb8fe-9aa9-4711-bc0e-c0f7e66edd20",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-920eb8fe-9aa9-4711-bc0e-c0f7e66edd20"
+            },
+            {
+              "id": "f11ccf58-0888-4d07-9c3c-ae811440bbeb",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-f11ccf58-0888-4d07-9c3c-ae811440bbeb"
+            },
+            {
+              "id": "8219899c-f5fe-4111-9427-5938b24f1e52",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The email address of a valid user associated with the account making the request.",
+                    "key": "From",
+                    "value": "<email>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"response_play\": {\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"type\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"team\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\"\n    },\n    \"subscribers\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"subscribers_message\": \"<string>\",\n    \"responders\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"summary\": \"<string>\",\n        \"self\": \"<string>\",\n        \"html_url\": \"<string>\"\n      }\n    ],\n    \"responders_message\": \"<string>\",\n    \"runnability\": \"services\",\n    \"conference_number\": \"<string>\",\n    \"conference_url\": \"<string>\",\n    \"conference_type\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/response_plays",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "response_plays"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:31:25.000Z",
+              "updatedAt": "2026-07-28T02:31:25.000Z",
+              "uid": "35240-8219899c-f5fe-4111-9427-5938b24f1e52"
+            }
+          ],
+          "createdAt": "2026-07-28T02:31:25.000Z",
+          "updatedAt": "2026-07-28T02:31:25.000Z",
+          "uid": "35240-62bed86d-8e1f-4e2f-9c10-9e12dc226d54"
+        }
+      ],
+      "id": "5fbf121f-a73d-4351-9f6a-a341f26d89cc",
+      "createdAt": "2026-07-28T02:31:25.000Z",
+      "updatedAt": "2026-07-28T02:31:25.000Z",
+      "uid": "35240-5fbf121f-a73d-4351-9f6a-a341f26d89cc"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

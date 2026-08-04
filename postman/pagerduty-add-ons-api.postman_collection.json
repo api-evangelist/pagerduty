@@ -1,0 +1,1846 @@
+{
+  "info": {
+    "_postman_id": "6327ef3f-84e4-4420-8140-3ab837018f5c",
+    "name": "PagerDuty Abilities Add-Ons API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:30:35.000Z",
+    "updatedAt": "2026-07-28T02:30:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6327ef3f-84e4-4420-8140-3ab837018f5c"
+  },
+  "item": [
+    {
+      "name": "addons",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "PagerDuty Get an Add-on",
+              "id": "6a6ba963-0981-4867-ab9c-6adb8b4b7f3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "81eee1a8-6631-4ff5-a412-332e3d0ab4cb",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Get details about an existing Add-on.\n\nAddon's are pieces of functionality that developers can write to insert new functionality into PagerDuty's UI.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)\n\nScoped OAuth requires: `addons.read`\n"
+              },
+              "response": [
+                {
+                  "id": "b1cb5420-b8f3-4a59-841e-eae32849b285",
+                  "name": "The requested Add-on.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-b1cb5420-b8f3-4a59-841e-eae32849b285"
+                },
+                {
+                  "id": "28f8dd5c-358b-4a2b-9199-3789aa0de867",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-28f8dd5c-358b-4a2b-9199-3789aa0de867"
+                },
+                {
+                  "id": "dd14356d-8017-4b88-9d99-fc58f728a27c",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-dd14356d-8017-4b88-9d99-fc58f728a27c"
+                },
+                {
+                  "id": "424151df-df57-45cc-92c2-1077867d5b1a",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-424151df-df57-45cc-92c2-1077867d5b1a"
+                },
+                {
+                  "id": "6de43f59-bed9-4e2e-a2d9-413fb8fe11a8",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-6de43f59-bed9-4e2e-a2d9-413fb8fe11a8"
+                },
+                {
+                  "id": "299a3a99-74ef-4e0e-88d5-fd6ab98323b2",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-299a3a99-74ef-4e0e-88d5-fd6ab98323b2"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-6a6ba963-0981-4867-ab9c-6adb8b4b7f3e"
+            },
+            {
+              "name": "PagerDuty Delete an Add-on",
+              "id": "9d0394d7-e838-4444-98c6-b1e0aca700f9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2b295067-38da-479d-a6e6-c89b93d74c25",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Remove an existing Add-on.\n\nAddon's are pieces of functionality that developers can write to insert new functionality into PagerDuty's UI.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)\n\nScoped OAuth requires: `addons.write`\n"
+              },
+              "response": [
+                {
+                  "id": "5435a38b-cfe3-4a42-b498-3f406ec6b9c9",
+                  "name": "The Add-on was deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-5435a38b-cfe3-4a42-b498-3f406ec6b9c9"
+                },
+                {
+                  "id": "1a8251a7-b2c5-495a-8a76-e47d7302ac62",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-1a8251a7-b2c5-495a-8a76-e47d7302ac62"
+                },
+                {
+                  "id": "9c773153-08b7-444b-ae8e-836e9b2f0e3a",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-9c773153-08b7-444b-ae8e-836e9b2f0e3a"
+                },
+                {
+                  "id": "9d92500e-ee11-4814-8b92-ed55d0107add",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-9d92500e-ee11-4814-8b92-ed55d0107add"
+                },
+                {
+                  "id": "b863275d-9d05-48e6-b0b9-0ceb5c868b1a",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-b863275d-9d05-48e6-b0b9-0ceb5c868b1a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-9d0394d7-e838-4444-98c6-b1e0aca700f9"
+            },
+            {
+              "name": "PagerDuty Update an Add-on",
+              "id": "3af84d90-dc0d-407a-b993-d3326edfabf9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addons/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1b0510d7-29b7-4e5b-82ea-bbdfc7e3083d",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Update an existing Add-on.\n\nAddon's are pieces of functionality that developers can write to insert new functionality into PagerDuty's UI.\n\nGiven a configuration containing a `src` parameter, that URL will be embedded in an `iframe` on a page that's available to users from a drop-down menu.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)\n\nScoped OAuth requires: `addons.write`\n"
+              },
+              "response": [
+                {
+                  "id": "e7af4772-6ae2-42de-a017-8389e90310c3",
+                  "name": "The Add-on that was updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-e7af4772-6ae2-42de-a017-8389e90310c3"
+                },
+                {
+                  "id": "ebb8a74a-eab4-40d2-a88f-0a09f5e3a643",
+                  "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-ebb8a74a-eab4-40d2-a88f-0a09f5e3a643"
+                },
+                {
+                  "id": "bf1f7749-9a81-497e-91bf-e3b6406ad3f7",
+                  "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-bf1f7749-9a81-497e-91bf-e3b6406ad3f7"
+                },
+                {
+                  "id": "57902297-1b37-4f62-84fa-5eadd36490a9",
+                  "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-57902297-1b37-4f62-84fa-5eadd36490a9"
+                },
+                {
+                  "id": "12af53a0-1ed9-4981-9ab9-35a104f3843d",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-12af53a0-1ed9-4981-9ab9-35a104f3843d"
+                },
+                {
+                  "id": "be0edd23-866b-48dd-ae59-e12095f6061a",
+                  "name": "Too many requests have been made, the rate limit has been reached.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/addons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "addons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:30:35.000Z",
+                  "updatedAt": "2026-07-28T02:30:35.000Z",
+                  "uid": "35240-be0edd23-866b-48dd-ae59-e12095f6061a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-3af84d90-dc0d-407a-b993-d3326edfabf9"
+            }
+          ],
+          "id": "6cee4d2d-c15f-4460-8436-216321562368",
+          "createdAt": "2026-07-28T02:30:35.000Z",
+          "updatedAt": "2026-07-28T02:30:35.000Z",
+          "uid": "35240-6cee4d2d-c15f-4460-8436-216321562368"
+        },
+        {
+          "name": "PagerDuty List installed Add-ons",
+          "id": "fd75bc0a-4aaf-4d8f-8e1a-e602b629bb42",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/addons?limit=<integer>&offset=<integer>&total=false&include[]=services&service_ids[]=<string>&service_ids[]=<string>&filter=incident_show_addon",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "addons"
+              ],
+              "query": [
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Offset to start pagination search results.",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                  "key": "total",
+                  "value": "false"
+                },
+                {
+                  "description": "Array of additional Models to include in response.",
+                  "key": "include[]",
+                  "value": "services"
+                },
+                {
+                  "description": "Filters the results, showing only Add-ons for the given services",
+                  "key": "service_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only Add-ons for the given services",
+                  "key": "service_ids[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters the results, showing only Add-ons of the given type",
+                  "key": "filter",
+                  "value": "incident_show_addon"
+                }
+              ]
+            },
+            "description": "List all of the Add-ons installed on your account.\n\nAddon's are pieces of functionality that developers can write to insert new functionality into PagerDuty's UI.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)\n\nScoped OAuth requires: `addons.read`\n"
+          },
+          "response": [
+            {
+              "id": "dda42a34-2953-460a-b009-b7c219d2c0e5",
+              "name": "A paginated array of installed Add-ons.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons?limit=<integer>&offset=<integer>&total=false&include[]=services&service_ids[]=<string>&filter=incident_show_addon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons for the given services",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons of the given type",
+                      "key": "filter",
+                      "value": "incident_show_addon"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"addons\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"src\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"summary\": \"<string>\",\n      \"self\": \"<string>\",\n      \"html_url\": \"<string>\",\n      \"src\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"more\": \"<boolean>\",\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-dda42a34-2953-460a-b009-b7c219d2c0e5"
+            },
+            {
+              "id": "440000f2-643b-4285-95b4-273f96cd9543",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons?limit=<integer>&offset=<integer>&total=false&include[]=services&service_ids[]=<string>&filter=incident_show_addon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons for the given services",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons of the given type",
+                      "key": "filter",
+                      "value": "incident_show_addon"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-440000f2-643b-4285-95b4-273f96cd9543"
+            },
+            {
+              "id": "431f2b32-e668-4e80-bb82-d411cf3d6fd1",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons?limit=<integer>&offset=<integer>&total=false&include[]=services&service_ids[]=<string>&filter=incident_show_addon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons for the given services",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons of the given type",
+                      "key": "filter",
+                      "value": "incident_show_addon"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-431f2b32-e668-4e80-bb82-d411cf3d6fd1"
+            },
+            {
+              "id": "c9f62f45-b637-426e-bf99-fdbd852b44bb",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons?limit=<integer>&offset=<integer>&total=false&include[]=services&service_ids[]=<string>&filter=incident_show_addon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons for the given services",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons of the given type",
+                      "key": "filter",
+                      "value": "incident_show_addon"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-c9f62f45-b637-426e-bf99-fdbd852b44bb"
+            },
+            {
+              "id": "4d096108-0c23-459f-9c7d-bd799dc821d1",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/addons?limit=<integer>&offset=<integer>&total=false&include[]=services&service_ids[]=<string>&filter=incident_show_addon",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ],
+                  "query": [
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Offset to start pagination search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n",
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Array of additional Models to include in response.",
+                      "key": "include[]",
+                      "value": "services"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons for the given services",
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters the results, showing only Add-ons of the given type",
+                      "key": "filter",
+                      "value": "incident_show_addon"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-4d096108-0c23-459f-9c7d-bd799dc821d1"
+            }
+          ],
+          "createdAt": "2026-07-28T02:30:35.000Z",
+          "updatedAt": "2026-07-28T02:30:35.000Z",
+          "uid": "35240-fd75bc0a-4aaf-4d8f-8e1a-e602b629bb42"
+        },
+        {
+          "name": "PagerDuty Install an Add-on",
+          "id": "49eb1b2d-9ad3-4e8b-abfb-98c0354ed8d6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "addons"
+              ]
+            },
+            "description": "Install an Add-on for your account.\n\nAddon's are pieces of functionality that developers can write to insert new functionality into PagerDuty's UI.\n\nGiven a configuration containing a `src` parameter, that URL will be embedded in an `iframe` on a page that's available to users from a drop-down menu.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#add-ons)\n\nScoped OAuth requires: `addons.write`\n"
+          },
+          "response": [
+            {
+              "id": "9ef5c30e-b4c9-40df-9a10-2d93b127f133",
+              "name": "The Add-on that was installed.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addons",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\",\n    \"src\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-9ef5c30e-b4c9-40df-9a10-2d93b127f133"
+            },
+            {
+              "id": "13863396-a39b-4288-a11a-ac9c3cfc942f",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addons",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-13863396-a39b-4288-a11a-ac9c3cfc942f"
+            },
+            {
+              "id": "cddf5719-a17a-470e-9df9-696faa837e39",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addons",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-cddf5719-a17a-470e-9df9-696faa837e39"
+            },
+            {
+              "id": "ec41658d-1d0b-4278-bfb4-fc0920ea3880",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addons",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-ec41658d-1d0b-4278-bfb4-fc0920ea3880"
+            },
+            {
+              "id": "493107f4-c9f4-4a0a-8d09-a94e2e35515b",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addon\": {\n    \"type\": \"<string>\",\n    \"name\": \"<string>\",\n    \"src\": \"<string>\",\n    \"id\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"self\": \"<string>\",\n    \"html_url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addons",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "addons"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:30:35.000Z",
+              "updatedAt": "2026-07-28T02:30:35.000Z",
+              "uid": "35240-493107f4-c9f4-4a0a-8d09-a94e2e35515b"
+            }
+          ],
+          "createdAt": "2026-07-28T02:30:35.000Z",
+          "updatedAt": "2026-07-28T02:30:35.000Z",
+          "uid": "35240-49eb1b2d-9ad3-4e8b-abfb-98c0354ed8d6"
+        }
+      ],
+      "id": "7bebbbd6-3844-44f3-8b8d-f8e05ddacf62",
+      "createdAt": "2026-07-28T02:30:35.000Z",
+      "updatedAt": "2026-07-28T02:30:35.000Z",
+      "uid": "35240-7bebbbd6-3844-44f3-8b8d-f8e05ddacf62"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}

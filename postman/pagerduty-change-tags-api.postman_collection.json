@@ -1,0 +1,458 @@
+{
+  "info": {
+    "_postman_id": "121e1ff5-5051-4cc4-9daf-984edba7818f",
+    "name": "PagerDuty Abilities Change Tags API",
+    "description": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:30:46.000Z",
+    "updatedAt": "2026-07-28T02:30:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-121e1ff5-5051-4cc4-9daf-984edba7818f"
+  },
+  "item": [
+    {
+      "name": "{entity_type}",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "change_tags",
+              "item": [
+                {
+                  "name": "PagerDuty Assign tags",
+                  "id": "3a2ecd2d-ee3d-4405-962d-0b570bceba84",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"add\": [\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"remove\": [\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:entity_type/:id/change_tags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":entity_type",
+                        ":id",
+                        "change_tags"
+                      ],
+                      "variable": [
+                        {
+                          "id": "38aa635a-f5b9-4e34-bdb9-a9e7ba9df029",
+                          "key": "entity_type",
+                          "value": "users",
+                          "description": "(Required) Type of entity related with the tag"
+                        },
+                        {
+                          "id": "28973253-65b8-498b-9d6c-5407e335bfaa",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the resource."
+                        }
+                      ]
+                    },
+                    "description": "Assign existing or new tags.\n\nA Tag is applied to Escalation Policies, Teams or Users and can be used to filter them.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#tags)\n\nScoped OAuth requires: `tags.write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "4e2628ab-4b16-4468-8c16-874d3c4b6e49",
+                      "name": "The tags were added and/or removed.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"add\": [\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"remove\": [\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/change_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "change_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T02:30:47.000Z",
+                      "updatedAt": "2026-07-28T02:30:47.000Z",
+                      "uid": "35240-4e2628ab-4b16-4468-8c16-874d3c4b6e49"
+                    },
+                    {
+                      "id": "07b1e17a-fd63-4c95-84a2-c2d697ea30ba",
+                      "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"add\": [\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"remove\": [\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/change_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "change_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:30:47.000Z",
+                      "updatedAt": "2026-07-28T02:30:47.000Z",
+                      "uid": "35240-07b1e17a-fd63-4c95-84a2-c2d697ea30ba"
+                    },
+                    {
+                      "id": "9463adf4-6df6-4243-8193-567e8ebf48da",
+                      "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"add\": [\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"remove\": [\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/change_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "change_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:30:47.000Z",
+                      "updatedAt": "2026-07-28T02:30:47.000Z",
+                      "uid": "35240-9463adf4-6df6-4243-8193-567e8ebf48da"
+                    },
+                    {
+                      "id": "b62fc088-3e61-46f3-b120-3f9e68e36984",
+                      "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"add\": [\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"remove\": [\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/change_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "change_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:30:47.000Z",
+                      "updatedAt": "2026-07-28T02:30:47.000Z",
+                      "uid": "35240-b62fc088-3e61-46f3-b120-3f9e68e36984"
+                    },
+                    {
+                      "id": "884c4f00-5a28-42a3-b993-1853293f8e48",
+                      "name": "Too many requests have been made, the rate limit has been reached.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"add\": [\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"label\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"remove\": [\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"type\": \"tag_reference\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/:entity_type/:id/change_tags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":entity_type",
+                            ":id",
+                            "change_tags"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entity_type"
+                            },
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:30:47.000Z",
+                      "updatedAt": "2026-07-28T02:30:47.000Z",
+                      "uid": "35240-884c4f00-5a28-42a3-b993-1853293f8e48"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:30:47.000Z",
+                  "updatedAt": "2026-07-28T02:30:47.000Z",
+                  "uid": "35240-3a2ecd2d-ee3d-4405-962d-0b570bceba84"
+                }
+              ],
+              "id": "736720ae-4f47-44f7-a45b-bdbdde252419",
+              "createdAt": "2026-07-28T02:30:47.000Z",
+              "updatedAt": "2026-07-28T02:30:47.000Z",
+              "uid": "35240-736720ae-4f47-44f7-a45b-bdbdde252419"
+            }
+          ],
+          "id": "3dabe6a6-0268-4781-a16e-1c8fe48955a8",
+          "createdAt": "2026-07-28T02:30:47.000Z",
+          "updatedAt": "2026-07-28T02:30:47.000Z",
+          "uid": "35240-3dabe6a6-0268-4781-a16e-1c8fe48955a8"
+        }
+      ],
+      "id": "3138ab0b-0a6d-4291-aee0-7447345dcc0c",
+      "createdAt": "2026-07-28T02:30:47.000Z",
+      "updatedAt": "2026-07-28T02:30:47.000Z",
+      "uid": "35240-3138ab0b-0a6d-4291-aee0-7447345dcc0c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pagerduty.com"
+    }
+  ]
+}
