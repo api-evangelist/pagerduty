@@ -1,0 +1,922 @@
+{
+  "item": [
+    {
+      "id": "1a728c5b-f6b3-4df3-8e72-9f38cafe5dd8",
+      "name": "Audit",
+      "description": {
+        "content": "Provides audit record data.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "06726917-170c-4fa8-b7f9-349dfc324273",
+          "name": "PagerDuty List audit records",
+          "request": {
+            "name": "PagerDuty List audit records",
+            "description": {
+              "content": "List audit trail records matching provided query params or default criteria.\n\nThe returned records are sorted by the `execution_time` from newest to oldest.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n\nOnly admins, account owners, or global API tokens on PagerDuty account [pricing plans](https://www.pagerduty.com/pricing) with the \"Audit Trail\" feature can access this endpoint.\n\nFor other role based access to audit records by resource ID, see the resource's API documentation.\n\nFor more information see the [Audit API Document](https://developer.pagerduty.com/docs/rest-api-v2/audit-records-api/).\n\nScoped OAuth requires: `audit_records.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audit",
+                "records"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`."
+                },
+                {
+                  "disabled": false,
+                  "key": "root_resource_types[]",
+                  "value": "<string>",
+                  "description": "Resource type filter for the root_resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "actor_type",
+                  "value": "<string>",
+                  "description": "Actor type filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "actor_id",
+                  "value": "<string>",
+                  "description": "Actor Id filter. Must be qualified by providing the `actor_type` param."
+                },
+                {
+                  "disabled": false,
+                  "key": "method_type",
+                  "value": "<string>",
+                  "description": "Method type filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "method_truncated_token",
+                  "value": "<string>",
+                  "description": "Method truncated_token filter. Must be qualified by providing the `method_type` param."
+                },
+                {
+                  "disabled": false,
+                  "key": "actions[]",
+                  "value": "<string>",
+                  "description": "Action filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "863c0be9-4312-420b-bc71-407eb1c7ce5f",
+              "name": "Records matching the query criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"records\": [\n    {\n      \"id\": \"PDRECORDID1_TEAM_CREATED\",\n      \"execution_time\": \"2020-06-04T15:30:16.272Z\",\n      \"execution_context\": {\n        \"request_id\": \"111lDEOIH-534-4ljhLHJjh111\",\n        \"remote_address\": \"201.19.20.19\"\n      },\n      \"actors\": [\n        {\n          \"id\": \"PDUSER\",\n          \"summary\": \"John Snow\",\n          \"type\": \"user_reference\"\n        }\n      ],\n      \"method\": {\n        \"type\": \"api_token\",\n        \"truncated_token\": \"3usr\"\n      },\n      \"root_resource\": {\n        \"id\": \"PXASDFE\",\n        \"type\": \"team_reference\",\n        \"summary\": \"my DevOps team\"\n      },\n      \"action\": \"create\",\n      \"details\": {\n        \"resource\": {\n          \"id\": \"PXASDFE\",\n          \"type\": \"team_reference\",\n          \"summary\": \"my DevOps team\"\n        },\n        \"fields\": [\n          {\n            \"name\": \"teamName\",\n            \"value\": \"DevOps team\"\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"PDRECORDID2_USER_REMOVED_FROM_TEAM\",\n      \"execution_time\": \"2020-06-04T15:30:16.272Z\",\n      \"execution_context\": {\n        \"request_id\": \"222lDEOIH-534-4ljhLHJjh222\",\n        \"remote_address\": \"201.19.20.19\"\n      },\n      \"method\": {\n        \"type\": \"api_token\",\n        \"truncated_token\": \"2adm\"\n      },\n      \"root_resource\": {\n        \"id\": \"PRY9M8B\",\n        \"type\": \"team_reference\",\n        \"summary\": \"DevOps\"\n      },\n      \"action\": \"update\",\n      \"details\": {\n        \"resource\": {\n          \"id\": \"PRY9M8B\",\n          \"type\": \"team_reference\",\n          \"summary\": \"DevOps\"\n        },\n        \"references\": [\n          {\n            \"name\": \"members\",\n            \"removed\": [\n              {\n                \"id\": \"PRY9M8B\",\n                \"type\": \"user_reference\",\n                \"summary\": \"John Doe\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"PDRECORDID5_USERS_TEAM_ROLE_UPDATED\",\n      \"execution_time\": \"2020-06-04T15:30:16.272Z\",\n      \"execution_context\": {\n        \"request_id\": \"222lDEOIH-534-4ljhLHJjh222\",\n        \"remote_address\": \"201.19.20.19\"\n      },\n      \"method\": {\n        \"type\": \"api_token\",\n        \"truncated_token\": \"2adm\"\n      },\n      \"root_resource\": {\n        \"id\": \"PRY9M8B\",\n        \"type\": \"team_reference\",\n        \"summary\": \"DevOps\"\n      },\n      \"action\": \"update\",\n      \"details\": {\n        \"resource\": {\n          \"id\": \"PDUSER\",\n          \"type\": \"user_reference\",\n          \"summary\": \"John Snow\"\n        },\n        \"fields\": [\n          {\n            \"name\": \"team_role\",\n            \"before_value\": \"observer\",\n            \"value\": \"manager\"\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"PDRECORDID3_USERS_NAME_AND_EMAIL_UPDATED\",\n      \"execution_time\": \"2020-06-04T15:30:16.272Z\",\n      \"execution_context\": {\n        \"request_id\": \"222lDEOIH-534-4ljhLHJjh222\",\n        \"remote_address\": \"201.19.20.19\"\n      },\n      \"actors\": [\n        {\n          \"id\": \"PDUSER\",\n          \"summary\": \"John Snow\",\n          \"type\": \"user_reference\"\n        }\n      ],\n      \"method\": {\n        \"type\": \"identity_provider\"\n      },\n      \"root_resource\": {\n        \"id\": \"PDUSER\",\n        \"type\": \"user_reference\",\n        \"summary\": \"John Snow\"\n      },\n      \"action\": \"update\",\n      \"details\": {\n        \"resource\": {\n          \"id\": \"PDUSER\",\n          \"type\": \"user_reference\",\n          \"summary\": \"John Snow\"\n        },\n        \"fields\": [\n          {\n            \"name\": \"name\",\n            \"before_value\": \"Bob Doe\",\n            \"value\": \"Jon Snow\"\n          },\n          {\n            \"name\": \"email\",\n            \"before_value\": \"bob.doe@domain.com\",\n            \"value\": \"john.snow@domain.com\"\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"PDRECORDID4_UPDATED_USERS_NOTIFICATION_RULE\",\n      \"execution_time\": \"2020-06-04T15:30:16.272Z\",\n      \"execution_context\": {\n        \"request_id\": \"222lDEOIH-534-4ljhLHJjh222\",\n        \"remote_address\": \"201.19.20.19\"\n      },\n      \"actors\": [\n        {\n          \"id\": \"PDUSER\",\n          \"summary\": \"John Snow\",\n          \"type\": \"user_reference\"\n        }\n      ],\n      \"method\": {\n        \"type\": \"api_token\",\n        \"truncated_token\": \"2adm\"\n      },\n      \"root_resource\": {\n        \"id\": \"PDUSER\",\n        \"type\": \"user_reference\",\n        \"summary\": \"John Snow\"\n      },\n      \"action\": \"update\",\n      \"details\": {\n        \"resource\": {\n          \"id\": \"PXOGWUS\",\n          \"type\": \"assignment_notification_rule_reference\",\n          \"summary\": \"0 minutes: channel P1IAAPZ\"\n        },\n        \"fields\": [\n          {\n            \"name\": \"start_delay_in_minutes\",\n            \"before_value\": \"0\",\n            \"value\": \"2\"\n          }\n        ],\n        \"references\": [\n          {\n            \"name\": \"contact_method\",\n            \"removed\": [\n              {\n                \"id\": \"POE6L88\",\n                \"type\": \"push_notification_contact_method_reference\",\n                \"summary\": \"Pixel 3\"\n              }\n            ],\n            \"added\": [\n              {\n                \"id\": \"P4GTUMK\",\n                \"type\": \"sms_contact_method_reference\",\n                \"summary\": \"Mobile\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"next_cursor\": null,\n  \"limit\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f109432f-231f-471f-888a-3d9cb592ecf2",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "929a40f4-41bd-4732-83f6-de23f722922d",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28ecb5d6-8068-4970-baed-47d0bb8d4bd6",
+              "name": "Account does not have the abilities to perform the action. Please review the response for the required abilities.\nYou can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "858612e6-5e94-428d-a5c7-4ddbe10eebad",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38cfa64b-5fc3-449f-a80e-e74b59c88a1e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e3968ab-bfc7-4ade-9409-436fd7ba3ad4",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "140467c8-5036-440d-b1eb-82ff74c7959d",
+              "name": "Internal Server Error the PagerDuty server experienced an error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audit",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "root_resource_types[]",
+                      "value": "users"
+                    },
+                    {
+                      "key": "actor_type",
+                      "value": "user_reference"
+                    },
+                    {
+                      "key": "actor_id",
+                      "value": "P123456"
+                    },
+                    {
+                      "key": "method_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method_truncated_token",
+                      "value": "3xyz"
+                    },
+                    {
+                      "key": "actions[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "958552ca-58ef-4c9c-a434-70cec2e38db6",
+    "name": "PagerDuty Abilities Audit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

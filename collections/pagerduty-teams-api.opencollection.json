@@ -1,0 +1,534 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Teams API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/teams",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filters the result, showing only the records whose name matches the query."
+              }
+            ]
+          },
+          "docs": "List teams of your PagerDuty account, optionally filtered by a search query.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/teams",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/teams/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get details about an existing team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/teams/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/teams/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reassignment_team",
+                "value": "",
+                "type": "query",
+                "description": "Team to reassign unresolved incident to.\nIf an unresolved incident exists on both the reassignment team and\nthe team being deleted, a duplicate will not be made. If not supplied,\nunresolved incidents will be made account-level.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Remove an existing team.\n\nSucceeds only if the team has no associated Escalation Policies, Services, Schedules and Subteams.\n\nAll associated unresovled incidents will be reassigned to another team (if specified) or will loose team association, thus becoming account-level (with visibility implications).\n\nNote that the incidents reassignment process is asynchronous and has no guarantee to complete before the API call return.\n\nA team is a collection of Users and Escalation Policies that represent a"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List audit records for a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/teams/:id/audit/records",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`."
+              }
+            ]
+          },
+          "docs": "The returned records are sorted by the `execution_time` from newest to oldest.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n\nFor more information see the [Audit API Document](https://developer.pagerduty.com/docs/rest-api-v2/audit-records-api/).\n\nScoped OAuth requires: `audit_records.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Add an escalation policy to a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/teams/:id/escalation_policies/:escalation_policy_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "escalation_policy_id",
+                "value": "",
+                "type": "path",
+                "description": "The escalation policy ID on the team."
+              }
+            ]
+          },
+          "docs": "Add an escalation policy to a team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Remove an escalation policy from a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/teams/:id/escalation_policies/:escalation_policy_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "escalation_policy_id",
+                "value": "",
+                "type": "path",
+                "description": "The escalation policy ID on the team."
+              }
+            ]
+          },
+          "docs": "Remove an escalation policy from a team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List members of a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/teams/:id/members",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get information about members on a team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Team Notification Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/teams/:id/notification_subscriptions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Notification Subscriptions the given Team has.\n\n<!-- theme: warning -->\n> Teams must be added through `POST /teams/{id}/notification_subscriptions` to be returned from this endpoint.\n\nScoped OAuth requires: `subscribers.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create Team Notification Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/teams/:id/notification_subscriptions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new Notification Subscriptions for the given Team.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "removeTeamNotificationSubscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/teams/:id/notification_subscriptions/unsubscribe",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe the given Team from Notifications on the matching Subscribable entities.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Add a user to a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/teams/:id/users/:user_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID on the team."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a user to a team. Attempting to add a user with the `read_only_user` role will return a 400 error.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Remove a user from a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/teams/:id/users/:user_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID on the team."
+              }
+            ]
+          },
+          "docs": "Remove a user from a team.\n\nA team is a collection of Users and Escalation Policies that represent a group of people within an organization.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#teams)\n\nScoped OAuth requires: `teams.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Templates API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/templates",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Template name or description to search"
+              },
+              {
+                "name": "template_type",
+                "value": "",
+                "type": "query",
+                "description": "Filters templates by type."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify both the field you wish to sort the results on (name/created_at), as well as the direction (asc/desc) of the results. The sort_by field and direction should be separated by a colon. Sort direction defaults to ascending."
+              }
+            ]
+          },
+          "docs": "Get a list of all the template on an account\n\nScoped OAuth requires: `templates.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new template\n\nScoped OAuth requires: `templates.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get a single template on the account\n\nScoped OAuth requires: `templates.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing template\n\nScoped OAuth requires: `templates.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete a specific of templates on the account\n\nScoped OAuth requires: `templates.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Render a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/templates/:id/render",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Render a template. This endpoint has a variable request body depending on the template type. For the `status_update` template type, the caller will provide the incident id, and a status update message.\n\nScoped OAuth requires: `templates.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List template fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/templates/fields",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of fields that can be used on the account templates.\n\nScoped OAuth requires: `templates.read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

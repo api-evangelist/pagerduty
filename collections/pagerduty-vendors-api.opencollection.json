@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Vendors API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vendors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List vendors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/vendors",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              }
+            ]
+          },
+          "docs": "List all vendors.\n\nA PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#vendors)\n\nScoped OAuth requires: `vendors.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/vendors/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get details about one specific vendor.\n\nA PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#vendors)\n\nScoped OAuth requires: `vendors.read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

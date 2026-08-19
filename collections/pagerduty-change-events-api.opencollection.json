@@ -1,0 +1,280 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Change Events API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Change Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Change Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/change_events",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "team_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter."
+              },
+              {
+                "name": "integration_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of integration IDs. Only results related to these integrations will be returned."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes."
+              }
+            ]
+          },
+          "docs": "List all of the existing Change Events.\n\nScoped OAuth requires: `change_events.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Change Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/change_events",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Sending Change Events is documented as part of the V2 Events API. See [`Send Change Event`](https://developer.pagerduty.com/api-reference/b3A6Mjc0ODI2Ng-send-change-events-to-the-pager-duty-events-api).\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Change Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/change_events/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get details about an existing Change Event.\n\nScoped OAuth requires: `change_events.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Change Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/change_events/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing Change Event\n\nScoped OAuth requires: `change_events.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List related Change Events for an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/related_change_events",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "List related Change Events for an Incident, as well as the reason these changes are correlated with the incident.\n\nChange events represent service changes such as deploys, build completion, and configuration changes, providing information that is critical during incident triage or hypercare. For more information on change events, see [Change Events](https://support.pagerduty.com/docs/change-events).\n\nThe Change Correlation feature provides incident responders with recent change events that are m"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Change Events for a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/services/:id/change_events",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "team_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter."
+              },
+              {
+                "name": "integration_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of integration IDs. Only results related to these integrations will be returned."
+              }
+            ]
+          },
+          "docs": "List all of the existing Change Events for a service.\n\nScoped OAuth requires: `services.read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

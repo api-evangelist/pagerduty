@@ -1,0 +1,1045 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Event Orchestrations API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Orchestrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Event Orchestrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify the field you wish to sort the results on."
+              }
+            ]
+          },
+          "docs": "List all Global Event Orchestrations on an Account.\n\nGlobal Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration's Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event's content.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth require"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/event_orchestrations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Global Event Orchestration.\n\nGlobal Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration's Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event's content.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orche"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "Get a Global Event Orchestration.\n\nGlobal Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration's Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event's content.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestr"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Global Event Orchestration.\n\nGlobal Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration's Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event's content.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orche"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete an Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "Delete a Global Event Orchestration.\n\nOnce deleted, you will no longer be able to ingest events into PagerDuty using this Orchestration's Routing Key.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Integrations for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/integrations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "List the Integrations associated with this Event Orchestrations.\n\nYou can use a Routing Key from these Integrations to send events to PagerDuty!\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Integration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/integrations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Integration associated with this Event Orchestration.\n\nYou can then use the Routing Key from this new Integration to send events to PagerDuty!\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an Integration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/integrations/:integration_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Integration."
+              }
+            ]
+          },
+          "docs": "Get an Integration associated with this Event Orchestrations.\n\nYou can use the Routing Key from this Integration to send events to PagerDuty!\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an Integration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/integrations/:integration_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Integration associated with this Event Orchestrations.\n\nYou can use the Routing Key from this Integration to send events to PagerDuty!\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete an Integration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/integrations/:integration_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Integration."
+              }
+            ]
+          },
+          "docs": "Delete an Integration and its associated Routing Key.\n\nOnce deleted, PagerDuty will drop all future events sent to PagerDuty using the Routing Key.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Migrate an Integration from one Event Orchestration to another",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/integrations/migration",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move an Integration and its Routing Key from the Event Orchestration specified in the request payload, to the Event Orchestration specified in the request URL.\n\nAny future events sent to this Integration's Routing Key will be processed by this Event Orchestration's Rules.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the Global Orchestration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/global",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "Get the Global Orchestration for an Event Orchestration.\n\nGlobal Orchestration Rules allows you to create a set of Event Rules. These rules evaluate against all Events sent to an Event Orchestration. When a matching rule is found, it can modify and enhance the event and can route the event to another set of Global Rules within this Orchestration for further processing.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nSc"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update the Global Orchestration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/global",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the Global Orchestration for an Event Orchestration.\n\nGlobal Orchestration Rules allows you to create a set of Event Rules. These rules evaluate against all Events sent to an Event Orchestration. When a matching rule is found, it can modify and enhance the event and can route the event to another set of Global Rules within this Orchestration for further processing.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the Router for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/router",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "Get a Global Orchestration's Routing Rules.\n\nAn Orchestration Router allows you to create a set of Event Rules. The Router evaluates Events you send to this Global Orchestration against each of its rules, one at a time, and routes the event to a specific Service based on the first rule that matches. If an event doesn't match any rules, it'll be sent to service specified in as the `catch_all` or the \"Unrouted\" Orchestration if no service is specified.\n\nFor more information see the [API Concepts D"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update the Router for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/router",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Global Orchestration's Routing Rules.\n\nAn Orchestration Router allows you to create a set of Event Rules. The Router evaluates Events you send to this Global Orchestration against each of its rules, one at a time, and routes the event to a specific Service based on the first rule that matches. If an event doesn't match any rules, it'll be sent to service specified in as the `catch_all` or the \"Unrouted\" Orchestration if no service is specified.\n\nFor more information see the [API Concept"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the Unrouted Orchestration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/unrouted",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "Get a Global Event Orchestration's Rules for Unrouted events.\n\nAn Unrouted Orchestration allows you to create a set of Event Rules that will be evaluated against all events that don't match any rules in the Global Orchestration's Router. Events that reach the Unrouted Orchestration will never be routed to a specific Service.\n\nThe Unrouted Orchestration evaluates Events sent to it against each of its rules, beginning with the rules in the \"start\" set. When a matching rule is found, it can modify "
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update the Unrouted Orchestration for an Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/unrouted",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Global Event Orchestration's Rules for Unrouted events.\n\nAn Unrouted Orchestration allows you to create a set of Event Rules that will be evaluated against all events that don't match any rules in the Global Orchestration's Router. Events that reach the Unrouted Orchestration will never be routed to a specific Service.\n\nThe Unrouted Orchestration evaluates Events sent to it against each of its rules, beginning with the rules in the \"start\" set. When a matching rule is found, it can modi"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the Service Orchestration for a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get a Service Orchestration.\n\nA Service Orchestration allows you to create a set of Event Rules. The Service Orchestration evaluates Events sent to this Service against each of its rules, beginning with the rules in the \"start\" set. When a matching rule is found, it can modify and enhance the event and can route the event to another set of rules within this Service Orchestration for further processing.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update the Service Orchestration for a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Service Orchestration.\n\nA Service Orchestration allows you to create a set of Event Rules. The Service Orchestration evaluates Events sent to this Service against each of its rules, beginning with the rules in the \"start\" set. When a matching rule is found, it can modify and enhance the event and can route the event to another set of rules within this Service Orchestration for further processing.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-a"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the Service Orchestration active status for a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/active",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ]
+          },
+          "docs": "Get a Service Orchestration's active status.\n\nA Service Orchestration allows you to set an active status based on whether an event will be evaluated against a service orchestration path (true) or service ruleset (false).\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update the Service Orchestration active status for a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/active",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Service Orchestration's active status.\n\nA Service Orchestration allows you to set an active status based on whether an event will be evaluated against a service orchestration path (true) or service ruleset (false).\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Cache Variables for a Global Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/cache_variables",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ]
+          },
+          "docs": "List Cache Variables for a Global Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Cache Variable for a Global Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/cache_variables",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Cache Variable for a Global Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Cache Variable for a Global Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/cache_variables/:cache_variable_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              },
+              {
+                "name": "cache_variable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a Cache Variable."
+              }
+            ]
+          },
+          "docs": "Get a Cache Variable for a Global Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Cache Variable for a Global Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/cache_variables/:cache_variable_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              },
+              {
+                "name": "cache_variable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a Cache Variable."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Cache Variable for a Global Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Cache Variable for a Global Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/event_orchestrations/:id/cache_variables/:cache_variable_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an Event Orchestration."
+              },
+              {
+                "name": "cache_variable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a Cache Variable."
+              }
+            ]
+          },
+          "docs": "Delete a Cache Variable for a Global Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `event_orchestrations.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Cache Variables for a Service Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/cache_variables",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ]
+          },
+          "docs": "List Cache Variables for a Service Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Cache Variable for a Service Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/cache_variables",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Cache Variable for a Service Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Cache Variable for a Service Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/cache_variables/:cache_variable_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              },
+              {
+                "name": "cache_variable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a Cache Variable."
+              }
+            ]
+          },
+          "docs": "Get a Cache Variable for a Service Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Cache Variable for a Service Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/cache_variables/:cache_variable_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              },
+              {
+                "name": "cache_variable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a Cache Variable."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Cache Variable for a Service Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Cache Variable for a Service Event Orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/event_orchestrations/services/:service_id/cache_variables/:cache_variable_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              },
+              {
+                "name": "cache_variable_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of a Cache Variable."
+              }
+            ]
+          },
+          "docs": "Delete a Cache Variable for a Service Event Orchestration.\n\nCache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)\n\nScoped OAuth requires: `services.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,573 @@
+{
+  "item": [
+    {
+      "id": "c0eb4bda-f636-447d-b263-7adae744ab42",
+      "name": "Notifications",
+      "description": {
+        "content": "A Notification is created when an Incident is triggered or escalated.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02081990-ae3e-4e2a-ac74-4ae2b2348764",
+          "name": "PagerDuty List notifications",
+          "request": {
+            "name": "PagerDuty List notifications",
+            "description": {
+              "content": "List notifications for a given time range, optionally filtered by type (sms_notification, email_notification, phone_notification, or push_notification).\n\nA Notification is created when an Incident is triggered or escalated.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#notifications)\n\nScoped OAuth requires: `users:notifications.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset to start pagination search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "total",
+                  "value": "false",
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_zone",
+                  "value": "<tzinfo>",
+                  "description": "Time zone in which results will be rendered. This will default to the account time zone."
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "(Required) The start of the date range over which you want to search. The time element is optional."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "(Required) The end of the date range over which you want to search. This should be in the same format as since. The size of the date range must be less than 3 months."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Return notification of this type only."
+                },
+                {
+                  "disabled": false,
+                  "key": "include[]",
+                  "value": "<string>",
+                  "description": "Array of additional details to include."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbf3f1a3-3025-452c-9b49-9e56b66e6978",
+              "name": "A paginated array of notifications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notifications\": [\n    {\n      \"id\": \"PWL7QXS\",\n      \"type\": \"phone_notification\",\n      \"started_at\": \"2013-03-06T15:28:51-05:00\",\n      \"address\": \"+15555551234\",\n      \"user\": {\n        \"id\": \"PT23IWX\",\n        \"type\": \"user_reference\",\n        \"summary\": \"Tim Wright\",\n        \"self\": \"https://api.pagerduty.com/users/PT23IWX\",\n        \"html_url\": \"https://subdomain.pagerduty.com/users/PT23IWX\"\n      }\n    },\n    {\n      \"id\": \"PKN7NBH\",\n      \"type\": \"push_notification\",\n      \"started_at\": \"2013-03-06T15:28:51-05:00\",\n      \"user\": {\n        \"id\": \"PT23IWX\",\n        \"type\": \"user_reference\",\n        \"summary\": \"Tim Wright\",\n        \"self\": \"https://api.pagerduty.com/users/PT23IWX\",\n        \"html_url\": \"https://subdomain.pagerduty.com/users/PT23IWX\"\n      }\n    }\n  ],\n  \"limit\": 100,\n  \"offset\": 0,\n  \"more\": false,\n  \"total\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dcdbd3e-0053-4abc-87c3-675bd84185cb",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60267e73-a225-427e-b4a4-525b954287af",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ad59782-ae56-4c11-ac30-dfde390f17bc",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f1c500a-38b2-483c-baca-2ebfe3bd09d2",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7d307774-3381-4dfb-95c6-7bd25376dff4",
+    "name": "PagerDuty Abilities Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

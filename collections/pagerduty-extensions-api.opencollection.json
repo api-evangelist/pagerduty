@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Extensions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/extensions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filters the result, showing only the records whose name matches the query."
+              },
+              {
+                "name": "extension_object_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the extension object you want to filter by."
+              },
+              {
+                "name": "extension_schema_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter the extensions by extension vendor id."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "List existing extensions.\n\nExtensions are representations of Extension Schema objects that are attached to Services.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)\n\nScoped OAuth requires: `extensions.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/extensions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Extension.\n\nExtensions are representations of Extension Schema objects that are attached to Services.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)\n\nScoped OAuth requires: `extensions.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/extensions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "Get details about an existing extension.\n\nExtensions are representations of Extension Schema objects that are attached to Services.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)\n\nScoped OAuth requires: `extensions.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/extensions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing extension.\n\nExtensions are representations of Extension Schema objects that are attached to Services.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)\n\nScoped OAuth requires: `extensions.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete an extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/extensions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an existing extension.\n\nOnce the extension is deleted, it will not be accessible from the web UI and new incidents won't be able to be created for this extension.\n\nExtensions are representations of Extension Schema objects that are attached to Services.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)\n\nScoped OAuth requires: `extensions.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Enable an extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/extensions/:id/enable",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Enable an extension that is temporarily disabled. (This API does not require a request body.)\n\nExtensions are representations of Extension Schema objects that are attached to Services.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extensions)\n\nScoped OAuth requires: `extensions.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,871 @@
+{
+  "item": [
+    {
+      "id": "cbe37e71-102a-4edf-9e35-4db85bc43aa3",
+      "name": "Vendors",
+      "description": {
+        "content": "A PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c6022f5-21b2-48ab-9338-b7e4da3c4234",
+          "name": "PagerDuty List vendors",
+          "request": {
+            "name": "PagerDuty List vendors",
+            "description": {
+              "content": "List all vendors.\n\nA PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#vendors)\n\nScoped OAuth requires: `vendors.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset to start pagination search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "total",
+                  "value": "false",
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "498df0c8-b59e-42b7-be66-4fa9839aa5e1",
+              "name": "A paginated array of vendors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vendors\": [\n    {\n      \"id\": \"PZQ6AUS\",\n      \"type\": \"vendor\",\n      \"summary\": \"Amazon CloudWatch\",\n      \"self\": \"https://api.pagerduty.com/vendors/PZQ6AUS\",\n      \"name\": \"Amazon CloudWatch\",\n      \"website_url\": \"https://aws.amazon.com/cloudwatch\",\n      \"logo_url\": \"https://s3.amazonaws.com/pdpartner/cloudwatch_large.png\",\n      \"thumbnail_url\": \"https://s3.amazonaws.com/pdpartner/cloudwatch_thumb.png\",\n      \"description\": \"Amazon Web Services CloudWatch provides monitoring for AWS cloud resources and customer-run applications. AWS can collect data, gain insight, and alert users to fix problems within applications and organizations. AWS CloudWatch gives system-wide visibility into resource utilization and notifications can be set for when any metrics cross a specified threshold.\",\n      \"integration_guide_url\": \"http://www.pagerduty.com/docs/guides/aws-cloudwatch-integration-guide/\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"more\": false,\n  \"total\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9290985a-b050-47ea-9554-b74d43338b63",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f694257-0847-40eb-8bed-da3d9875c012",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53239e15-8cb0-47ea-9497-d079b77e054f",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "476f898f-a940-4c8b-a827-978439e0e334",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16064620-5144-482b-b661-a4f8f5f30c6e",
+          "name": "PagerDuty Get a vendor",
+          "request": {
+            "name": "PagerDuty Get a vendor",
+            "description": {
+              "content": "Get details about one specific vendor.\n\nA PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#vendors)\n\nScoped OAuth requires: `vendors.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35d26231-f77d-4df4-9a07-5433737d6185",
+              "name": "The vendor requested",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vendor\": [\n    {\n      \"id\": \"PZQ6AUS\",\n      \"type\": \"vendor\",\n      \"summary\": \"Amazon CloudWatch\",\n      \"self\": \"https://api.pagerduty.com/vendors/PZQ6AUS\",\n      \"name\": \"Amazon CloudWatch\",\n      \"website_url\": \"https://aws.amazon.com/cloudwatch\",\n      \"logo_url\": \"https://s3.amazonaws.com/pdpartner/cloudwatch_large.png\",\n      \"thumbnail_url\": \"https://s3.amazonaws.com/pdpartner/cloudwatch_thumb.png\",\n      \"description\": \"Amazon Web Services CloudWatch provides monitoring for AWS cloud resources and customer-run applications. AWS can collect data, gain insight, and alert users to fix problems within applications and organizations. AWS CloudWatch gives system-wide visibility into resource utilization and notifications can be set for when any metrics cross a specified threshold.\",\n      \"integration_guide_url\": \"http://www.pagerduty.com/docs/guides/aws-cloudwatch-integration-guide/\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13d38ee8-3d14-4767-97f8-96fa3b890454",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "937fffbe-8883-46a9-9e0a-bd655ed422f5",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac35ef24-4ff6-4ebe-881d-c6d3c4f99037",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54df485d-d9bb-4021-86c2-215aa626410a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6741af4-8d9d-4310-b3a4-a2e662b1a60a",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "28dc2a17-222b-4bf0-a065-a00126d00bc4",
+    "name": "PagerDuty Abilities Vendors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

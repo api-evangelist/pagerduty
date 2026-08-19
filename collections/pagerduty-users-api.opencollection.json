@@ -1,0 +1,1279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Users API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filters the result, showing only the records whose name matches the query."
+              },
+              {
+                "name": "team_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "List users of your PagerDuty account, optionally filtered by a search query.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get details about an existing user.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/users/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing user.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Remove an existing user.\n\nReturns 400 if the user has assigned incidents unless your [pricing plan](https://www.pagerduty.com/pricing) has the `offboarding` feature and the account is [configured](https://support.pagerduty.com/docs/offboarding#section-additional-configurations) appropriately.\n\nNote that the incidents reassignment process is asynchronous and has no guarantee to complete before the api call return.\n\n[*Learn more about `offboarding` feature*](https://support.pagerduty.com/docs/offb"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List audit records for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/audit/records",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`."
+              }
+            ]
+          },
+          "docs": "The response will include audit records with changes that are made to the identified user not changes made by the identified user.\n\n\nThe returned records are sorted by the `execution_time` from newest to oldest.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n\nFor more information see the [Audit API Document](https://developer.pagerduty.com/docs/rest-api-v2/audit-records-api/).\n\nScoped OAut"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List a user's contact methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/contact_methods",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "List contact methods of your PagerDuty user.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a user contact method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users/:id/contact_methods",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new contact method for the User.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a user's contact method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/contact_methods/:contact_method_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "contact_method_id",
+                "value": "",
+                "type": "path",
+                "description": "The contact method ID on the user."
+              }
+            ]
+          },
+          "docs": "Get details about a User's contact method.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a user's contact method",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/users/:id/contact_methods/:contact_method_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "contact_method_id",
+                "value": "",
+                "type": "path",
+                "description": "The contact method ID on the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a User's contact method.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a user's contact method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id/contact_methods/:contact_method_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "contact_method_id",
+                "value": "",
+                "type": "path",
+                "description": "The contact method ID on the user."
+              }
+            ]
+          },
+          "docs": "Remove a user's contact method.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the License allocated to a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/license",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get the License allocated to a User\n\nScoped OAuth requires: `licenses.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List a user's notification rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/notification_rules",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              },
+              {
+                "name": "urgency",
+                "value": "",
+                "type": "query",
+                "description": "The incident urgency for which the notification rules are applied. If not specified, defaults to `high`."
+              }
+            ]
+          },
+          "docs": "List notification rules of your PagerDuty user.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a user notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users/:id/notification_rules",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a user's notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/notification_rules/:notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The notification rule ID on the user."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "Get details about a user's notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a user's notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/users/:id/notification_rules/:notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The notification rule ID on the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user's notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a user's notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id/notification_rules/:notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The notification rule ID on the user."
+              }
+            ]
+          },
+          "docs": "Remove a user's notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:contact_methods.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Notification Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/notification_subscriptions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Notification Subscriptions the given User has.\n\n<!-- theme: warning -->\n> Users must be added through `POST /users/{id}/notification_subscriptions` to be returned from this endpoint.\n\nScoped OAuth requires: `subscribers.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create Notification Subcriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users/:id/notification_subscriptions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new Notification Subscriptions for the given User.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Remove Notification Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users/:id/notification_subscriptions/unsubscribe",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribe the given User from Notifications on the matching Subscribable entities.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List a User's Handoff Notification Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/oncall_handoff_notification_rules",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "List Handoff Notification Rules of your PagerDuty User.\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a User Handoff Notification Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users/:id/oncall_handoff_notification_rules",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Handoff Notification Rule.\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a user's handoff notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/oncall_handoff_notification_rules/:oncall_handoff_notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "oncall_handoff_notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The oncall handoff notification rule ID on the user."
+              }
+            ]
+          },
+          "docs": "Get details about a User's Handoff Notification Rule.\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a User's Handoff Notification Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/users/:id/oncall_handoff_notification_rules/:oncall_handoff_notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "oncall_handoff_notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The oncall handoff notification rule ID on the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a User's Handoff Notification Rule.\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a User's Handoff Notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id/oncall_handoff_notification_rules/:oncall_handoff_notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "oncall_handoff_notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The oncall handoff notification rule ID on the user."
+              }
+            ]
+          },
+          "docs": "Remove a User's Handoff Notification Rule.\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List a user's active sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/sessions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "List active sessions of a PagerDuty user.\n\nBeginning November 2021, active sessions no longer includes newly issued OAuth tokens.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:sessions.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete all user sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id/sessions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete all user sessions.\n\nBeginning November 2021, user sessions no longer includes newly issued OAuth tokens.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:sessions.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a user's session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/sessions/:type/:session_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The session type for the user session ID."
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID for the user."
+              }
+            ]
+          },
+          "docs": "Get details about a user's session.\n\nBeginning November 2021, user sessions no longer includes newly issued OAuth tokens.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:sessions.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a user's session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id/sessions/:type/:session_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "The session type for the user session ID."
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID for the user."
+              }
+            ]
+          },
+          "docs": "Delete a user's session.\n\nBeginning November 2021, user sessions no longer includes newly issued OAuth tokens.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users:sessions.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List a user's status update notification rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/status_update_notification_rules",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "X-EARLY-ACCESS",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "List status update notification rules of your PagerDuty user.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\n<!-- theme: warning -->\n> ### Early Access\n> This endpoint is in Early Access and may change at any time. You must pass in the X-EARLY-ACCESS header to access it.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a user status update notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/users/:id/status_update_notification_rules",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "X-EARLY-ACCESS",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new status update notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\n<!-- theme: warning -->\n> ### Early Access\n> This endpoint is in Early Access and may change at any time. You must pass in the X-EARLY-ACCESS header to access it.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a user's status update notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/:id/status_update_notification_rules/:status_update_notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "X-EARLY-ACCESS",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "status_update_notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The status update notification rule ID on the user."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "Get details about a user's status update notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\n<!-- theme: warning -->\n> ### Early Access\n> This endpoint is in Early Access and may change at any time. You must pass in the X-EARLY-ACCESS header to access it.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a user's status update notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/users/:id/status_update_notification_rules/:status_update_notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "X-EARLY-ACCESS",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "status_update_notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The status update notification rule ID on the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user's status update notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\n<!-- theme: warning -->\n> ### Early Access\n> This endpoint is in Early Access and may change at any time. You must pass in the X-EARLY-ACCESS header to access it.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a user's status update notification rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/users/:id/status_update_notification_rules/:status_update_notification_rule_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "X-EARLY-ACCESS",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "status_update_notification_rule_id",
+                "value": "",
+                "type": "path",
+                "description": "The status update notification rule ID on the user."
+              }
+            ]
+          },
+          "docs": "Remove a user's status update notification rule.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\n<!-- theme: warning -->\n> ### Early Access\n> This endpoint is in Early Access and may change at any time. You must pass in the X-EARLY-ACCESS header to access it.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#users)\n\nScoped OAuth requires: `users.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/users/me",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get details about the current user.\n\nThis endpoint can only be used with a [user-level API key](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or a key generated through an OAuth flow. This will not work if the request is made with an account-level access token.\n\nUsers are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.\n\nFor more information see the [API Concepts Document](../../api-refer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,669 @@
+{
+  "item": [
+    {
+      "id": "9dac57ee-3d59-42ad-8d12-465940c3dd08",
+      "name": "On-Calls",
+      "description": {
+        "content": "An on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c6fdea2-32e5-46a2-b416-21e2a39ffd32",
+          "name": "PagerDuty List all of the on-calls",
+          "request": {
+            "name": "PagerDuty List all of the on-calls",
+            "description": {
+              "content": "List the on-call entries during a given time range.\n\nAn on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#on-calls)\n\nScoped OAuth requires: `oncalls.read`\n\nThis API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more information.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oncalls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_zone",
+                  "value": "<tzinfo>",
+                  "description": "Time zone in which results will be rendered. This will default to the account time zone."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset to start pagination search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "total",
+                  "value": "false",
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "include[]",
+                  "value": "<string>",
+                  "description": "Array of additional details to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids[]",
+                  "value": "<string>",
+                  "description": "Filters the results, showing only on-calls for the specified user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids[]",
+                  "value": "<string>",
+                  "description": "Filters the results, showing only on-calls for the specified user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "escalation_policy_ids[]",
+                  "value": "<string>",
+                  "description": "Filters the results, showing only on-calls for the specified escalation policy IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "escalation_policy_ids[]",
+                  "value": "<string>",
+                  "description": "Filters the results, showing only on-calls for the specified escalation policy IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "schedule_ids[]",
+                  "value": "<string>",
+                  "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets."
+                },
+                {
+                  "disabled": false,
+                  "key": "schedule_ids[]",
+                  "value": "<string>",
+                  "description": "Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets."
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time."
+                },
+                {
+                  "disabled": false,
+                  "key": "earliest",
+                  "value": "<boolean>",
+                  "description": "This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the \"next\" on-calls are for a given set of filters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88d0604d-ebee-4868-9e22-2d564c68119b",
+              "name": "A paginated array of on-call objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oncalls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"oncalls\": [\n    {\n      \"user\": {\n        \"id\": \"PT23IWX\",\n        \"type\": \"user_reference\",\n        \"summary\": \"Tim Wright\",\n        \"self\": \"https://api.pagerduty.com/users/PT23IWX\",\n        \"html_url\": \"https://subdomain.pagerduty.com/users/PT23IWX\"\n      },\n      \"schedule\": {\n        \"id\": \"PI7DH85\",\n        \"type\": \"schedule_reference\",\n        \"summary\": \"Daily Engineering Rotation\",\n        \"self\": \"https://api.pagerduty.com/schedules/PI7DH85\",\n        \"html_url\": \"https://subdomain.pagerduty.com/schedules/PI7DH85\"\n      },\n      \"escalation_policy\": {\n        \"id\": \"PT20YPA\",\n        \"type\": \"escalation_policy_reference\",\n        \"summary\": \"Engineering Escalation Policy\",\n        \"self\": \"https://api.pagerduty.com/escalation_policies/PT20YPA\",\n        \"html_url\": \"https://subdomain.pagerduty.com/escalation_policies/PT20YPA\"\n      },\n      \"escalation_level\": 2,\n      \"start\": \"2015-03-06T15:28:51-05:00\",\n      \"end\": \"2015-03-07T15:28:51-05:00\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"more\": false,\n  \"total\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd85b74b-6f25-4805-b52b-e74147ff7e38",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oncalls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "563b01f1-9c28-427a-b100-13f7262c4efc",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oncalls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "506437c2-371f-4f65-ab2e-b69fc5df9002",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oncalls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee4c70dd-8f82-4b1f-8193-e1ed51c13c7e",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oncalls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_zone",
+                      "value": "<tzinfo>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "escalation_policy_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "earliest",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a9650cd-6e70-44a8-884a-92de77557670",
+    "name": "PagerDuty Abilities On-Calls API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

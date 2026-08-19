@@ -1,0 +1,871 @@
+{
+  "item": [
+    {
+      "id": "deaa8b92-e602-42bc-a111-00a784ba8bf7",
+      "name": "Extension Schemas",
+      "description": {
+        "content": "A PagerDuty extension vendor represents a specific type of outbound extension such as Generic Webhook, Slack, ServiceNow.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac29b1ec-4684-4f6b-8162-299de40de0a2",
+          "name": "PagerDuty List extension schemas",
+          "request": {
+            "name": "PagerDuty List extension schemas",
+            "description": {
+              "content": "List all extension schemas.\n\nA PagerDuty extension vendor represents a specific type of outbound extension such as Generic Webhook, Slack, ServiceNow.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extension-schemas)\n\nScoped OAuth requires: `extension_schemas.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extension_schemas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset to start pagination search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "total",
+                  "value": "false",
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "778f1684-70ca-4562-a9ea-da19e8ffacf4",
+              "name": "A paginated array of extension schemas.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extension_schemas\": [\n    {\n      \"id\": \"PJFWPEP\",\n      \"type\": \"extension_schema\",\n      \"summary\": \"Generic Webhook\",\n      \"self\": \"https://api.pagerduty.com/extension_schemas/PJFWPEP\",\n      \"description\": \"Long description here\",\n      \"guide_url\": \"https://developer.pagerduty.com\",\n      \"icon_url\": \"https://extension.com/extension.png\",\n      \"key\": \"generic_webhook\",\n      \"label\": \"Generic Webhook\",\n      \"logo_url\": \"https://extension.com/logo.png\",\n      \"send_types\": [\n        \"trigger\",\n        \"acknowledge\",\n        \"resolve\",\n        \"delegate\",\n        \"escalate\",\n        \"unacknowledge\",\n        \"assign\"\n      ],\n      \"url\": \"\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"more\": false,\n  \"total\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4861ddc-c0c9-47a6-a18d-774a6911966f",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a39823f-42ff-4dd6-9908-31d01bd302bf",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6166c639-a605-4419-9ed7-bf5f4234dc9a",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab85d42-d348-4503-a4c8-8d0a1d1a796f",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "838eba75-d04e-4a98-ab1e-dc881a32da46",
+          "name": "PagerDuty Get an extension vendor",
+          "request": {
+            "name": "PagerDuty Get an extension vendor",
+            "description": {
+              "content": "Get details about one specific extension vendor.\n\nA PagerDuty extension vendor represents a specific type of outbound extension such as Generic Webhook, Slack, ServiceNow.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#extension-schemas)\n\nScoped OAuth requires: `extension_schemas.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extension_schemas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f787a71-cb16-4de5-8a4d-d58847a9163a",
+              "name": "The extension vendor requested",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"extension_schema\": {\n    \"id\": \"PJFWPEP\",\n    \"type\": \"extension_schema\",\n    \"summary\": \"Generic Webhook\",\n    \"self\": \"https://api.pagerduty.com/extension_schemas/PJFWPEP\",\n    \"description\": \"Long description here\",\n    \"guide_url\": \"https://developer.pagerduty.com\",\n    \"icon_url\": \"https://extension.com/extension.png\",\n    \"key\": \"generic_webhook\",\n    \"label\": \"Generic Webhook\",\n    \"logo_url\": \"https://extension.com/logo.png\",\n    \"send_types\": [\n      \"trigger\",\n      \"acknowledge\",\n      \"resolve\",\n      \"delegate\",\n      \"escalate\",\n      \"unacknowledge\",\n      \"assign\"\n    ],\n    \"url\": \"\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5956fe4-7c65-4290-acf8-6d6614fb4939",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c23b854-6f41-445f-8b67-ea649b31102d",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7996e5c8-3f85-45ce-a29f-c125760b2847",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e6bbf26-d045-42c5-b640-45daf0b1d24d",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44a18f6d-4ceb-44f9-b1cd-bf513df66d0d",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extension_schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "251268cc-62bb-4502-81b2-07d7596d5595",
+    "name": "PagerDuty Abilities Extension Schemas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

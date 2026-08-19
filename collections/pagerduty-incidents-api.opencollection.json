@@ -1,0 +1,1086 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Incidents API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page. Maximum of 10000."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "date_range",
+                "value": "",
+                "type": "query",
+                "description": "When set to all, the since and until parameters and defaults are ignored."
+              },
+              {
+                "name": "incident_key",
+                "value": "",
+                "type": "query",
+                "description": "Incident de-duplication key. Incidents with child alerts do not have an incident key; querying by incident key will return incidents whose alerts have alert_key matching the given incident key."
+              },
+              {
+                "name": "service_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Returns only the incidents associated with the passed service(s). This expects one or more service IDs."
+              },
+              {
+                "name": "team_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter."
+              },
+              {
+                "name": "user_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Returns only the incidents currently assigned to the passed user(s). This expects one or more user IDs. Note: When using the assigned_to_user filter, you will only receive incidents with statuses of triggered or acknowledged. This is because resolved incidents are not assigned to any user."
+              },
+              {
+                "name": "urgencies[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of the urgencies of the incidents to be returned. Defaults to all urgencies. Account must have the `urgencies` ability to do this."
+              },
+              {
+                "name": "time_zone",
+                "value": "",
+                "type": "query",
+                "description": "Time zone in which results will be rendered. This will default to the account time zone."
+              },
+              {
+                "name": "statuses[]",
+                "value": "",
+                "type": "query",
+                "description": "Return only incidents with the given statuses. To query multiple statuses, pass `statuses[]` more than once, for example: `https://api.pagerduty.com/incidents?statuses[]=triggered&statuses[]=acknowledged`. (More status codes may be introduced in the future.)"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify both the field you wish to sort the results on (incident_number/created_at/resolved_at/urgency), as well as the direction (asc/desc) of the results. The sort_by field and direction should be separated by a colon. A maximum of two fields can be included, separated by a comma. Sort direction defaults to ascending. The account must have the `urgencies` ability to sort by the urgency."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search. Maximum range is 6 months and default is 1 month."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search. Maximum range is 6 months and default is 1 month."
+              }
+            ]
+          },
+          "docs": "List existing incidents.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an incident synchronously without a corresponding event from a monitoring service.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n\nThis API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more in"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Manage incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge, resolve, escalate or reassign one or more incidents.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nA maximum of 250 incidents may be updated at a time. If more than this number of incidents are given, the API will respond with status 413 (Request Entity Too Large).\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n\nThis API operation has"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "Show detailed information about an incident. Accepts either an incident id, or an incident number.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledge, resolve, escalate or reassign an incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List alerts for an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/alerts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "alert_key",
+                "value": "",
+                "type": "query",
+                "description": "Alert de-duplication key."
+              },
+              {
+                "name": "statuses[]",
+                "value": "",
+                "type": "query",
+                "description": "Return only alerts with the given statuses. (More status codes may be introduced in the future.)"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify both the field you wish to sort the results on (created_at/resolved_at), as well as the direction (asc/desc) of the results. The sort_by field and direction should be separated by a colon. A maximum of two fields can be included, separated by a comma. Sort direction defaults to ascending."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "List alerts for the specified incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Manage alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/:id/alerts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resolve multiple alerts or associate them with different incidents.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved. An alert represents a digital signal that was emitted to PagerDuty by the monitoring systems that detected or identified the issue.\n\nA maximum of 500 alerts may be updated at a time. If more than this number of alerts are given, the API will respond with status 413 (Request Entity Too Large).\n\nFor more information see the [API Concepts Documen"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/alerts/:alert_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "alert_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the alert to retrieve."
+              }
+            ]
+          },
+          "docs": "Show detailed information about an alert. Accepts an alert id.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nWhen a service sends an event to PagerDuty, an alert and corresponding incident is triggered in PagerDuty.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/:id/alerts/:alert_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "alert_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the alert to retrieve."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resolve an alert or associate an alert with a new parent incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nWhen a service sends an event to PagerDuty, an alert and corresponding incident is triggered in PagerDuty.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Manually change an Incident's Impact on a Business Service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/:id/business_services/:business_service_id/impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "business_service_id",
+                "value": "",
+                "type": "path",
+                "description": "The business service ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change Impact of an Incident on a Business Service.\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Business Services impacted by the given Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/business_services/impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Business Services that are being impacted by the given Incident.\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get Custom Field Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/custom_fields/values",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get custom field values for an incident.\n\n<!-- theme: warning -->\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update Custom Field Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/:id/custom_fields/values",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set custom field values for an incident.\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List log entries for an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/log_entries",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "time_zone",
+                "value": "",
+                "type": "query",
+                "description": "Time zone in which results will be rendered. This will default to the account time zone."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search."
+              },
+              {
+                "name": "is_overview",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, will return a subset of log entries that show only the most important changes to the incident."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "List log entries for the specified incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nA Log Entry are a record of all events on your account.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Merge incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/:id/merge",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merge a list of source incidents into this incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List notes for an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/notes",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "List existing notes for the specified incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a note on an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/:id/notes",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new note for the specified incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nA maximum of 2000 notes can be added to an incident.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get Outlier Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/outlier_incident",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search."
+              },
+              {
+                "name": "additional_details[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional attributes to any of the returned incidents for related incidents."
+              }
+            ]
+          },
+          "docs": "Gets Outlier Incident information for a given Incident on its Service.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#outlier-incident)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get Past Incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/past_incidents",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to be returned in the response."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in the response body is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated with the total number of Past Incidents.\n"
+              }
+            ]
+          },
+          "docs": "Past Incidents returns Incidents within the past 6 months that have similar metadata and were generated on the same Service as the parent Incident. By default, 5 Past Incidents are returned. Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#past_incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get Related Incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/related_incidents",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "additional_details[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional attributes to any of the returned incidents for related incidents."
+              }
+            ]
+          },
+          "docs": "Returns the 20 most recent Related Incidents that are impacting other Responders and Services. Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#related_incidents)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a responder request for an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/:id/responder_requests",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a new responder request for the specified incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Snooze an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/:id/snooze",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Snooze an incident.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a status update on an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/:id/status_updates",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new status update for the specified incident. Optionally pass `subject` and `html_message` properties in the request body to override the email notification that gets sent.\n\nAn incident represents a problem or an issue that needs to be addressed and resolved.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#incidents)\n\nScoped OAuth requires: `incidents.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Notification Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/:id/status_updates/subscribers",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Notification Subscribers on the Incident.\n\n<!-- theme: warning -->\n> Users must be added through `POST /incident/{id}/status_updates/subscribers` to be returned from this endpoint.\nScoped OAuth requires: `subscribers.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Add Notification Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/:id/status_updates/subscribers",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe the given entities to Incident Status Update Notifications.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Remove Notification Subscriber",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/:id/status_updates/unsubscribe",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribes the matching Subscribers from Incident Status Update Notifications.\n\nScoped OAuth requires: `subscribers.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

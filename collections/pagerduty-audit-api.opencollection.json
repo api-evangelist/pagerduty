@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Audit API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List audit records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/audit/records",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`."
+              },
+              {
+                "name": "root_resource_types[]",
+                "value": "",
+                "type": "query",
+                "description": "Resource type filter for the root_resource."
+              },
+              {
+                "name": "actor_type",
+                "value": "",
+                "type": "query",
+                "description": "Actor type filter."
+              },
+              {
+                "name": "actor_id",
+                "value": "",
+                "type": "query",
+                "description": "Actor Id filter. Must be qualified by providing the `actor_type` param."
+              },
+              {
+                "name": "method_type",
+                "value": "",
+                "type": "query",
+                "description": "Method type filter."
+              },
+              {
+                "name": "method_truncated_token",
+                "value": "",
+                "type": "query",
+                "description": "Method truncated_token filter. Must be qualified by providing the `method_type` param."
+              },
+              {
+                "name": "actions[]",
+                "value": "",
+                "type": "query",
+                "description": "Action filter"
+              }
+            ]
+          },
+          "docs": "List audit trail records matching provided query params or default criteria.\n\nThe returned records are sorted by the `execution_time` from newest to oldest.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n\nOnly admins, account owners, or global API tokens on PagerDuty account [pricing plans](https://www.pagerduty.com/pricing) with the \"Audit Trail\" feature can access this endpoint.\n\nFor oth"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Alert Grouping Settings API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alert Grouping Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List alert grouping settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/alert_grouping_settings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to retrieve next page; only present if next page exists."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor to retrieve previous page; only present if not on first page."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "service_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of service IDs. Only results related to these services will be returned."
+              }
+            ]
+          },
+          "docs": "List all of your alert grouping settings including both single service settings and global content based settings.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Alert Grouping Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/alert_grouping_settings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nThis endpoint will be used to create an instance of AlertGroupingSettings for either one service or many services that are in the alert group setting.\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an Alert Grouping Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/alert_grouping_settings/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get an existing Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an Alert Grouping Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/alert_grouping_settings/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nif `services` are not provided in the request, then the existing services will not be removed from the setting.\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete an Alert Grouping Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/alert_grouping_settings/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an existing Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3358 @@
+{
+  "item": [
+    {
+      "id": "c2baa37e-4c9e-4129-b732-f2c19fa6c40a",
+      "name": "Analytics",
+      "description": {
+        "content": "Provides enriched incident data.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d1f3ff3-bec6-4486-a47c-8344712cdcfa",
+          "name": "PagerDuty Get aggregated incident data",
+          "request": {
+            "name": "PagerDuty Get aggregated incident data",
+            "description": {
+              "content": "Provides aggregated enriched metrics for incidents.\n\nThe provided metrics are aggregated by day, week, month using the aggregate_unit parameter, or for the entire period if no aggregate_unit is provided.\n\n<!-- theme: info -->\n> A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26f1715c-7285-43d9-9c16-8dc2ee344d56",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2024-01-01T00:00:00-05:00\",\n    \"created_at_end\": \"2024-01-31T00:00:00-05:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aggregate_unit\": \"day\",\n  \"data\": [\n    {\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 366,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 81,\n      \"mean_seconds_to_first_ack\": 63,\n      \"mean_seconds_to_mobilize\": 41,\n      \"mean_seconds_to_resolve\": 380,\n      \"mean_user_defined_engaged_seconds\": 366,\n      \"range_start\": \"2024-01-01T00:00:00\",\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 3591,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 0,\n      \"total_incidents_auto_resolved\": 0,\n      \"total_incidents_manual_escalated\": 0,\n      \"total_incidents_reassigned\": 0,\n      \"total_incidents_timeout_escalated\": 0,\n      \"total_interruptions\": 2,\n      \"total_notifications\": 2,\n      \"total_off_hour_interruptions\": 20,\n      \"total_sleep_hour_interruptions\": 21,\n      \"total_snoozed_seconds\": 78,\n      \"total_user_defined_engaged_seconds\": 3591\n    }\n  ],\n  \"filters\": {\n    \"create_range_start\": \"2024-01-01T00:00:00Z\",\n    \"create_range_end\": \"2024-02-01T00:00:00Z\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dc04ae7-f132-4c1f-92c5-5f370276d2d1",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2024-01-01T00:00:00-05:00\",\n    \"created_at_end\": \"2024-01-31T00:00:00-05:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "539b3af4-2235-40ee-aa2a-b7faee6b4aeb",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2024-01-01T00:00:00-05:00\",\n    \"created_at_end\": \"2024-01-31T00:00:00-05:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b9fa032-69ae-414a-b81e-54180f0b0a73",
+          "name": "PagerDuty Get aggregated escalation policy data",
+          "request": {
+            "name": "PagerDuty Get aggregated escalation policy data",
+            "description": {
+              "content": "Provides aggregated metrics for incidents aggregated into units of time by escalation policy.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#escalation-policy-list).\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "escalation_policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e0f5319-37eb-4a49-97c7-5d06240dbc66",
+              "name": "Only returns data for escalation policies that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "escalation_policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"distinct_responder_count\": 1,\n      \"escalation_policy_id\": \"PDESCP1\",\n      \"escalation_policy_name\": \"Escalation Policy 1\",\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 81,\n      \"mean_engaged_user_count\": 63,\n      \"mean_seconds_to_engage\": 41,\n      \"mean_seconds_to_first_ack\": 380,\n      \"mean_seconds_to_mobilize\": 81,\n      \"mean_seconds_to_resolve\": 3591,\n      \"mean_user_defined_engaged_seconds\": 81,\n      \"team_id\": \"PDTEAM1\",\n      \"team_name\": \"Team 1\",\n      \"total_business_hour_interruptions\": 5,\n      \"total_engaged_seconds\": 124,\n      \"total_escalation_count\": 20,\n      \"total_incident_count\": 21,\n      \"total_incidents_acknowledged\": 78,\n      \"total_incidents_auto_resolved\": 3,\n      \"total_incidents_manual_escalated\": 3,\n      \"total_incidents_reassigned\": 4,\n      \"total_incidents_timeout_escalated\": 1,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 23,\n      \"total_off_hour_interruptions\": 3,\n      \"total_sleep_hour_interruptions\": 1,\n      \"total_snoozed_seconds\": 341,\n      \"total_user_defined_engaged_seconds\": 124,\n      \"up_time_pct\": 9.124123\n    },\n    {\n      \"distinct_responder_count\": 1,\n      \"escalation_policy_id\": \"PDESCP2\",\n      \"escalation_policy_name\": \"Escalation Policy 2\",\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 81,\n      \"mean_engaged_user_count\": 63,\n      \"mean_seconds_to_engage\": 41,\n      \"mean_seconds_to_first_ack\": 380,\n      \"mean_seconds_to_mobilize\": 81,\n      \"mean_seconds_to_resolve\": 3591,\n      \"mean_user_defined_engaged_seconds\": 81,\n      \"team_id\": \"PDTEAM1\",\n      \"team_name\": \"Team 1\",\n      \"total_business_hour_interruptions\": 5,\n      \"total_engaged_seconds\": 124,\n      \"total_escalation_count\": 20,\n      \"total_incident_count\": 21,\n      \"total_incidents_acknowledged\": 78,\n      \"total_incidents_auto_resolved\": 3,\n      \"total_incidents_manual_escalated\": 3,\n      \"total_incidents_reassigned\": 4,\n      \"total_incidents_timeout_escalated\": 1,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 23,\n      \"total_off_hour_interruptions\": 3,\n      \"total_sleep_hour_interruptions\": 1,\n      \"total_snoozed_seconds\": 341,\n      \"total_user_defined_engaged_seconds\": 124,\n      \"up_time_pct\": 9.124123\n    }\n  ],\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00Z\",\n    \"created_at_end\": \"2023-06-12T00:00:00Z\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b40f6df-bc08-4619-9fa5-d6561b1164a1",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "escalation_policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c3b8471-2c3f-4372-9d3c-dc249dd6a334",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "escalation_policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10e1100e-51ae-4f1a-bb77-3ad434b7d9da",
+          "name": "PagerDuty Get aggregated metrics for all escalation policies",
+          "request": {
+            "name": "PagerDuty Get aggregated metrics for all escalation policies",
+            "description": {
+              "content": "Provides aggregated metrics across all escalation policies.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#escalation-policy-list).\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "escalation_policies",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9607afa6-02b9-4ea3-928a-6b738e0e4982",
+              "name": "Only returns data for escalation policies that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "escalation_policies",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T00:00:00-07:00\",\n    \"created_at_end\": \"2023-07-01T23:59:59-07:00\",\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"distinct_responder_count\": 1,\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 81,\n      \"mean_engaged_user_count\": 63,\n      \"mean_seconds_to_engage\": 41,\n      \"mean_seconds_to_first_ack\": 380,\n      \"mean_seconds_to_mobilize\": 81,\n      \"mean_seconds_to_resolve\": 3591,\n      \"mean_user_defined_engaged_seconds\": 81,\n      \"total_business_hour_interruptions\": 5,\n      \"total_engaged_seconds\": 124,\n      \"total_escalation_count\": 20,\n      \"total_incident_count\": 21,\n      \"total_incidents_acknowledged\": 78,\n      \"total_incidents_auto_resolved\": 3,\n      \"total_incidents_manual_escalated\": 3,\n      \"total_incidents_reassigned\": 4,\n      \"total_incidents_timeout_escalated\": 1,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 23,\n      \"total_off_hour_interruptions\": 3,\n      \"total_sleep_hour_interruptions\": 1,\n      \"total_snoozed_seconds\": 341,\n      \"total_user_defined_engaged_seconds\": 124,\n      \"up_time_pct\": 9.124123\n    }\n  ],\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T07:00:00Z\",\n    \"created_at_end\": \"2023-07-02T06:59:59Z\",\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2004345-48a8-4af7-a962-ccf16001c09d",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "escalation_policies",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T00:00:00-07:00\",\n    \"created_at_end\": \"2023-07-01T23:59:59-07:00\",\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88482d54-5575-411b-825b-1bdd5896fd1b",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "escalation_policies",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T00:00:00-07:00\",\n    \"created_at_end\": \"2023-07-01T23:59:59-07:00\",\n    \"escalation_policy_ids\": [\n      \"PDESCP1\",\n      \"PDESCP2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9d401f0-8542-4862-bec6-bbf056a17756",
+          "name": "PagerDuty Get aggregated service data",
+          "request": {
+            "name": "PagerDuty Get aggregated service data",
+            "description": {
+              "content": "Provides aggregated metrics for incidents aggregated into units of time by service.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#services-list).\nData can be aggregated by day, week or month in addition to by service, or provided just as a collection of aggregates for each service in the dataset for the entire period.  If a unit is provided, each row in the returned dataset will include a 'range_start' timestamp.\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "842cc463-b469-4ee9-8648-3b4386d4af6c",
+              "name": "Only returns data for services that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ],\n    \"service_ids\": [\n      \"PPSCXAN\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aggregate_unit\": \"day\",\n  \"data\": [\n    {\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 366,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 81,\n      \"mean_seconds_to_first_ack\": 63,\n      \"mean_seconds_to_mobilize\": 41,\n      \"mean_seconds_to_resolve\": 380,\n      \"mean_user_defined_engaged_seconds\": 366,\n      \"range_start\": \"2023-06-11T00:00:00\",\n      \"service_id\": \"PPSCXAN\",\n      \"service_name\": \"Critical Prod Service 1\",\n      \"team_id\": \"P3XUQ75\",\n      \"team_name\": \"Engineering\",\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 3591,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 1,\n      \"total_incidents_auto_resolved\": 12,\n      \"total_incidents_manual_escalated\": 9,\n      \"total_incidents_reassigned\": 1,\n      \"total_incidents_timeout_escalated\": 4,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 342,\n      \"total_off_hour_interruptions\": 20,\n      \"total_sleep_hour_interruptions\": 21,\n      \"total_snoozed_seconds\": 78,\n      \"total_user_defined_engaged_seconds\": 3591,\n      \"up_time_pct\": 99.92677595628416\n    },\n    {\n      \"mean_assignment_count\": 12,\n      \"mean_engaged_seconds\": 432,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 77,\n      \"mean_seconds_to_first_ack\": 32,\n      \"mean_seconds_to_mobilize\": 32,\n      \"mean_seconds_to_resolve\": 87,\n      \"mean_user_defined_engaged_seconds\": 432,\n      \"range_start\": \"2023-06-10T00:00:00\",\n      \"service_id\": \"PPSCXAN\",\n      \"service_name\": \"Critical Prod Service 1\",\n      \"team_id\": \"P3XUQ75\",\n      \"team_name\": \"Engineering\",\n      \"total_business_hour_interruptions\": 12,\n      \"total_engaged_seconds\": 3645,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 1,\n      \"total_incidents_auto_resolved\": 12,\n      \"total_incidents_manual_escalated\": 9,\n      \"total_incidents_reassigned\": 1,\n      \"total_incidents_timeout_escalated\": 4,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 32,\n      \"total_off_hour_interruptions\": 42,\n      \"total_sleep_hour_interruptions\": 3,\n      \"total_snoozed_seconds\": 123,\n      \"total_user_defined_engaged_seconds\": 3645,\n      \"up_time_pct\": 99.234416\n    }\n  ],\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00Z\",\n    \"created_at_end\": \"2023-06-12T00:00:00Z\",\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ],\n    \"service_ids\": [\n      \"PPSCXAN\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58bd2cc1-71be-4e0a-a570-b5934bb0b101",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ],\n    \"service_ids\": [\n      \"PPSCXAN\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cf8e714-7e0d-4beb-b225-c4fcdc3292d8",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ],\n    \"service_ids\": [\n      \"PPSCXAN\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c270c9d-b00e-4782-a0d8-204401d5d1dc",
+          "name": "PagerDuty Get aggregated metrics for all services",
+          "request": {
+            "name": "PagerDuty Get aggregated metrics for all services",
+            "description": {
+              "content": "Provides aggregated metrics across all services.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#services-list).\n\n<!-- theme: info -->\n> A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "services",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71c5840f-c948-4afb-b2ff-65de4d918076",
+              "name": "Only returns data for services that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "services",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T00:00:00-07:00\",\n    \"created_at_end\": \"2023-07-01T23:59:59-07:00\",\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 366,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 81,\n      \"mean_seconds_to_first_ack\": 63,\n      \"mean_seconds_to_mobilize\": 41,\n      \"mean_seconds_to_resolve\": 380,\n      \"mean_user_defined_engaged_seconds\": 366,\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 3591,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 1,\n      \"total_incidents_auto_resolved\": 12,\n      \"total_incidents_manual_escalated\": 9,\n      \"total_incidents_reassigned\": 1,\n      \"total_incidents_timeout_escalated\": 4,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 342,\n      \"total_off_hour_interruptions\": 20,\n      \"total_sleep_hour_interruptions\": 21,\n      \"total_snoozed_seconds\": 78,\n      \"total_user_defined_engaged_seconds\": 3591,\n      \"up_time_pct\": 99.92677595628416\n    }\n  ],\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T07:00:00Z\",\n    \"created_at_end\": \"2023-07-02T06:59:59Z\",\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fec2ea7-6b29-4fe3-868b-e11900904c51",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "services",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T00:00:00-07:00\",\n    \"created_at_end\": \"2023-07-01T23:59:59-07:00\",\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f063b576-95be-4d2c-880f-7be3ea058a2a",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "services",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-17T00:00:00-07:00\",\n    \"created_at_end\": \"2023-07-01T23:59:59-07:00\",\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4bfdcda-6486-4adf-92cb-4fcc85afba76",
+          "name": "PagerDuty Get aggregated team data",
+          "request": {
+            "name": "PagerDuty Get aggregated team data",
+            "description": {
+              "content": "Provides aggregated metrics for incidents aggregated into units of time by team.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#teams-list).\nData can be aggregated by day, week or month in addition to by team, or provided just as a collection of aggregates for each team in the dataset for the entire period.  If a unit is provided, each row in the returned dataset will include a 'range_start' timestamp.\n\n<!-- theme: info -->\n> A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7135d072-b35b-424d-a85b-dc5b8a27672a",
+              "name": "Only returns data for teams that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aggregate_unit\": \"day\",\n  \"data\": [\n    {\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 366,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 81,\n      \"mean_seconds_to_first_ack\": 63,\n      \"mean_seconds_to_mobilize\": 41,\n      \"mean_seconds_to_resolve\": 380,\n      \"mean_user_defined_engaged_seconds\": 366,\n      \"range_start\": \"2023-06-11T00:00:00\",\n      \"team_id\": \"P3XUQ75\",\n      \"team_name\": \"Engineering\",\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 3591,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 1,\n      \"total_incidents_auto_resolved\": 12,\n      \"total_incidents_manual_escalated\": 9,\n      \"total_incidents_reassigned\": 1,\n      \"total_incidents_timeout_escalated\": 4,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 342,\n      \"total_off_hour_interruptions\": 20,\n      \"total_sleep_hour_interruptions\": 21,\n      \"total_snoozed_seconds\": 78,\n      \"total_user_defined_engaged_seconds\": 3591,\n      \"up_time_pct\": 99.92677595628416\n    },\n    {\n      \"mean_assignment_count\": 12,\n      \"mean_engaged_seconds\": 432,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 77,\n      \"mean_seconds_to_first_ack\": 32,\n      \"mean_seconds_to_mobilize\": 32,\n      \"mean_seconds_to_resolve\": 87,\n      \"mean_user_defined_engaged_seconds\": 432,\n      \"range_start\": \"2023-06-10T00:00:00\",\n      \"team_id\": \"P3XUQ75\",\n      \"team_name\": \"Engineering\",\n      \"total_business_hour_interruptions\": 12,\n      \"total_engaged_seconds\": 3645,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 1,\n      \"total_incidents_auto_resolved\": 12,\n      \"total_incidents_manual_escalated\": 9,\n      \"total_incidents_reassigned\": 1,\n      \"total_incidents_timeout_escalated\": 4,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 32,\n      \"total_off_hour_interruptions\": 42,\n      \"total_sleep_hour_interruptions\": 3,\n      \"total_snoozed_seconds\": 123,\n      \"total_user_defined_engaged_seconds\": 3645,\n      \"up_time_pct\": 99.234416\n    }\n  ],\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00Z\",\n    \"created_at_end\": \"2023-06-12T00:00:00Z\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89d84405-2dad-4203-80f8-1204f37be7b9",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05013ad0-02b5-422d-bf7a-3d942f677965",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"aggregate_unit\": \"day\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54b3b8ba-a82c-4472-9d2e-04879da1b979",
+          "name": "PagerDuty Get aggregated metrics for all teams",
+          "request": {
+            "name": "PagerDuty Get aggregated metrics for all teams",
+            "description": {
+              "content": "Provides aggregated metrics across all teams.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#teams-list).\n\n<!-- theme: info -->\n> A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "incidents",
+                "teams",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"min_ackowledgements\": \"<integer>\",\n    \"min_timeout_escalations\": \"<integer>\",\n    \"min_manual_escalations\": \"<integer>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"escalation_policy_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"aggregate_unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7afb87c0-afcd-4469-8d06-15911ac007a6",
+              "name": "Only returns data for teams that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "teams",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"mean_assignment_count\": 1,\n      \"mean_engaged_seconds\": 366,\n      \"mean_engaged_user_count\": 1,\n      \"mean_seconds_to_engage\": 81,\n      \"mean_seconds_to_first_ack\": 63,\n      \"mean_seconds_to_mobilize\": 41,\n      \"mean_seconds_to_resolve\": 380,\n      \"mean_user_defined_engaged_seconds\": 366,\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 3591,\n      \"total_escalation_count\": 5,\n      \"total_incident_count\": 124,\n      \"total_incidents_acknowledged\": 1,\n      \"total_incidents_auto_resolved\": 12,\n      \"total_incidents_manual_escalated\": 9,\n      \"total_incidents_reassigned\": 1,\n      \"total_incidents_timeout_escalated\": 4,\n      \"total_interruptions\": 1,\n      \"total_notifications\": 342,\n      \"total_off_hour_interruptions\": 20,\n      \"total_sleep_hour_interruptions\": 21,\n      \"total_snoozed_seconds\": 78,\n      \"total_user_defined_engaged_seconds\": 3591\n    }\n  ],\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00Z\",\n    \"created_at_end\": \"2023-06-12T00:00:00Z\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48eed3ff-ba3b-4b13-97e4-32f91640bbb7",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "teams",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7de49621-10f3-40d6-ac12-521c8495d9bb",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "incidents",
+                    "teams",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"P3XUQ75\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcc83d0e-bfaf-42da-a6a1-50af56d0e729",
+          "name": "PagerDuty Get aggregated metrics for all responders",
+          "request": {
+            "name": "PagerDuty Get aggregated metrics for all responders",
+            "description": {
+              "content": "Provides aggregated incident metrics for all selected responders.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#responders-list).\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "responders",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"<string>\",\n    \"date_range_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"responder_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb43a8b7-0048-45f2-a932-fa94e16f1c09",
+              "name": "Only returns data for responders that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "responders",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00-07:00\",\n    \"date_range_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"mean_engaged_seconds\": 366,\n      \"mean_time_to_acknowledge_seconds\": 1,\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 63,\n      \"total_incident_count\": 41,\n      \"total_incidents_acknowledged\": 380,\n      \"total_incidents_manual_escalated_from\": 81,\n      \"total_incidents_manual_escalated_to\": 3591,\n      \"total_incidents_reassigned_from\": 5,\n      \"total_incidents_reassigned_to\": 124,\n      \"total_incidents_timeout_escalated_from\": 20,\n      \"total_incidents_timeout_escalated_to\": 21,\n      \"total_interruptions\": 4,\n      \"total_notifications\": 78,\n      \"total_off_hour_interruptions\": 23,\n      \"total_seconds_on_call\": 604799,\n      \"total_seconds_on_call_level_1\": 126000,\n      \"total_seconds_on_call_level_2_plus\": 604799,\n      \"total_sleep_hour_interruptions\": 0\n    }\n  ],\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00Z\",\n    \"date_range_end\": \"2023-06-12T00:00:00Z\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ],\n    \"urgency\": \"high\"\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c976f45-6587-4eeb-8910-31503af7c9df",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "responders",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00-07:00\",\n    \"date_range_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fb25b2d-9aac-4589-8776-3f10d6979f42",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "responders",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00-07:00\",\n    \"date_range_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f8b4009-d0c5-4049-b870-72f18b9b16ea",
+          "name": "PagerDuty Get responder data aggregated by team",
+          "request": {
+            "name": "PagerDuty Get responder data aggregated by team",
+            "description": {
+              "content": "Provides incident metrics aggregated by responder.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#responders-list).\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "metrics",
+                "responders",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"<string>\",\n    \"date_range_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"responder_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"time_zone\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31fc388d-cd76-4eca-a0eb-fbddc06b8e35",
+              "name": "Only returns data for responders and teams that match the filters and have data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "responders",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00-07:00\",\n    \"date_range_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"mean_engaged_seconds\": 366,\n      \"mean_time_to_acknowledge_seconds\": 1,\n      \"responder_id\": \"PDUSER1\",\n      \"responder_name\": \"User 1\",\n      \"team_id\": \"PPSCXAN\",\n      \"team_name\": \"Best Team A #1\",\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 63,\n      \"total_incident_count\": 41,\n      \"total_incidents_acknowledged\": 380,\n      \"total_incidents_manual_escalated_from\": 81,\n      \"total_incidents_manual_escalated_to\": 3591,\n      \"total_incidents_reassigned_from\": 5,\n      \"total_incidents_reassigned_to\": 124,\n      \"total_incidents_timeout_escalated_from\": 20,\n      \"total_incidents_timeout_escalated_to\": 21,\n      \"total_interruptions\": 4,\n      \"total_notifications\": 78,\n      \"total_off_hour_interruptions\": 23,\n      \"total_seconds_on_call\": 604799,\n      \"total_seconds_on_call_level_1\": 126000,\n      \"total_seconds_on_call_level_2_plus\": 604799,\n      \"total_sleep_hour_interruptions\": 0\n    },\n    {\n      \"mean_engaged_seconds\": 366,\n      \"mean_time_to_acknowledge_seconds\": 1,\n      \"responder_id\": \"PDUSER2\",\n      \"responder_name\": \"User 2\",\n      \"team_id\": \"PPSCXAN\",\n      \"team_name\": \"Best Team A #1\",\n      \"total_business_hour_interruptions\": 81,\n      \"total_engaged_seconds\": 63,\n      \"total_incident_count\": 41,\n      \"total_incidents_acknowledged\": 380,\n      \"total_incidents_manual_escalated_from\": 81,\n      \"total_incidents_manual_escalated_to\": 3591,\n      \"total_incidents_reassigned_from\": 5,\n      \"total_incidents_reassigned_to\": 124,\n      \"total_incidents_timeout_escalated_from\": 20,\n      \"total_incidents_timeout_escalated_to\": 21,\n      \"total_interruptions\": 6,\n      \"total_notifications\": 78,\n      \"total_off_hour_interruptions\": 23,\n      \"total_seconds_on_call\": 120000,\n      \"total_seconds_on_call_level_1\": 120000,\n      \"total_seconds_on_call_level_2_plus\": 0,\n      \"total_sleep_hour_interruptions\": 0\n    }\n  ],\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00Z\",\n    \"date_range_end\": \"2023-06-12T00:00:00Z\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ],\n    \"urgency\": \"high\"\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "814ba67f-e720-4df0-918e-b2e28d910c84",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "responders",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00-07:00\",\n    \"date_range_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa68252b-3a60-4c39-80f0-3e172253acdb",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "metrics",
+                    "responders",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"date_range_start\": \"2023-06-10T00:00:00-07:00\",\n    \"date_range_end\": \"2023-06-11T23:59:59-07:00\",\n    \"urgency\": \"high\",\n    \"responder_ids\": [\n      \"PDUSER1\",\n      \"PDUSER2\"\n    ]\n  },\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7471f186-01ea-4f2e-bffc-8f3cd11ce9f5",
+          "name": "PagerDuty Get raw data - multiple incidents",
+          "request": {
+            "name": "PagerDuty Get raw data - multiple incidents",
+            "description": {
+              "content": "Provides enriched incident data and metrics for multiple incidents.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#incidents-list).\n\n<!-- theme: info -->\n> A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "raw",
+                "incidents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"updated_after\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"starting_after\": \"<string>\",\n  \"ending_before\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"time_zone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b96806f-8670-4402-aa2c-0cdfc69fb69a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2024-01-01T00:00:00-05:00\",\n    \"created_at_end\": \"2024-01-31T00:00:00-05:00\",\n    \"updated_after\": \"2024-05-01T00:00:00-05:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ],\n    \"priority_names\": [\n      \"P1\",\n      \"P2\"\n    ]\n  },\n  \"limit\": 20,\n  \"order\": \"desc\",\n  \"order_by\": \"created_at\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"acknowledged_user_ids\": [\n        \"PRJ4208\"\n      ],\n      \"acknowledged_user_names\": [\n        \"John Smith\"\n      ],\n      \"acknowledgement_count\": 1,\n      \"active_user_count\": 3,\n      \"assigned_user_ids\": [\n        \"PRJ4208\",\n        \"PA02301\"\n      ],\n      \"assigned_user_names\": [\n        \"John Smith\",\n        \"Jane Doe\"\n      ],\n      \"assignment_count\": 2,\n      \"auto_resolved\": false,\n      \"business_hour_interruptions\": 5,\n      \"created_at\": \"2023-05-31T10:05:00\",\n      \"updated_at\": \"2023-06-04T00:00:00\",\n      \"description\": \"The server is on fire!\",\n      \"engaged_seconds\": 3510,\n      \"engaged_user_count\": 10,\n      \"escalation_count\": 1,\n      \"escalation_policy_id\": \"PDESCP1\",\n      \"escalation_policy_name\": \"Escalation Policy 1\",\n      \"id\": \"PYC0H08\",\n      \"incident_number\": 928,\n      \"joined_user_ids\": [\n        \"PRJ4208\",\n        \"PA02301\",\n        \"P40D0J1\"\n      ],\n      \"joined_user_names\": [\n        \"John Smith\",\n        \"Jane Doe\",\n        \"Wanda Evans\"\n      ],\n      \"major\": false,\n      \"manual_escalation_count\": 0,\n      \"off_hour_interruptions\": 4,\n      \"priority_id\": null,\n      \"priority_name\": null,\n      \"priority_order\": null,\n      \"reassignment_count\": 0,\n      \"resolved_at\": \"2023-05-31T10:15:00\",\n      \"resolved_by_user_id\": \"PRJ4208\",\n      \"resolved_by_user_name\": \"John Smith\",\n      \"seconds_to_engage\": 70,\n      \"seconds_to_first_ack\": 5,\n      \"seconds_to_mobilize\": 19,\n      \"seconds_to_resolve\": 3305,\n      \"service_id\": \"PPSCXAN\",\n      \"service_name\": \"Engineering\",\n      \"sleep_hour_interruptions\": 3,\n      \"snoozed_seconds\": 604,\n      \"status\": \"resolved\",\n      \"team_id\": null,\n      \"team_name\": null,\n      \"timeout_escalation_count\": 0,\n      \"total_interruptions\\\"\": null,\n      \"total_notifications\": 2,\n      \"urgency\": \"low\",\n      \"user_defined_effort_seconds\": null\n    },\n    {\n      \"acknowledged_user_ids\": [\n        \"PMT4102\"\n      ],\n      \"acknowledged_user_names\": [\n        \"Sally Styles\"\n      ],\n      \"acknowledgement_count\": 1,\n      \"active_user_count\": 1,\n      \"assigned_user_ids\": [\n        \"PMT4102\"\n      ],\n      \"assigned_user_names\": [\n        \"Sally Styles\"\n      ],\n      \"assignment_count\": 1,\n      \"business_hour_interruptions\": 2,\n      \"created_at\": \"2023-05-31T10:00:00\",\n      \"updated_at\": \"2023-06-04T00:00:00\",\n      \"description\": \"Reply on social media\",\n      \"engaged_seconds\": 521,\n      \"engaged_user_count\": 6,\n      \"escalation_count\": 1,\n      \"escalation_policy_id\": \"PDESCP1\",\n      \"escalation_policy_name\": \"Escalation Policy 1\",\n      \"id\": \"PCOOHCY\",\n      \"incident_number\": 929,\n      \"joined_user_ids\": [\n        \"PMT4102\"\n      ],\n      \"joined_user_names\": [\n        \"Sally Styles\"\n      ],\n      \"major\": false,\n      \"manual_escalation_count\": 0,\n      \"off_hour_interruptions\": 3,\n      \"priority_id\": \"POTCOTX\",\n      \"priority_name\": \"SEV-2\",\n      \"priority_order\": null,\n      \"reassignment_count\": 0,\n      \"resolved_at\": \"2023-05-30T10:00:05\",\n      \"resolved_by_user_id\": \"PMT4102\",\n      \"resolved_by_user_name\": \"Sally Styles\",\n      \"seconds_to_engage\": 24,\n      \"seconds_to_first_ack\": 48,\n      \"seconds_to_mobilize\": 122,\n      \"seconds_to_resolve\": 2029,\n      \"service_id\": \"PPSCXAN\",\n      \"service_name\": \"Social media tracking\",\n      \"sleep_hour_interruptions\": 1,\n      \"snoozed_seconds\": 698,\n      \"status\": \"resolved\",\n      \"team_id\": null,\n      \"team_name\": \"Marketing\",\n      \"timeout_escalation_count\": 0,\n      \"total_interruptions\\\"\": null,\n      \"total_notifications\": 2,\n      \"urgency\": \"low\",\n      \"user_defined_effort_seconds\": null\n    }\n  ],\n  \"ending_before\": null,\n  \"filters\": {},\n  \"first\": \"PYC0H08\",\n  \"last\": \"PCOOHCY\",\n  \"limit\": 10,\n  \"more\": true,\n  \"order\": \"desc\",\n  \"order_by\": \"created_at\",\n  \"starting_after\": null,\n  \"time_zone\": \"Etc/UTC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fc8baec-016b-463f-9e12-3cbae33d35d7",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2024-01-01T00:00:00-05:00\",\n    \"created_at_end\": \"2024-01-31T00:00:00-05:00\",\n    \"updated_after\": \"2024-05-01T00:00:00-05:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ],\n    \"priority_names\": [\n      \"P1\",\n      \"P2\"\n    ]\n  },\n  \"limit\": 20,\n  \"order\": \"desc\",\n  \"order_by\": \"created_at\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e636a9a-52cc-4f83-8ece-46cedef36b29",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2024-01-01T00:00:00-05:00\",\n    \"created_at_end\": \"2024-01-31T00:00:00-05:00\",\n    \"updated_after\": \"2024-05-01T00:00:00-05:00\",\n    \"urgency\": \"high\",\n    \"major\": true,\n    \"team_ids\": [\n      \"PGVXG6U\",\n      \"PNVU4U4\"\n    ],\n    \"service_ids\": [\n      \"PQVUB8D\",\n      \"PU2D9X3\"\n    ],\n    \"priority_names\": [\n      \"P1\",\n      \"P2\"\n    ]\n  },\n  \"limit\": 20,\n  \"order\": \"desc\",\n  \"order_by\": \"created_at\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e22c267-7e37-44c2-9121-dda8e0ff497d",
+          "name": "PagerDuty Get raw data - single incident",
+          "request": {
+            "name": "PagerDuty Get raw data - single incident",
+            "description": {
+              "content": "Provides enriched incident data and metrics for a single incident.\n\nExample metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#incidents-list).\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "raw",
+                "incidents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ced91e55-c392-4b58-ac5f-1dab4276fffa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"time_zone\": \"Etc/UTC\",\n  \"data\": {\n    \"acknowledged_user_ids\": [\n      \"PRJ4208\"\n    ],\n    \"acknowledged_user_names\": [\n      \"Santos Dicera\"\n    ],\n    \"acknowledgement_count\": 1,\n    \"active_user_count\": 2,\n    \"assigned_user_ids\": [\n      \"PRJ4208\",\n      \"PA02301\"\n    ],\n    \"assigned_user_names\": [\n      \"Santos Dicera\",\n      \"Jane Doe\"\n    ],\n    \"assignment_count\": 2,\n    \"auto_resolved\": false,\n    \"business_hour_interruptions\": 0,\n    \"created_at\": \"2024-01-01T21:00:00Z\",\n    \"updated_at\": \"2024-06-01T00:00:00Z\",\n    \"description\": \"The server is on fire!\",\n    \"engaged_seconds\": 75,\n    \"engaged_user_count\": 2,\n    \"escalation_count\": 0,\n    \"escalation_policy_id\": \"PCI3U5T\",\n    \"escalation_policy_name\": \"Sputnik\",\n    \"id\": \"PJASD33\",\n    \"incident_number\": 924,\n    \"joined_user_ids\": [\n      \"PRJ4208\",\n      \"PA02301\"\n    ],\n    \"joined_user_names\": [\n      \"Santos Dicera\",\n      \"Jane Doe\"\n    ],\n    \"major\": true,\n    \"manual_escalation_count\": 0,\n    \"off_hour_interruptions\": 2,\n    \"priority_id\": \"PZOZQXA\",\n    \"priority_name\": \"SEV-1\",\n    \"priority_order\": 67108864,\n    \"reassignment_count\": 0,\n    \"resolved_at\": \"2024-01-02T21:01:00Z\",\n    \"resolved_by_user_id\": \"PRJ4208\",\n    \"resolved_by_user_name\": \"Santos Dicera\",\n    \"seconds_to_engage\": 30,\n    \"seconds_to_first_ack\": 15,\n    \"seconds_to_mobilize\": 15,\n    \"seconds_to_resolve\": 60,\n    \"service_id\": \"PAQTPI2\",\n    \"service_name\": \"Engineering\",\n    \"sleep_hour_interruptions\": 0,\n    \"snoozed_seconds\": 0,\n    \"status\": \"resolved\",\n    \"team_id\": \"PNVU4UR\",\n    \"team_name\": \"Engineering team 7\",\n    \"timeout_escalation_count\": 0,\n    \"total_interruptions\": null,\n    \"total_notifications\": 2,\n    \"urgency\": \"high\",\n    \"user_defined_effort_seconds\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6a457c4-8364-4dff-81eb-ae3a2a9079ed",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b05b9ec-b6d0-4357-816d-a1494749b65d",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d916a31f-11c9-478d-8b7f-e7e60c9e4c4d",
+          "name": "PagerDuty Get raw responses from a single incident",
+          "request": {
+            "name": "PagerDuty Get raw responses from a single incident",
+            "description": {
+              "content": "Provides enriched responder data for a single incident.\n\nExample metrics include Time to Respond, Responder Type, and Response Status. See metric definitions below.\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incident responses appear in the Analytics API.\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "raw",
+                "incidents",
+                ":id",
+                "responses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": \"<integer>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"time_zone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da17d8ae-611a-447b-849d-6574e3aa118f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents",
+                    ":id",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": 20,\n  \"order\": \"desc\",\n  \"order_by\": \"requested_at\",\n  \"time_zone\": \"America/Los_Angeles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"incident_id\": \"PJASD33\",\n  \"limit\": 100,\n  \"order\": \"asc\",\n  \"order_by\": \"requested_at\",\n  \"time_zone\": \"Etc/UTC\",\n  \"responses\": {\n    \"requested_at\": \"2024-01-05T10:15:00\",\n    \"responded_at\": \"2024-01-05T10:18:00\",\n    \"responder_id\": \"PXPGF42\",\n    \"responder_name\": \"Earline Greenholt\",\n    \"responder_type\": \"added_responder\",\n    \"response_status\": \"accepted\",\n    \"time_to_respond_seconds\": 180\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9a72b3f-23a3-48b9-9e27-20cc08e3c8e2",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents",
+                    ":id",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": 20,\n  \"order\": \"desc\",\n  \"order_by\": \"requested_at\",\n  \"time_zone\": \"America/Los_Angeles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edbde039-ea9d-4018-824e-77a870855ad7",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "incidents",
+                    ":id",
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": 20,\n  \"order\": \"desc\",\n  \"order_by\": \"requested_at\",\n  \"time_zone\": \"America/Los_Angeles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f002c266-4fd9-46c4-8331-be21967623ba",
+          "name": "PagerDuty Get raw incidents for a single responder_id",
+          "request": {
+            "name": "PagerDuty Get raw incidents for a single responder_id",
+            "description": {
+              "content": "Provides enriched incident data and metrics for a specific responder.\n\nExample metrics include Mean Seconds to Resolve, Mean Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#incidents-list).\n\n<!-- theme: info -->\n> **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.\n\nScoped OAuth requires: `analytics.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "raw",
+                "responders",
+                ":responder_id",
+                "incidents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "responder_id",
+                  "description": "(Required) The ID of the responder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"<string>\",\n    \"created_at_end\": \"<string>\",\n    \"urgency\": \"<string>\",\n    \"major\": \"<boolean>\",\n    \"team_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"priority_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"starting_after\": \"<string>\",\n  \"ending_before\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_by\": \"<string>\",\n  \"limit\": \"<integer>\",\n  \"time_zone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24256c01-ab85-4e97-a151-04fcd93ae142",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "responders",
+                    ":responder_id",
+                    "incidents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responder_id",
+                      "description": "(Required) The ID of the responder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\"\n  },\n  \"responder_id\": \"PDUSER1\",\n  \"limit\": 100,\n  \"order\": \"asc\",\n  \"order_by\": \"incident_created_at\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responder_id\": \"PDUSER1\",\n  \"limit\": 100,\n  \"order\": \"asc\",\n  \"order_by\": \"incident_created_at\",\n  \"time_zone\": \"Etc/UTC\",\n  \"data\": [\n    {\n      \"incident_created_at\": \"2023-06-10T22:08:35\",\n      \"incident_description\": 30,\n      \"incident_id\": \"QPDINCIDENT1\",\n      \"incident_number\": 123456,\n      \"incident_priority_id\": \"PZOZQXA\",\n      \"incident_priority_name\": \"P1\",\n      \"incident_priority_order\": 67108864,\n      \"incident_urgency\": 75,\n      \"mean_time_to_acknowledge_seconds\": 2,\n      \"responder_id\": \"PDUSER1\",\n      \"responder_name\": \"User 1\",\n      \"service_id\": \"PDSERV1\",\n      \"service_name\": \"Service 1\",\n      \"service_team_id\": \"PDTEAM1\",\n      \"service_team_name\": \"Team 1\",\n      \"total_acknowledgements\": 12,\n      \"total_business_hour_interruptions\": 3,\n      \"total_engaged_seconds\": 244,\n      \"total_interruptions\": 2,\n      \"total_manual_escalations_from\": 5,\n      \"total_manual_escalations_to\": 1,\n      \"total_off_hour_interruptions\": 0,\n      \"total_reassignments_from\": 0,\n      \"total_reassignments_to\": 0,\n      \"total_sleep_hour_interruptions\": 0,\n      \"total_timeout_escalations_from\": 0,\n      \"total_timeout_escalations_to\": 0\n    },\n    {\n      \"incident_created_at\": \"2023-06-11T22:08:35\",\n      \"incident_description\": 30,\n      \"incident_id\": \"QPDINCIDENT2\",\n      \"incident_number\": 123456,\n      \"incident_priority_id\": \"PZOZQXA\",\n      \"incident_priority_name\": \"P1\",\n      \"incident_priority_order\": 67108864,\n      \"incident_urgency\": 75,\n      \"mean_time_to_acknowledge_seconds\": 2,\n      \"responder_id\": \"PDUSER1\",\n      \"responder_name\": \"User 1\",\n      \"service_id\": \"PDSERV2\",\n      \"service_name\": \"Service 2\",\n      \"service_team_id\": \"PDTEAM1\",\n      \"service_team_name\": \"Team 1\",\n      \"total_acknowledgements\": 12,\n      \"total_business_hour_interruptions\": 3,\n      \"total_engaged_seconds\": 945,\n      \"total_interruptions\": 2,\n      \"total_manual_escalations_from\": 5,\n      \"total_manual_escalations_to\": 1,\n      \"total_off_hour_interruptions\": 0,\n      \"total_reassignments_from\": 0,\n      \"total_reassignments_to\": 0,\n      \"total_sleep_hour_interruptions\": 0,\n      \"total_timeout_escalations_from\": 0,\n      \"total_timeout_escalations_to\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39863775-73f6-4299-9b72-f9ddc6ca6b63",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "responders",
+                    ":responder_id",
+                    "incidents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responder_id",
+                      "description": "(Required) The ID of the responder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\"\n  },\n  \"responder_id\": \"PDUSER1\",\n  \"limit\": 100,\n  \"order\": \"asc\",\n  \"order_by\": \"incident_created_at\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbb518ad-8646-4094-b9c9-69c37faad2ec",
+              "name": "Too many requests have been made, the rate limit has been reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "raw",
+                    "responders",
+                    ":responder_id",
+                    "incidents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "responder_id",
+                      "description": "(Required) The ID of the responder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"created_at_start\": \"2023-06-10T00:00:00-07:00\",\n    \"created_at_end\": \"2023-06-11T23:59:59-07:00\"\n  },\n  \"responder_id\": \"PDUSER1\",\n  \"limit\": 100,\n  \"order\": \"asc\",\n  \"order_by\": \"incident_created_at\",\n  \"time_zone\": \"Etc/UTC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cefbd38b-fc26-4e69-8314-29e24aebbc54",
+    "name": "PagerDuty Abilities Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

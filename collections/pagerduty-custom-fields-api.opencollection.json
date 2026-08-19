@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Custom Fields API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/custom_fields",
+            "params": [
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "List fields.\n\nScoped OAuth requires: `custom_fields.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/custom_fields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Field, along with the Field Options if provided. An account may have up to 10 Fields.\n\nScoped OAuth requires: `custom_fields.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional details to include."
+              }
+            ]
+          },
+          "docs": "Show detailed information about a field.\n\nScoped OAuth requires: `custom_fields.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a field.\n\nScoped OAuth requires: `custom_fields.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              }
+            ]
+          },
+          "docs": "Delete a Field. Fields may not be deleted if they are used by a Field Schema.\n\nScoped OAuth requires: `custom_fields.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Field Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id/field_options",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              }
+            ]
+          },
+          "docs": "List all enabled Field Options for a Field.\n\nScoped OAuth requires: `custom_fields.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Field Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id/field_options",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Field Option. Field Options may only be created for Fields that have `field_options`. A Field may have no more than 10 enabled options.\n\nScoped OAuth requires: `custom_fields.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Field Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id/field_options/:field_option_id",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              },
+              {
+                "name": "field_option_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field option."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Field Option for a Field.\n\nScoped OAuth requires: `custom_fields.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Field Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/incidents/custom_fields/:field_id/field_options/:field_option_id",
+            "params": [
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field."
+              },
+              {
+                "name": "field_option_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field option."
+              }
+            ]
+          },
+          "docs": "Delete a Field Option.\n\nScoped OAuth requires: `custom_fields.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,881 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Automation Actions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Automation Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Automation Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/actions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones matching the name (case insensitive substring matching)"
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones linked to the specified runner.\nSpecifying the value `any` filters results to include the ones linked to runners only,\nthus omitting the results not linked to runners.\n"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones matching the specified classification (aka category)"
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones associated with the specified team."
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones associated with the specified service"
+              },
+              {
+                "name": "action_type",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones matching the specified action type"
+              }
+            ]
+          },
+          "docs": "Lists Automation Actions matching provided query params.\n\nThe returned records are sorted by action name in alphabetical order.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Automation Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/automation_actions/actions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Script, Process Automation, or Runbook Automation action\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an Automation Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get an Automation Action\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an Automation Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an Automation Action\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete an Automation Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an Automation Action\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Invocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/invocations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invokes an Action\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get all service references associated with an Automation Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/services",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Gets all service references associated with an Automation Action"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Associate an Automation Action with a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/services",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate an Automation Action with a service\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the details of an Automation Action / service relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/services/:service_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ]
+          },
+          "docs": "Gets the details of a Automation Action / service relation"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Disassociate an Automation Action from a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/services/:service_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ]
+          },
+          "docs": "Disassociate an Automation Action from a service\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get all team references associated with an Automation Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/teams",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Gets all team references associated with an Automation Action"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Associate an Automation Action with a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/teams",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate an Automation Action with a team\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the details of an Automation Action / team relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/teams/:team_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The team ID"
+              }
+            ]
+          },
+          "docs": "Gets the details of an Automation Action / team relation"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Disassociate an Automation Action from a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/automation_actions/actions/:id/teams/:team_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The team ID"
+              }
+            ]
+          },
+          "docs": "Disassociate an Automation Action from a team\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Invocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/invocations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "invocation_state",
+                "value": "",
+                "type": "query",
+                "description": "Invocation state"
+              },
+              {
+                "name": "not_invocation_state",
+                "value": "",
+                "type": "query",
+                "description": "Invocation state inverse filter (matches invocations NOT in the specified state)"
+              },
+              {
+                "name": "incident_id",
+                "value": "",
+                "type": "query",
+                "description": "Incident ID"
+              },
+              {
+                "name": "action_id",
+                "value": "",
+                "type": "query",
+                "description": "Action ID"
+              }
+            ]
+          },
+          "docs": "List Invocations\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an Invocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/invocations/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get an Automation Action Invocation\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Automation Action runners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/runners",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The minimum of the `limit` parameter used in the request or the maximum request size of the API."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter used to request the \"next\" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.\n"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include the ones matching the name (case insensitive substring matching)"
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Includes additional data elements into the response"
+              }
+            ]
+          },
+          "docs": "Lists Automation Action runners matching provided query params.\nThe returned records are sorted by runner name in alphabetical order.\n\nSee [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create an Automation Action runner.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/automation_actions/runners",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Process Automation or a Runbook Automation runner.\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get an Automation Action runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get an Automation Action runner\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update an Automation Action runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Automation Action runner\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete an Automation Action runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an Automation Action runner\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get all team references associated with a runner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id/teams",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Gets all team references associated with a runner"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Associate a runner with a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id/teams",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate a runner with a team\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the details of a runner / team relation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id/teams/:team_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The team ID"
+              }
+            ]
+          },
+          "docs": "Gets the details of a runner / team relation"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Disassociate a runner from a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/automation_actions/runners/:id/teams/:team_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The team ID"
+              }
+            ]
+          },
+          "docs": "Disassociates a runner from a team\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

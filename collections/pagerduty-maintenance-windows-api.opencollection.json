@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Maintenance Windows API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Maintenance Windows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List maintenance windows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/maintenance_windows",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filters the result, showing only the records whose name matches the query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "team_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter."
+              },
+              {
+                "name": "service_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of service IDs. Only results related to these services will be returned."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Only return maintenance windows in a given state."
+              }
+            ]
+          },
+          "docs": "List existing maintenance windows, optionally filtered by service and/or team, or whether they are from the past, present or future.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a maintenance window",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/maintenance_windows",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new maintenance window for the specified services. No new incidents will be created for a service that is in maintenance.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a maintenance window",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/maintenance_windows/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get an existing maintenance window.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a maintenance window",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/maintenance_windows/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing maintenance window.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete or end a maintenance window",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/maintenance_windows/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an existing maintenance window if it's in the future, or end it if it's currently on-going. If the maintenance window has already ended it cannot be deleted.\n\nA Maintenance Window is used to temporarily disable one or more Services for a set period of time.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#maintenance-windows)\n\nScoped OAuth requires: `services.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,464 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Business Services API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Business Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Business Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              }
+            ]
+          },
+          "docs": "List existing Business Services.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Business Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/business_services",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Business Service.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nThere is a limit of 5,000 business services per account. If the limit is reached, the API will respond with an error.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Business Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get details about an existing Business Service.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Business Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/business_services/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing Business Service. NOTE that this endpoint also accepts the PATCH verb.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Business Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/business_services/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Delete an existing Business Service.\n\nOnce the service is deleted, it will not be accessible from the web UI and new incidents won't be able to be created for this service.\n\nBusiness services model capabilities that span multiple technical services and that may be owned by several different teams.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#business-services)\n\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create Business Service Account Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/business_services/:id/account_subscription",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Subscribe your Account to a Business Service.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete Business Service Account Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/business_services/:id/account_subscription",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Unsubscribe your Account from a Business Service.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Business Service Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services/:id/subscribers",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Notification Subscribers on the Business Service.\n\n<!-- theme: warning -->\n> Users must be added through `POST /business_services/{id}/subscribers` to be returned from this endpoint.\nScoped OAuth requires: `subscribers.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create Business Service Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/business_services/:id/subscribers",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe the given entities to the given Business Service.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List the supporting Business Services for the given Business Service Id, sorted by impacted status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services/:id/supporting_services/impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "additional_fields[]",
+                "value": "",
+                "type": "query",
+                "description": "Provides access to additional fields such as highest priority per business service and total impacted count"
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the resources."
+              }
+            ]
+          },
+          "docs": "Retrieve of Business Services that support the given Business Service sorted by highest Impact with `status` included.\nThis endpoint does not return an exhaustive list of Business Services but rather provides access to the most impacted up to the limit of 200.\n\nThe returned Business Services are sorted first by Impact, secondarily by most recently impacted, and finally by name.\n\nTo get impact information about a specific set of Business Services, use the `ids[]` parameter on the `/business_servi"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Remove Business Service Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/business_services/:id/unsubscribe",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribes the matching Subscribers from a Business Service.\n\nScoped OAuth requires: `subscribers.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Impactors affecting Business Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services/impactors",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the resources."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of Impactors for the top-level Business Services on the account. Impactors are currently limited to Incidents.\n\nThis endpoint does not return an exhaustive list of Impactors but rather provides access to the highest priority Impactors for the Business Services in question up to the limit of 200.\n\nTo get Impactors for a specific set of Business Services, use the `ids[]` parameter.\n\nThe returned Impactors are sorted first by priority and secondarily by their creation date.\nScoped O"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Business Services sorted by impacted status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services/impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "additional_fields[]",
+                "value": "",
+                "type": "query",
+                "description": "Provides access to additional fields such as highest priority per business service and total impacted count"
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the resources."
+              }
+            ]
+          },
+          "docs": "Retrieve a list top-level Business Services sorted by highest Impact with `status` included.\nWhen called without the `ids[]` parameter, this endpoint does not return an exhaustive list of Business Services but rather provides access to the most impacted up to the limit of 200.\n\nThe returned Business Services are sorted first by Impact, secondarily by most recently impacted, and finally by name.\n\nTo get impact information about a specific set of Business Services, use the `ids[]` parameter.\nScope"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get the global priority threshold for a Business Service to be considered impacted by an Incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/business_services/priority_thresholds",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the priority threshold information for an account.  Currently, there is a `global_threshold` that can be set for the account.  Incidents that have a priority meeting or exceeding this threshold will be considered impacting on any Business Service that depends on the Service to which the Incident belongs.\nScoped OAuth requires: `services.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Set the Account-level priority threshold for Business Service impact.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/business_services/priority_thresholds",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the Account-level priority threshold for Business Service.\nScoped OAuth requires: `services.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Deletes the account-level priority threshold for Business Service impact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/business_services/priority_thresholds",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Clears the Priority Threshold for the account.  If the priority threshold is cleared, any Incident with a Priority set will be able to impact Business Services.\nScoped OAuth requires: `services.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

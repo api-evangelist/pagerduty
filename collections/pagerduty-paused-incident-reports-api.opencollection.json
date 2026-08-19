@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Paused Incident Reports API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Paused Incident Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty Get Paused Incident Reporting on Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/paused_incident_reports/alerts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search."
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a filter to limit the scope of reporting to a particular service"
+              },
+              {
+                "name": "suspended_by",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a filter to scope the response to either alerts suspended by Auto Pause or Event Rules."
+              }
+            ]
+          },
+          "docs": "Returns the 5 most recent alerts that were triggered after being paused and the 5 most recent alerts that were resolved after being paused for a given reporting period (maximum 6 months lookback period).  Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get Paused Incident Reporting counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/paused_incident_reports/counts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search."
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a filter to limit the scope of reporting to a particular service"
+              },
+              {
+                "name": "suspended_by",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a filter to scope the response to either alerts suspended by Auto Pause or Event Rules."
+              }
+            ]
+          },
+          "docs": "Returns reporting counts for paused Incident usage for a given reporting period (maximum 6 months lookback period).  Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)\n\nScoped OAuth requires: `incidents.read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

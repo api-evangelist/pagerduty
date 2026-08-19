@@ -1,0 +1,915 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Status Pages API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status Pages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Status Pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "status_page_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the Status Page."
+              }
+            ]
+          },
+          "docs": "List Status Pages.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Impacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Post type."
+              }
+            ]
+          },
+          "docs": "List Impacts for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Impact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/impacts/:impact_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "impact_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Impact."
+              }
+            ]
+          },
+          "docs": "Get an Impact for a Status Page by Status Page ID and Impact ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/services",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "List Services for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/services/:service_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page service."
+              }
+            ]
+          },
+          "docs": "Get a Service for a Status Page by Status Page ID and Service ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Severities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/severities",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Post type."
+              }
+            ]
+          },
+          "docs": "List Severities for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Severity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/severities/:severity_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "severity_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page severity."
+              }
+            ]
+          },
+          "docs": "Get a Severity for a Status Page by Status Page ID and Severity ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/statuses",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Post type."
+              }
+            ]
+          },
+          "docs": "List Statuses for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/statuses/:status_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "status_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page status."
+              }
+            ]
+          },
+          "docs": "Get a Status for a Status Page by Status Page ID and Status ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Posts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Post type."
+              },
+              {
+                "name": "reviewed_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the reviewed status of the Post to retrieve."
+              },
+              {
+                "name": "status[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an array of Status identifiers."
+              }
+            ]
+          },
+          "docs": "List Posts for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Status Page Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Post for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get a Post for a Status Page by Status Page ID and Post ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Status Page Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Post for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Status Page Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ]
+          },
+          "docs": "Delete a Post for a Status Page by Status Page ID and Post ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Post Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/post_updates",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              },
+              {
+                "name": "reviewed_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the reviewed status of the Post Update to retrieve."
+              }
+            ]
+          },
+          "docs": "List Post Updates for a Status Page by Status Page ID and Post ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Status Page Post Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/post_updates",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Post Update for a Post by Post ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Post Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/post_updates/:post_update_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              },
+              {
+                "name": "post_update_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post Update."
+              }
+            ]
+          },
+          "docs": "Get a Post Update for a Post by Post ID and Post Update ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Status Page Post Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/post_updates/:post_update_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              },
+              {
+                "name": "post_update_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post Update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Post Update for a Post by Post ID and Post Update ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Status Page Post Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/post_updates/:post_update_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              },
+              {
+                "name": "post_update_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post Update."
+              }
+            ]
+          },
+          "docs": "Delete a Post Update for a Post by Post ID and Post Update ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Post Postmortem",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/postmortem",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ]
+          },
+          "docs": "Get a Postmortem for a Post by Post ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Post Postmortem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/postmortem",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Postmortem for a Post by Post ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a Post Postmortem",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/postmortem",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Postmortem for a Post by Post ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Post Postmortem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/status_pages/:id/posts/:post_id/postmortem",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "post_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page Post."
+              }
+            ]
+          },
+          "docs": "Delete a Postmortem for a Post by Post ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List Status Page Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/subscriptions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Subscription status."
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Subscription channel."
+              }
+            ]
+          },
+          "docs": "List Subscriptions for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Create a Status Page Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pagerduty.com/status_pages/:id/subscriptions",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Subscription for a Status Page by Status Page ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a Status Page Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_pages/:id/subscriptions/:subscription_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page subscription."
+              }
+            ]
+          },
+          "docs": "Get a Subscription for a Status Page by Status Page ID and Subscription ID.\n\nScoped OAuth requires: `status_pages.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Delete a Status Page Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pagerduty.com/status_pages/:id/subscriptions/:subscription_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "subscription_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Status Page subscription."
+              }
+            ]
+          },
+          "docs": "Delete a Subscription for a Status Page by Status Page ID and Subscription ID.\n\nScoped OAuth requires: `status_pages.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

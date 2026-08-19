@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Log Entries API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Log Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List log entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/log_entries",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset to start pagination search results."
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+              },
+              {
+                "name": "time_zone",
+                "value": "",
+                "type": "query",
+                "description": "Time zone in which results will be rendered. This will default to the account time zone."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "The start of the date range over which you want to search."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "The end of the date range over which you want to search."
+              },
+              {
+                "name": "is_overview",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, will return a subset of log entries that show only the most important changes to the incident."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              },
+              {
+                "name": "team_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter."
+              }
+            ]
+          },
+          "docs": "List all of the incident log entries across the entire account.\n\nA log of all the events that happen to an Incident, and these are exposed as Log Entries.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#log-entries)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a log entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/log_entries/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "time_zone",
+                "value": "",
+                "type": "query",
+                "description": "Time zone in which results will be rendered. This will default to the account time zone."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "include[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of additional Models to include in response."
+              }
+            ]
+          },
+          "docs": "Get details for a specific incident log entry. This method provides additional information you can use to get at raw event data.\n\nA log of all the events that happen to an Incident, and these are exposed as Log Entries.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#log-entries)\n\nScoped OAuth requires: `incidents.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update log entry channel information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/log_entries/:id/channel",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "From",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing incident log entry channel.\n\nFor more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#log-entries)\n\nScoped OAuth requires: `incidents.write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

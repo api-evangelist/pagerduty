@@ -1,0 +1,1394 @@
+{
+  "item": [
+    {
+      "id": "2d4132b4-82b2-4429-a0c3-69258dba845a",
+      "name": "Alert Grouping Settings",
+      "description": {
+        "content": "Alert Grouping Settings allow you to configure how alerts in services are grouped together into incidents.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5563c32f-74f4-47ae-8031-991486edd9da",
+          "name": "PagerDuty List alert grouping settings",
+          "request": {
+            "name": "PagerDuty List alert grouping settings",
+            "description": {
+              "content": "List all of your alert grouping settings including both single service settings and global content based settings.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alert_grouping_settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor to retrieve next page; only present if next page exists."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor to retrieve previous page; only present if not on first page."
+                },
+                {
+                  "disabled": false,
+                  "key": "total",
+                  "value": "false",
+                  "description": "By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.\n\nSee our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_ids[]",
+                  "value": "<string>",
+                  "description": "An array of service IDs. Only results related to these services will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_ids[]",
+                  "value": "<string>",
+                  "description": "An array of service IDs. Only results related to these services will be returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4a76ad3-461e-4fcf-ad7d-89f88a3d04ce",
+              "name": "An array of alert grouping settings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alert_grouping_settings\": [\n    {\n      \"id\": \"PJWA06X\",\n      \"name\": \"Example of Alert Grouping Setting\",\n      \"description\": \"This is an example of list of Alert Grouping Settings\",\n      \"type\": \"content_based\",\n      \"config\": {\n        \"time_window\": 86400,\n        \"aggregate\": \"all\",\n        \"fields\": [\n          \"summary\",\n          \"component\",\n          \"custom_details.host\",\n          \"custom_details.field1.field2\"\n        ]\n      },\n      \"services\": [\n        {\n          \"id\": \"P0KJZ0A\",\n          \"name\": \"Payment Service\"\n        },\n        {\n          \"id\": \"PA15YRT\",\n          \"name\": \"Checkout Service\"\n        }\n      ],\n      \"created_at\": \"2022-12-13T19:55:01.171Z\",\n      \"updated_at\": \"2023-08-24T18:29:35.630Z\"\n    }\n  ],\n  \"after\": \"g3QAAAACZAACaWRhB2QAC2luc2VydGVkX2F0dAAAAAlkAApfX3N0cnVjdF9fZAAURWxpeGlyLk5haXZlRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhA2QABGhvdXJhFGQAC21pY3Jvc2Vjb25kaAJiAAL81WEGZAAGbWludXRlYR5kAAVtb250aGEIZAAGc2Vjb25kYR5kAAR5ZWFyYgAAB\",\n  \"before\": \"g3QAAAACZAACaWRhCGQAC2luc2VydGVkX2F0dAAAAAlkAApfX3N0cnVjdF9fZAAURWxpeGlyLk5haXZlRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhA2QABGhvdXJhFGQAC21pY3Jvc2Vjb25kaAJiAANYzWEGZAAGbWludXRlYR5kAAVtb250aGEIZAAGc2Vjb25kYR5kAAR5ZWFyYgAAB\",\n  \"limit\": 25,\n  \"total\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25a07c65-f588-4abf-a037-a55924b3905a",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "total",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_ids[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dd58ba4-5a6f-4c81-b27b-687faf7ad7f3",
+          "name": "PagerDuty Create an Alert Grouping Setting",
+          "request": {
+            "name": "PagerDuty Create an Alert Grouping Setting",
+            "description": {
+              "content": "Create a new Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nThis endpoint will be used to create an instance of AlertGroupingSettings for either one service or many services that are in the alert group setting.\n\nScoped OAuth requires: `services.write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alert_grouping_settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alert_grouping_setting\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\",\n    \"config\": {\n      \"aggregate\": \"<string>\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\"\n    },\n    \"services\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "551ba887-8da2-4162-9b95-fbdf73d5f355",
+              "name": "The new Alert Grouping Setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\",\n        \"name\": \"Payment Service\"\n      },\n      {\n        \"id\": \"PA15YRT\",\n        \"name\": \"Checkout Service\"\n      }\n    ],\n    \"created_at\": \"2022-12-13T19:55:01.171Z\",\n    \"updated_at\": \"2023-08-24T18:29:35.630Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2bfd2d9-62f2-4c64-80a3-4c156f84b2d4",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd1ea64c-1047-4ea1-912a-54874be26af4",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2a5fb3b-9648-4cff-a8f1-6d9c7d10e6e6",
+              "name": "Caller is not authorized to view the requested resource.\nWhile your authentication is valid, the authenticated user or token does not have permission to perform this action.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c641fbec-0a20-43b0-a50f-e7b554509a78",
+          "name": "PagerDuty Get an Alert Grouping Setting",
+          "request": {
+            "name": "PagerDuty Get an Alert Grouping Setting",
+            "description": {
+              "content": "Get an existing Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alert_grouping_settings",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8653e51b-768b-44ae-bf33-0760c63d7baf",
+              "name": "The Alert Grouping Setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\",\n        \"name\": \"Payment Service\"\n      },\n      {\n        \"id\": \"PA15YRT\",\n        \"name\": \"Checkout Service\"\n      }\n    ],\n    \"created_at\": \"2022-12-13T19:55:01.171Z\",\n    \"updated_at\": \"2023-08-24T18:29:35.630Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b298225e-6c88-4d72-bb13-cd4eb887e9d2",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9757946-eb7a-47d3-bea7-cff1d647da30",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "205f9ac3-8028-45ea-b56e-8cda2d90e3bb",
+          "name": "PagerDuty Delete an Alert Grouping Setting",
+          "request": {
+            "name": "PagerDuty Delete an Alert Grouping Setting",
+            "description": {
+              "content": "Delete an existing Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nScoped OAuth requires: `services.write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alert_grouping_settings",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "782eef1c-f159-470e-b038-54095229e2ef",
+              "name": "The Alert Grouping Setting was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59507734-3a1c-40da-ad5f-c8cad5e8b4c5",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20733250-14a8-4b32-80b6-0870304d59ad",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b90f1b52-0b2e-44c2-a347-6be08c2affd1",
+          "name": "PagerDuty Update an Alert Grouping Setting",
+          "request": {
+            "name": "PagerDuty Update an Alert Grouping Setting",
+            "description": {
+              "content": "Update an Alert Grouping Setting.\n\nThe settings part of Alert Grouper service allows us to create Alert Grouping Settings and configs that are required to be used during grouping of the alerts.\n\nif `services` are not provided in the request, then the existing services will not be removed from the setting.\n\nScoped OAuth requires: `services.write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alert_grouping_settings",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alert_grouping_setting\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\",\n    \"config\": {\n      \"aggregate\": \"<string>\",\n      \"fields\": \"<array>\",\n      \"time_window\": \"<integer>\"\n    },\n    \"services\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "420ce41b-41bb-4b43-92cb-bb134ba9328f",
+              "name": "The updated Alert Grouping Setting.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\",\n        \"name\": \"Payment Service\"\n      },\n      {\n        \"id\": \"PA15YRT\",\n        \"name\": \"Checkout Service\"\n      }\n    ],\n    \"created_at\": \"2022-12-13T19:55:01.171Z\",\n    \"updated_at\": \"2023-08-24T18:29:35.630Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4737a20-80d4-4218-b25b-10d89bd8355e",
+              "name": "Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "777b0865-713b-4675-921f-70d7e7035909",
+              "name": "Caller did not supply credentials or did not provide the correct credentials.\nIf you are using an API key, it may be invalid or your Authorization header may be malformed.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f30cd71e-0c39-4b4e-a5d4-574f1425424c",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alert_grouping_settings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The `Accept` header is used as a versioning header.",
+                    "key": "Accept",
+                    "value": "application/vnd.pagerduty+json;version=2"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alert_grouping_setting\": {\n    \"id\": \"PZC4OM1\",\n    \"name\": \"Example of Alert Grouping Setting\",\n    \"description\": \"This Alert Grouping Setting is an example\",\n    \"type\": \"content_based\",\n    \"config\": {\n      \"time_window\": 900,\n      \"aggregate\": \"all\",\n      \"fields\": [\n        \"summary\",\n        \"component\",\n        \"custom_details.host\",\n        \"custom_details.field1.field2\"\n      ]\n    },\n    \"services\": [\n      {\n        \"id\": \"P0KJZ0A\"\n      },\n      {\n        \"id\": \"PA15YRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Not Found\",\n    \"code\": 2100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pagerduty.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2df1dfae-63a4-472a-9848-51e4569778f8",
+    "name": "PagerDuty Abilities Alert Grouping Settings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document describes the PagerDuty REST APIs.\n\nFor guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)\n\nOur REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).\n\nNote that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.\n\n\nContact Support:\n Name: PagerDuty Support\n Email: support@pagerduty.com",
+      "type": "text/plain"
+    }
+  }
+}

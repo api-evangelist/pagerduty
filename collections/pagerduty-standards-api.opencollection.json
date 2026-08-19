@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Standards API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Standards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Standards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/standards",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all standards of an account.\n\nScoped OAuth requires: `standards.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Update a standard",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pagerduty.com/standards/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the standard"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a standard\n\nScoped OAuth requires: `standards.write`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List resources' standards scores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/standards/scores/:resource_type",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Ids of resources to apply the standards. Maximum of 100 items"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List standards applied to a set of resources\n\nScoped OAuth requires: `standards.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty List a resource's standards scores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/standards/scores/:resource_type/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the resource to apply the standards."
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List standards applied to a specific resource\n\nScoped OAuth requires: `standards.read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PagerDuty Abilities Status Dashboards API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PagerDuty List Status Dashboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_dashboards",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get all your account's custom Status Dashboard views.\n\nScoped OAuth requires: `status_dashboards.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a single Status Dashboard by `id`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_dashboards/:id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Get a Status Dashboard by its PagerDuty `id`.\n\nScoped OAuth requires: `status_dashboards.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get impacted Business Services for a Status Dashboard by `id`.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_dashboards/:id/service_impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "additional_fields[]",
+                "value": "",
+                "type": "query",
+                "description": "Provides access to additional fields such as highest priority per business service and total impacted count"
+              }
+            ]
+          },
+          "docs": "Get impacted Business Services for a Status Dashboard by `id`\n\nThis endpoint does not return an exhaustive list of Business Services but rather provides access to the most impacted on the specified Status Dashboard up to the limit of 200.\n\nThe returned Business Services are sorted first by Impact, secondarily by most recently impacted, and finally by name.\n\nTo get Impact information about a specific Business Service on the Status Dashboard that does not appear in the Impact-sorted response, use "
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get a single Status Dashboard by `url_slug`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_dashboards/url_slugs/:url_slug",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "url_slug",
+                "value": "",
+                "type": "path",
+                "description": "The `url_slug` for a status dashboard"
+              }
+            ]
+          },
+          "docs": "Get a Status Dashboard by its PagerDuty `url_slug`.  A `url_slug` is a human-readable reference\nfor a custom Status Dashboard that may be created or changed in the UI. It will generally be a `dash-separated-string-like-this`.\n\nScoped OAuth requires: `status_dashboards.read`\n"
+        },
+        {
+          "info": {
+            "name": "PagerDuty Get impacted Business Services for a  Status Dashboard by `url_slug`",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pagerduty.com/status_dashboards/url_slugs/:url_slug/service_impacts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "url_slug",
+                "value": "",
+                "type": "path",
+                "description": "The `url_slug` for a status dashboard"
+              },
+              {
+                "name": "additional_fields[]",
+                "value": "",
+                "type": "query",
+                "description": "Provides access to additional fields such as highest priority per business service and total impacted count"
+              }
+            ]
+          },
+          "docs": "Get Business Service Impacts for the Business Services on a Status Dashboard by its `url_slug`. A `url_slug` is a human-readable reference\nfor a custom Status Dashboard that may be created or changed in the UI. It will generally be a `dash-separated-string-like-this`.\n\nThis endpoint does not return an exhaustive list of Business Services but rather provides access to the most impacted on the Status Dashboard up to the limit of 200.\n\nThe returned Business Services are sorted first by Impact, seco"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
