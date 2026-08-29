@@ -4,6 +4,18 @@ description: PagerDuty is a digital operations management platform that helps te
   detect problems and resolve incidents with automated alerting, on-call management,
   and incident response workflows.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -857,6 +869,9 @@ apis:
   - type: GraphQL
     url: graphql/pagerduty-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/pagerduty-capability-edges.yml
+  name: PagerDuty Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/pagerduty/overview
 - type: AgenticAccess
