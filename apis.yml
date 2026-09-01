@@ -91,7 +91,7 @@ apis:
   humanURL: https://developer.pagerduty.com/api-reference/
   baseURL: https://api.pagerduty.com
   tags:
-  - Add-Ons
+  - Addons
   tags_raw:
   - Add-Ons
   properties:
