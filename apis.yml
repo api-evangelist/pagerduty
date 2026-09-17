@@ -36,6 +36,7 @@ tags:
 - DevOps
 - Incident Management
 - On-Call Management
+- pagerduty
 url: https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/apis.yml
 created: '2026-03-16'
 modified: '2026-05-30'
