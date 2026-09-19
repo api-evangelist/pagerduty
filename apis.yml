@@ -609,6 +609,8 @@ apis:
   humanURL: https://developer.pagerduty.com/api-reference/
   baseURL: https://api.pagerduty.com
   tags:
+  - Schedule
+  tags_raw:
   - Schedules
   properties:
   - type: OpenAPI
