@@ -1,118 +1,98 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: PagerDuty
-providerId: pagerduty
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-reconciled: true
-tags:
-  - Incident Response
-  - On-Call
-  - Observability
-description: PagerDuty per-user-per-month pricing across four tiers. Annual billing saves ~25%.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.pagerduty.com/pricing/incident-management/
 sources:
-  - https://www.pagerduty.com/pricing/
+- https://www.pagerduty.com/pricing/incident-management/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T124425
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: Per-user tiered plans with monthly and yearly (16% off) prices, plus priced add-ons; Enterprise
+  is custom pricing. Add-on price text appears with duplicated monthly/yearly figures on the page.
+plan_count: 11
+currency: USD
 plans:
-  - id: pagerduty-free
-    name: Free
-    type: freemium
-    description: Up to 5 users; basic on-call.
-    entries:
-      - label: Users
-        name: users
-        type: quota
-        metric: user
-        limit: 5
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: International phone/SMS notifications
-        name: intl_notifications
-        type: quota
-        metric: notification
-        limit: 100
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: 1 on-call schedule
-      - name: 1 escalation policy
-      - name: 750+ integrations
-      - name: Email and push notifications
-  - id: pagerduty-professional
-    name: Professional
-    type: paid
-    description: $21/user/month annual.
-    entries:
-      - label: Per user
-        name: seat
-        type: subscription
-        metric: user
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '21.00'
-        userMultiplied: true
-    elements:
-      - name: Basic chat experience (Slack, Microsoft Teams)
-      - name: Major Incident Workflow Template
-      - name: External Status Page (up to 250 subscribers)
-      - name: 2 predefined Incident Roles
-      - name: 3 predefined Incident Types
-      - name: PagerDuty Advance (1,000 credits)
-  - id: pagerduty-business
-    name: Business
-    type: paid
-    description: $41/user/month annual.
-    entries:
-      - label: Per user
-        name: seat
-        type: subscription
-        metric: user
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '41.00'
-        userMultiplied: true
-    elements:
-      - name: Custom Fields
-      - name: Up to 3 custom Incident Types
-      - name: Advanced ITSM integrations
-      - name: Multi-year historical data access
-      - name: Internal Status Pages
-      - name: External Status Page (up to 500 subscribers)
-      - name: PagerDuty Advance (5,000 credits)
-  - id: pagerduty-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom pricing.
-    entries:
-      - label: Per user (custom)
-        name: seat
-        type: subscription
-        metric: user
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: custom
-        userMultiplied: true
-    elements:
-      - name: Full chat experience with premium Slack actions
-      - name: Incident workflows with conditionals/loops/delays
-      - name: 10 custom Incident Roles
-      - name: Incident Tasks
-      - name: Up to 100 custom Incident Types
-      - name: Post-Incident Reviews
-      - name: PagerDuty Advance (20,000 credits)
-      - name: Bi-directional ServiceNow custom field sync
+- name: Free
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  unit: up to 5 users
+  included_quota: 100/month international phone/SMS notifications, 1 On-call Schedule, 1 Escalation Policy,
+    API Calls Included, 750+ integrations
+- name: Professional
+  price_text: $25
+  price: 25
+  currency: USD
+  period: month
+  unit: per user
+  included_quota: Free Plan, plus basic chat experience, External Status Page (up to 250 subscribers),
+    2 Teams, SSO, PagerDuty Advance (1,000 one-time AI Actions)
+- name: Professional (yearly)
+  price_text: $21
+  price: 21
+  currency: USD
+  period: month
+  unit: per user, yearly pricing (16% Off)
+  included_quota: Save $48/user annually
+- name: Business
+  price_text: $49
+  price: 49
+  currency: USD
+  period: month
+  unit: per user
+  included_quota: Professional Plan, plus Custom Fields, up to 3 custom Incident Types, External Status
+    Page (up to 500 subscribers), PagerDuty Advance (5,000 one-time AI Actions)
+- name: Business (yearly)
+  price_text: $41
+  price: 41
+  currency: USD
+  period: month
+  unit: per user, yearly pricing (16% Off)
+  included_quota: Save $96/user annually
+- name: Enterprise
+  price_text: Custom pricing
+  period: none
+  included_quota: Business Plan, plus full chat experience, 100 Custom Incident Types, PagerDuty Advance
+    (20,000 one-time AI Actions)
+- name: PagerDuty Advance for Incident Management (add-on)
+  price_text: 415 (only available with annual commitment)
+  price: 415
+  currency: USD
+  period: month
+  unit: starting at, per month
+  included_quota: SRE Agent, Scribe Agent, Shift Agent, Insights Agent
+- name: AIOps (add-on)
+  price_text: '799'
+  price: 799
+  currency: USD
+  period: month
+  unit: starting at, per month
+  included_quota: Consumption-based; licensed per accepted event
+- name: AIOps (add-on, alternate shown price)
+  price_text: '699'
+  price: 699
+  currency: USD
+  period: month
+  unit: per month
+- name: Stakeholder License (add-on)
+  price_text: '150'
+  price: 150
+  currency: USD
+  period: month
+  unit: per 50 stakeholders
+  included_quota: Sold in packaged tiers of 50, 250, 500, 1000, 5000 users
+- name: Public, Private and Audience Specific Status Pages (add-on)
+  price_text: '89'
+  price: 89
+  currency: USD
+  period: month
+  unit: per 1000 subscribers
+rate_limit_statements:
+- 100/month international phone/SMS notifications included
+- Free customers receive 100 SMS and phone notifications
+- Max users per account 5
