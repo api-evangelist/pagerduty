@@ -1,0 +1,146 @@
+slug: pagerduty
+provider: PagerDuty
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 13
+edges:
+- tag: Incidents
+  spec_file: pagerduty-incidents-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.9
+  evidence: POST /incidents "Create an Incident"; GET /incidents/{id}/alerts "List alerts for an incident";
+    schemas ResponderRequest, AcknowledgeLogEntry, StatusUpdate
+  reason: 'Full incident lifecycle: creation, alerts, responders, acknowledgement, status updates and
+    business-service impact — production incident response management.'
+- tag: Escalation Policies
+  spec_file: pagerduty-escalation-policies-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.85
+  evidence: POST /escalation_policies "Create an escalation policy"; schemas EscalationRule, EscalationTargetReference
+  reason: Escalation policies define who is paged and in what order during production incidents — core
+    on-call/incident response coordination.
+- tag: Incident Workflows
+  spec_file: pagerduty-incident-workflows-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.85
+  evidence: POST /incident_workflows/{id}/instances "Start an Incident Workflow Instance"; schemas IncidentWorkflowTrigger,
+    IncidentWorkflowAction
+  reason: Automation of incident response procedures — triggers and actions executed during production
+    incidents; squarely incident response management.
+- tag: On-Calls
+  spec_file: pagerduty-on-calls-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.85
+  evidence: 'GET /oncalls  listOnCalls  PagerDuty List all of the on-calls; schemas: EscalationPolicyReference,
+    Oncall, ScheduleReference'
+  reason: Operations expose who is currently on call per escalation policy and schedule — precisely the
+    on-call response element of incident response management for a SaaS/IT service.
+- tag: Response Plays
+  spec_file: pagerduty-response-plays-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.85
+  evidence: 'POST /response_plays/{response_play_id}/run  runResponsePlay  PagerDuty Run a response play;
+    schemas: ResponsePlay, IncidentReference, EscalationPolicyReference'
+  reason: Response plays are pre-defined incident mobilisation workflows (responders, escalation, conference
+    bridge) executed against an incident — coordination of on-call incident response.
+- tag: Webhooks
+  spec_file: pagerduty-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.82
+  evidence: POST /webhook_subscriptions createWebhookSubscription; POST /webhook_subscriptions/{id}/ping
+    testWebhookSubscription
+  reason: Operations manage the lifecycle of outbound webhook subscriptions including enable and test/ping
+    for delivery verification, matching Webhook & Event Subscription Management.
+- tag: Schedules
+  spec_file: pagerduty-schedules-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.8
+  evidence: 'GET /schedules/{id}/users  listScheduleUsers  PagerDuty List users on call.; schemas: ScheduleLayer,
+    Override, Restriction, EscalationPolicyReference'
+  reason: These are on-call rotation schedules with layers and overrides feeding escalation policies —
+    on-call staffing for incident response, not general workforce scheduling or HR shift planning.
+- tag: Alert Grouping Settings
+  spec_file: pagerduty-alert-grouping-settings-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.7
+  evidence: 'POST /alert_grouping_settings  postAlertGroupingSettings  PagerDuty Create an Alert Grouping
+    Setting; schemas: ContentBasedIntelligentAlertGroupingConfiguration, ServiceReference'
+  reason: Configures how monitoring alerts are correlated into incidents on a service — incident detection
+    tuning for on-call response, not financial-crime or marketing alerting.
+- tag: Analytics
+  spec_file: pagerduty-analytics-api-openapi.yml
+  capability_id: BC-4220
+  capability_id_l1: BC-4220
+  capability_name: SaaS Platform Operations Management
+  confidence: 0.7
+  evidence: POST /analytics/metrics/incidents/all  Get aggregated incident data; POST /analytics/metrics/responders/all  Get
+    aggregated metrics for all responders
+  reason: Aggregated incident and responder metrics measure production incident response performance.
+    Left at L1 because the data spans incident response, escalation policies and reliability improvement
+    rather than one sub-capability.
+- tag: Change Events
+  spec_file: pagerduty-change-events-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.7
+  evidence: GET /change_events listChangeEvents ... GET /incidents/{id}/related_change_events "List related
+    Change Events for an Incident"
+  reason: Change events in PagerDuty are production change signals ingested against services and correlated
+    with incidents — production observability/telemetry supporting incident response. Maps to SaaS Platform
+    Operations, observability sub-capability; some ambiguity vs incident response.
+- tag: Event Orchestrations
+  spec_file: pagerduty-event-orchestrations-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.7
+  evidence: POST /event_orchestrations "Create an Orchestration"; schemas OrchestrationRouter, OrchestrationUnrouted,
+    ServiceOrchestration
+  reason: Rules that route and transform inbound monitoring events to the right service/responder — part
+    of incident detection and response routing on this operations platform.
+- tag: Log Entries
+  spec_file: pagerduty-log-entries-api-openapi.yml
+  capability_id: BC-4220.30
+  capability_id_l1: BC-4220
+  capability_name: Incident Response Management
+  confidence: 0.7
+  evidence: schemas TriggerLogEntry, EscalateLogEntry, ResolveLogEntry, AcknowledgeLogEntry, AssignLogEntry
+  reason: Log entries here are the audit trail of incident lifecycle actions (trigger, escalate, notify,
+    resolve), i.e. incident response history — not general application logging.
+- tag: Status Pages
+  spec_file: pagerduty-status-pages-api-openapi.yml
+  capability_id: BC-4290.30
+  capability_id_l1: BC-4290
+  capability_name: Trust Portal & Public Disclosure
+  confidence: 0.7
+  evidence: 'POST /status_pages/{id}/posts  createStatusPagePost; schemas: StatusPage, StatusPageSubscription,
+    StatusPagePostmortem, StatusPageStatus'
+  reason: Public status pages with posts, severities, statuses and subscriber management are customer-facing
+    uptime/incident disclosure — the trust-portal and public status disclosure capability. Some overlap
+    with incident customer communication keeps this below 0.8.
