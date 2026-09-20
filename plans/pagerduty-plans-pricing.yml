@@ -10,6 +10,11 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: Professional
 published: true
 note: Per-user tiered plans with monthly and yearly (16% off) prices, plus priced add-ons; Enterprise
   is custom pricing. Add-on price text appears with duplicated monthly/yearly figures on the page.
