@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Priorities API
+  title: PagerDuty Priorities API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Priorities
-  description: 'A priority is a label representing the importance and impact of an incident. This feature is only available on Standard and Enterprise plans.
-
-    '
+  description: A priority is a label representing the importance and impact of an incident. This feature is only available on Standard and Enterprise plans.
 paths:
   /priorities:
     description: List priorities.
@@ -42,12 +38,10 @@ paths:
         A priority is a label representing the importance and impact of an incident. This feature is only available on Standard and Enterprise plans.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#priorities)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `priorities.read`
-
-        '
+        Scoped OAuth requires: `priorities.read`'
       summary: PagerDuty List priorities
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -121,52 +115,27 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+  responses:
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
 
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
-      schema:
-        default: false
-        type: boolean
-  responses:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -194,20 +163,16 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
 
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
       content:
@@ -220,22 +185,51 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
+  parameters:
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
 
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+      schema:
+        default: false
+        type: boolean
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
   schemas:
     Priority:
       allOf:
@@ -264,9 +258,10 @@ components:
           description: Indicates if there are additional records to return
           readOnly: true
         total:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of records matching the given query.
-          nullable: true
           readOnly: true
     Tag:
       allOf:
@@ -276,8 +271,9 @@ components:
             type: string
             readOnly: true
           summary:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
           type:
@@ -285,14 +281,16 @@ components:
             readOnly: true
             description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
           self:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: the API show URL at which the object is accessible
           html_url:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: a URL at which the entity is uniquely displayed in the Web app

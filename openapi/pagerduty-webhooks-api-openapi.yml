@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Webhooks API
+  title: PagerDuty Webhooks API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -27,9 +25,7 @@ tags:
 - name: Webhooks
   description: 'A webhook is a way to receive events that occur on the PagerDuty platform via an HTTP POST request.
 
-    V3 webhooks are set up by creating a webhook subscription.
-
-    '
+    V3 webhooks are set up by creating a webhook subscription.'
 paths:
   /webhook_subscriptions:
     get:
@@ -48,12 +44,10 @@ paths:
 
         For more information on webhook subscriptions and how they are used to configure v3 webhooks
 
-        see the [Webhooks v3 Developer Documentation](https://developer.pagerduty.com/docs/webhooks/v3-overview/).
+        see the Webhooks v3 Developer Documentation.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.read`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/offset_limit'
@@ -97,12 +91,10 @@ paths:
 
         For more information on webhook subscriptions and how they are used to configure v3 webhooks
 
-        see the [Webhooks v3 Developer Documentation](https://developer.pagerduty.com/docs/webhooks/v3-overview/).
+        see the Webhooks v3 Developer Documentation.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.write`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -150,9 +142,7 @@ paths:
       description: 'Gets details about an existing webhook subscription.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.read`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/id'
@@ -188,14 +178,12 @@ paths:
       description: 'Updates an existing webhook subscription.
 
 
-        Only the fields being updated need to be included on the request.  This operation does not
+        Only the fields being updated need to be included on the request. This operation does not
 
         support updating the `delivery_method` of the webhook subscription.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.write`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -240,9 +228,7 @@ paths:
       description: 'Deletes a webhook subscription.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.write`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/id'
@@ -270,9 +256,7 @@ paths:
         Webhook subscriptions can become temporarily disabled when the subscription''s delivery method is repeatedly rejected by the server.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.write`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/id'
@@ -307,14 +291,12 @@ paths:
       description: 'Test a webhook subscription.
 
 
-        Fires a test event against the webhook subscription.  If properly configured,
+        Fires a test event against the webhook subscription. If properly configured,
 
         this will deliver the `pagey.ping` webhook event to the destination.
 
 
-        Scoped OAuth requires: `webhook_subscriptions.write`
-
-        '
+        Scoped OAuth requires: `webhook_subscriptions.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/id'
@@ -328,7 +310,84 @@ paths:
         '404':
           $ref: '#/components/responses/WebhookNotFound'
 components:
+  parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    webhooks_filter_type:
+      name: filter_type
+      in: query
+      required: false
+      description: The type of resource to filter upon.
+      schema:
+        enum:
+        - service
+        - team
+        type: string
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    webhooks_filter_id:
+      name: filter_id
+      in: query
+      required: false
+      description: The id of the resource to filter upon.
+      schema:
+        type: string
   responses:
+    WebhookBadRequest:
+      description: 'Caller provided invalid arguments. Please review the response for error
+
+        details. Retrying with the same arguments will *not* work.
+
+        '
+    WebhookNotFound:
+      description: The requested resource was not found.
     WebhookUnauthorized:
       description: 'Caller did not supply credentials or did not provide the correct
 
@@ -345,15 +404,24 @@ components:
         While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
-    WebhookBadRequest:
-      description: 'Caller provided invalid arguments. Please review the response for error
-
-        details. Retrying with the same arguments will *not* work.
-
-        '
-    WebhookNotFound:
-      description: The requested resource was not found.
   examples:
+    PutSubscriptionExample:
+      summary: Update Subscribed Events
+      value:
+        webhook_subscription:
+          events:
+          - incident.acknowledged
+          - incident.annotated
+          - incident.delegated
+          - incident.escalated
+          - incident.priority_updated
+          - incident.reassigned
+          - incident.reopened
+          - incident.resolved
+          - incident.responder.added
+          - incident.responder.replied
+          - incident.triggered
+          - incident.unacknowledged
     CreateSubscriptionExample:
       summary: Example
       value:
@@ -382,6 +450,39 @@ components:
             id: P393ZNQ
             type: service_reference
           type: webhook_subscription
+    GetSubscriptionExample:
+      summary: Example
+      value:
+        webhook_subscription:
+          delivery_method:
+            id: PF9KMXH
+            secret: null
+            temporarily_disabled: false
+            type: http_delivery_method
+            url: https://example.com/receive_a_pagerduty_webhook
+            custom_headers:
+            - name: your-header-name
+              value: -- redacted --
+          description: Sends PagerDuty v3 webhook events somewhere interesting.
+          events:
+          - incident.acknowledged
+          - incident.annotated
+          - incident.delegated
+          - incident.escalated
+          - incident.priority_updated
+          - incident.reassigned
+          - incident.reopened
+          - incident.resolved
+          - incident.responder.added
+          - incident.responder.replied
+          - incident.triggered
+          - incident.unacknowledged
+          filter:
+            id: P393ZNQ
+            type: service_reference
+          id: PY1OL64
+          type: webhook_subscription
+          active: true
     ListSubscriptionExample:
       summary: Example
       value:
@@ -417,126 +518,60 @@ components:
         offset: 0
         total: null
         more: false
-    PutSubscriptionExample:
-      summary: Update Subscribed Events
-      value:
-        webhook_subscription:
-          events:
-          - incident.acknowledged
-          - incident.annotated
-          - incident.delegated
-          - incident.escalated
-          - incident.priority_updated
-          - incident.reassigned
-          - incident.reopened
-          - incident.resolved
-          - incident.responder.added
-          - incident.responder.replied
-          - incident.triggered
-          - incident.unacknowledged
-    GetSubscriptionExample:
-      summary: Example
-      value:
-        webhook_subscription:
-          delivery_method:
-            id: PF9KMXH
-            secret: null
-            temporarily_disabled: false
-            type: http_delivery_method
-            url: https://example.com/receive_a_pagerduty_webhook
-            custom_headers:
-            - name: your-header-name
-              value: -- redacted --
-          description: Sends PagerDuty v3 webhook events somewhere interesting.
-          events:
-          - incident.acknowledged
-          - incident.annotated
-          - incident.delegated
-          - incident.escalated
-          - incident.priority_updated
-          - incident.reassigned
-          - incident.reopened
-          - incident.resolved
-          - incident.responder.added
-          - incident.responder.replied
-          - incident.triggered
-          - incident.unacknowledged
-          filter:
-            id: P393ZNQ
-            type: service_reference
-          id: PY1OL64
-          type: webhook_subscription
-          active: true
-  parameters:
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    webhooks_filter_type:
-      name: filter_type
-      in: query
-      required: false
-      description: The type of resource to filter upon.
-      schema:
-        enum:
-        - service
-        - team
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    webhooks_filter_id:
-      name: filter_id
-      in: query
-      required: false
-      description: The id of the resource to filter upon.
-      schema:
-        type: string
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
   schemas:
+    WebhookSubscriptionUpdate:
+      type: object
+      properties:
+        webhook_subscription:
+          type: object
+          properties:
+            description:
+              type: string
+              description: A short description of the webhook subscription.
+            events:
+              type: array
+              description: The set of outbound event types the subscription will receive.
+              minItems: 1
+              uniqueItems: true
+              items:
+                type: string
+            filter:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The id of the object being used as the filter.  This field is required for all filter types except account_reference.
+                type:
+                  type: string
+                  description: The type of object being used as the filter.
+                  enum:
+                  - account_reference
+                  - service_reference
+                  - team_reference
+            active:
+              type: boolean
+              description: If true, a webhook will be sent. True is the default state. If false, a webhook will not be sent.
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
     WebhookSubscription:
       type: object
       properties:
@@ -560,9 +595,10 @@ components:
               type: string
               readOnly: true
             secret:
-              type: string
+              type:
+              - string
+              - 'null'
               description: The secret used to sign webhook payloads. Only provided on the initial create response.
-              nullable: true
               readOnly: true
             temporarily_disabled:
               type: boolean
@@ -613,58 +649,6 @@ components:
       - delivery_method
       - events
       - filter
-    WebhookSubscriptionUpdate:
-      type: object
-      properties:
-        webhook_subscription:
-          type: object
-          properties:
-            description:
-              type: string
-              description: A short description of the webhook subscription.
-            events:
-              type: array
-              description: The set of outbound event types the subscription will receive.
-              minItems: 1
-              uniqueItems: true
-              items:
-                type: string
-            filter:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: The id of the object being used as the filter.  This field is required for all filter types except account_reference.
-                type:
-                  type: string
-                  description: The type of object being used as the filter.
-                  enum:
-                  - account_reference
-                  - service_reference
-                  - team_reference
-            active:
-              type: boolean
-              description: If true, a webhook will be sent. True is the default state. If false, a webhook will not be sent.
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type: integer
-          description: The total number of records matching the given query.
-          nullable: true
-          readOnly: true
   securitySchemes:
     api_key:
       type: apiKey

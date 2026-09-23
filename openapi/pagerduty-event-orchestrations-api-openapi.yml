@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Event Orchestrations API
+  title: PagerDuty Event Orchestrations API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Event Orchestrations
-  description: 'Event Orchestrations allow you to route events to an endpoint and create collections of Event Orchestrations, which define sets of actions to take based on event content.
-
-    '
+  description: Event Orchestrations allow you to route events to an endpoint and create collections of Event Orchestrations, which define sets of actions to take based on event content.
 paths:
   /event_orchestrations:
     description: Manage Global Event Orchestrations.
@@ -42,12 +38,10 @@ paths:
         Global Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration''s Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event''s content.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       summary: PagerDuty List Event Orchestrations
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -197,12 +191,10 @@ paths:
         Global Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration''s Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event''s content.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Create an Orchestration
       operationId: postOrchestration
       requestBody:
@@ -293,12 +285,10 @@ paths:
         Global Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration''s Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event''s content.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       summary: PagerDuty Get an Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -364,12 +354,10 @@ paths:
         Global Event Orchestrations allow you define a set of Global Rules and Router Rules, so that when you ingest events using the Orchestration''s Routing Key your events will have actions applied via the Global Rules & then routed to the correct Service by the Router Rules, based on the event''s content.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Update an Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -467,12 +455,10 @@ paths:
         Once deleted, you will no longer be able to ingest events into PagerDuty using this Orchestration''s Routing Key.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Delete an Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -505,12 +491,10 @@ paths:
         You can use a Routing Key from these Integrations to send events to PagerDuty!
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       summary: PagerDuty List Integrations for an Event Orchestration
       operationId: listOrchestrationIntegrations
       parameters:
@@ -565,12 +549,10 @@ paths:
         You can then use the Routing Key from this new Integration to send events to PagerDuty!
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Create an Integration for an Event Orchestration
       operationId: postOrchestrationIntegration
       requestBody:
@@ -643,12 +625,10 @@ paths:
         You can use the Routing Key from this Integration to send events to PagerDuty!
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       summary: PagerDuty Get an Integration for an Event Orchestration
       operationId: getOrchestrationIntegration
       parameters:
@@ -693,12 +673,10 @@ paths:
         You can use the Routing Key from this Integration to send events to PagerDuty!
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Update an Integration for an Event Orchestration
       operationId: updateOrchestrationIntegration
       requestBody:
@@ -770,12 +748,10 @@ paths:
         Once deleted, PagerDuty will drop all future events sent to PagerDuty using the Routing Key.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Delete an Integration for an Event Orchestration
       operationId: deleteOrchestrationIntegration
       parameters:
@@ -808,12 +784,10 @@ paths:
         Any future events sent to this Integration''s Routing Key will be processed by this Event Orchestration''s Rules.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Migrate an Integration from one Event Orchestration to another
       operationId: migrateOrchestrationIntegration
       requestBody:
@@ -904,12 +878,10 @@ paths:
         Global Orchestration Rules allows you to create a set of Event Rules. These rules evaluate against all Events sent to an Event Orchestration. When a matching rule is found, it can modify and enhance the event and can route the event to another set of Global Rules within this Orchestration for further processing.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -944,12 +916,10 @@ paths:
         Global Orchestration Rules allows you to create a set of Event Rules. These rules evaluate against all Events sent to an Event Orchestration. When a matching rule is found, it can modify and enhance the event and can route the event to another set of Global Rules within this Orchestration for further processing.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1163,12 +1133,10 @@ paths:
         An Orchestration Router allows you to create a set of Event Rules. The Router evaluates Events you send to this Global Orchestration against each of its rules, one at a time, and routes the event to a specific Service based on the first rule that matches. If an event doesn''t match any rules, it''ll be sent to service specified in as the `catch_all` or the "Unrouted" Orchestration if no service is specified.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1196,12 +1164,10 @@ paths:
         An Orchestration Router allows you to create a set of Event Rules. The Router evaluates Events you send to this Global Orchestration against each of its rules, one at a time, and routes the event to a specific Service based on the first rule that matches. If an event doesn''t match any rules, it''ll be sent to service specified in as the `catch_all` or the "Unrouted" Orchestration if no service is specified.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1337,12 +1303,10 @@ paths:
         The Unrouted Orchestration evaluates Events sent to it against each of its rules, beginning with the rules in the "start" set. When a matching rule is found, it can modify and enhance the event and can route the event to another set of rules within this Unrouted Orchestration for further processing.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1373,12 +1337,10 @@ paths:
         The Unrouted Orchestration evaluates Events sent to it against each of its rules, beginning with the rules in the "start" set. When a matching rule is found, it can modify and enhance the event and can route the event to another set of rules within this Unrouted Orchestration for further processing.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1502,12 +1464,10 @@ paths:
         A Service Orchestration allows you to create a set of Event Rules. The Service Orchestration evaluates Events sent to this Service against each of its rules, beginning with the rules in the "start" set. When a matching rule is found, it can modify and enhance the event and can route the event to another set of rules within this Service Orchestration for further processing.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1536,12 +1496,10 @@ paths:
         A Service Orchestration allows you to create a set of Event Rules. The Service Orchestration evaluates Events sent to this Service against each of its rules, beginning with the rules in the "start" set. When a matching rule is found, it can modify and enhance the event and can route the event to another set of rules within this Service Orchestration for further processing.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1796,12 +1754,10 @@ paths:
         A Service Orchestration allows you to set an active status based on whether an event will be evaluated against a service orchestration path (true) or service ruleset (false).
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1829,12 +1785,10 @@ paths:
         A Service Orchestration allows you to set an active status based on whether an event will be evaluated against a service orchestration path (true) or service ruleset (false).
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1878,12 +1832,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       summary: PagerDuty List Cache Variables for a Global Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1911,12 +1863,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Create a Cache Variable for a Global Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1950,12 +1900,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.read`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.read`'
       summary: PagerDuty Get a Cache Variable for a Global Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1984,12 +1932,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Update a Cache Variable for a Global Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2022,12 +1968,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `event_orchestrations.write`
-
-        '
+        Scoped OAuth requires: `event_orchestrations.write`'
       summary: PagerDuty Delete a Cache Variable for a Global Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2058,12 +2002,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty List Cache Variables for a Service Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2091,12 +2033,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Create a Cache Variable for a Service Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2130,12 +2070,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty Get a Cache Variable for a Service Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2164,12 +2102,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Update a Cache Variable for a Service Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2202,12 +2138,10 @@ paths:
         Cache Variables allow you to store event data on an Event Orchestration, which can then be used in Event Orchestration rules as part of conditions or actions.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#event-orchestrations)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Delete a Cache Variable for a Service Event Orchestration
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -2226,534 +2160,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    OrchestrationCacheVariablePutResponse:
-      description: The updated Cache Variable for this Event Orchestration.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              cache_variable:
-                $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            update_conditions:
-              summary: 'Response Example: Recent value cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: event.summary matches 'exception'
-                  - expression: event.summary matches 'error'
-                  configuration:
-                    type: recent_value
-                    source: event.summary
-                    regex: .*
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-            update_configuration:
-              summary: 'Response Example: Trigger event count cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: not event.custom_details.errors exists
-                  configuration:
-                    type: trigger_event_count
-                    ttl_seconds: 2
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-            update_disabled:
-              summary: 'Response Example: Disabled cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: not event.custom_details.errors exists
-                  configuration:
-                    type: recent_value
-                    source: event.summary
-                    regex: .*
-                  disabled: true
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    OrchestrationPathServiceTypeResponse:
-      description: The Service Orchestration object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceOrchestration'
-          examples:
-            response:
-              summary: Example Response
-              value:
-                orchestration_path:
-                  type: service
-                  parent:
-                    id: PC2D9ML
-                    self: https://api.pagerduty.com/service/PC2D9ML
-                    type: service_reference
-                  self: https://api.pagerduty.com/event_orchestrations/service/PC2D9ML
-                  sets:
-                  - id: start
-                    rules:
-                    - label: Always apply some consistent event transformations to every event sent to this Service
-                      id: c91f72f3
-                      conditions: []
-                      actions:
-                        variables:
-                        - name: hostname
-                          path: event.component
-                          value: 'hostname: (.*)'
-                          type: regex
-                        extractions:
-                        - template: '{{variables.hostname}}'
-                          target: event.custom_details.hostname
-                        - source: event.source
-                          regex: www (.*) service
-                          target: event.source
-                        pagerduty_automation_actions:
-                        - action_id: 01CSB5SMOKCKVRI5GN0LJG7SMB
-                        route_to: step-two
-                        incident_custom_field_updates:
-                        - id: PEXCK89
-                          value: '#my-team-channel'
-                        - id: PN1C4A2
-                          value: '{{event.timestamp}}'
-                  - id: step-two
-                    rules:
-                    - label: All critical alerts should be treated as P1 incidents
-                      id: 7c54529d
-                      conditions:
-                      - expression: event.severity matches 'critical'
-                      actions:
-                        annotate: 'Please use our P1 runbook: https://docs.test/p1-runbook'
-                        priority: P0IN2KQ
-                        suppress: false
-                        incident_custom_field_updates:
-                        - id: PEXCK89
-                          value: '#p1-incident-response'
-                    - label: If there's something wrong on the canary let the team know about it in our deployments Slack channel
-                      id: 1f6d9a33
-                      conditions:
-                      - expression: event.custom_details.hostname matches part 'canary'
-                      actions:
-                        automation_actions:
-                        - name: Canary Slack Notification
-                          url: https://our-slack-listerner.test/send-notification
-                          auto_send: true
-                          headers:
-                          - key: X-Notification-Source
-                            value: PagerDuty Incident Webhook
-                          parameters:
-                          - key: channel
-                            value: '#my-team-channel'
-                          - key: message
-                            value: Something is wrong with the canary deployment
-                        incident_custom_field_updates:
-                        - id: PEXCK89
-                          value: '#my-team-channel'
-                    - label: Never bother the on-call for info-level events outside of work hours
-                      id: cd770384
-                      conditions:
-                      - expression: event.severity matches 'info' and not (now in Mon,Tue,Wed,Thu,Fri 09:00:00 to 17:00:00 America/Los_Angeles)
-                      actions:
-                        suppress: true
-                  catch_all:
-                    actions:
-                      suppress: true
-                      incident_custom_field_updates:
-                      - id: PEXCK89
-                        value: '#general-incident-notifications'
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  migrated_at: '2023-06-14T13:51:31Z'
-                  migrated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  migrated_from:
-                    id: PC2D9ML
-                    self: https://api.pagerduty.com/services/PC2D9ML/rules
-                    type: service_event_rules_reference
-                  migrated_status: completed
-                  migrated_via: UI
-                  version: rn1Mja13T1HBdmPChqFilSQXUW2fWXM_
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    OrchestrationCacheVariablePostResponse:
-      description: The created Cache Variable for this Event Orchestration.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              cache_variable:
-                $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            recent_value:
-              summary: 'Response Example: Recent value cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: not event.custom_details.errors exists
-                  configuration:
-                    type: recent_value
-                    source: event.summary
-                    regex: .*
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-            trigger_event_count:
-              summary: 'Response Example: Trigger event count cache variable'
-              value:
-                cache_variable:
-                - id: f08cdd8d-10a5-4c70-b508-82ab5c365a43
-                  name: example_2
-                  conditions: []
-                  configuration:
-                    type: trigger_event_count
-                    ttl_seconds: 30
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-    OrchestrationCacheVariableListResponse:
-      description: The Cache Variables for this Event Orchestration.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              cache_variables:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            response:
-              summary: Response Example
-              value:
-                cache_variables:
-                - id: 294c3ee9-ae83-4da7-828d-107c71dc9316
-                  name: cache_var_1
-                  conditions:
-                  - expression: event.source exists
-                  - expression: event.severity matches 'critical'
-                  configuration:
-                    type: recent_value
-                    source: event.source
-                    regex: www (.*) service
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                - id: 2a6d02d5-6365-4326-aaf1-6a719e990245
-                  name: cache_var_2
-                  conditions: []
-                  configuration:
-                    type: trigger_event_count
-                    ttl_seconds: 60
-                  disabled: true
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                total: 2
-    OrchestrationCacheVariableGetResponse:
-      description: The fetched Cache Variable for this Event Orchestration.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              cache_variable:
-                $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            response:
-              summary: Response Example
-              value:
-                cache_variable:
-                - id: 64122e97-de81-4554-9d7c-c219cef351cd
-                  name: cache_var_1
-                  conditions:
-                  - expression: raw_event.class exists and event.summary matches part 'unstable'
-                  configuration:
-                    type: recent_value
-                    source: event.custom_details.work_id
-                    regex: .*
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-    NotAllowed:
-      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    OrchestrationPathUnroutedTypeResponse:
-      description: The Unrouted Orchestration object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OrchestrationUnrouted'
-          examples:
-            response:
-              summary: Example Response
-              value:
-                orchestration_path:
-                  type: unrouted
-                  parent:
-                    id: b02e973d-9620-4e0a-9edc-00fedf7d4694
-                    self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
-                    type: event_orchestration_reference
-                  self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/router
-                  sets:
-                  - id: start
-                    rules:
-                    - label: Update the summary of un-matched Critical alerts so they're easier to spot
-                      id: 38880ffb
-                      conditions:
-                      - expression: event.severity matches 'critical'
-                      actions:
-                        extractions:
-                        - target: event.summary
-                          template: '[Critical Unrouted] {{event.summary}}'
-                    - label: Reduce the severity of all other unrouted events
-                      id: 3896801e
-                      conditions: []
-                      actions:
-                        severity: info
-                  catch_all:
-                    actions:
-                      suppress: true
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  version: aZO.EEf9zWb9Vg0NYq.Uqad1hOC2Maod
-    OrchestrationPathRouterTypeResponse:
-      description: The Orchestration Router object.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OrchestrationRouter'
-          examples:
-            response:
-              summary: Example Response
-              value:
-                orchestration_path:
-                  type: router
-                  parent:
-                    id: b02e973d-9620-4e0a-9edc-00fedf7d4694
-                    self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
-                    type: event_orchestration_reference
-                  self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/router
-                  sets:
-                  - id: start
-                    rules:
-                    - label: Events relating to our relational database
-                      id: 1c26698b
-                      conditions:
-                      - expression: event.summary matches part 'database'
-                      - expression: event.source matches regex 'db[0-9]+-server'
-                      actions:
-                        route_to: PB31XBA
-                    - label: Events relating to our www app server
-                      id: d9801904
-                      conditions:
-                      - expression: event.summary matches part 'www'
-                      actions:
-                        route_to: PC2D9ML
-                  catch_all:
-                    actions:
-                      route_to: unrouted
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  version: 9co0z4b152oICsoV91_PW2.ww8ip_xap
-    OrchestrationPathServiceActiveResponse:
-      description: An object with the active status.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              active:
-                type: boolean
-                description: The status of the service orchestration.
-          examples:
-            response:
-              summary: Example Response
-              value:
-                active: false
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
-    service_id:
-      name: service_id
-      in: path
-      description: The service ID
-      required: true
-      schema:
-        type: string
-    event_orchestration_integration_id:
-      name: integration_id
-      description: The ID of an Integration.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    event_orchestration_id:
-      name: id
-      description: The ID of an Event Orchestration.
-      in: path
-      required: true
-      schema:
-        type: string
     header_Accept:
       name: Accept
       description: The `Accept` header is used as a versioning header.
@@ -2762,15 +2169,20 @@ components:
       schema:
         type: string
         default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
+    service_id:
+      name: service_id
+      in: path
+      description: The service ID
       required: true
       schema:
         type: string
-        default: application/json
-        enum:
-        - application/json
+    event_orchestration_cache_variable_id:
+      name: cache_variable_id
+      description: The ID of a Cache Variable.
+      in: path
+      required: true
+      schema:
+        type: string
     sort_by_event_orchestration:
       name: sort_by
       in: query
@@ -2785,9 +2197,9 @@ components:
         - created_at:asc
         - created_at:desc
         default: name:asc
-    event_orchestration_cache_variable_id:
-      name: cache_variable_id
-      description: The ID of a Cache Variable.
+    event_orchestration_integration_id:
+      name: integration_id
+      description: The ID of an Integration.
       in: path
       required: true
       schema:
@@ -2802,6 +2214,13 @@ components:
         enum:
         - migrated_metadata
         uniqueItems: true
+    event_orchestration_id:
+      name: id
+      description: The ID of an Event Orchestration.
+      in: path
+      required: true
+      schema:
+        type: string
     offset_limit:
       name: limit
       in: query
@@ -2809,150 +2228,23 @@ components:
       description: The number of results per page.
       schema:
         type: integer
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
   schemas:
-    OrchestrationCacheVariable:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          description: The name of the Cache Variable
-        configuration:
-          oneOf:
-          - type: object
-            description: 'Defines how the value of the Cache Variable will be set.
-
-              '
-            properties:
-              type:
-                type: string
-                description: 'Cache Variable will be set to the most recent value seen, based on the source event field and the extraction regex specified
-
-                  '
-                enum:
-                - recent_value
-              source:
-                type: string
-                description: The path to the event field where the regex will be applied to extract a value.
-                example: event.summary
-              regex:
-                type: string
-                description: 'A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
-
-                  '
-            required:
-            - type
-            - source
-            - regex
-          - type: object
-            description: 'Defines how the value of the Cache Variable will be set.
-
-              '
-            properties:
-              type:
-                type: string
-                description: 'Cache Variable will be set to the number of trigger events that have been seen within the TTL range
-
-                  '
-                enum:
-                - trigger_event_count
-              ttl_seconds:
-                type: integer
-                description: 'The time to live (in seconds) for how long to count trigger events before resetting back to 0.
-
-                  '
-            required:
-            - type
-            - ttl_seconds
-        conditions:
-          type: array
-          description: Each of these conditions is evaluated to check if an event matches this rule. The rule is considered a match if **any** of these conditions match.
-          items:
-            type: object
-            properties:
-              expression:
-                type: string
-                example: event.summary matches part 'my service error'
-                description: 'A PCL condition string.
-
-
-                  Note: The `trigger_count` and `resetting_trigger_count` operators are unsupported for Cache Variables
-
-                  '
-        disabled:
-          type: boolean
-          description: Indicates whether the Cache Variable is disabled and would therefore not be evaluated.
-        created_at:
-          type: string
-          format: date-time
-          description: The date/time the object was created.
-          readOnly: true
-        created_by:
-          type: object
-          description: Reference to the user that created the object.
-          properties:
-            id:
-              type: string
-              readOnly: true
-            type:
-              type: string
-              description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: The date/time the object was last updated.
-          readOnly: true
-        updated_by:
-          type: object
-          description: Reference to the user that last updated the object.
-          properties:
-            id:
-              type: string
-              readOnly: true
-            type:
-              type: string
-              description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-          readOnly: true
-      required:
-      - name
-      - configuration
-    OrchestrationIntegration:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Integration.
-          readOnly: true
-        label:
-          type: string
-          description: Name of the Integration.
-        parameters:
-          type: object
-          readOnly: true
-          properties:
-            routing_key:
-              type: string
-              description: Routing Key used to send Events to this Orchestration
-              readOnly: true
-            type:
-              type: string
-              default: global
-              readOnly: true
     ServiceOrchestration:
       allOf:
       - $ref: '#/components/schemas/OrchestrationGlobal/allOf/0'
@@ -3178,26 +2470,6 @@ components:
             migrated_status: completed
             migrated_via: UI
             version: rn1Mja13T1HBdmPChqFilSQXUW2fWXM_
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type: integer
-          description: The total number of records matching the given query.
-          nullable: true
-          readOnly: true
     OrchestrationGlobal:
       allOf:
       - type: object
@@ -3438,175 +2710,6 @@ components:
                                 example: High CPU on server
         example:
           $ref: '#/components/examples/OrchestrationPathGlobalTypeResponse/value'
-    Orchestration:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Orchestration.
-          readOnly: true
-        self:
-          type: string
-          format: url
-          description: The API show URL at which the object is accessible
-          readOnly: true
-        name:
-          type: string
-          description: Name of the Orchestration.
-        description:
-          type: string
-          description: A description of this Orchestration's purpose.
-        team:
-          type: object
-          description: Reference to the team that owns the Orchestration. If none is specified, only admins have access.
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              description: A string that determines the schema of the object
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-        integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrchestrationIntegration'
-          readOnly: true
-        routes:
-          type: integer
-          description: Number of different Service Orchestration being routed to
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: The date the Orchestration was created at.
-          readOnly: true
-        created_by:
-          type: object
-          description: Reference to the user that has created the Orchestration.
-          properties:
-            id:
-              type: string
-              readOnly: true
-            type:
-              type: string
-              description: A string that determines the schema of the object
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: The date the Orchestration was last updated.
-          readOnly: true
-        updated_by:
-          type: object
-          description: Reference to the user that has updated the Orchestration last.
-          properties:
-            id:
-              type: string
-              readOnly: true
-            type:
-              type: string
-              description: A string that determines the schema of the object
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-          readOnly: true
-        version:
-          type: string
-          description: Version of the Orchestration.
-          readOnly: true
-    OrchestrationRouter:
-      allOf:
-      - $ref: '#/components/schemas/OrchestrationGlobal/allOf/0'
-      - type: object
-        properties:
-          orchestration_path:
-            properties:
-              type:
-                description: Indicates that these are a "router" type set of rules.
-                default: router
-              parent:
-                properties:
-                  id:
-                    description: ID of the Global Event Orchestration this Router belongs to.
-                  type:
-                    enum:
-                    - event_orchestration_reference
-              sets:
-                description: The Router contains a single set of rules (the "start" set). The Router evaluates Events against these Rules, one at a time, and routes each Event to a specific Service based on the first rule that matches.
-                maxItems: 1
-                minItems: 1
-                items:
-                  properties:
-                    rules:
-                      items:
-                        properties:
-                          actions:
-                            properties:
-                              route_to:
-                                type: string
-                                description: The ID of the target Service for the resulting alert. You can find the service you want to route to by calling the services endpoint.
-                                example: PSI2I2O
-              catch_all:
-                description: When none of the rules match an event, the event will be routed according to the catch_all settings.
-                properties:
-                  actions:
-                    properties:
-                      route_to:
-                        description: With a value of 'unrouted', all events are sent to the Unrouted Orchestration.
-                        type: string
-                        default: unrouted
-        example:
-          orchestration_path:
-            type: router
-            parent:
-              id: b02e973d-9620-4e0a-9edc-00fedf7d4694
-              self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
-              type: event_orchestration_reference
-            self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/router
-            sets:
-            - id: start
-              rules:
-              - label: Events relating to our relational database
-                id: 1c26698b
-                conditions:
-                - expression: event.summary matches part 'database'
-                - expression: event.source matches regex 'db[0-9]+-server'
-                actions:
-                  route_to: PB31XBA
-              - label: Events relating to our www app server
-                id: d9801904
-                conditions:
-                - expression: event.summary matches part 'www'
-                actions:
-                  route_to: PC2D9ML
-            catch_all:
-              actions:
-                route_to: unrouted
-            created_at: '2021-11-18T16:42:01Z'
-            created_by:
-              id: P8B9WR8
-              self: https://api.pagerduty.com/users/P8B9WR8
-              type: user_reference
-            updated_at: '2021-11-18T16:42:01Z'
-            updated_by:
-              id: P8B9WR8
-              self: https://api.pagerduty.com/users/P8B9WR8
-              type: user_reference
-            version: 9co0z4b152oICsoV91_PW2.ww8ip_xap
     OrchestrationWarningInvalidData:
       type: object
       description: This rule includes invalid data for a feature item.
@@ -3691,6 +2794,27 @@ components:
           description: The type of warning that is being returned for the rule.
           enum:
           - forbidden_feature
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
     OrchestrationUnrouted:
       allOf:
       - $ref: '#/components/schemas/OrchestrationGlobal/allOf/0'
@@ -3833,6 +2957,817 @@ components:
               self: https://api.pagerduty.com/users/P8B9WR8
               type: user_reference
             version: aZO.EEf9zWb9Vg0NYq.Uqad1hOC2Maod
+    OrchestrationIntegration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Integration.
+          readOnly: true
+        label:
+          type: string
+          description: Name of the Integration.
+        parameters:
+          type: object
+          readOnly: true
+          properties:
+            routing_key:
+              type: string
+              description: Routing Key used to send Events to this Orchestration
+              readOnly: true
+            type:
+              type: string
+              default: global
+              readOnly: true
+    OrchestrationCacheVariable:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: The name of the Cache Variable
+        configuration:
+          oneOf:
+          - type: object
+            description: 'Defines how the value of the Cache Variable will be set.
+
+              '
+            properties:
+              type:
+                type: string
+                description: 'Cache Variable will be set to the most recent value seen, based on the source event field and the extraction regex specified
+
+                  '
+                enum:
+                - recent_value
+              source:
+                type: string
+                description: The path to the event field where the regex will be applied to extract a value.
+                example: event.summary
+              regex:
+                type: string
+                description: 'A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
+
+                  '
+            required:
+            - type
+            - source
+            - regex
+          - type: object
+            description: 'Defines how the value of the Cache Variable will be set.
+
+              '
+            properties:
+              type:
+                type: string
+                description: 'Cache Variable will be set to the number of trigger events that have been seen within the TTL range
+
+                  '
+                enum:
+                - trigger_event_count
+              ttl_seconds:
+                type: integer
+                description: 'The time to live (in seconds) for how long to count trigger events before resetting back to 0.
+
+                  '
+            required:
+            - type
+            - ttl_seconds
+        conditions:
+          type: array
+          description: Each of these conditions is evaluated to check if an event matches this rule. The rule is considered a match if **any** of these conditions match.
+          items:
+            type: object
+            properties:
+              expression:
+                type: string
+                example: event.summary matches part 'my service error'
+                description: 'A PCL condition string.
+
+
+                  Note: The `trigger_count` and `resetting_trigger_count` operators are unsupported for Cache Variables
+
+                  '
+        disabled:
+          type: boolean
+          description: Indicates whether the Cache Variable is disabled and would therefore not be evaluated.
+        created_at:
+          type: string
+          format: date-time
+          description: The date/time the object was created.
+          readOnly: true
+        created_by:
+          type: object
+          description: Reference to the user that created the object.
+          properties:
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: The date/time the object was last updated.
+          readOnly: true
+        updated_by:
+          type: object
+          description: Reference to the user that last updated the object.
+          properties:
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+          readOnly: true
+      required:
+      - name
+      - configuration
+    OrchestrationRouter:
+      allOf:
+      - $ref: '#/components/schemas/OrchestrationGlobal/allOf/0'
+      - type: object
+        properties:
+          orchestration_path:
+            properties:
+              type:
+                description: Indicates that these are a "router" type set of rules.
+                default: router
+              parent:
+                properties:
+                  id:
+                    description: ID of the Global Event Orchestration this Router belongs to.
+                  type:
+                    enum:
+                    - event_orchestration_reference
+              sets:
+                description: The Router contains a single set of rules (the "start" set). The Router evaluates Events against these Rules, one at a time, and routes each Event to a specific Service based on the first rule that matches.
+                maxItems: 1
+                minItems: 1
+                items:
+                  properties:
+                    rules:
+                      items:
+                        properties:
+                          actions:
+                            properties:
+                              route_to:
+                                type: string
+                                description: The ID of the target Service for the resulting alert. You can find the service you want to route to by calling the services endpoint.
+                                example: PSI2I2O
+              catch_all:
+                description: When none of the rules match an event, the event will be routed according to the catch_all settings.
+                properties:
+                  actions:
+                    properties:
+                      route_to:
+                        description: With a value of 'unrouted', all events are sent to the Unrouted Orchestration.
+                        type: string
+                        default: unrouted
+        example:
+          orchestration_path:
+            type: router
+            parent:
+              id: b02e973d-9620-4e0a-9edc-00fedf7d4694
+              self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
+              type: event_orchestration_reference
+            self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/router
+            sets:
+            - id: start
+              rules:
+              - label: Events relating to our relational database
+                id: 1c26698b
+                conditions:
+                - expression: event.summary matches part 'database'
+                - expression: event.source matches regex 'db[0-9]+-server'
+                actions:
+                  route_to: PB31XBA
+              - label: Events relating to our www app server
+                id: d9801904
+                conditions:
+                - expression: event.summary matches part 'www'
+                actions:
+                  route_to: PC2D9ML
+            catch_all:
+              actions:
+                route_to: unrouted
+            created_at: '2021-11-18T16:42:01Z'
+            created_by:
+              id: P8B9WR8
+              self: https://api.pagerduty.com/users/P8B9WR8
+              type: user_reference
+            updated_at: '2021-11-18T16:42:01Z'
+            updated_by:
+              id: P8B9WR8
+              self: https://api.pagerduty.com/users/P8B9WR8
+              type: user_reference
+            version: 9co0z4b152oICsoV91_PW2.ww8ip_xap
+    Orchestration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Orchestration.
+          readOnly: true
+        self:
+          type: string
+          format: url
+          description: The API show URL at which the object is accessible
+          readOnly: true
+        name:
+          type: string
+          description: Name of the Orchestration.
+        description:
+          type: string
+          description: A description of this Orchestration's purpose.
+        team:
+          type: object
+          description: Reference to the team that owns the Orchestration. If none is specified, only admins have access.
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrchestrationIntegration'
+          readOnly: true
+        routes:
+          type: integer
+          description: Number of different Service Orchestration being routed to
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: The date the Orchestration was created at.
+          readOnly: true
+        created_by:
+          type: object
+          description: Reference to the user that has created the Orchestration.
+          properties:
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: The date the Orchestration was last updated.
+          readOnly: true
+        updated_by:
+          type: object
+          description: Reference to the user that has updated the Orchestration last.
+          properties:
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+          readOnly: true
+        version:
+          type: string
+          description: Version of the Orchestration.
+          readOnly: true
+  responses:
+    OrchestrationCacheVariableListResponse:
+      description: The Cache Variables for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variables:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            response:
+              summary: Response Example
+              value:
+                cache_variables:
+                - id: 294c3ee9-ae83-4da7-828d-107c71dc9316
+                  name: cache_var_1
+                  conditions:
+                  - expression: event.source exists
+                  - expression: event.severity matches 'critical'
+                  configuration:
+                    type: recent_value
+                    source: event.source
+                    regex: www (.*) service
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                - id: 2a6d02d5-6365-4326-aaf1-6a719e990245
+                  name: cache_var_2
+                  conditions: []
+                  configuration:
+                    type: trigger_event_count
+                    ttl_seconds: 60
+                  disabled: true
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                total: 2
+    OrchestrationCacheVariablePostResponse:
+      description: The created Cache Variable for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variable:
+                $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            recent_value:
+              summary: 'Response Example: Recent value cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: not event.custom_details.errors exists
+                  configuration:
+                    type: recent_value
+                    source: event.summary
+                    regex: .*
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+            trigger_event_count:
+              summary: 'Response Example: Trigger event count cache variable'
+              value:
+                cache_variable:
+                - id: f08cdd8d-10a5-4c70-b508-82ab5c365a43
+                  name: example_2
+                  conditions: []
+                  configuration:
+                    type: trigger_event_count
+                    ttl_seconds: 30
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    OrchestrationPathRouterTypeResponse:
+      description: The Orchestration Router object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrchestrationRouter'
+          examples:
+            response:
+              summary: Example Response
+              value:
+                orchestration_path:
+                  type: router
+                  parent:
+                    id: b02e973d-9620-4e0a-9edc-00fedf7d4694
+                    self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
+                    type: event_orchestration_reference
+                  self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/router
+                  sets:
+                  - id: start
+                    rules:
+                    - label: Events relating to our relational database
+                      id: 1c26698b
+                      conditions:
+                      - expression: event.summary matches part 'database'
+                      - expression: event.source matches regex 'db[0-9]+-server'
+                      actions:
+                        route_to: PB31XBA
+                    - label: Events relating to our www app server
+                      id: d9801904
+                      conditions:
+                      - expression: event.summary matches part 'www'
+                      actions:
+                        route_to: PC2D9ML
+                  catch_all:
+                    actions:
+                      route_to: unrouted
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  version: 9co0z4b152oICsoV91_PW2.ww8ip_xap
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    OrchestrationCacheVariablePutResponse:
+      description: The updated Cache Variable for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variable:
+                $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            update_conditions:
+              summary: 'Response Example: Recent value cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: event.summary matches 'exception'
+                  - expression: event.summary matches 'error'
+                  configuration:
+                    type: recent_value
+                    source: event.summary
+                    regex: .*
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+            update_configuration:
+              summary: 'Response Example: Trigger event count cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: not event.custom_details.errors exists
+                  configuration:
+                    type: trigger_event_count
+                    ttl_seconds: 2
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+            update_disabled:
+              summary: 'Response Example: Disabled cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: not event.custom_details.errors exists
+                  configuration:
+                    type: recent_value
+                    source: event.summary
+                    regex: .*
+                  disabled: true
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotAllowed:
+      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    OrchestrationCacheVariableGetResponse:
+      description: The fetched Cache Variable for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variable:
+                $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            response:
+              summary: Response Example
+              value:
+                cache_variable:
+                - id: 64122e97-de81-4554-9d7c-c219cef351cd
+                  name: cache_var_1
+                  conditions:
+                  - expression: raw_event.class exists and event.summary matches part 'unstable'
+                  configuration:
+                    type: recent_value
+                    source: event.custom_details.work_id
+                    regex: .*
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+    OrchestrationPathServiceActiveResponse:
+      description: An object with the active status.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              active:
+                type: boolean
+                description: The status of the service orchestration.
+          examples:
+            response:
+              summary: Example Response
+              value:
+                active: false
+    OrchestrationPathUnroutedTypeResponse:
+      description: The Unrouted Orchestration object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrchestrationUnrouted'
+          examples:
+            response:
+              summary: Example Response
+              value:
+                orchestration_path:
+                  type: unrouted
+                  parent:
+                    id: b02e973d-9620-4e0a-9edc-00fedf7d4694
+                    self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
+                    type: event_orchestration_reference
+                  self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/router
+                  sets:
+                  - id: start
+                    rules:
+                    - label: Update the summary of un-matched Critical alerts so they're easier to spot
+                      id: 38880ffb
+                      conditions:
+                      - expression: event.severity matches 'critical'
+                      actions:
+                        extractions:
+                        - target: event.summary
+                          template: '[Critical Unrouted] {{event.summary}}'
+                    - label: Reduce the severity of all other unrouted events
+                      id: 3896801e
+                      conditions: []
+                      actions:
+                        severity: info
+                  catch_all:
+                    actions:
+                      suppress: true
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  version: aZO.EEf9zWb9Vg0NYq.Uqad1hOC2Maod
+    OrchestrationPathServiceTypeResponse:
+      description: The Service Orchestration object.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServiceOrchestration'
+          examples:
+            response:
+              summary: Example Response
+              value:
+                orchestration_path:
+                  type: service
+                  parent:
+                    id: PC2D9ML
+                    self: https://api.pagerduty.com/service/PC2D9ML
+                    type: service_reference
+                  self: https://api.pagerduty.com/event_orchestrations/service/PC2D9ML
+                  sets:
+                  - id: start
+                    rules:
+                    - label: Always apply some consistent event transformations to every event sent to this Service
+                      id: c91f72f3
+                      conditions: []
+                      actions:
+                        variables:
+                        - name: hostname
+                          path: event.component
+                          value: 'hostname: (.*)'
+                          type: regex
+                        extractions:
+                        - template: '{{variables.hostname}}'
+                          target: event.custom_details.hostname
+                        - source: event.source
+                          regex: www (.*) service
+                          target: event.source
+                        pagerduty_automation_actions:
+                        - action_id: 01CSB5SMOKCKVRI5GN0LJG7SMB
+                        route_to: step-two
+                        incident_custom_field_updates:
+                        - id: PEXCK89
+                          value: '#my-team-channel'
+                        - id: PN1C4A2
+                          value: '{{event.timestamp}}'
+                  - id: step-two
+                    rules:
+                    - label: All critical alerts should be treated as P1 incidents
+                      id: 7c54529d
+                      conditions:
+                      - expression: event.severity matches 'critical'
+                      actions:
+                        annotate: 'Please use our P1 runbook: https://docs.test/p1-runbook'
+                        priority: P0IN2KQ
+                        suppress: false
+                        incident_custom_field_updates:
+                        - id: PEXCK89
+                          value: '#p1-incident-response'
+                    - label: If there's something wrong on the canary let the team know about it in our deployments Slack channel
+                      id: 1f6d9a33
+                      conditions:
+                      - expression: event.custom_details.hostname matches part 'canary'
+                      actions:
+                        automation_actions:
+                        - name: Canary Slack Notification
+                          url: https://our-slack-listerner.test/send-notification
+                          auto_send: true
+                          headers:
+                          - key: X-Notification-Source
+                            value: PagerDuty Incident Webhook
+                          parameters:
+                          - key: channel
+                            value: '#my-team-channel'
+                          - key: message
+                            value: Something is wrong with the canary deployment
+                        incident_custom_field_updates:
+                        - id: PEXCK89
+                          value: '#my-team-channel'
+                    - label: Never bother the on-call for info-level events outside of work hours
+                      id: cd770384
+                      conditions:
+                      - expression: event.severity matches 'info' and not (now in Mon,Tue,Wed,Thu,Fri 09:00:00 to 17:00:00 America/Los_Angeles)
+                      actions:
+                        suppress: true
+                  catch_all:
+                    actions:
+                      suppress: true
+                      incident_custom_field_updates:
+                      - id: PEXCK89
+                        value: '#general-incident-notifications'
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  migrated_at: '2023-06-14T13:51:31Z'
+                  migrated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  migrated_from:
+                    id: PC2D9ML
+                    self: https://api.pagerduty.com/services/PC2D9ML/rules
+                    type: service_event_rules_reference
+                  migrated_status: completed
+                  migrated_via: UI
+                  version: rn1Mja13T1HBdmPChqFilSQXUW2fWXM_
   examples:
     OrchestrationPathGlobalTypeResponse:
       summary: Example Response

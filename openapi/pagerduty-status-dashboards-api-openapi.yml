@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Status Dashboards API
+  title: PagerDuty Status Dashboards API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Status Dashboards
-  description: 'Status Dashboards represent user-defined views for the Status Dashboard product that are limited to specific Business Services rather than the whole set of top-level Business Services (those with no dependent Services).
-
-    '
+  description: Status Dashboards represent user-defined views for the Status Dashboard product that are limited to specific Business Services rather than the whole set of top-level Business Services (those with no dependent Services).
 paths:
   /status_dashboards:
     get:
@@ -38,9 +34,7 @@ paths:
       description: 'Get all your account''s custom Status Dashboard views.
 
 
-        Scoped OAuth requires: `status_dashboards.read`
-
-        '
+        Scoped OAuth requires: `status_dashboards.read`'
       summary: PagerDuty List Status Dashboards
       responses:
         '200':
@@ -83,9 +77,7 @@ paths:
       description: 'Get a Status Dashboard by its PagerDuty `id`.
 
 
-        Scoped OAuth requires: `status_dashboards.read`
-
-        '
+        Scoped OAuth requires: `status_dashboards.read`'
       summary: PagerDuty Get a single Status Dashboard by `id`
       responses:
         '200':
@@ -136,10 +128,8 @@ paths:
         To get Impact information about a specific Business Service on the Status Dashboard that does not appear in the Impact-sorted response, use the `ids[]` parameter on the `/business_services/impacts` endpoint.
 
 
-        Scoped OAuth requires: `status_dashboards.read`
-
-        '
-      summary: PagerDuty Get impacted Business Services for a Status Dashboard by `id`.
+        Scoped OAuth requires: `status_dashboards.read`'
+      summary: PagerDuty Get impacted Business Services for a Status Dashboard by `id`
       responses:
         '200':
           description: OK
@@ -204,14 +194,12 @@ paths:
       tags:
       - Status Dashboards
       operationId: getStatusDashboardByUrlSlug
-      description: 'Get a Status Dashboard by its PagerDuty `url_slug`.  A `url_slug` is a human-readable reference
+      description: 'Get a Status Dashboard by its PagerDuty `url_slug`. A `url_slug` is a human-readable reference
 
         for a custom Status Dashboard that may be created or changed in the UI. It will generally be a `dash-separated-string-like-this`.
 
 
-        Scoped OAuth requires: `status_dashboards.read`
-
-        '
+        Scoped OAuth requires: `status_dashboards.read`'
       summary: PagerDuty Get a single Status Dashboard by `url_slug`
       responses:
         '200':
@@ -264,10 +252,8 @@ paths:
         To get impact information about a specific Business Service on the Status Dashboard that does not appear in the Impact-sored response, use the `ids[]` parameter on the `/business_services/impacts` endpoint.
 
 
-        Scoped OAuth requires: `status_dashboards.read`
-
-        '
-      summary: PagerDuty Get impacted Business Services for a  Status Dashboard by `url_slug`
+        Scoped OAuth requires: `status_dashboards.read`'
+      summary: PagerDuty Get impacted Business Services for a Status Dashboard by `url_slug`
       responses:
         '200':
           description: OK
@@ -327,7 +313,50 @@ paths:
       - $ref: '#/components/parameters/url_slug'
       - $ref: '#/components/parameters/impacts_additional_fields'
 components:
+  parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    impacts_additional_fields:
+      name: additional_fields[]
+      in: query
+      description: Provides access to additional fields such as highest priority per business service and total impacted count
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services.highest_impacting_priority
+        - total_impacted_count
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    url_slug:
+      name: url_slug
+      in: path
+      description: The `url_slug` for a status dashboard
+      required: true
+      schema:
+        type: string
   responses:
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -355,16 +384,6 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     ArgumentError:
       description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
@@ -373,6 +392,12 @@ components:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
     TooManyRequests:
       description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    UnprocessableEntity:
+      description: Unprocessable Entity. Some arguments failed validation checks.
       content:
         application/json:
           schema:
@@ -387,74 +412,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    UnprocessableEntity:
-      description: Unprocessable Entity. Some arguments failed validation checks.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    impacts_additional_fields:
-      name: additional_fields[]
-      in: query
-      description: Provides access to additional fields such as highest priority per business service and total impacted count
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services.highest_impacting_priority
-        - total_impacted_count
-    url_slug:
-      name: url_slug
-      in: path
-      description: The `url_slug` for a status dashboard
-      required: true
-      schema:
-        type: string
   schemas:
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type: string
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          nullable: true
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    StatusDashboard:
-      title: StatusDashboard
-      type: object
-      properties:
-        id:
-          type: string
-        url_slug:
-          type: string
-        name:
-          type: string
     LiveListResponse:
       type: object
       properties:
@@ -466,6 +424,25 @@ components:
           type: boolean
           description: Indicates if there are additional records to return
           readOnly: true
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
     Impact:
       title: Impact
       type: object
@@ -491,8 +468,9 @@ components:
           type: object
           properties:
             highest_impacting_priority:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               description: Priority information for the highest priority level that is affecting the impacted object.
               properties:
                 id:
@@ -501,6 +479,16 @@ components:
                 order:
                   type: integer
                   readOnly: true
+    StatusDashboard:
+      title: StatusDashboard
+      type: object
+      properties:
+        id:
+          type: string
+        url_slug:
+          type: string
+        name:
+          type: string
   securitySchemes:
     api_key:
       type: apiKey

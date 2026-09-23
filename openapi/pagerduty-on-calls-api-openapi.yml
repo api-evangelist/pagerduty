@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities On-Calls API
+  title: PagerDuty On Calls API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: On-Calls
-  description: 'An on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules
-
-    '
+  description: An on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules
 paths:
   /oncalls:
     description: 'List all of the on-call entries within a given time range for a given set of users, escalation policies, and/or schedules. Each on-call entry includes:
@@ -54,15 +50,13 @@ paths:
         An on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#on-calls)
+        For more information see the API Concepts Document
 
 
         Scoped OAuth requires: `oncalls.read`
 
 
-        This API operation has operation specific rate limits. See the [Rate Limits](https://developer.pagerduty.com/docs/72d3b724589e3-rest-api-rate-limits) page for more information.
-
-        '
+        This API operation has operation specific rate limits. See the Rate Limits page for more information.'
       summary: PagerDuty List all of the on-calls
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -134,40 +128,18 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
-    user_ids_oncalls:
-      name: user_ids[]
+    include_oncalls:
+      name: include[]
       in: query
-      description: Filters the results, showing only on-calls for the specified user IDs.
+      description: Array of additional details to include.
       explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    escalation_policy_ids_oncalls:
-      name: escalation_policy_ids[]
-      in: query
-      description: Filters the results, showing only on-calls for the specified escalation policy IDs.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    since_oncalls:
-      name: since
-      in: query
-      description: The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.
       schema:
         type: string
-        format: date-time
+        enum:
+        - escalation_policies
+        - users
+        - schedules
+        uniqueItems: true
     header_Accept:
       name: Accept
       description: The `Accept` header is used as a versioning header.
@@ -176,15 +148,32 @@ components:
       schema:
         type: string
         default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
       schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    earliest_oncalls:
+      name: earliest
+      in: query
+      description: This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the "next" on-calls are for a given set of filters.
+      schema:
+        type: boolean
     until_oncalls:
       name: until
       in: query
@@ -199,37 +188,23 @@ components:
       schema:
         type: string
         format: tzinfo
-    earliest_oncalls:
-      name: earliest
+    escalation_policy_ids_oncalls:
+      name: escalation_policy_ids[]
       in: query
-      description: This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the "next" on-calls are for a given set of filters.
-      schema:
-        type: boolean
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    include_oncalls:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
+      description: Filters the results, showing only on-calls for the specified escalation policy IDs.
       explode: true
       schema:
-        type: string
-        enum:
-        - escalation_policies
-        - users
-        - schedules
+        type: array
+        items:
+          type: string
         uniqueItems: true
+    since_oncalls:
+      name: since
+      in: query
+      description: The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.
+      schema:
+        type: string
+        format: date-time
     schedule_ids_oncalls:
       name: schedule_ids[]
       in: query
@@ -240,15 +215,34 @@ components:
         items:
           type: string
         uniqueItems: true
-    offset_limit:
-      name: limit
+    offset_offset:
+      name: offset
       in: query
       required: false
-      description: The number of results per page.
+      description: Offset to start pagination search results.
       schema:
         type: integer
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    user_ids_oncalls:
+      name: user_ids[]
+      in: query
+      description: Filters the results, showing only on-calls for the specified user IDs.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
   schemas:
-    ScheduleReference:
+    EscalationPolicyReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -256,7 +250,7 @@ components:
           type:
             type: string
             enum:
-            - schedule_reference
+            - escalation_policy_reference
     UserReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
@@ -266,6 +260,43 @@ components:
             type: string
             enum:
             - user_reference
+    ScheduleReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - schedule_reference
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     Oncall:
       type: object
       properties:
@@ -311,42 +342,6 @@ components:
         escalation_level: 2
         start: '2015-03-06T15:28:51-05:00'
         end: '2015-03-07T15:28:51-05:00'
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    EscalationPolicyReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - escalation_policy_reference
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type: integer
-          description: The total number of records matching the given query.
-          nullable: true
-          readOnly: true
     Tag:
       allOf:
       - type: object
@@ -355,8 +350,9 @@ components:
             type: string
             readOnly: true
           summary:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
           type:
@@ -364,14 +360,16 @@ components:
             readOnly: true
             description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
           self:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: the API show URL at which the object is accessible
           html_url:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: a URL at which the entity is uniquely displayed in the Web app
@@ -394,18 +392,28 @@ components:
           type: tag
           label: Batman
   responses:
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
 
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
       content:
         application/json:
           schema:
@@ -437,18 +445,8 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:

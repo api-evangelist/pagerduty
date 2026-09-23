@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Templates API
+  title: PagerDuty Templates API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Templates
-  description: 'Templates is a new feature which will allow customers to create message templates to be leveraged by (but not limited to) status updates. The API will be secured to customers with the status updates entitlements.
-
-    '
+  description: Templates is a new feature which will allow customers to create message templates to be leveraged by (but not limited to) status updates. The API will be secured to customers with the status updates entitlements.
 paths:
   /templates:
     description: List and Create Templates
@@ -39,9 +35,7 @@ paths:
       description: 'Get a list of all the template on an account
 
 
-        Scoped OAuth requires: `templates.read`
-
-        '
+        Scoped OAuth requires: `templates.read`'
       summary: PagerDuty List templates
       parameters:
       - $ref: '#/components/parameters/offset_limit'
@@ -107,9 +101,7 @@ paths:
       description: 'Create a new template
 
 
-        Scoped OAuth requires: `templates.write`
-
-        '
+        Scoped OAuth requires: `templates.write`'
       summary: PagerDuty Create a template
       requestBody:
         content:
@@ -190,9 +182,7 @@ paths:
       description: 'Get a single template on the account
 
 
-        Scoped OAuth requires: `templates.read`
-
-        '
+        Scoped OAuth requires: `templates.read`'
       summary: PagerDuty Get a template
       parameters:
       - $ref: '#/components/parameters/id'
@@ -251,9 +241,7 @@ paths:
       description: 'Update an existing template
 
 
-        Scoped OAuth requires: `templates.write`
-
-        '
+        Scoped OAuth requires: `templates.write`'
       summary: PagerDuty Update a template
       parameters:
       - $ref: '#/components/parameters/id'
@@ -335,9 +323,7 @@ paths:
       description: 'Delete a specific of templates on the account
 
 
-        Scoped OAuth requires: `templates.write`
-
-        '
+        Scoped OAuth requires: `templates.write`'
       summary: PagerDuty Delete a template
       parameters:
       - $ref: '#/components/parameters/id'
@@ -364,9 +350,7 @@ paths:
       description: 'Render a template. This endpoint has a variable request body depending on the template type. For the `status_update` template type, the caller will provide the incident id, and a status update message.
 
 
-        Scoped OAuth requires: `templates.read`
-
-        '
+        Scoped OAuth requires: `templates.read`'
       parameters:
       - $ref: '#/components/parameters/id'
       requestBody:
@@ -420,9 +404,7 @@ paths:
       description: 'Get a list of fields that can be used on the account templates.
 
 
-        Scoped OAuth requires: `templates.read`
-
-        '
+        Scoped OAuth requires: `templates.read`'
       summary: PagerDuty List template fields
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -452,13 +434,15 @@ paths:
                           - datetime
                           - url
                         default_value:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           description: The default value of the template field.
-                          nullable: true
                         description:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           description: A short description of the template field.
-                          nullable: true
                         domain_name:
                           type: object
                           properties:
@@ -467,12 +451,14 @@ paths:
                             summary:
                               type: string
                         example:
-                          type: string
+                          type:
+                          - string
+                          - 'null'
                           description: An example value for the template field.
-                          nullable: true
                         keyword:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                         summary:
                           type: string
                           description: A short summary of the template field.
@@ -529,6 +515,14 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
     sort_by_template:
       name: sort_by
       in: query
@@ -545,43 +539,26 @@ components:
         - created_at:asc
         - created_at:desc
         default: created_at:asc
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
     template_query:
       name: query
       description: Template name or description to search
       in: query
       schema:
         type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
+    template_type:
+      name: template_type
+      description: Filters templates by type.
+      in: query
       schema:
         type: string
+        default: status_update
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
     offset_total:
       name: total
       in: query
@@ -595,21 +572,105 @@ components:
       schema:
         default: false
         type: boolean
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    template_type:
-      name: template_type
-      description: Filters templates by type.
-      in: query
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
       schema:
         type: string
-        default: status_update
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+  responses:
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
     Template:
       allOf:
       - $ref: '#/components/schemas/EditableTemplate'
@@ -619,19 +680,22 @@ components:
             type: string
             readOnly: true
           summary:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
           self:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: the API show URL at which the object is accessible
           html_url:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: a URL at which the entity is uniquely displayed in the Web app
@@ -656,36 +720,27 @@ components:
             oneOf:
             - $ref: '#/components/schemas/UserReference'
             - $ref: '#/components/schemas/Template/allOf/1/properties/created_by/oneOf/1'
-    StatusUpdateTemplateInput:
+    Pagination:
       type: object
       properties:
-        incident_id:
-          type: string
-          description: The incident id to render the template for
-        status_update:
-          type: object
-          properties:
-            message:
-              type: string
-              description: An optional status update message that will be sent to the template
-        external:
-          description: An optional object collection that can be referenced in the template.
-    UserReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
           type:
-            type: string
-            enum:
-            - user_reference
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
     EditableTemplate:
       type: object
       properties:
@@ -698,26 +753,37 @@ components:
           type: string
           description: The name of the template
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Description of the template
         templated_fields:
           type: object
           properties:
             email_subject:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               description: The subject of the e-mail
             email_body:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               description: The HTML body of the e-mail message
             message:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               description: 'The short-message of the template (SMS, Push notification, Slack,
 
                 etc)'
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     RenderedTemplate:
       type: object
       properties:
@@ -753,26 +819,20 @@ components:
           type: array
           items:
             type: string
-    Pagination:
+    StatusUpdateTemplateInput:
       type: object
       properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type: integer
-          description: The total number of records matching the given query.
-          nullable: true
-          readOnly: true
+        incident_id:
+          type: string
+          description: The incident id to render the template for
+        status_update:
+          type: object
+          properties:
+            message:
+              type: string
+              description: An optional status update message that will be sent to the template
+        external:
+          description: An optional object collection that can be referenced in the template.
     Tag:
       allOf:
       - type: object
@@ -781,8 +841,9 @@ components:
             type: string
             readOnly: true
           summary:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
           type:
@@ -790,14 +851,16 @@ components:
             readOnly: true
             description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
           self:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: the API show URL at which the object is accessible
           html_url:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: a URL at which the entity is uniquely displayed in the Web app
@@ -819,72 +882,6 @@ components:
         example:
           type: tag
           label: Batman
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   securitySchemes:
     api_key:
       type: apiKey

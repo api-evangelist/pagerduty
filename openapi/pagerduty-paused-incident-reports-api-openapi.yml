@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Paused Incident Reports API
+  title: PagerDuty Paused Incident Reports API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Paused Incident Reports
-  description: 'Provides paused Incident reporting data on services and accounts that have paused Alerts.
-
-    '
+  description: Provides paused Incident reporting data on services and accounts that have paused Alerts.
 paths:
   /paused_incident_reports/alerts:
     description: Get reporting on Alerts for paused Incident usage
@@ -36,15 +32,13 @@ paths:
       tags:
       - Paused Incident Reports
       operationId: getPausedIncidentReportAlerts
-      description: 'Returns the 5 most recent alerts that were triggered after being paused and the 5 most recent alerts that were resolved after being paused for a given reporting period (maximum 6 months lookback period).  Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.
+      description: 'Returns the 5 most recent alerts that were triggered after being paused and the 5 most recent alerts that were resolved after being paused for a given reporting period (maximum 6 months lookback period). Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `incidents.read`
-
-        '
+        Scoped OAuth requires: `incidents.read`'
       summary: PagerDuty Get Paused Incident Reporting on Alerts
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -135,15 +129,13 @@ paths:
       tags:
       - Paused Incident Reports
       operationId: getPausedIncidentReportCounts
-      description: 'Returns reporting counts for paused Incident usage for a given reporting period (maximum 6 months lookback period).  Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.
+      description: 'Returns reporting counts for paused Incident usage for a given reporting period (maximum 6 months lookback period). Note: This feature is currently available as part of the Event Intelligence package or Digital Operations plan only.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#paused-incident-reports)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `incidents.read`
-
-        '
+        Scoped OAuth requires: `incidents.read`'
       summary: PagerDuty Get Paused Incident Reporting counts
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -202,13 +194,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   parameters:
-    paused_incident_reports_service_id:
-      name: service_id
-      in: query
-      description: Specifies a filter to limit the scope of reporting to a particular service
-      schema:
-        type: string
-        example: P123456
     header_Accept:
       name: Accept
       description: The `Accept` header is used as a versioning header.
@@ -233,13 +218,13 @@ components:
         default: application/json
         enum:
         - application/json
-    since:
-      name: since
+    paused_incident_reports_service_id:
+      name: service_id
       in: query
-      description: The start of the date range over which you want to search.
+      description: Specifies a filter to limit the scope of reporting to a particular service
       schema:
         type: string
-        format: date-time
+        example: P123456
     paused_incident_reports_suspended_by:
       name: suspended_by
       in: query
@@ -248,7 +233,24 @@ components:
         enum:
         - auto_pause
         - rules
+    since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
   responses:
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -276,6 +278,12 @@ components:
                 example:
                   message: Not Found
                   code: 2100
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     TooManyRequests:
       description: Too many requests have been made, the rate limit has been reached.
       content:
@@ -290,22 +298,6 @@ components:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
     NotFound:
       description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:

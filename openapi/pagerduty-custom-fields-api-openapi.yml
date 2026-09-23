@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Custom Fields API
+  title: PagerDuty Custom Fields API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Custom Fields
-  description: 'Custom fields allow you to enrich PagerDuty incidents with critical and helpful metadata throughout the incident lifecycle.
-
-    '
+  description: Custom fields allow you to enrich PagerDuty incidents with critical and helpful metadata throughout the incident lifecycle.
 paths:
   /incidents/custom_fields:
     description: Create and list Fields on Incidents
@@ -39,9 +35,7 @@ paths:
       description: 'Create a new Field, along with the Field Options if provided. An account may have up to 10 Fields.
 
 
-        Scoped OAuth requires: `custom_fields.write`
-
-        '
+        Scoped OAuth requires: `custom_fields.write`'
       summary: PagerDuty Create a Field
       requestBody:
         content:
@@ -207,9 +201,7 @@ paths:
       description: 'List fields.
 
 
-        Scoped OAuth requires: `custom_fields.read`
-
-        '
+        Scoped OAuth requires: `custom_fields.read`'
       summary: PagerDuty List Fields
       parameters:
       - $ref: '#/components/parameters/include_customfields_field'
@@ -267,9 +259,7 @@ paths:
       description: 'Show detailed information about a field.
 
 
-        Scoped OAuth requires: `custom_fields.read`
-
-        '
+        Scoped OAuth requires: `custom_fields.read`'
       summary: PagerDuty Get a Field
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -348,9 +338,7 @@ paths:
       description: 'Update a field.
 
 
-        Scoped OAuth requires: `custom_fields.write`
-
-        '
+        Scoped OAuth requires: `custom_fields.write`'
       summary: PagerDuty Update a Field
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -416,9 +404,7 @@ paths:
       description: 'Delete a Field. Fields may not be deleted if they are used by a Field Schema.
 
 
-        Scoped OAuth requires: `custom_fields.write`
-
-        '
+        Scoped OAuth requires: `custom_fields.write`'
       summary: PagerDuty Delete a Field
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -443,9 +429,7 @@ paths:
       description: 'Create a new Field Option. Field Options may only be created for Fields that have `field_options`. A Field may have no more than 10 enabled options.
 
 
-        Scoped OAuth requires: `custom_fields.write`
-
-        '
+        Scoped OAuth requires: `custom_fields.write`'
       summary: PagerDuty Create a Field Option
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -507,9 +491,7 @@ paths:
       description: 'List all enabled Field Options for a Field.
 
 
-        Scoped OAuth requires: `custom_fields.read`
-
-        '
+        Scoped OAuth requires: `custom_fields.read`'
       summary: PagerDuty List Field Options
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -553,9 +535,7 @@ paths:
       description: 'Update Field Option for a Field.
 
 
-        Scoped OAuth requires: `custom_fields.write`
-
-        '
+        Scoped OAuth requires: `custom_fields.write`'
       summary: PagerDuty Update a Field Option
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -618,9 +598,7 @@ paths:
       description: 'Delete a Field Option.
 
 
-        Scoped OAuth requires: `custom_fields.write`
-
-        '
+        Scoped OAuth requires: `custom_fields.write`'
       summary: PagerDuty Delete a Field Option
       parameters:
       - $ref: '#/components/parameters/field_id'
@@ -637,31 +615,62 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  parameters:
-    field_id:
-      name: field_id
-      description: The ID of the field.
-      in: path
-      required: true
-      schema:
-        type: string
-    include_customfields_field:
-      name: include[]
-      description: Array of additional details to include.
-      in: query
-      explode: true
-      schema:
-        type: string
-        enum:
-        - field_options
-        uniqueItems: true
-    field_option_id:
-      name: field_option_id
-      description: The ID of the field option.
-      in: path
-      required: true
-      schema:
-        type: string
+  responses:
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
     CustomFieldsFieldValue:
       type: object
@@ -702,8 +711,9 @@ components:
           - datetime
           - url
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A description of the data this field contains.
           maxLength: 1000
         value:
@@ -712,50 +722,57 @@ components:
             title: Boolean
             properties:
               value:
-                type: boolean
-                nullable: true
+                type:
+                - boolean
+                - 'null'
           - type: object
             title: Float
             properties:
               value:
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
           - type: object
             title: Integer
             properties:
               value:
-                type: integer
-                nullable: true
+                type:
+                - integer
+                - 'null'
           - type: object
             title: String
             properties:
               value:
                 oneOf:
-                - type: string
+                - type:
+                  - string
+                  - 'null'
                   maxLength: 200
-                  nullable: true
-                - type: array
+                - type:
+                  - array
+                  - 'null'
                   items:
                     type: string
                     maxLength: 200
                   maxItems: 10
                   uniqueItems: true
-                  nullable: true
           - type: object
             title: Datetime
             properties:
               value:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
                 format: date-time
           - type: object
             title: Url
             properties:
               value:
-                type: string
+                type:
+                - string
+                - 'null'
                 format: uri
                 maxLength: 200
-                nullable: true
       required:
       - id
       - type
@@ -765,85 +782,6 @@ components:
       - data_type
       - field_type
       - description
-    CustomFieldsEditableField:
-      type: object
-      properties:
-        display_name:
-          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
-        description:
-          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
-        default_value:
-          oneOf:
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
-          nullable: true
-    CustomFieldsField:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldsEditableField'
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-            description: The ID of the resource.
-          name:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
-          summary:
-            type: string
-            nullable: true
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          self:
-            type: string
-            nullable: true
-            readOnly: true
-            format: url
-            description: The API show URL at which the object is accessible
-          type:
-            type: string
-            enum:
-            - field
-            readOnly: true
-          created_at:
-            type: string
-            format: date-time
-            description: The date/time the object was created at.
-            readOnly: true
-          updated_at:
-            type: string
-            format: date-time
-            description: The date/time the object was last updated.
-            readOnly: true
-          data_type:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/data_type'
-          field_type:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/field_type'
-      required:
-      - id
-      - summary
-      - self
-      - type
-      - created_at
-      - updated_at
-      - data_type
-      - namespace
-      - name
-      - display_name
-      - field_type
-    CustomFieldsFieldOption:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
-      - type: object
-        required:
-        - id
-        - type
-        - data
-        - created_at
-        - updated_at
     CustomFieldsEditableFieldOption:
       type: object
       properties:
@@ -890,73 +828,123 @@ components:
       - created_at
       - updated_at
       description: ''
+    CustomFieldsFieldOption:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
+      - type: object
+        required:
+        - id
+        - type
+        - data
+        - created_at
+        - updated_at
+    CustomFieldsField:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableField'
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+            description: The ID of the resource.
+          name:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: The API show URL at which the object is accessible
+          type:
+            type: string
+            enum:
+            - field
+            readOnly: true
+          created_at:
+            type: string
+            format: date-time
+            description: The date/time the object was created at.
+            readOnly: true
+          updated_at:
+            type: string
+            format: date-time
+            description: The date/time the object was last updated.
+            readOnly: true
+          data_type:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/data_type'
+          field_type:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/field_type'
+      required:
+      - id
+      - summary
+      - self
+      - type
+      - created_at
+      - updated_at
+      - data_type
+      - namespace
+      - name
+      - display_name
+      - field_type
+    CustomFieldsEditableField:
+      type: object
+      properties:
+        display_name:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
+        description:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
+        default_value:
+          oneOf:
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
     CustomFieldsFieldWithOptions:
       allOf:
       - $ref: '#/components/schemas/CustomFieldsField'
       - type: object
         properties:
           field_options:
-            type: array
+            type:
+            - array
+            - 'null'
             description: The fixed list of value options that may be stored in this field.
             items:
               $ref: '#/components/schemas/CustomFieldsFieldOption'
-            nullable: true
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  parameters:
+    field_id:
+      name: field_id
+      description: The ID of the field.
+      in: path
+      required: true
+      schema:
+        type: string
+    field_option_id:
+      name: field_option_id
+      description: The ID of the field option.
+      in: path
+      required: true
+      schema:
+        type: string
+    include_customfields_field:
+      name: include[]
+      description: Array of additional details to include.
+      in: query
+      explode: true
+      schema:
+        type: string
+        enum:
+        - field_options
+        uniqueItems: true
   securitySchemes:
     api_key:
       type: apiKey

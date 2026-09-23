@@ -1,0 +1,32 @@
+# Front Door AI Index — pagerduty — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: pagerduty
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.pagerduty.com
+  final_host: www.pagerduty.com
+  ownership: own
+  owner: pagerduty
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 34
+  host_score: 34
+  density: 22.46
+  words: 1514
+  tiers:
+    agentic: 6
+    core: 28
+    model: 0
+  ambiguous: 16
+  top_terms:
+    AI: 26
+    agent: 8
+    AI agent: 4
+    automation: 4
+    intelligence: 4
+    ML: 2
+    MCP: 1
+    prompts: 1

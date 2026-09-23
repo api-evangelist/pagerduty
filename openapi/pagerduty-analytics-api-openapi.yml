@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Analytics API
+  title: PagerDuty Analytics API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Analytics
-  description: 'Provides enriched incident data.
-
-    '
+  description: Provides enriched incident data.
 paths:
   /analytics/metrics/incidents/all:
     parameters: []
@@ -265,18 +261,13 @@ paths:
         The provided metrics are aggregated by day, week, month using the aggregate_unit parameter, or for the entire period if no aggregate_unit is provided.
 
 
-        <!-- theme: info -->
+        > A `team_ids` or `service_ids` filter is required for user-level API keys or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
 
-        > A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/incidents/escalation_policies:
@@ -398,17 +389,13 @@ paths:
       description: 'Provides aggregated metrics for incidents aggregated into units of time by escalation policy.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#escalation-policy-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/incidents/escalation_policies/all:
@@ -493,17 +480,13 @@ paths:
       description: 'Provides aggregated metrics across all escalation policies.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#escalation-policy-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/incidents/services:
@@ -627,19 +610,15 @@ paths:
       description: 'Provides aggregated metrics for incidents aggregated into units of time by service.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#services-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-        Data can be aggregated by day, week or month in addition to by service, or provided just as a collection of aggregates for each service in the dataset for the entire period.  If a unit is provided, each row in the returned dataset will include a ''range_start'' timestamp.
+        Data can be aggregated by day, week or month in addition to by service, or provided just as a collection of aggregates for each service in the dataset for the entire period. If a unit is provided, each row in the returned dataset will include a ''range_start'' timestamp.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/incidents/services/all:
@@ -723,21 +702,16 @@ paths:
       description: 'Provides aggregated metrics across all services.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#services-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
 
-        <!-- theme: info -->
+        > A `team_ids` or `service_ids` filter is required for user-level API keys or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
 
-        > A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/incidents/teams:
@@ -855,23 +829,18 @@ paths:
       description: 'Provides aggregated metrics for incidents aggregated into units of time by team.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#teams-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-        Data can be aggregated by day, week or month in addition to by team, or provided just as a collection of aggregates for each team in the dataset for the entire period.  If a unit is provided, each row in the returned dataset will include a ''range_start'' timestamp.
+        Data can be aggregated by day, week or month in addition to by team, or provided just as a collection of aggregates for each team in the dataset for the entire period. If a unit is provided, each row in the returned dataset will include a ''range_start'' timestamp.
 
 
-        <!-- theme: info -->
+        > A `team_ids` or `service_ids` filter is required for user-level API keys or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
 
-        > A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/incidents/teams/all:
@@ -956,21 +925,16 @@ paths:
       description: 'Provides aggregated metrics across all teams.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#teams-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
 
-        <!-- theme: info -->
+        > A `team_ids` or `service_ids` filter is required for user-level API keys or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
 
-        > A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/responders/all:
@@ -1051,17 +1015,13 @@ paths:
       description: 'Provides aggregated incident metrics for all selected responders.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#responders-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/metrics/responders/teams:
@@ -1169,17 +1129,13 @@ paths:
       description: 'Provides incident metrics aggregated by responder.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#responders-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/raw/incidents:
@@ -1499,10 +1455,8 @@ paths:
 
                     Limits between 1 to 1000 are accepted.'
                   example: 20
-                  minimum: 0
-                  exclusiveMinimum: true
                   maximum: 1000
-                  exclusiveMaximum: false
+                  exclusiveMinimum: 0
                 time_zone:
                   type: string
                   description: The time zone to use for the results.
@@ -1533,21 +1487,16 @@ paths:
       description: 'Provides enriched incident data and metrics for multiple incidents.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#incidents-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
 
-        <!-- theme: info -->
+        > A `team_ids` or `service_ids` filter is required for user-level API keys or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
 
-        > A `team_ids` or `service_ids` filter is required for [user-level API keys](https://support.pagerduty.com/docs/using-the-api#section-generating-a-personal-rest-api-key) or keys generated through an OAuth flow. Account-level API keys do not have this requirement.
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       tags:
       - Analytics
   /analytics/raw/incidents/{id}:
@@ -1635,17 +1584,13 @@ paths:
       description: 'Provides enriched incident data and metrics for a single incident.
 
 
-        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#incidents-list).
+        Example metrics include Seconds to Resolve, Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1721,10 +1666,8 @@ paths:
 
                     Limits between 1 to 1000 are accepted.'
                   example: 20
-                  minimum: 0
-                  exclusiveMinimum: true
                   maximum: 1000
-                  exclusiveMaximum: false
+                  exclusiveMinimum: 0
                 order:
                   type: string
                   description: The order in which to display the results; asc for ascending, desc for descending. Defaults to `desc`.
@@ -1755,13 +1698,9 @@ paths:
         Example metrics include Time to Respond, Responder Type, and Response Status. See metric definitions below.
 
 
-        <!-- theme: info -->
-
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incident responses appear in the Analytics API.
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -2006,10 +1945,8 @@ paths:
 
                     Limits between 1 to 1000 are accepted.'
                   example: 20
-                  minimum: 0
-                  exclusiveMinimum: true
                   maximum: 1000
-                  exclusiveMaximum: false
+                  exclusiveMinimum: 0
                 time_zone:
                   type: string
                   description: The time zone to use for the results.
@@ -2031,168 +1968,15 @@ paths:
       description: 'Provides enriched incident data and metrics for a specific responder.
 
 
-        Example metrics include Mean Seconds to Resolve, Mean Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our [Knowledge Base](https://support.pagerduty.com/docs/insights#incidents-list).
+        Example metrics include Mean Seconds to Resolve, Mean Seconds to Engage, Snoozed Seconds, and Sleep Hour Interruptions. Metric definitions can be found in our Knowledge Base.
 
-
-        <!-- theme: info -->
 
         > **Note:** Analytics data is updated once per day. It takes up to 24 hours before new incidents appear in the Analytics API.
 
 
-        Scoped OAuth requires: `analytics.read`
-
-        '
+        Scoped OAuth requires: `analytics.read`'
 components:
-  responses:
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    responder_id:
-      name: responder_id
-      description: The ID of the responder.
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    AnalyticsResponderFilter:
-      type: object
-      properties:
-        filters:
-          type: object
-          description: Accepts a set of filters to apply to the Incidents before aggregating.  Any incidents that do not match the included filters will be omitted from the results
-          properties:
-            date_range_start:
-              type: string
-              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at less than this value will be omitted from the results. The maximum supported time range in conjunction with date_range_end is one year.
-              example: '2023-10-01T00:00:00+05:00'
-            date_range_end:
-              type: string
-              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at greater than or equal to this value will be omitted from the results. The maximum supported time range in conjunction with date_range_start is one year.
-              example: '2023-10-01T00:00:00Z'
-            urgency:
-              type: string
-              description: Any incidents whose urgency does not match the provided string will be omitted from the results.
-              example: high
-              enum:
-              - high
-              - low
-            team_ids:
-              type: array
-              description: An array of team IDs. Only incidents related to these teams will be included in the results. If omitted, all teams the requestor has access to will be included in the results.
-              items:
-                type: string
-              example:
-              - P373JQQ
-              - PAECHJV
-              - P7SYGW6
-            responder_ids:
-              type: array
-              description: An array of responder IDs. Only incidents related to these responders will be included in the results. If omitted, all responders the requestor has access to will be included in the results.
-              items:
-                type: string
-              example:
-              - PDJXDF3
-              - PG4EHNS
-            priority_ids:
-              type: array
-              description: An array of priority IDs. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
-              items:
-                type: string
-              example:
-              - PC8O0L3
-              - PX01HJD
-              - P5FK83M
-            priority_names:
-              type: array
-              description: An array of user-defined priority names. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
-              items:
-                type: string
-              example:
-              - P1
-              - P2
-              - P3
-        time_zone:
-          type: string
-          description: The time zone to use for the results and grouping.
-          example: Etc/UTC
-        order:
-          type: string
-          description: The order in which the results were sorted; asc for ascending, desc for descending.
-          enum:
-          - asc
-          - desc
-        order_by:
-          type: string
-          description: The column that was used for ordering the results.
-          example: user_id
     AnalyticsIncidentMetricsEscalationPolicy:
       title: Analytics Incident Metrics Escalation Policy
       type: object
@@ -2327,16 +2111,19 @@ components:
           type: integer
           description: The PagerDuty incident number.
         incident_priority_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ID of the incident's priority level.
         incident_priority_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The user-provided short name of the priority.
         incident_priority_order:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: The numerical value used to sort priorities. Higher values are higher priority.
         incident_urgency:
           type: string
@@ -2357,12 +2144,14 @@ components:
           type: string
           description: Name of the service that the incident triggered on.
         service_team_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ID of the team that owns the related service.
         service_team_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Name of the team that owns the related service.
         total_acknowledgements:
           type: integer
@@ -2404,6 +2193,115 @@ components:
         total_timeout_escalations_to:
           type: integer
           description: Total times the responder was escalated to the incident due to timeout.
+    AnalyticsRawIncidentResponses:
+      title: Analytics Raw Incident Responses
+      type: object
+      properties:
+        responder_name:
+          type: string
+          description: Name of the user associated with the Incident Response.
+        responder_id:
+          type: string
+          description: ID of the user associated with the Incident Response.
+        response_status:
+          type: string
+          description: Status of the user's interaction with the Incident notification.
+          enum:
+          - joined
+          - pending
+          - declined
+        responder_type:
+          type: string
+          description: 'Type of responder, where `assigned` means the user was added to the Incident via Assignment at Incident creation,
+
+            `reassigned` means the user was added to the Incident via Reassignment, `escalated` means the user was added via Escalation,
+
+            and `added_responder` means the user was added via Responder Reqeuest.'
+          enum:
+          - assigned
+          - reassigned
+          - escalated
+          - added_responder
+        requested_at:
+          type: string
+          description: Timestamp of when the user was requested.
+        responded_at:
+          type: string
+          description: Timestamp of when the user responded to the request.
+        time_to_respond_seconds:
+          type: integer
+          description: Measures the time it took for the user to respond to the Incident request. In other words, `responded_at - requested_at`.
+    AnalyticsResponderFilter:
+      type: object
+      properties:
+        filters:
+          type: object
+          description: Accepts a set of filters to apply to the Incidents before aggregating.  Any incidents that do not match the included filters will be omitted from the results
+          properties:
+            date_range_start:
+              type: string
+              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at less than this value will be omitted from the results. The maximum supported time range in conjunction with date_range_end is one year.
+              example: '2023-10-01T00:00:00+05:00'
+            date_range_end:
+              type: string
+              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at greater than or equal to this value will be omitted from the results. The maximum supported time range in conjunction with date_range_start is one year.
+              example: '2023-10-01T00:00:00Z'
+            urgency:
+              type: string
+              description: Any incidents whose urgency does not match the provided string will be omitted from the results.
+              example: high
+              enum:
+              - high
+              - low
+            team_ids:
+              type: array
+              description: An array of team IDs. Only incidents related to these teams will be included in the results. If omitted, all teams the requestor has access to will be included in the results.
+              items:
+                type: string
+              example:
+              - P373JQQ
+              - PAECHJV
+              - P7SYGW6
+            responder_ids:
+              type: array
+              description: An array of responder IDs. Only incidents related to these responders will be included in the results. If omitted, all responders the requestor has access to will be included in the results.
+              items:
+                type: string
+              example:
+              - PDJXDF3
+              - PG4EHNS
+            priority_ids:
+              type: array
+              description: An array of priority IDs. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
+              items:
+                type: string
+              example:
+              - PC8O0L3
+              - PX01HJD
+              - P5FK83M
+            priority_names:
+              type: array
+              description: An array of user-defined priority names. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
+              items:
+                type: string
+              example:
+              - P1
+              - P2
+              - P3
+        time_zone:
+          type: string
+          description: The time zone to use for the results and grouping.
+          example: Etc/UTC
+        order:
+          type: string
+          description: The order in which the results were sorted; asc for ascending, desc for descending.
+          enum:
+          - asc
+          - desc
+        order_by:
+          type: string
+          description: The column that was used for ordering the results.
+          example: user_id
     AnalyticsRawIncident:
       title: Analytics Raw Incident
       type: object
@@ -2493,16 +2391,19 @@ components:
           type: integer
           description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
         priority_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ID of the incident's priority level.
         priority_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The user-provided short name of the priority.
         priority_order:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           description: The numerical value used to sort priorities. Higher values are higher priority.
         reassignment_count:
           type: integer
@@ -2550,12 +2451,14 @@ components:
           type: string
           description: The incident status. Can be one of `triggered`, `acknowledged`, or `resolved`.
         team_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: ID of the team the incident was assigned to.
         team_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Name of the team the incident was assigned to.
         timeout_escalation_count:
           type: integer
@@ -2570,11 +2473,12 @@ components:
           type: string
           description: Notification level
         user_defined_effort_seconds:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: 'The total response effort in seconds,
 
             [as defined by the user](https://support.pagerduty.com/docs/editing-incidents#edit-incident-duration).'
-          nullable: true
     AnalyticsModel:
       type: object
       properties:
@@ -2672,14 +2576,100 @@ components:
           description: The column that was used for ordering the results.
           example: created_at
         aggregate_unit:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The time unit to aggregate metrics by.  If no value is provided, the metrics will be aggregated for the entire period.
-          nullable: true
           example: day
           enum:
           - day
           - week
           - month
+    AnalyticsResponderMetrics:
+      title: Analytics Responder Metrics
+      type: object
+      properties:
+        mean_engaged_seconds:
+          type: integer
+          description: 'Mean engaged time across all responders for incidents that match the given filters.
+
+            Engaged time is measured from the time a user engages with an incident (by
+
+            acknowledging or accepting a responder request) until the incident is resolved.
+
+            This may include periods in which the incidents were snoozed.'
+        mean_time_to_acknowledge_seconds:
+          type: integer
+          description: 'The average time between when an incident is first assigned to a user and when the incident is first acknowledged by that user.
+
+            Reassign, resolve, and escalation actions do not imply acknowledgement.'
+        responder_id:
+          type: integer
+          description: ID of the responder (user). Not included when aggregating by all responders.
+        responder_name:
+          type: string
+          description: Name of the responder (user). Not included when aggregating by all responders.
+        team_id:
+          type: string
+          description: ID of the team associated with the responder. Not included when aggregating by all responders.
+        team_name:
+          type: string
+          description: Name of the team associated with the responder. Not included when aggregating by all responders.
+        total_business_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during business hours; 8am-6pm Mon-Fri, based on the user’s time zone.
+        total_engaged_seconds:
+          type: integer
+          description: 'Total engaged time across all responders for incidents. Engaged time is measured from
+
+            the time a user engages with an incident (by acknowledging or accepting a responder request)
+
+            until the incident is resolved. This may include periods in which the incidents were snoozed.'
+        total_incident_count:
+          type: integer
+          description: The total number of incidents that were created.
+        total_incidents_acknowledged:
+          type: integer
+          description: "The total count of assigned incidents acknowledged by the user. \nOnly explicit incident acknowledgment counts; reassign, resolve, and escalation actions do not imply acknowledgement."
+        total_incidents_manual_escalated_from:
+          type: integer
+          description: The total count of the user’s assigned incidents that were manually escalated away from a user without acknowledgement.
+        total_incidents_manual_escalated_to:
+          type: integer
+          description: The total count of incidents the user was manually escalated to.
+        total_incidents_reassigned_from:
+          type: integer
+          description: The total count of a user's assigned incidents that were reassigned away from the user to another user or escalation policy.
+        total_incidents_reassigned_to:
+          type: integer
+          description: The total count of incidents the user was reassigned to.
+        total_incidents_timeout_escalated_from:
+          type: integer
+          description: The total count of the user’s assigned incidents that were escalated due to timeouts.
+        total_incidents_timeout_escalated_to:
+          type: integer
+          description: The total count of incidents the user was escalated to due to timeouts.
+        total_interruptions:
+          type: integer
+          description: Total number of unique interruptions.
+        total_notifications:
+          type: integer
+          description: The total count of incident notifications sent via email, SMS, phone call and push.
+        total_off_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
+        total_seconds_on_call:
+          type: integer
+          description: Total seconds the responder was on call.
+        total_seconds_on_call_level_1:
+          type: integer
+          description: Total seconds the responder was on call at level 1 of their escalation policy.
+        total_seconds_on_call_level_2_plus:
+          type: integer
+          description: Total seconds the responder was on call at level 2 or higher of their escalation policy.
+        total_sleep_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during sleep hours; 10pm-8am every day, based on the user’s time zone.
     AnalyticsIncidentMetrics:
       title: Analytics Incident Metrics
       type: object
@@ -2798,129 +2788,84 @@ components:
             by a [major incident](https://support.pagerduty.com/docs/operational-reviews#major-incidents).
 
             Only included when aggregating by team, escalation policy, service, or all services.'
-    AnalyticsRawIncidentResponses:
-      title: Analytics Raw Incident Responses
-      type: object
-      properties:
-        responder_name:
-          type: string
-          description: Name of the user associated with the Incident Response.
-        responder_id:
-          type: string
-          description: ID of the user associated with the Incident Response.
-        response_status:
-          type: string
-          description: Status of the user's interaction with the Incident notification.
-          enum:
-          - joined
-          - pending
-          - declined
-        responder_type:
-          type: string
-          description: 'Type of responder, where `assigned` means the user was added to the Incident via Assignment at Incident creation,
-
-            `reassigned` means the user was added to the Incident via Reassignment, `escalated` means the user was added via Escalation,
-
-            and `added_responder` means the user was added via Responder Reqeuest.'
-          enum:
-          - assigned
-          - reassigned
-          - escalated
-          - added_responder
-        requested_at:
-          type: string
-          description: Timestamp of when the user was requested.
-        responded_at:
-          type: string
-          description: Timestamp of when the user responded to the request.
-        time_to_respond_seconds:
-          type: integer
-          description: Measures the time it took for the user to respond to the Incident request. In other words, `responded_at - requested_at`.
-    AnalyticsResponderMetrics:
-      title: Analytics Responder Metrics
-      type: object
-      properties:
-        mean_engaged_seconds:
-          type: integer
-          description: 'Mean engaged time across all responders for incidents that match the given filters.
-
-            Engaged time is measured from the time a user engages with an incident (by
-
-            acknowledging or accepting a responder request) until the incident is resolved.
-
-            This may include periods in which the incidents were snoozed.'
-        mean_time_to_acknowledge_seconds:
-          type: integer
-          description: 'The average time between when an incident is first assigned to a user and when the incident is first acknowledged by that user.
-
-            Reassign, resolve, and escalation actions do not imply acknowledgement.'
-        responder_id:
-          type: integer
-          description: ID of the responder (user). Not included when aggregating by all responders.
-        responder_name:
-          type: string
-          description: Name of the responder (user). Not included when aggregating by all responders.
-        team_id:
-          type: string
-          description: ID of the team associated with the responder. Not included when aggregating by all responders.
-        team_name:
-          type: string
-          description: Name of the team associated with the responder. Not included when aggregating by all responders.
-        total_business_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during business hours; 8am-6pm Mon-Fri, based on the user’s time zone.
-        total_engaged_seconds:
-          type: integer
-          description: 'Total engaged time across all responders for incidents. Engaged time is measured from
-
-            the time a user engages with an incident (by acknowledging or accepting a responder request)
-
-            until the incident is resolved. This may include periods in which the incidents were snoozed.'
-        total_incident_count:
-          type: integer
-          description: The total number of incidents that were created.
-        total_incidents_acknowledged:
-          type: integer
-          description: "The total count of assigned incidents acknowledged by the user. \nOnly explicit incident acknowledgment counts; reassign, resolve, and escalation actions do not imply acknowledgement."
-        total_incidents_manual_escalated_from:
-          type: integer
-          description: The total count of the user’s assigned incidents that were manually escalated away from a user without acknowledgement.
-        total_incidents_manual_escalated_to:
-          type: integer
-          description: The total count of incidents the user was manually escalated to.
-        total_incidents_reassigned_from:
-          type: integer
-          description: The total count of a user's assigned incidents that were reassigned away from the user to another user or escalation policy.
-        total_incidents_reassigned_to:
-          type: integer
-          description: The total count of incidents the user was reassigned to.
-        total_incidents_timeout_escalated_from:
-          type: integer
-          description: The total count of the user’s assigned incidents that were escalated due to timeouts.
-        total_incidents_timeout_escalated_to:
-          type: integer
-          description: The total count of incidents the user was escalated to due to timeouts.
-        total_interruptions:
-          type: integer
-          description: Total number of unique interruptions.
-        total_notifications:
-          type: integer
-          description: The total count of incident notifications sent via email, SMS, phone call and push.
-        total_off_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
-        total_seconds_on_call:
-          type: integer
-          description: Total seconds the responder was on call.
-        total_seconds_on_call_level_1:
-          type: integer
-          description: Total seconds the responder was on call at level 1 of their escalation policy.
-        total_seconds_on_call_level_2_plus:
-          type: integer
-          description: Total seconds the responder was on call at level 2 or higher of their escalation policy.
-        total_sleep_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during sleep hours; 10pm-8am every day, based on the user’s time zone.
+  parameters:
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    responder_id:
+      name: responder_id
+      description: The ID of the responder.
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   securitySchemes:
     api_key:
       type: apiKey

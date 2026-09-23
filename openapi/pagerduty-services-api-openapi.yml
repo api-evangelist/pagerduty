@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Services API
+  title: PagerDuty Services API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -39,12 +37,10 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty List services
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -162,15 +158,13 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        There is a limit of 25,000 services per account. If the limit is reached, the API will respond with an error. There is also a limit of 100,000 open Incidents per Service. If the limit is reached and `auto_resolve_timeout` is disabled (set to 0 or null), the `auto_resolve_timeout` property will automatically be set to  84600 (1 day).
+        There is a limit of 25,000 services per account. If the limit is reached, the API will respond with an error. There is also a limit of 100,000 open Incidents per Service. If the limit is reached and `auto_resolve_timeout` is disabled (set to 0 or null), the `auto_resolve_timeout` property will automatically be set to 84600 (1 day).
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Create a service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -328,12 +322,10 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty Get a service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -436,12 +428,10 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Delete a service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -467,12 +457,10 @@ paths:
         There is a limit of 100,000 open Incidents per Service. If the limit is reached and you disable `auto_resolve_timeout` (set to 0 or null), the API will respond with an error.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Update a service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -634,15 +622,13 @@ paths:
       description: 'The returned records are sorted by the `execution_time` from newest to oldest.
 
 
-        See [`Cursor-based pagination`](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for instructions on how to paginate through the result set.
+        See `Cursor-based pagination` for instructions on how to paginate through the result set.
 
 
-        For more information see the [Audit API Document](https://developer.pagerduty.com/docs/rest-api-v2/audit-records-api/).
+        For more information see the Audit API Document.
 
 
-        Scoped OAuth requires: `audit_records.read`
-
-        '
+        Scoped OAuth requires: `audit_records.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -689,12 +675,10 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -814,12 +798,10 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -906,12 +888,10 @@ paths:
         A service may represent an application, component, or team you wish to open incidents against.
 
 
-        For more information see the [API Concepts Document](../../api-reference/ZG9jOjI3NDc5Nzc-api-concepts#services)
+        For more information see the API Concepts Document
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -970,16 +950,13 @@ paths:
       operationId: listServiceEventRules
       description: 'List Event Rules on a Service.
 
-        <!-- theme: warning -->
 
         > ### End-of-life
 
-        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
+        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you migrate to Event Orchestration as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty List Service's Event Rules
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1123,16 +1100,13 @@ paths:
       operationId: createServiceEventRule
       description: 'Create a new Event Rule on a Service.
 
-        <!-- theme: warning -->
 
         > ### End-of-life
 
-        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
+        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you migrate to Event Orchestration as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Create an Event Rule on a Service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1248,17 +1222,15 @@ paths:
         2. Makes all existing Event Rules for this Service read-only. All future updates need to be made via the newly created Event Orchestration rules.
 
 
-        Sending a request to this API endpoint will **not** change how future events will be processed. If past events for this Service have been evaluated via Event Rules then new events sent to this Service will also continue to be evaluated via the (now read-only) Event Rules. To change this Service so that new events start being evaluated via the newly created Event Orchestration Rules use the [Update the Service Orchestration active status for a Service API](https://developer.pagerduty.com/api-reference/855659be83d9e-update-the-service-orchestration-active-status-for-a-service).
+        Sending a request to this API endpoint will **not** change how future events will be processed. If past events for this Service have been evaluated via Event Rules then new events sent to this Service will also continue to be evaluated via the (now read-only) Event Rules. To change this Service so that new events start being evaluated via the newly created Event Orchestration Rules use the Update the Service Orchestration active status for a Service API.
 
 
         > ### End-of-life
 
-        > Event Rules will end-of-life soon. We highly recommend that you use this API to [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
+        > Event Rules will end-of-life soon. We highly recommend that you use this API to migrate to Event Orchestration as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1358,16 +1330,13 @@ paths:
       operationId: getServiceEventRule
       description: 'Get an Event Rule from a Service.
 
-        <!-- theme: warning -->
 
         > ### End-of-life
 
-        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
+        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you migrate to Event Orchestration as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty Get an Event Rule from a Service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1431,16 +1400,13 @@ paths:
       summary: PagerDuty Update an Event Rule on a Service
       description: 'Update an Event Rule on a Service. Note that the endpoint supports partial updates, so any number of the writable fields can be provided.
 
-        <!-- theme: warning -->
 
         > ### End-of-life
 
-        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
+        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you migrate to Event Orchestration as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       parameters:
       - $ref: '#/components/parameters/header_Accept'
       - $ref: '#/components/parameters/header_Content-Type'
@@ -1534,16 +1500,13 @@ paths:
       operationId: deleteServiceEventRule
       description: 'Delete an Event Rule from a Service.
 
-        <!-- theme: warning -->
 
         > ### End-of-life
 
-        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you [migrate to Event Orchestration](https://support.pagerduty.com/docs/migrate-to-event-orchestration) as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
+        > Rulesets and Event Rules will end-of-life soon. We highly recommend that you migrate to Event Orchestration as soon as possible so you can take advantage of the new functionality, such as improved UI, rule creation, APIs and Terraform support, advanced conditions, and rule nesting.
 
 
-        Scoped OAuth requires: `services.write`
-
-        '
+        Scoped OAuth requires: `services.write`'
       summary: PagerDuty Delete an Event Rule from a Service
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -1566,52 +1529,401 @@ paths:
         '409':
           $ref: '#/components/responses/Conflict'
 components:
+  parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
+    sort_by_service:
+      name: sort_by
+      in: query
+      description: Used to specify the field you wish to sort the results on.
+      schema:
+        type: string
+        enum:
+        - name
+        - name:asc
+        - name:desc
+        default: name
+    include_ruleset_migrated_metadata:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - migrated_metadata
+        uniqueItems: true
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    include_services_integrations:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services
+        - vendors
+        uniqueItems: true
+    audit_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
+      schema:
+        type: string
+        format: date-time
+    time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the account time zone.
+      schema:
+        type: string
+        format: tzinfo
+    integration_id:
+      name: integration_id
+      in: path
+      description: The integration ID on the service.
+      required: true
+      schema:
+        type: string
+    service_name:
+      name: name
+      in: query
+      description: Filters the results, showing only services with the specified name.
+      schema:
+        type: string
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    include_services_id:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - escalation_policies
+        - teams
+        - auto_pause_notifications_parameters
+        - integrations
+        uniqueItems: true
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    audit_method_type:
+      name: method_type
+      in: query
+      description: Method type filter.
+      schema:
+        type: string
+        description: 'Describes the method used to perform the action:
+
+
+          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
+
+
+          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
+
+
+          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
+
+
+          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
+
+
+          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
+
+          '
+        enum:
+        - browser
+        - oauth
+        - api_token
+        - identity_provider
+        - other
+    rule_id:
+      name: rule_id
+      in: path
+      description: The id of the Event Rule to retrieve.
+      required: true
+      schema:
+        type: string
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    include_services:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - escalation_policies
+        - teams
+        - integrations
+        - auto_pause_notifications_parameters
+        uniqueItems: true
   schemas:
-    SupportHours:
+    ServiceEventRule:
+      allOf:
+      - $ref: '#/components/schemas/EventRule/allOf/0'
+      - type: object
+        properties:
+          position:
+            type: integer
+            description: Position/index of the Event Rule on the Service.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching Event Rule is found or the end of the list is reached.
+          actions:
+            $ref: '#/components/schemas/EventRuleActionsCommon'
+    EmailParser:
       type: object
       properties:
-        type:
+        action:
           type: string
-          description: The type of support hours
-          default: fixed_time_per_day
           enum:
-          - fixed_time_per_day
-        time_zone:
-          type: string
-          format: activesupport-time-zone
-          description: The time zone for the support hours
-        days_of_week:
+          - trigger
+          - resolve
+        match_predicate:
+          $ref: '#/components/schemas/MatchPredicate'
+        value_extractors:
           type: array
-          readOnly: true
+          description: Additional values that will be pulled in to the Incident object. Exactly one value extractor must have a `value_name` of `incident_key`.
+          uniqueItems: true
+          minItems: 1
           items:
-            type: integer
-            readOnly: true
-            description: The days of the week (1 through 7, for Monday through Sunday)
-        start_time:
-          type: string
-          format: time
-          description: The support hours' starting time of day (date portion is ignored)
-        end_time:
-          type: string
-          format: time
-          description: The support hours' ending time of day (date portion is ignored)
-    AddonReference:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - entire
+                - regex
+                - between
+              part:
+                type: string
+                enum:
+                - body
+                - subject
+                - from_addresses
+              value_name:
+                type: string
+                minLength: 1
+                description: The field name to set in the Incident object. Exactly one must use the `value_name` of `incident_key`
+              regex:
+                type: string
+              starts_after:
+                type: string
+              ends_with:
+                type: string
+            required:
+            - type
+            - part
+            - value_name
+      required:
+      - action
+      - match_predicate
+    EscalationPolicyReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
         properties:
-          src:
-            type: string
-            format: url
-            description: The URL source of the Addon
-          name:
-            type: string
-            description: The user entered name of the Addon.
           type:
             type: string
             enum:
-            - full_page_addon_reference
-            - incident_show_addon_reference
+            - escalation_policy_reference
+    IncidentUrgencyRule:
+      allOf:
+      - $ref: '#/components/schemas/IncidentUrgencyType'
+      - type: object
+        properties:
+          during_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+          outside_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+    VendorReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - vendor_reference
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
+    MatchPredicate:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - all
+          - any
+          - not
+          - contains
+          - exactly
+          - regex
+        matcher:
+          type: string
+          description: Required if the type is `contains`, `exactly` or `regex`.
+          minLength: 1
+        part:
+          type: string
+          description: The email field that will attempt to use the matcher expression. Required if the type is `contains`, `exactly` or `regex`.
+          enum:
+          - body
+          - subject
+          - from_addresses
+        children:
+          type: array
+          description: Additional matchers to be run. Must be not empty if the type is `all`, `any`, or `not`.
+          items:
+            $ref: '#/components/schemas/MatchPredicate'
+      required:
+      - type
+      - part
+      - children
+    AuditMetadata:
+      type: object
+      properties:
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
+    ScheduledAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of schedule action. Must be set to urgency_change.
+          enum:
+          - urgency_change
+        at:
+          type: object
+          description: Represents when scheduled action will occur.
+          properties:
+            type:
+              type: string
+              description: Must be set to named_time.
+              enum:
+              - named_time
+            name:
+              type: string
+              description: Designates either the start or the end of support hours.
+              enum:
+              - support_hours_start
+              - support_hours_end
+          required:
+          - type
+          - name
+        to_urgency:
+          type: string
+          description: Urgency level. Must be set to high.
+          enum:
+          - high
+      required:
+      - type
+      - at
+      - to_urgency
     IntegrationReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
@@ -1631,15 +1943,54 @@ components:
             - sql_monitor_inbound_integration_reference
             - events_api_v2_inbound_integration_reference
             - inbound_integration_reference
-    AuditMetadata:
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
+    IncidentUrgencyType:
       type: object
       properties:
-        messages:
-          type: array
-          nullable: true
-          items:
-            type: string
-            example: Message about the result
+        type:
+          type: string
+          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
+          default: constant
+          enum:
+          - constant
+          - use_support_hours
+        urgency:
+          type: string
+          description: The incidents' urgency, if type is constant.
+          default: high
+          enum:
+          - low
+          - high
+          - severity_based
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
     TeamReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
@@ -1649,119 +2000,6 @@ components:
             type: string
             enum:
             - team_reference
-    EventRuleActionsCommon:
-      type: object
-      description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
-      properties:
-        annotate:
-          description: Set a note on the resulting incident.
-          type: object
-          nullable: true
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              description: The content of the note.
-        event_action:
-          description: Set whether the resulting alert status is trigger or resolve.
-          type: object
-          required:
-          - value
-          nullable: true
-          properties:
-            value:
-              type: string
-              enum:
-              - trigger
-              - resolve
-        extractions:
-          type: array
-          description: Dynamically extract values to set and modify new and existing PD-CEF fields.
-          items:
-            oneOf:
-            - type: object
-              required:
-              - target
-              - source
-              - regex
-              properties:
-                target:
-                  type: string
-                  description: The PD-CEF field that will be set with the value from the regex.
-                source:
-                  type: string
-                  description: The path to the event field where the regex will be applied to extract a value.
-                regex:
-                  type: string
-                  description: A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
-            - type: object
-              required:
-              - target
-              - template
-              properties:
-                target:
-                  type: string
-                  description: The PD-CEF field that will be set with the value from the regex.
-                template:
-                  type: string
-                  description: A value that will be used to populate the target PD-CEF field.  You can include variables extracted from the payload by using string interpolation.
-                  example: Error number {{count}} on host {{host}}
-        priority:
-          description: Set the priority ID for the resulting incident. You can find the priority you want by calling the priorities endpoint.
-          type: object
-          required:
-          - value
-          nullable: true
-          properties:
-            value:
-              type: string
-              description: The priority ID.
-        severity:
-          description: Set the severity of the resulting alert.
-          type: object
-          required:
-          - value
-          nullable: true
-          properties:
-            value:
-              type: string
-              enum:
-              - info
-              - warning
-              - error
-              - critical
-        suppress:
-          description: Set whether the resulting alert is suppressed. Can optionally be used with a threshold where resulting alerts will be suppressed until the threshold is met in a window of time. If using a threshold the rule must also set a route action.
-          type: object
-          required:
-          - value
-          properties:
-            value:
-              type: boolean
-            threshold_value:
-              type: integer
-              description: The number of occurences needed during the window of time to trigger the theshold.
-            threshold_time_unit:
-              type: string
-              description: The time unit for the window of time.
-              enum:
-              - seconds
-              - minutes
-              - hours
-            threshold_time_amount:
-              type: integer
-              description: The amount of time units for the window of time.
-        suspend:
-          description: Set the length of time to suspend the resulting alert before triggering. Rules with a suspend action must also set a route action, and cannot have a suppress with threshold action
-          type: object
-          required:
-          - value
-          nullable: true
-          properties:
-            value:
-              type: integer
-              description: The amount of time to suspend the alert in seconds.
     EventRule:
       allOf:
       - type: object
@@ -1915,45 +2153,15 @@ components:
               properties:
                 route:
                   description: Set the service ID of the target service for the resulting alert. You can find the service you want to route to by calling the services endpoint.
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                   required:
                   - value
-                  nullable: true
                   properties:
                     value:
                       type: string
                       description: The target service's ID.
-    AutoPauseNotificationsParameters:
-      title: AutoPauseNotificationsParameters
-      type: object
-      description: Defines how alerts on this service are automatically suspended for a period of time before triggering, when identified as likely being transient. Note that automatically pausing notifications is only available on certain plans.
-      properties:
-        enabled:
-          type: boolean
-          default: false
-          description: Indicates whether alerts should be automatically suspended when identified as transient
-        timeout:
-          type: integer
-          enum:
-          - 120
-          - 180
-          - 300
-          - 600
-          - 900
-          description: Indicates in seconds how long alerts should be suspended before triggering
-      example:
-        enabled: true
-        timeout: 300
-    ServiceEventRule:
-      allOf:
-      - $ref: '#/components/schemas/EventRule/allOf/0'
-      - type: object
-        properties:
-          position:
-            type: integer
-            description: Position/index of the Event Rule on the Service.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching Event Rule is found or the end of the list is reached.
-          actions:
-            $ref: '#/components/schemas/EventRuleActionsCommon'
     Integration:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -2057,106 +2265,6 @@ components:
             required:
             - type
             - name
-    VendorReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - vendor_reference
-    ScheduledAction:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of schedule action. Must be set to urgency_change.
-          enum:
-          - urgency_change
-        at:
-          type: object
-          description: Represents when scheduled action will occur.
-          properties:
-            type:
-              type: string
-              description: Must be set to named_time.
-              enum:
-              - named_time
-            name:
-              type: string
-              description: Designates either the start or the end of support hours.
-              enum:
-              - support_hours_start
-              - support_hours_end
-          required:
-          - type
-          - name
-        to_urgency:
-          type: string
-          description: Urgency level. Must be set to high.
-          enum:
-          - high
-      required:
-      - type
-      - at
-      - to_urgency
-    EmailParser:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - trigger
-          - resolve
-        match_predicate:
-          $ref: '#/components/schemas/MatchPredicate'
-        value_extractors:
-          type: array
-          description: Additional values that will be pulled in to the Incident object. Exactly one value extractor must have a `value_name` of `incident_key`.
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - entire
-                - regex
-                - between
-              part:
-                type: string
-                enum:
-                - body
-                - subject
-                - from_addresses
-              value_name:
-                type: string
-                minLength: 1
-                description: The field name to set in the Incident object. Exactly one must use the `value_name` of `incident_key`
-              regex:
-                type: string
-              starts_after:
-                type: string
-              ends_with:
-                type: string
-            required:
-            - type
-            - part
-            - value_name
-      required:
-      - action
-      - match_predicate
-    IncidentUrgencyRule:
-      allOf:
-      - $ref: '#/components/schemas/IncidentUrgencyType'
-      - type: object
-        properties:
-          during_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
-          outside_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
     Service:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -2350,198 +2458,6 @@ components:
           auto_pause_notifications_parameters:
             enabled: true
             timeout: 300
-    IncidentUrgencyType:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
-          default: constant
-          enum:
-          - constant
-          - use_support_hours
-        urgency:
-          type: string
-          description: The incidents' urgency, if type is constant.
-          default: high
-          enum:
-          - low
-          - high
-          - severity_based
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type: string
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          nullable: true
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    AuditRecord:
-      type: object
-      readOnly: true
-      description: An Audit Trail record
-      properties:
-        id:
-          type: string
-        self:
-          type: string
-          nullable: true
-          description: Record URL.
-        execution_time:
-          type: string
-          format: date-time
-          description: The date/time the action executed, in ISO8601 format and millisecond precision.
-        execution_context:
-          type: object
-          description: Action execution context
-          properties:
-            request_id:
-              type: string
-              nullable: true
-              description: Request Id
-            remote_address:
-              type: string
-              nullable: true
-              description: remote address
-          nullable: true
-        actors:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/Reference'
-        method:
-          type: object
-          description: The method information
-          properties:
-            description:
-              type: string
-              nullable: true
-            truncated_token:
-              description: Truncated token containing the last 4 chars of the token's actual value.
-              type: string
-              nullable: true
-              example: 3xyz
-            type:
-              $ref: '#/components/parameters/audit_method_type/schema'
-          required:
-          - type
-        root_resource:
-          $ref: '#/components/schemas/Reference'
-        action:
-          type: string
-          example: create
-        details:
-          type: object
-          nullable: true
-          description: 'Additional details to provide further information about the action or
-
-            the resource that has been audited.
-
-            '
-          properties:
-            resource:
-              $ref: '#/components/schemas/Reference'
-            fields:
-              description: 'A set of fields that have been affected.
-
-                The fields that have not been affected MAY be returned.
-
-                '
-              type: array
-              nullable: true
-              items:
-                type: object
-                description: "Information about the affected field.\nWhen available, field's before and after values are returned:\n  \n#### Resource creation\n- `value` MAY be returned\n\n#### Resource update\n- `value` MAY be returned\n- `before_value` MAY be returned\n\n#### Resource deletion\n- `before_value` MAY be returned\n"
-                properties:
-                  name:
-                    type: string
-                    description: Name of the resource field
-                    example: name
-                  description:
-                    type: string
-                    nullable: true
-                    description: Human readable description of the resource field
-                    example: First and Last name
-                  value:
-                    type: string
-                    nullable: true
-                    description: new or updated value of the field
-                    example: Jonathan
-                  before_value:
-                    type: string
-                    nullable: true
-                    description: previous or deleted value of the field
-                    example: John
-                required:
-                - name
-            references:
-              description: A set of references that have been affected.
-              type: array
-              nullable: true
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Name of the reference field
-                    example: team_members
-                  description:
-                    type: string
-                    nullable: true
-                    description: Human readable description of the references field
-                    example: First and Last name
-                  added:
-                    type: array
-                    nullable: true
-                    items:
-                      $ref: '#/components/schemas/Reference'
-                  removed:
-                    type: array
-                    nullable: true
-                    items:
-                      $ref: '#/components/schemas/Reference'
-                required:
-                - name
-          required:
-          - resource
-      required:
-      - id
-      - execution_time
-      - method
-      - root_resource
-      - action
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    AuditRecordResponseSchema:
-      allOf:
-      - type: object
-        properties:
-          records:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            nullable: true
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
-        required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
     TimeBasedAlertGroupingConfiguration:
       type: object
       title: Time Grouping
@@ -2550,6 +2466,20 @@ components:
         timeout:
           type: integer
           description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
+    FlexibleTimeWindowIntelligentAlertGroupingConfig:
+      type: object
+      title: Intelligent Alert Grouping
+      description: The configuration for Intelligent Alert Grouping. Note that this configuration is only available for certain plans.
+      properties:
+        time_window:
+          type: integer
+          minimum: 300
+          maximum: 3600
+          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours. To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 and 3600.
+        recommended_time_window:
+          readOnly: true
+          type: integer
+          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
     ContentBasedAlertGroupingConfiguration:
       type: object
       title: Content Only Grouping
@@ -2572,6 +2502,152 @@ components:
           readOnly: true
           type: integer
           description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
+    AutoPauseNotificationsParameters:
+      title: AutoPauseNotificationsParameters
+      type: object
+      description: Defines how alerts on this service are automatically suspended for a period of time before triggering, when identified as likely being transient. Note that automatically pausing notifications is only available on certain plans.
+      properties:
+        enabled:
+          type: boolean
+          default: false
+          description: Indicates whether alerts should be automatically suspended when identified as transient
+        timeout:
+          type: integer
+          enum:
+          - 120
+          - 180
+          - 300
+          - 600
+          - 900
+          description: Indicates in seconds how long alerts should be suspended before triggering
+      example:
+        enabled: true
+        timeout: 300
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    EventRuleActionsCommon:
+      type: object
+      description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
+      properties:
+        annotate:
+          description: Set a note on the resulting incident.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              description: The content of the note.
+        event_action:
+          description: Set whether the resulting alert status is trigger or resolve.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              enum:
+              - trigger
+              - resolve
+        extractions:
+          type: array
+          description: Dynamically extract values to set and modify new and existing PD-CEF fields.
+          items:
+            oneOf:
+            - type: object
+              required:
+              - target
+              - source
+              - regex
+              properties:
+                target:
+                  type: string
+                  description: The PD-CEF field that will be set with the value from the regex.
+                source:
+                  type: string
+                  description: The path to the event field where the regex will be applied to extract a value.
+                regex:
+                  type: string
+                  description: A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
+            - type: object
+              required:
+              - target
+              - template
+              properties:
+                target:
+                  type: string
+                  description: The PD-CEF field that will be set with the value from the regex.
+                template:
+                  type: string
+                  description: A value that will be used to populate the target PD-CEF field.  You can include variables extracted from the payload by using string interpolation.
+                  example: Error number {{count}} on host {{host}}
+        priority:
+          description: Set the priority ID for the resulting incident. You can find the priority you want by calling the priorities endpoint.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              description: The priority ID.
+        severity:
+          description: Set the severity of the resulting alert.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              enum:
+              - info
+              - warning
+              - error
+              - critical
+        suppress:
+          description: Set whether the resulting alert is suppressed. Can optionally be used with a threshold where resulting alerts will be suppressed until the threshold is met in a window of time. If using a threshold the rule must also set a route action.
+          type: object
+          required:
+          - value
+          properties:
+            value:
+              type: boolean
+            threshold_value:
+              type: integer
+              description: The number of occurences needed during the window of time to trigger the theshold.
+            threshold_time_unit:
+              type: string
+              description: The time unit for the window of time.
+              enum:
+              - seconds
+              - minutes
+              - hours
+            threshold_time_amount:
+              type: integer
+              description: The amount of time units for the window of time.
+        suspend:
+          description: Set the length of time to suspend the resulting alert before triggering. Rules with a suspend action must also set a route action, and cannot have a suppress with threshold action
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: integer
+              description: The amount of time to suspend the alert in seconds.
     AlertGroupingParameters:
       type: object
       description: 'Defines how alerts on this service will be automatically grouped into incidents. Note that the alert grouping features are available only on certain plans. To turn grouping off set the type to null.
@@ -2579,8 +2655,9 @@ components:
         '
       properties:
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           enum:
           - time
           - intelligent
@@ -2591,90 +2668,215 @@ components:
           - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
           - $ref: '#/components/schemas/TimeBasedAlertGroupingConfiguration'
           - $ref: '#/components/schemas/ContentBasedAlertGroupingConfiguration'
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    EscalationPolicyReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - escalation_policy_reference
-    FlexibleTimeWindowIntelligentAlertGroupingConfig:
+    AuditRecord:
       type: object
-      title: Intelligent Alert Grouping
-      description: The configuration for Intelligent Alert Grouping. Note that this configuration is only available for certain plans.
+      readOnly: true
+      description: An Audit Trail record
       properties:
-        time_window:
-          type: integer
-          minimum: 300
-          maximum: 3600
-          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours. To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 and 3600.
-        recommended_time_window:
-          readOnly: true
-          type: integer
-          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
-    MatchPredicate:
+        id:
+          type: string
+        self:
+          type:
+          - string
+          - 'null'
+          description: Record URL.
+        execution_time:
+          type: string
+          format: date-time
+          description: The date/time the action executed, in ISO8601 format and millisecond precision.
+        execution_context:
+          type:
+          - object
+          - 'null'
+          description: Action execution context
+          properties:
+            request_id:
+              type:
+              - string
+              - 'null'
+              description: Request Id
+            remote_address:
+              type:
+              - string
+              - 'null'
+              description: remote address
+        actors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Reference'
+        method:
+          type: object
+          description: The method information
+          properties:
+            description:
+              type:
+              - string
+              - 'null'
+            truncated_token:
+              description: Truncated token containing the last 4 chars of the token's actual value.
+              type:
+              - string
+              - 'null'
+              example: 3xyz
+            type:
+              $ref: '#/components/parameters/audit_method_type/schema'
+          required:
+          - type
+        root_resource:
+          $ref: '#/components/schemas/Reference'
+        action:
+          type: string
+          example: create
+        details:
+          type:
+          - object
+          - 'null'
+          description: 'Additional details to provide further information about the action or
+
+            the resource that has been audited.
+
+            '
+          properties:
+            resource:
+              $ref: '#/components/schemas/Reference'
+            fields:
+              description: 'A set of fields that have been affected.
+
+                The fields that have not been affected MAY be returned.
+
+                '
+              type:
+              - array
+              - 'null'
+              items:
+                type: object
+                description: "Information about the affected field.\nWhen available, field's before and after values are returned:\n  \n#### Resource creation\n- `value` MAY be returned\n\n#### Resource update\n- `value` MAY be returned\n- `before_value` MAY be returned\n\n#### Resource deletion\n- `before_value` MAY be returned\n"
+                properties:
+                  name:
+                    type: string
+                    description: Name of the resource field
+                    example: name
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    description: Human readable description of the resource field
+                    example: First and Last name
+                  value:
+                    type:
+                    - string
+                    - 'null'
+                    description: new or updated value of the field
+                    example: Jonathan
+                  before_value:
+                    type:
+                    - string
+                    - 'null'
+                    description: previous or deleted value of the field
+                    example: John
+                required:
+                - name
+            references:
+              description: A set of references that have been affected.
+              type:
+              - array
+              - 'null'
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Name of the reference field
+                    example: team_members
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    description: Human readable description of the references field
+                    example: First and Last name
+                  added:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      $ref: '#/components/schemas/Reference'
+                  removed:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      $ref: '#/components/schemas/Reference'
+                required:
+                - name
+          required:
+          - resource
+      required:
+      - id
+      - execution_time
+      - method
+      - root_resource
+      - action
+    SupportHours:
       type: object
       properties:
         type:
           type: string
+          description: The type of support hours
+          default: fixed_time_per_day
           enum:
-          - all
-          - any
-          - not
-          - contains
-          - exactly
-          - regex
-        matcher:
+          - fixed_time_per_day
+        time_zone:
           type: string
-          description: Required if the type is `contains`, `exactly` or `regex`.
-          minLength: 1
-        part:
-          type: string
-          description: The email field that will attempt to use the matcher expression. Required if the type is `contains`, `exactly` or `regex`.
-          enum:
-          - body
-          - subject
-          - from_addresses
-        children:
+          format: activesupport-time-zone
+          description: The time zone for the support hours
+        days_of_week:
           type: array
-          description: Additional matchers to be run. Must be not empty if the type is `all`, `any`, or `not`.
+          readOnly: true
           items:
-            $ref: '#/components/schemas/MatchPredicate'
-      required:
-      - type
-      - part
-      - children
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type: integer
-          description: The total number of records matching the given query.
-          nullable: true
-          readOnly: true
+            type: integer
+            readOnly: true
+            description: The days of the week (1 through 7, for Monday through Sunday)
+        start_time:
+          type: string
+          format: time
+          description: The support hours' starting time of day (date portion is ignored)
+        end_time:
+          type: string
+          format: time
+          description: The support hours' ending time of day (date portion is ignored)
+    AddonReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          src:
+            type: string
+            format: url
+            description: The URL source of the Addon
+          name:
+            type: string
+            description: The user entered name of the Addon.
+          type:
+            type: string
+            enum:
+            - full_page_addon_reference
+            - incident_show_addon_reference
+    AuditRecordResponseSchema:
+      allOf:
+      - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
+        required:
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
     Tag:
       allOf:
       - type: object
@@ -2683,8 +2885,9 @@ components:
             type: string
             readOnly: true
           summary:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
           type:
@@ -2692,14 +2895,16 @@ components:
             readOnly: true
             description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
           self:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: the API show URL at which the object is accessible
           html_url:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: a URL at which the entity is uniquely displayed in the Web app
@@ -2721,223 +2926,41 @@ components:
         example:
           type: tag
           label: Batman
-  parameters:
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    rule_id:
-      name: rule_id
-      in: path
-      description: The id of the Event Rule to retrieve.
-      required: true
-      schema:
-        type: string
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
-    service_name:
-      name: name
-      in: query
-      description: Filters the results, showing only services with the specified name.
-      schema:
-        type: string
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    audit_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
-      schema:
-        type: string
-        format: date-time
-    audit_method_type:
-      name: method_type
-      in: query
-      description: Method type filter.
-      schema:
-        type: string
-        description: 'Describes the method used to perform the action:
-
-
-          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
-
-
-          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
-
-
-          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
-
-
-          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
-
-
-          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
-
-          '
-        enum:
-        - browser
-        - oauth
-        - api_token
-        - identity_provider
-        - other
-    include_services_integrations:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services
-        - vendors
-        uniqueItems: true
-    time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the account time zone.
-      schema:
-        type: string
-        format: tzinfo
-    include_ruleset_migrated_metadata:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - migrated_metadata
-        uniqueItems: true
-    sort_by_service:
-      name: sort_by
-      in: query
-      description: Used to specify the field you wish to sort the results on.
-      schema:
-        type: string
-        enum:
-        - name
-        - name:asc
-        - name:desc
-        default: name
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    include_services:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - escalation_policies
-        - teams
-        - integrations
-        - auto_pause_notifications_parameters
-        uniqueItems: true
-    include_services_id:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - escalation_policies
-        - teams
-        - auto_pause_notifications_parameters
-        - integrations
-        uniqueItems: true
-    integration_id:
-      name: integration_id
-      in: path
-      description: The integration ID on the service.
-      required: true
-      schema:
-        type: string
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
   responses:
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     NotFound:
       description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
       content:
         application/json:
           schema:
@@ -2979,46 +3002,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotAllowed:
-      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     ArgumentError:
       description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
+    NotAllowed:
+      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
       content:
         application/json:
           schema:

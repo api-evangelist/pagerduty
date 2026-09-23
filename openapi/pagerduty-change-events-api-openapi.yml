@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   description: 'This document describes the PagerDuty REST APIs.
 
 
-    For guides and examples please visit our [Documentation.](https://developer.pagerduty.com/docs/get-started/getting-started/)
+    For guides and examples please visit our Documentation.
 
 
-    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at [github.com/PagerDuty/api-schema](https://github.com/PagerDuty/api-schema).
+    Our REST APIs are defined in OpenAPI v3.x. You can view the schema at github.com/PagerDuty/api-schema.
 
 
-    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.
-
-    '
+    Note that properties in some schemas have fields not shown by default such as `readOnly`, `format`, and `default`. Hover your cursor over the right column that looks like `optional+1` to see the full list of fields.'
   contact:
     name: PagerDuty Support
     url: http://www.pagerduty.com/support
     email: support@pagerduty.com
-  title: PagerDuty Abilities Change Events API
+  title: PagerDuty Change Events API
   version: 2.0.0
 servers:
 - url: https://api.pagerduty.com
@@ -25,9 +23,7 @@ security:
 - api_key: []
 tags:
 - name: Change Events
-  description: 'Change Events enable you to send informational events about recent changes such as code deploys and system config changes from any system that can make an outbound HTTP connection. These events do not create incidents and do not send notifications; they are shown in context with incidents on the same PagerDuty service.
-
-    '
+  description: Change Events enable you to send informational events about recent changes such as code deploys and system config changes from any system that can make an outbound HTTP connection. These events do not create incidents and do not send notifications; they are shown in context with incidents on the same PagerDuty service.
 paths:
   /change_events:
     description: List change events.
@@ -39,9 +35,7 @@ paths:
       description: 'List all of the existing Change Events.
 
 
-        Scoped OAuth requires: `change_events.read`
-
-        '
+        Scoped OAuth requires: `change_events.read`'
       summary: PagerDuty List Change Events
       parameters:
       - $ref: '#/components/parameters/offset_limit'
@@ -118,9 +112,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       summary: PagerDuty Create a Change Event
-      description: 'Sending Change Events is documented as part of the V2 Events API. See [`Send Change Event`](https://developer.pagerduty.com/api-reference/b3A6Mjc0ODI2Ng-send-change-events-to-the-pager-duty-events-api).
-
-        '
+      description: Sending Change Events is documented as part of the V2 Events API. See `Send Change Event`.
       operationId: createChangeEvent
       tags:
       - Change Events
@@ -140,9 +132,7 @@ paths:
       description: 'Get details about an existing Change Event.
 
 
-        Scoped OAuth requires: `change_events.read`
-
-        '
+        Scoped OAuth requires: `change_events.read`'
       summary: PagerDuty Get a Change Event
       parameters:
       - $ref: '#/components/parameters/header_Accept'
@@ -194,9 +184,7 @@ paths:
       description: 'Update an existing Change Event
 
 
-        Scoped OAuth requires: `change_events.write`
-
-        '
+        Scoped OAuth requires: `change_events.write`'
       tags:
       - Change Events
       operationId: updateChangeEvent
@@ -276,15 +264,13 @@ paths:
       description: 'List related Change Events for an Incident, as well as the reason these changes are correlated with the incident.
 
 
-        Change events represent service changes such as deploys, build completion, and configuration changes, providing information that is critical during incident triage or hypercare. For more information on change events, see [Change Events](https://support.pagerduty.com/docs/change-events).
+        Change events represent service changes such as deploys, build completion, and configuration changes, providing information that is critical during incident triage or hypercare. For more information on change events, see Change Events.
 
 
         The Change Correlation feature provides incident responders with recent change events that are most relevant to that incident. Change Correlation informs the responder why a particular change event was surfaced and correlated to an incident based on three key factors which include time, related service, or intelligence (machine learning).
 
 
-        Scoped OAuth requires: `incidents.read`
-
-        '
+        Scoped OAuth requires: `incidents.read`'
       summary: PagerDuty List related Change Events for an Incident
       parameters:
       - $ref: '#/components/parameters/id'
@@ -384,9 +370,7 @@ paths:
       description: 'List all of the existing Change Events for a service.
 
 
-        Scoped OAuth requires: `services.read`
-
-        '
+        Scoped OAuth requires: `services.read`'
       summary: PagerDuty List Change Events for a service
       parameters:
       - $ref: '#/components/parameters/id'
@@ -466,6 +450,22 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    change_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes.
+      schema:
+        type: string
+        format: date-time
+        pattern: YYYY-MM-DDThh:mm:ssZ
     team_ids:
       name: team_ids[]
       in: query
@@ -476,55 +476,13 @@ components:
         items:
           type: string
         uniqueItems: true
-    offset_offset:
-      name: offset
+    offset_limit:
+      name: limit
       in: query
       required: false
-      description: Offset to start pagination search results.
+      description: The number of results per page.
       schema:
         type: integer
-    change_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search, as a UTC ISO 8601 datetime string. Will return an HTTP 400 for non-UTC datetimes.
-      schema:
-        type: string
-        format: date-time
-        pattern: YYYY-MM-DDThh:mm:ssZ
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    integration_ids:
-      name: integration_ids[]
-      in: query
-      description: An array of integration IDs. Only results related to these integrations will be returned.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
     offset_total:
       name: total
       in: query
@@ -538,6 +496,29 @@ components:
       schema:
         default: false
         type: boolean
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
     change_since:
       name: since
       in: query
@@ -546,13 +527,76 @@ components:
         type: string
         format: date-time
         pattern: YYYY-MM-DDThh:mm:ssZ
-    offset_limit:
-      name: limit
+    integration_ids:
+      name: integration_ids[]
       in: query
-      required: false
-      description: The number of results per page.
+      description: An array of integration IDs. Only results related to these integrations will be returned.
+      explode: true
       schema:
-        type: integer
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+  responses:
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
     IntegrationReference:
       allOf:
@@ -573,6 +617,15 @@ components:
             - sql_monitor_inbound_integration_reference
             - events_api_v2_inbound_integration_reference
             - inbound_integration_reference
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
     ChangeEvent:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -664,15 +717,6 @@ components:
         required:
         - type
         - id
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
     Tag:
       allOf:
       - type: object
@@ -681,8 +725,9 @@ components:
             type: string
             readOnly: true
           summary:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
           type:
@@ -690,14 +735,16 @@ components:
             readOnly: true
             description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
           self:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: the API show URL at which the object is accessible
           html_url:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
             readOnly: true
             format: url
             description: a URL at which the entity is uniquely displayed in the Web app
@@ -719,66 +766,6 @@ components:
         example:
           type: tag
           label: Batman
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   securitySchemes:
     api_key:
       type: apiKey
