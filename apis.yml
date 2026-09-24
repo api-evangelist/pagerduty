@@ -37,6 +37,7 @@ tags:
 - Incident Management
 - On-Call Management
 - pagerduty
+- Monitoring
 url: https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/apis.yml
 created: '2026-03-16'
 modified: '2026-05-30'
@@ -85,8 +86,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-add-ons-api
   name: PagerDuty Add-Ons API
   description: Developers can write their own functionality to insert into PagerDuty's UI.
@@ -107,8 +106,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-alert-grouping-settings-api
   name: PagerDuty Alert Grouping Settings API
   description: >-
@@ -128,8 +125,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-analytics-api
   name: PagerDuty Analytics API
   description: Provides enriched incident data.
@@ -148,8 +143,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-audit-api
   name: PagerDuty Audit API
   description: Provides audit record data.
@@ -168,8 +161,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-automation-actions-api
   name: PagerDuty Automation Actions API
   description: >-
@@ -189,8 +180,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-business-services-api
   name: PagerDuty Business Services API
   description: >-
@@ -211,8 +200,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-change-events-api
   name: PagerDuty Change Events API
   description: >-
@@ -235,8 +222,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-change-tags-api
   name: PagerDuty Change Tags API
   description: The Change Tags API from PagerDuty — 1 operation(s) for change tags.
@@ -255,8 +240,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-custom-fields-api
   name: PagerDuty Custom Fields API
   description: >-
@@ -277,8 +260,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-escalation-policies-api
   name: PagerDuty Escalation Policies API
   description: Escalation policies define which user should be alerted at which time.
@@ -297,8 +278,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-event-orchestrations-api
   name: PagerDuty Event Orchestrations API
   description: >-
@@ -319,8 +298,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-extension-schemas-api
   name: PagerDuty Extension Schemas API
   description: >-
@@ -341,8 +318,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-extensions-api
   name: PagerDuty Extensions API
   description: >-
@@ -362,8 +337,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-incident-workflows-api
   name: PagerDuty Incident Workflows API
   description: >-
@@ -384,8 +357,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-incidents-api
   name: PagerDuty Incidents API
   description: >-
@@ -407,8 +378,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-licenses-api
   name: PagerDuty Licenses API
   description: >-
@@ -429,8 +398,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-log-entries-api
   name: PagerDuty Log Entries API
   description: >-
@@ -450,8 +417,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-maintenance-windows-api
   name: PagerDuty Maintenance Windows API
   description: >-
@@ -471,8 +436,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-notifications-api
   name: PagerDuty Notifications API
   description: A Notification is created when an Incident is triggered or escalated.
@@ -493,8 +456,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-on-calls-api
   name: PagerDuty On-Calls API
   description: >-
@@ -515,8 +476,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-paused-incident-reports-api
   name: PagerDuty Paused Incident Reports API
   description: >-
@@ -536,8 +495,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-priorities-api
   name: PagerDuty Priorities API
   description: >-
@@ -558,8 +515,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-response-plays-api
   name: PagerDuty Response Plays API
   description: >-
@@ -579,8 +534,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-rulesets-api
   name: PagerDuty Rulesets API
   description: >-
@@ -601,8 +554,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-schedules-api
   name: PagerDuty Schedules API
   description: A Schedule determines the time periods that users are On-Call.
@@ -623,8 +574,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-service-dependencies-api
   name: PagerDuty Service Dependencies API
   description: >-
@@ -645,8 +594,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-services-api
   name: PagerDuty Services API
   description: The Services API from PagerDuty — 8 operation(s) for services.
@@ -665,8 +612,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-standards-api
   name: PagerDuty Standards API
   description: >-
@@ -687,8 +632,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-status-dashboards-api
   name: PagerDuty Status Dashboards API
   description: >-
@@ -710,8 +653,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-status-pages-api
   name: PagerDuty Status Pages API
   description: >-
@@ -732,8 +673,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-tags-api
   name: PagerDuty Tags API
   description: The Tags API from PagerDuty — 4 operation(s) for tags.
@@ -752,8 +691,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-teams-api
   name: PagerDuty Teams API
   description: >-
@@ -776,8 +713,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-templates-api
   name: PagerDuty Templates API
   description: >-
@@ -799,8 +734,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-users-api
   name: PagerDuty Users API
   description: >-
@@ -823,8 +756,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-vendors-api
   name: PagerDuty Vendors API
   description: >-
@@ -845,8 +776,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 - aid: pagerduty:pagerduty-webhooks-api
   name: PagerDuty Webhooks API
   description: >-
@@ -870,8 +799,6 @@ apis:
     url: https://developer.pagerduty.com/docs/rest-api-v2/rest-api/
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/pagerduty-graphql.md
 common:
 - type: Pricing
   url: https://www.pagerduty.com/pricing/incident-management/
