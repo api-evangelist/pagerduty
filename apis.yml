@@ -800,6 +800,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
 common:
+- type: VendorFacets
+  url: vendor-facets/pagerduty-vendor-facets.yml
 - type: Pricing
   url: https://www.pagerduty.com/pricing/incident-management/
 - type: Plans
