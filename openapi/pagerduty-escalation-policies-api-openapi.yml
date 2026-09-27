@@ -515,253 +515,25 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    sort_by_escalation_policy:
-      name: sort_by
-      in: query
-      description: Used to specify the field you wish to sort the results on.
-      schema:
-        type: string
-        enum:
-        - name
-        - name:asc
-        - name:desc
-        default: name
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    include_escalation_policy:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services
-        - teams
-        - targets
-        uniqueItems: true
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    audit_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
-      schema:
-        type: string
-        format: date-time
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    user_ids_escalation_policies:
-      name: user_ids[]
-      in: query
-      description: Filters the results, showing only escalation policies on which any of the users is a target.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    audit_method_type:
-      name: method_type
-      in: query
-      description: Method type filter.
-      schema:
-        type: string
-        description: 'Describes the method used to perform the action:
-
-
-          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
-
-
-          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
-
-
-          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
-
-
-          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
-
-
-          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
-
-          '
-        enum:
-        - browser
-        - oauth
-        - api_token
-        - identity_provider
-        - other
-    optional_from_header:
-      name: From
-      in: header
-      description: The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.
-      required: false
-      schema:
-        type: string
-        format: email
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
-  examples:
-    AuditRecordEscalationPolicyResponse:
-      summary: Response Example
-      value:
-        records:
-        - id: PD_ASSIGN_TEAM_TO_ESCALATION_POLICY
-          action: update
-          actors:
-          - id: PDUSER
-            summary: John Snow
-            type: user_reference
-            self: https://api.pagerduty.com/users/PD_USER123
-            html_url: https://mydomain.pagerduty.com/users/PD_USER123
-          details:
-            references:
-            - added:
-              - id: PD_TEAM123
-                summary: Devops
-                type: team_reference
-                self: https://api.pagerduty.com/teams/PD_TEAM123
-                html_url: https://mydomain.pagerduty.com/teams/PD_TEAM123
-              name: teams
-            resource:
-              id: PD_ESCALATION_ID
-              summary: DevOps Escalation
-              type: escalation_policy_reference
-              self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-              html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-          execution_context:
-            request_id: 0cc413fb-8e7d-4414-b4bc-b7578bf3ba77
-          execution_time: '2021-01-05T16:33:52.026Z'
-          method:
-            type: browser
-          root_resource:
-            id: PD_ESCALATION_ID
-            summary: DevOps Escalation
-            type: escalation_policy_reference
-            self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-            html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-        - id: PD_CREATE_ESCALATION_POLICY
-          action: create
-          actors:
-          - id: PDUSER
-            summary: John Snow
-            type: user_reference
-            self: https://api.pagerduty.com/users/PD_USER123
-            html_url: https://mydomain.pagerduty.com/users/PD_USER123
-          details:
-            fields:
-            - name: name
-              value: DevOps Escalation
-            - name: description
-              value: Escalation Policy for devops
-            - name: num_loops
-              value: '1'
-            resource:
-              id: PD_ESCALATION_ID
-              summary: DevOps Escalation
-              type: escalation_policy_reference
-              self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-              html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-          execution_context:
-            request_id: 0cc413fb-8e7d-4414-b4bc-b7578bf3ba77
-          execution_time: '2021-01-05T16:33:51.951Z'
-          method:
-            type: browser
-          root_resource:
-            id: PD_ESCALATION_ID
-            summary: DevOps Escalation
-            type: escalation_policy_reference
-            self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-            html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
-        limit: 10
-        next_cursor: null
   responses:
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -772,36 +544,10 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Unauthorized:
       description: 'Caller did not supply credentials or did not provide the correct credentials.
 
         If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
       content:
@@ -835,13 +581,53 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    TeamReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
     EscalationPolicy:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -910,6 +696,22 @@ components:
           - id: PQ9K7I8
             type: team_reference
           description: Here is the ep for the engineering team.
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     CursorPagination:
       type: object
       properties:
@@ -929,107 +731,6 @@ components:
       required:
       - limit
       - next_cursor
-    EscalationTargetReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        description: The escalation target is the entity that will be assigned an incident upon escalation.
-        properties:
-          type:
-            enum:
-            - user
-            - schedule
-            - user_reference
-            - schedule_reference
-            type: string
-    AuditMetadata:
-      type: object
-      properties:
-        messages:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            example: Message about the result
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    EscalationRule:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        escalation_delay_in_minutes:
-          type: integer
-          description: The number of minutes before an unacknowledged incident escalates away from this rule.
-        targets:
-          type: array
-          minItems: 1
-          maxItems: 10
-          description: The targets an incident should be assigned to upon reaching this rule.
-          items:
-            $ref: '#/components/schemas/EscalationTargetReference'
-        escalation_rule_assignment_strategy:
-          type: string
-          description: The strategy used to assign the escalation rule to an incident.
-          enum:
-          - round_robin
-          - assign_to_everyone
-      required:
-      - escalation_delay_in_minutes
-      - targets
-      example:
-        escalation_delay_in_minutes: 30
-        targets:
-        - id: PAM4FGS
-          type: user_reference
-        - id: PI7DH85
-          type: schedule_reference
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    TeamReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - team_reference
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
     AuditRecord:
       type: object
       readOnly: true
@@ -1180,20 +881,61 @@ components:
       - method
       - root_resource
       - action
-    AuditRecordResponseSchema:
+    AuditMetadata:
+      type: object
+      properties:
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
+    EscalationRule:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        escalation_delay_in_minutes:
+          type: integer
+          description: The number of minutes before an unacknowledged incident escalates away from this rule.
+        targets:
+          type: array
+          minItems: 1
+          maxItems: 10
+          description: The targets an incident should be assigned to upon reaching this rule.
+          items:
+            $ref: '#/components/schemas/EscalationTargetReference'
+        escalation_rule_assignment_strategy:
+          type: string
+          description: The strategy used to assign the escalation rule to an incident.
+          enum:
+          - round_robin
+          - assign_to_everyone
+      required:
+      - escalation_delay_in_minutes
+      - targets
+      example:
+        escalation_delay_in_minutes: 30
+        targets:
+        - id: PAM4FGS
+          type: user_reference
+        - id: PI7DH85
+          type: schedule_reference
+    EscalationTargetReference:
       allOf:
+      - $ref: '#/components/schemas/Reference'
       - type: object
+        description: The escalation target is the entity that will be assigned an incident upon escalation.
         properties:
-          records:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
-        required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
+          type:
+            enum:
+            - user
+            - schedule
+            - user_reference
+            - schedule_reference
+            type: string
     Tag:
       allOf:
       - type: object
@@ -1243,6 +985,264 @@ components:
         example:
           type: tag
           label: Batman
+    AuditRecordResponseSchema:
+      allOf:
+      - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
+        required:
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
+  parameters:
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    audit_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
+      schema:
+        type: string
+        format: date-time
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    user_ids_escalation_policies:
+      name: user_ids[]
+      in: query
+      description: Filters the results, showing only escalation policies on which any of the users is a target.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    optional_from_header:
+      name: From
+      in: header
+      description: The email address of a valid user associated with the account making the request. This is optional, and is only used for change tracking.
+      required: false
+      schema:
+        type: string
+        format: email
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    audit_method_type:
+      name: method_type
+      in: query
+      description: Method type filter.
+      schema:
+        type: string
+        description: 'Describes the method used to perform the action:
+
+
+          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
+
+
+          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
+
+
+          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
+
+
+          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
+
+
+          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
+
+          '
+        enum:
+        - browser
+        - oauth
+        - api_token
+        - identity_provider
+        - other
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    include_escalation_policy:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services
+        - teams
+        - targets
+        uniqueItems: true
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    sort_by_escalation_policy:
+      name: sort_by
+      in: query
+      description: Used to specify the field you wish to sort the results on.
+      schema:
+        type: string
+        enum:
+        - name
+        - name:asc
+        - name:desc
+        default: name
+  examples:
+    AuditRecordEscalationPolicyResponse:
+      summary: Response Example
+      value:
+        records:
+        - id: PD_ASSIGN_TEAM_TO_ESCALATION_POLICY
+          action: update
+          actors:
+          - id: PDUSER
+            summary: John Snow
+            type: user_reference
+            self: https://api.pagerduty.com/users/PD_USER123
+            html_url: https://mydomain.pagerduty.com/users/PD_USER123
+          details:
+            references:
+            - added:
+              - id: PD_TEAM123
+                summary: Devops
+                type: team_reference
+                self: https://api.pagerduty.com/teams/PD_TEAM123
+                html_url: https://mydomain.pagerduty.com/teams/PD_TEAM123
+              name: teams
+            resource:
+              id: PD_ESCALATION_ID
+              summary: DevOps Escalation
+              type: escalation_policy_reference
+              self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+              html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+          execution_context:
+            request_id: 0cc413fb-8e7d-4414-b4bc-b7578bf3ba77
+          execution_time: '2021-01-05T16:33:52.026Z'
+          method:
+            type: browser
+          root_resource:
+            id: PD_ESCALATION_ID
+            summary: DevOps Escalation
+            type: escalation_policy_reference
+            self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+            html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+        - id: PD_CREATE_ESCALATION_POLICY
+          action: create
+          actors:
+          - id: PDUSER
+            summary: John Snow
+            type: user_reference
+            self: https://api.pagerduty.com/users/PD_USER123
+            html_url: https://mydomain.pagerduty.com/users/PD_USER123
+          details:
+            fields:
+            - name: name
+              value: DevOps Escalation
+            - name: description
+              value: Escalation Policy for devops
+            - name: num_loops
+              value: '1'
+            resource:
+              id: PD_ESCALATION_ID
+              summary: DevOps Escalation
+              type: escalation_policy_reference
+              self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+              html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+          execution_context:
+            request_id: 0cc413fb-8e7d-4414-b4bc-b7578bf3ba77
+          execution_time: '2021-01-05T16:33:51.951Z'
+          method:
+            type: browser
+          root_resource:
+            id: PD_ESCALATION_ID
+            summary: DevOps Escalation
+            type: escalation_policy_reference
+            self: https://api.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+            html_url: https://mydomain.pagerduty.com/escalation_policies/PD_ESCALATION_ID
+        limit: 10
+        next_cursor: null
   securitySchemes:
     api_key:
       type: apiKey

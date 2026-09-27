@@ -881,12 +881,24 @@ paths:
           $ref: '#/components/responses/Conflict'
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Unauthorized:
       description: 'Caller did not supply credentials or did not provide the correct credentials.
 
         If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotAllowed:
+      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
       content:
         application/json:
           schema:
@@ -934,137 +946,87 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotAllowed:
-      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  parameters:
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    rule_id:
+      name: rule_id
+      in: path
+      description: The id of the Event Rule to retrieve.
+      required: true
+      schema:
+        type: string
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
   schemas:
-    EventRuleActionsCommon:
+    Pagination:
       type: object
-      description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
       properties:
-        annotate:
-          description: Set a note on the resulting incident.
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
           type:
-          - object
+          - integer
           - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              description: The content of the note.
-        event_action:
-          description: Set whether the resulting alert status is trigger or resolve.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              enum:
-              - trigger
-              - resolve
-        extractions:
-          type: array
-          description: Dynamically extract values to set and modify new and existing PD-CEF fields.
-          items:
-            oneOf:
-            - type: object
-              required:
-              - target
-              - source
-              - regex
-              properties:
-                target:
-                  type: string
-                  description: The PD-CEF field that will be set with the value from the regex.
-                source:
-                  type: string
-                  description: The path to the event field where the regex will be applied to extract a value.
-                regex:
-                  type: string
-                  description: A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
-            - type: object
-              required:
-              - target
-              - template
-              properties:
-                target:
-                  type: string
-                  description: The PD-CEF field that will be set with the value from the regex.
-                template:
-                  type: string
-                  description: A value that will be used to populate the target PD-CEF field.  You can include variables extracted from the payload by using string interpolation.
-                  example: Error number {{count}} on host {{host}}
-        priority:
-          description: Set the priority ID for the resulting incident. You can find the priority you want by calling the priorities endpoint.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              description: The priority ID.
-        severity:
-          description: Set the severity of the resulting alert.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              enum:
-              - info
-              - warning
-              - error
-              - critical
-        suppress:
-          description: Set whether the resulting alert is suppressed. Can optionally be used with a threshold where resulting alerts will be suppressed until the threshold is met in a window of time. If using a threshold the rule must also set a route action.
-          type: object
-          required:
-          - value
-          properties:
-            value:
-              type: boolean
-            threshold_value:
-              type: integer
-              description: The number of occurences needed during the window of time to trigger the theshold.
-            threshold_time_unit:
-              type: string
-              description: The time unit for the window of time.
-              enum:
-              - seconds
-              - minutes
-              - hours
-            threshold_time_amount:
-              type: integer
-              description: The amount of time units for the window of time.
-        suspend:
-          description: Set the length of time to suspend the resulting alert before triggering. Rules with a suspend action must also set a route action, and cannot have a suppress with threshold action
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: integer
-              description: The amount of time to suspend the alert in seconds.
+          description: The total number of records matching the given query.
+          readOnly: true
     EventRule:
       allOf:
       - type: object
@@ -1337,86 +1299,124 @@ components:
           type: team_reference
           self: https://api.pagerduty.com/teams/P3ZQXDF
           id: P3ZQXDF
-    Pagination:
+    EventRuleActionsCommon:
       type: object
+      description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
       properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
+        annotate:
+          description: Set a note on the resulting incident.
           type:
-          - integer
+          - object
           - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-  parameters:
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    rule_id:
-      name: rule_id
-      in: path
-      description: The id of the Event Rule to retrieve.
-      required: true
-      schema:
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              description: The content of the note.
+        event_action:
+          description: Set whether the resulting alert status is trigger or resolve.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              enum:
+              - trigger
+              - resolve
+        extractions:
+          type: array
+          description: Dynamically extract values to set and modify new and existing PD-CEF fields.
+          items:
+            oneOf:
+            - type: object
+              required:
+              - target
+              - source
+              - regex
+              properties:
+                target:
+                  type: string
+                  description: The PD-CEF field that will be set with the value from the regex.
+                source:
+                  type: string
+                  description: The path to the event field where the regex will be applied to extract a value.
+                regex:
+                  type: string
+                  description: A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
+            - type: object
+              required:
+              - target
+              - template
+              properties:
+                target:
+                  type: string
+                  description: The PD-CEF field that will be set with the value from the regex.
+                template:
+                  type: string
+                  description: A value that will be used to populate the target PD-CEF field.  You can include variables extracted from the payload by using string interpolation.
+                  example: Error number {{count}} on host {{host}}
+        priority:
+          description: Set the priority ID for the resulting incident. You can find the priority you want by calling the priorities endpoint.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              description: The priority ID.
+        severity:
+          description: Set the severity of the resulting alert.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              enum:
+              - info
+              - warning
+              - error
+              - critical
+        suppress:
+          description: Set whether the resulting alert is suppressed. Can optionally be used with a threshold where resulting alerts will be suppressed until the threshold is met in a window of time. If using a threshold the rule must also set a route action.
+          type: object
+          required:
+          - value
+          properties:
+            value:
+              type: boolean
+            threshold_value:
+              type: integer
+              description: The number of occurences needed during the window of time to trigger the theshold.
+            threshold_time_unit:
+              type: string
+              description: The time unit for the window of time.
+              enum:
+              - seconds
+              - minutes
+              - hours
+            threshold_time_amount:
+              type: integer
+              description: The amount of time units for the window of time.
+        suspend:
+          description: Set the length of time to suspend the resulting alert before triggering. Rules with a suspend action must also set a route action, and cannot have a suppress with threshold action
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: integer
+              description: The amount of time to suspend the alert in seconds.
   securitySchemes:
     api_key:
       type: apiKey

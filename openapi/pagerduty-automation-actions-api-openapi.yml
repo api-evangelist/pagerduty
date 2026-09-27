@@ -1516,37 +1516,89 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    service_id:
-      name: service_id
-      in: path
-      description: The service ID
-      required: true
-      schema:
-        type: string
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
-      schema:
-        type: string
-    automation_actions_not_invocation_state:
-      name: not_invocation_state
-      description: Invocation state inverse filter (matches invocations NOT in the specified state)
-      in: query
-      schema:
-        $ref: '#/components/parameters/automation_actions_invocation_state/schema'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  parameters:
     automation_actions_invocation_state:
       name: invocation_state
       description: Invocation state
@@ -1565,6 +1617,26 @@ components:
         - error
         - unknown
         example: sent
+    automation_actions_name:
+      name: name
+      description: Filters results to include the ones matching the name (case insensitive substring matching)
+      in: query
+      required: false
+      schema:
+        type: string
+    automation_actions_not_invocation_state:
+      name: not_invocation_state
+      description: Invocation state inverse filter (matches invocations NOT in the specified state)
+      in: query
+      schema:
+        $ref: '#/components/parameters/automation_actions_invocation_state/schema'
+    automation_actions_classification:
+      name: classification
+      description: Filters results to include the ones matching the specified classification (aka category)
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/AutomationActionsActionClassificationEnum'
     automation_actions_action_type:
       name: action_type
       description: Filters results to include the ones matching the specified action type
@@ -1576,28 +1648,13 @@ components:
         - script
         - process_automation
         example: process_automation
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    team_id:
-      name: team_id
+    id:
+      name: id
+      description: The ID of the resource.
       in: path
-      description: The team ID
       required: true
       schema:
         type: string
-    automation_actions_action_id:
-      name: action_id
-      description: Action ID
-      in: query
-      required: false
-      schema:
-        type: string
-        example: 01DAW70HK24JZORNE0P9C2V1L9
     automation_actions_incident_id:
       name: incident_id
       description: Incident ID
@@ -1606,6 +1663,60 @@ components:
       schema:
         type: string
         example: Q2LAR4ADCXC8IB
+    automation_actions_runner_id:
+      name: runner_id
+      description: 'Filters results to include the ones linked to the specified runner.
+
+        Specifying the value `any` filters results to include the ones linked to runners only,
+
+        thus omitting the results not linked to runners.
+
+        '
+      in: query
+      required: false
+      schema:
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    team_id:
+      name: team_id
+      in: path
+      description: The team ID
+      required: true
+      schema:
+        type: string
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    automation_actions_action_id:
+      name: action_id
+      description: Action ID
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 01DAW70HK24JZORNE0P9C2V1L9
     automation_actions_runners_include:
       name: include[]
       in: query
@@ -1620,40 +1731,25 @@ components:
           - associated_actions
           example: associated_actions
         uniqueItems: true
-    automation_actions_runner_id:
-      name: runner_id
-      description: 'Filters results to include the ones linked to the specified runner.
-
-        Specifying the value `any` filters results to include the ones linked to runners only,
-
-        thus omitting the results not linked to runners.
-
-        '
-      in: query
-      required: false
-      schema:
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
     automation_actions_team_id:
       name: team_id
       description: Filters results to include the ones associated with the specified team.
       in: query
       required: false
+      schema:
+        type: string
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    service_id:
+      name: service_id
+      in: path
+      description: The service ID
+      required: true
       schema:
         type: string
     automation_actions_service_id:
@@ -1663,55 +1759,56 @@ components:
       required: false
       schema:
         type: string
-    automation_actions_name:
-      name: name
-      description: Filters results to include the ones matching the name (case insensitive substring matching)
-      in: query
-      required: false
-      schema:
-        type: string
-    automation_actions_classification:
-      name: classification
-      description: Filters results to include the ones matching the specified classification (aka category)
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/AutomationActionsActionClassificationEnum'
   schemas:
-    AutomationActionsScriptActionDataReference:
+    AutomationActionsRunnerRunbookPostBody:
       type: object
+      title: RunnerRunbookPostBody
       properties:
-        script:
+        runner_type:
+          $ref: '#/components/schemas/AutomationActionsRunnerTypeEnum'
+        name:
           type: string
-          description: Body of the script to be executed on the Runner. To execute it, the Runner will write the content of the property into a temp file, make the file executable and execute it. It is assumed that the Runner has a properly configured environment to run the script as an executable file. This behaviour can be altered by providing the `invocation_command` property. The maxLength value is specified in bytes.
-          example: print("Hello from a Python script!")
-          maxLength: 16777215
-        invocation_command:
+          maxLength: 255
+          example: us-west-2 prod runner
+        description:
           type: string
-          description: The command to executed a script with. With the body of the script written into a temp file, the Runner will execute the `<invocation_command> <temp_file>` command. The maxLength value is specified in bytes.
-          example: /usr/local/bin/python3
-          maxLength: 65535
-      required:
-      - script
-    AutomationActionsProcessAutomationJobActionDataReference:
-      type: object
-      properties:
-        process_automation_job_id:
-          type: string
-          example: 79c199bba1aff6e519f198457f5ec0fc
-          maxLength: 36
-        process_automation_job_arguments:
-          type: string
-          description: Arguments to pass to the Process Automation job. The maxLength value is specified in bytes.
-          example: -env production
           maxLength: 1024
-        process_automation_node_filter:
+          example: us-west-2 runner provisioned in the production environment by the SRE team
+        runbook_base_uri:
+          $ref: '#/components/schemas/AutomationActionsRunbookBaseURI'
+        runbook_api_key:
           type: string
-          description: 'Node filter for the Process Automation job. The maxLength value is specified in bytes. Filter syntax: https://docs.rundeck.com/docs/manual/11-node-filters.html#node-filter-syntax'
-          example: 'mynode1 !nodename: mynode2'
-          maxLength: 1024
+          maxLength: 64
+          description: The API key to connect to the Runbook server with. If omitted, the previously stored value will remain unchanged
+        teams:
+          type: array
+          description: The list of teams associated with the Runner
+          items:
+            $ref: '#/components/schemas/TeamReference'
       required:
-      - process_automation_job_id
+      - runner_type
+      - name
+      - description
+      - runbook_base_uri
+      - runbook_api_key
+    AutomationActionsScriptActionWithTeams:
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionsScriptAction'
+      - type: object
+        properties:
+          teams:
+            type: array
+            items:
+              $ref: '#/components/schemas/TeamReference'
+    TeamReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
     AutomationActionsRunner:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -1779,22 +1876,6 @@ components:
         - runner_type
         - status
         - creation_time
-    UserReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - user_reference
-    AutomationActionsActionClassificationEnum:
-      type:
-      - string
-      - 'null'
-      enum:
-      - diagnostic
-      - remediation
     AutomationActionsScriptActionPostBody:
       allOf:
       - $ref: '#/components/schemas/AutomationActionsAbstractActionPostBody'
@@ -1804,6 +1885,15 @@ components:
             $ref: '#/components/schemas/AutomationActionsScriptActionDataReference'
         required:
         - action_data_reference
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
     AutomationActionsProcessAutomationJobActionPostBody:
       allOf:
       - $ref: '#/components/schemas/AutomationActionsAbstractActionPostBody'
@@ -1813,21 +1903,74 @@ components:
             $ref: '#/components/schemas/AutomationActionsProcessAutomationJobActionDataReference'
         required:
         - action_data_reference
-    AutomationActionsProcessAutomationJobActionPutBody:
+    AutomationActionsScriptAction:
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionsAbstractAction'
+      - type: object
+        properties:
+          action_data_reference:
+            $ref: '#/components/schemas/AutomationActionsScriptActionDataReference'
+        required:
+        - action_data_reference
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    AutomationActionsRunnerSidecarPostBody:
+      type: object
+      title: RunnerSidecarPostBody
+      properties:
+        runner_type:
+          $ref: '#/components/schemas/AutomationActionsRunnerTypeEnum'
+        name:
+          type: string
+          maxLength: 255
+          example: us-west-2 prod runner
+        description:
+          type: string
+          maxLength: 1024
+          example: us-west-2 runner provisioned in the production environment by the SRE team
+        teams:
+          type: array
+          description: The list of teams associated with the Runner
+          items:
+            $ref: '#/components/schemas/TeamReference'
+      required:
+      - runner_type
+      - name
+      - description
+    AutomationActionsProcessAutomationJobActionDataReference:
+      type: object
+      properties:
+        process_automation_job_id:
+          type: string
+          example: 79c199bba1aff6e519f198457f5ec0fc
+          maxLength: 36
+        process_automation_job_arguments:
+          type: string
+          description: Arguments to pass to the Process Automation job. The maxLength value is specified in bytes.
+          example: -env production
+          maxLength: 1024
+        process_automation_node_filter:
+          type: string
+          description: 'Node filter for the Process Automation job. The maxLength value is specified in bytes. Filter syntax: https://docs.rundeck.com/docs/manual/11-node-filters.html#node-filter-syntax'
+          example: 'mynode1 !nodename: mynode2'
+          maxLength: 1024
+      required:
+      - process_automation_job_id
+    AutomationActionsScriptActionPutBody:
       allOf:
       - $ref: '#/components/schemas/AutomationActionsAbstractActionPutBody'
       - type: object
         properties:
           action_data_reference:
-            $ref: '#/components/schemas/AutomationActionsProcessAutomationJobActionDataReference'
-    AutomationActionsRunbookBaseURI:
-      type: string
-      description: The base URI of the Runbook server to connect to. May only contain alphanumeric characters, periods, underscores and dashes. Specified as the subdomain portion of an RBA host, as in <runbook_base_uri>.runbook.pagerduty.cloud
-      maxLength: 255
-      example: subdomain
-    AutomationActionsRunnerSidecarBody:
+            $ref: '#/components/schemas/AutomationActionsScriptActionDataReference'
+    AutomationActionsRunnerRunbookBody:
       type: object
-      title: RunnerSidecarBody
+      title: RunnerRunbookBody
       properties:
         name:
           type: string
@@ -1837,6 +1980,31 @@ components:
           type: string
           maxLength: 1024
           example: us-west-2 runner provisioned in the production environment by the SRE team
+        runbook_base_uri:
+          $ref: '#/components/schemas/AutomationActionsRunbookBaseURI'
+        runbook_api_key:
+          type: string
+          maxLength: 64
+          description: The API key to connect to the Runbook server with. If omitted, the previously stored value will remain unchanged
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
     Template:
       allOf:
       - $ref: '#/components/schemas/EditableTemplate'
@@ -1886,94 +2054,96 @@ components:
             oneOf:
             - $ref: '#/components/schemas/UserReference'
             - $ref: '#/components/schemas/Template/allOf/1/properties/created_by/oneOf/1'
-    CursorPagination:
+    AutomationActionsRunnerSidecarBody:
       type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    AutomationActionsScriptActionPutBody:
-      allOf:
-      - $ref: '#/components/schemas/AutomationActionsAbstractActionPutBody'
-      - type: object
-        properties:
-          action_data_reference:
-            $ref: '#/components/schemas/AutomationActionsScriptActionDataReference'
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    TeamReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - team_reference
-    IncidentReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - incident_reference
-    AutomationActionsAbstractActionPutBody:
-      type: object
+      title: RunnerSidecarBody
       properties:
         name:
           type: string
-          example: Restart apache
           maxLength: 255
+          example: us-west-2 prod runner
         description:
           type: string
-          example: Restarts apache on the us-west-2-shopping-cart host
           maxLength: 1024
-        action_classification:
-          $ref: '#/components/schemas/AutomationActionsActionClassificationEnum'
-        action_type:
-          $ref: '#/components/parameters/automation_actions_action_type/schema'
-        runner:
-          type: string
-          maxLength: 36
-    AutomationActionsUserPermissions:
+          example: us-west-2 runner provisioned in the production environment by the SRE team
+    AutomationActionsScriptActionDataReference:
       type: object
       properties:
-        permissions:
-          type: array
-          items:
-            type: string
-            enum:
-            - create
-            - update
-            - delete
-            - invoke
-          example:
-          - update
-          - delete
+        script:
+          type: string
+          description: Body of the script to be executed on the Runner. To execute it, the Runner will write the content of the property into a temp file, make the file executable and execute it. It is assumed that the Runner has a properly configured environment to run the script as an executable file. This behaviour can be altered by providing the `invocation_command` property. The maxLength value is specified in bytes.
+          example: print("Hello from a Python script!")
+          maxLength: 16777215
+        invocation_command:
+          type: string
+          description: The command to executed a script with. With the body of the script written into a temp file, the Runner will execute the `<invocation_command> <temp_file>` command. The maxLength value is specified in bytes.
+          example: /usr/local/bin/python3
+          maxLength: 65535
       required:
-      - permissions
+      - script
+    AutomationActionsAbstractAction:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        description: A unit of work to be executed on runner. At most, an account can have 10,000 actions. If action maximum is exceeded, a 400 reponse is returned with error message.
+        properties:
+          name:
+            type: string
+            example: Restart apache
+          description:
+            type: string
+            example: Restarts apache on the us-west-2-shopping-cart host
+          action_type:
+            $ref: '#/components/parameters/automation_actions_action_type/schema'
+          action_classification:
+            $ref: '#/components/schemas/AutomationActionsActionClassificationEnum'
+          runner:
+            type: string
+            maxLength: 36
+          runner_type:
+            $ref: '#/components/schemas/AutomationActionsRunnerTypeEnum'
+          services:
+            type: array
+            items:
+              $ref: '#/components/schemas/ServiceReference'
+          privileges:
+            $ref: '#/components/schemas/AutomationActionsUserPermissions'
+          metadata:
+            type: object
+          creation_time:
+            type: string
+            format: date-time
+            description: The date/time
+          modify_time:
+            type: string
+            format: date-time
+            description: The date/time
+          last_run:
+            type: string
+            format: date-time
+            description: The date/time
+          last_run_by:
+            oneOf:
+            - $ref: '#/components/schemas/UserReference'
+            - type: object
+              properties:
+                id:
+                  type: string
+                  example: /5471da24-eecd-42e2-ac38-a32b2d907406/service/P000000
+                type:
+                  type: string
+                  example: event_orchestration_reference
+              required:
+              - type
+              - id
+            - $ref: '#/components/schemas/Template/allOf/1/properties/created_by/oneOf/1'
+        required:
+        - id
+        - type
+        - action_type
+        - name
+        - creation_time
+        - modify_time
     AutomationActionsRunnerTypeEnum:
       description: 'sidecar -- The runner is backed by an external sidecar that polls for invocations.
 
@@ -1985,60 +2155,13 @@ components:
       - sidecar
       - runbook
       example: runbook
-    AutomationActionsRunnerRunbookPostBody:
-      type: object
-      title: RunnerRunbookPostBody
-      properties:
-        runner_type:
-          $ref: '#/components/schemas/AutomationActionsRunnerTypeEnum'
-        name:
-          type: string
-          maxLength: 255
-          example: us-west-2 prod runner
-        description:
-          type: string
-          maxLength: 1024
-          example: us-west-2 runner provisioned in the production environment by the SRE team
-        runbook_base_uri:
-          $ref: '#/components/schemas/AutomationActionsRunbookBaseURI'
-        runbook_api_key:
-          type: string
-          maxLength: 64
-          description: The API key to connect to the Runbook server with. If omitted, the previously stored value will remain unchanged
-        teams:
-          type: array
-          description: The list of teams associated with the Runner
-          items:
-            $ref: '#/components/schemas/TeamReference'
-      required:
-      - runner_type
-      - name
-      - description
-      - runbook_base_uri
-      - runbook_api_key
-    AutomationActionsRunnerSidecarPostBody:
-      type: object
-      title: RunnerSidecarPostBody
-      properties:
-        runner_type:
-          $ref: '#/components/schemas/AutomationActionsRunnerTypeEnum'
-        name:
-          type: string
-          maxLength: 255
-          example: us-west-2 prod runner
-        description:
-          type: string
-          maxLength: 1024
-          example: us-west-2 runner provisioned in the production environment by the SRE team
-        teams:
-          type: array
-          description: The list of teams associated with the Runner
-          items:
-            $ref: '#/components/schemas/TeamReference'
-      required:
-      - runner_type
-      - name
-      - description
+    AutomationActionsProcessAutomationJobActionPutBody:
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionsAbstractActionPutBody'
+      - type: object
+        properties:
+          action_data_reference:
+            $ref: '#/components/schemas/AutomationActionsProcessAutomationJobActionDataReference'
     AutomationActionsInvocation:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -2119,87 +2242,49 @@ components:
         - state
         - action_id
         - metadata
-    AutomationActionsAbstractAction:
+    AutomationActionsProcessAutomationJobActionWithTeams:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/AutomationActionsProcessAutomationJobAction'
       - type: object
-        description: A unit of work to be executed on runner. At most, an account can have 10,000 actions. If action maximum is exceeded, a 400 reponse is returned with error message.
         properties:
-          name:
-            type: string
-            example: Restart apache
-          description:
-            type: string
-            example: Restarts apache on the us-west-2-shopping-cart host
-          action_type:
-            $ref: '#/components/parameters/automation_actions_action_type/schema'
-          action_classification:
-            $ref: '#/components/schemas/AutomationActionsActionClassificationEnum'
-          runner:
-            type: string
-            maxLength: 36
-          runner_type:
-            $ref: '#/components/schemas/AutomationActionsRunnerTypeEnum'
-          services:
+          teams:
             type: array
             items:
-              $ref: '#/components/schemas/ServiceReference'
-          privileges:
-            $ref: '#/components/schemas/AutomationActionsUserPermissions'
-          metadata:
-            type: object
-          creation_time:
-            type: string
-            format: date-time
-            description: The date/time
-          modify_time:
-            type: string
-            format: date-time
-            description: The date/time
-          last_run:
-            type: string
-            format: date-time
-            description: The date/time
-          last_run_by:
-            oneOf:
-            - $ref: '#/components/schemas/UserReference'
-            - type: object
-              properties:
-                id:
-                  type: string
-                  example: /5471da24-eecd-42e2-ac38-a32b2d907406/service/P000000
-                type:
-                  type: string
-                  example: event_orchestration_reference
-              required:
-              - type
-              - id
-            - $ref: '#/components/schemas/Template/allOf/1/properties/created_by/oneOf/1'
+              $ref: '#/components/schemas/TeamReference'
+    AutomationActionsActionClassificationEnum:
+      type:
+      - string
+      - 'null'
+      enum:
+      - diagnostic
+      - remediation
+    AutomationActionsProcessAutomationJobAction:
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionsAbstractAction'
+      - type: object
+        properties:
+          action_data_reference:
+            $ref: '#/components/schemas/AutomationActionsProcessAutomationJobActionDataReference'
         required:
-        - id
-        - type
-        - action_type
-        - name
-        - creation_time
-        - modify_time
-    AutomationActionsRunnerRunbookBody:
+        - action_data_reference
+    AutomationActionsAbstractActionPutBody:
       type: object
-      title: RunnerRunbookBody
       properties:
         name:
           type: string
+          example: Restart apache
           maxLength: 255
-          example: us-west-2 prod runner
         description:
           type: string
+          example: Restarts apache on the us-west-2-shopping-cart host
           maxLength: 1024
-          example: us-west-2 runner provisioned in the production environment by the SRE team
-        runbook_base_uri:
-          $ref: '#/components/schemas/AutomationActionsRunbookBaseURI'
-        runbook_api_key:
+        action_classification:
+          $ref: '#/components/schemas/AutomationActionsActionClassificationEnum'
+        action_type:
+          $ref: '#/components/parameters/automation_actions_action_type/schema'
+        runner:
           type: string
-          maxLength: 64
-          description: The API key to connect to the Runbook server with. If omitted, the previously stored value will remain unchanged
+          maxLength: 36
     AutomationActionsAbstractActionPostBody:
       type: object
       properties:
@@ -2231,56 +2316,6 @@ components:
       - name
       - description
       - action_type
-    AutomationActionsRunnerStatusEnum:
-      description: "Configured -- Runner has connected to the backend at least once \nNotConfigured -- Runner has never connected to backend\n"
-      type: string
-      enum:
-      - Configured
-      - NotConfigured
-      example: Configured
-    AutomationActionsScriptAction:
-      allOf:
-      - $ref: '#/components/schemas/AutomationActionsAbstractAction'
-      - type: object
-        properties:
-          action_data_reference:
-            $ref: '#/components/schemas/AutomationActionsScriptActionDataReference'
-        required:
-        - action_data_reference
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    AutomationActionsProcessAutomationJobAction:
-      allOf:
-      - $ref: '#/components/schemas/AutomationActionsAbstractAction'
-      - type: object
-        properties:
-          action_data_reference:
-            $ref: '#/components/schemas/AutomationActionsProcessAutomationJobActionDataReference'
-        required:
-        - action_data_reference
-    AutomationActionsProcessAutomationJobActionWithTeams:
-      allOf:
-      - $ref: '#/components/schemas/AutomationActionsProcessAutomationJobAction'
-      - type: object
-        properties:
-          teams:
-            type: array
-            items:
-              $ref: '#/components/schemas/TeamReference'
-    AutomationActionsScriptActionWithTeams:
-      allOf:
-      - $ref: '#/components/schemas/AutomationActionsScriptAction'
-      - type: object
-        properties:
-          teams:
-            type: array
-            items:
-              $ref: '#/components/schemas/TeamReference'
     Tag:
       allOf:
       - type: object
@@ -2330,88 +2365,53 @@ components:
         example:
           type: tag
           label: Batman
-  responses:
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    IncidentReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - incident_reference
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
+    AutomationActionsRunnerStatusEnum:
+      description: "Configured -- Runner has connected to the backend at least once \nNotConfigured -- Runner has never connected to backend\n"
+      type: string
+      enum:
+      - Configured
+      - NotConfigured
+      example: Configured
+    AutomationActionsUserPermissions:
+      type: object
+      properties:
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - create
+            - update
+            - delete
+            - invoke
+          example:
+          - update
+          - delete
+      required:
+      - permissions
+    AutomationActionsRunbookBaseURI:
+      type: string
+      description: The base URI of the Runbook server to connect to. May only contain alphanumeric characters, periods, underscores and dashes. Specified as the subdomain portion of an RBA host, as in <runbook_base_uri>.runbook.pagerduty.cloud
+      maxLength: 255
+      example: subdomain
   securitySchemes:
     api_key:
       type: apiKey

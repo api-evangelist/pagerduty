@@ -615,62 +615,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
     CustomFieldsFieldValue:
       type: object
@@ -782,6 +726,31 @@ components:
       - data_type
       - field_type
       - description
+    CustomFieldsFieldOption:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
+      - type: object
+        required:
+        - id
+        - type
+        - data
+        - created_at
+        - updated_at
+    CustomFieldsEditableField:
+      type: object
+      properties:
+        display_name:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
+        description:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
+        default_value:
+          oneOf:
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
     CustomFieldsEditableFieldOption:
       type: object
       properties:
@@ -828,16 +797,6 @@ components:
       - created_at
       - updated_at
       description: ''
-    CustomFieldsFieldOption:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
-      - type: object
-        required:
-        - id
-        - type
-        - data
-        - created_at
-        - updated_at
     CustomFieldsField:
       allOf:
       - $ref: '#/components/schemas/CustomFieldsEditableField'
@@ -893,21 +852,6 @@ components:
       - name
       - display_name
       - field_type
-    CustomFieldsEditableField:
-      type: object
-      properties:
-        display_name:
-          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
-        description:
-          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
-        default_value:
-          oneOf:
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
     CustomFieldsFieldWithOptions:
       allOf:
       - $ref: '#/components/schemas/CustomFieldsField'
@@ -920,21 +864,63 @@ components:
             description: The fixed list of value options that may be stored in this field.
             items:
               $ref: '#/components/schemas/CustomFieldsFieldOption'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
-    field_id:
-      name: field_id
-      description: The ID of the field.
-      in: path
-      required: true
-      schema:
-        type: string
-    field_option_id:
-      name: field_option_id
-      description: The ID of the field option.
-      in: path
-      required: true
-      schema:
-        type: string
     include_customfields_field:
       name: include[]
       description: Array of additional details to include.
@@ -945,6 +931,20 @@ components:
         enum:
         - field_options
         uniqueItems: true
+    field_option_id:
+      name: field_option_id
+      description: The ID of the field option.
+      in: path
+      required: true
+      schema:
+        type: string
+    field_id:
+      name: field_id
+      description: The ID of the field.
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     api_key:
       type: apiKey

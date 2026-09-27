@@ -127,148 +127,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    include_oncalls:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - escalation_policies
-        - users
-        - schedules
-        uniqueItems: true
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    earliest_oncalls:
-      name: earliest
-      in: query
-      description: This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the "next" on-calls are for a given set of filters.
-      schema:
-        type: boolean
-    until_oncalls:
-      name: until
-      in: query
-      description: The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.
-      schema:
-        type: string
-        format: date-time
-    time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the account time zone.
-      schema:
-        type: string
-        format: tzinfo
-    escalation_policy_ids_oncalls:
-      name: escalation_policy_ids[]
-      in: query
-      description: Filters the results, showing only on-calls for the specified escalation policy IDs.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    since_oncalls:
-      name: since
-      in: query
-      description: The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.
-      schema:
-        type: string
-        format: date-time
-    schedule_ids_oncalls:
-      name: schedule_ids[]
-      in: query
-      description: Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    user_ids_oncalls:
-      name: user_ids[]
-      in: query
-      description: Filters the results, showing only on-calls for the specified user IDs.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
   schemas:
-    EscalationPolicyReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - escalation_policy_reference
-    UserReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - user_reference
-    ScheduleReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - schedule_reference
     Pagination:
       type: object
       properties:
@@ -297,6 +156,15 @@ components:
         required:
         - type
         - id
+    ScheduleReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - schedule_reference
     Oncall:
       type: object
       properties:
@@ -391,19 +259,147 @@ components:
         example:
           type: tag
           label: Batman
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
+    EscalationPolicyReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - escalation_policy_reference
+  parameters:
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    until_oncalls:
+      name: until
+      in: query
+      description: The end of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future, and the `until` time cannot be before the `since` time.
+      schema:
+        type: string
+        format: date-time
+    schedule_ids_oncalls:
+      name: schedule_ids[]
+      in: query
+      description: Filters the results, showing only on-calls for the specified schedule IDs. If `null` is provided in the array, it includes permanent on-calls due to direct user escalation targets.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    include_oncalls:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - escalation_policies
+        - users
+        - schedules
+        uniqueItems: true
+    time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the account time zone.
+      schema:
+        type: string
+        format: tzinfo
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    user_ids_oncalls:
+      name: user_ids[]
+      in: query
+      description: Filters the results, showing only on-calls for the specified user IDs.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    escalation_policy_ids_oncalls:
+      name: escalation_policy_ids[]
+      in: query
+      description: Filters the results, showing only on-calls for the specified escalation policy IDs.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    earliest_oncalls:
+      name: earliest
+      in: query
+      description: This will filter on-calls such that only the earliest on-call for each combination of escalation policy, escalation level, and user is returned. This is useful for determining when the "next" on-calls are for a given set of filters.
+      schema:
+        type: boolean
+    since_oncalls:
+      name: since
+      in: query
+      description: The start of the time range over which you want to search. If an on-call period overlaps with the range, it will be included in the result. Defaults to current time. On-call shifts are limited to 90 days in the future.
+      schema:
+        type: string
+        format: date-time
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
   responses:
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
       content:
         application/json:
           schema:
@@ -445,8 +441,12 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:

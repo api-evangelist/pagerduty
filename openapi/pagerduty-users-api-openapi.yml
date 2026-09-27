@@ -2353,234 +2353,129 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    include_notification_rules:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - contact_methods
-        uniqueItems: true
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
-      schema:
-        type: string
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    from_header:
-      name: From
-      in: header
-      description: The email address of a valid user associated with the account making the request.
-      required: true
-      schema:
-        type: string
-        format: email
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    UnprocessableEntity:
+      description: Unprocessable Entity. Some arguments failed validation checks.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
 
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
-      schema:
-        default: false
-        type: boolean
-    oncall_handoff_notification_rule_id:
-      name: oncall_handoff_notification_rule_id
-      in: path
-      description: The oncall handoff notification rule ID on the user.
-      required: true
-      schema:
-        type: string
-    session_id:
-      name: session_id
-      in: path
-      description: The session ID for the user.
-      required: true
-      schema:
-        type: string
-    user_notification_rule_id:
-      name: notification_rule_id
-      in: path
-      description: The notification rule ID on the user.
-      required: true
-      schema:
-        type: string
-    type:
-      name: type
-      in: path
-      description: The session type for the user session ID.
-      required: true
-      schema:
-        type: string
-    audit_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
-      schema:
-        type: string
-        format: date-time
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    urgency:
-      name: urgency
-      in: query
-      description: The incident urgency for which the notification rules are applied. If not specified, defaults to `high`.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - high
-        - low
-        - all
-        uniqueItems: true
-    user_contact_method_id:
-      name: contact_method_id
-      in: path
-      description: The contact method ID on the user.
-      required: true
-      schema:
-        type: string
-    audit_method_type:
-      name: method_type
-      in: query
-      description: Method type filter.
-      schema:
-        type: string
-        description: 'Describes the method used to perform the action:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
 
-
-          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
-
-
-          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
-
-
-          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
-
-
-          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
-
-
-          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
-
-          '
-        enum:
-        - browser
-        - oauth
-        - api_token
-        - identity_provider
-        - other
-    user_status_update_notification_rule_id:
-      name: status_update_notification_rule_id
-      in: path
-      description: The status update notification rule ID on the user.
-      required: true
-      schema:
-        type: string
-    early_access_status-update-notification-rules:
-      name: X-EARLY-ACCESS
-      in: header
-      description: 'This header indicates that this API endpoint is __UNDER CONSTRUCTION__ and may change at any time. You __MUST__ pass in this header and the above value. Do not use this endpoint in production, as it may change!
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
-      required: true
-      schema:
-        type: string
-        default: status-update-notification-rules
-        enum:
-        - status-update-notification-rules
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
-    include_user:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - contact_methods
-        - notification_rules
-        - teams
-        - subdomains
-        uniqueItems: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    NotificationRuleReference:
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    StatusUpdateNotificationRule:
+      type: object
+      description: A rule for contacting the user for Incident Status Updates.
+      properties:
+        contact_method:
+          $ref: '#/components/schemas/ContactMethodReference'
+      required:
+      - contact_method
+      example:
+        contact_method:
+          id: PXPGF42
+          type: email_contact_method_reference
+    LicenseReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -2588,97 +2483,16 @@ components:
           type:
             type: string
             enum:
-            - assignment_notification_rule_reference
-    User:
+            - license_reference
+    TeamReference:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/Reference'
       - type: object
         properties:
-          name:
-            type: string
-            description: The name of the user.
-            maxLength: 100
           type:
             type: string
-            description: The type of object being created.
-            default: user
             enum:
-            - user
-          email:
-            type: string
-            format: email
-            description: The user's email address.
-            minLength: 6
-            maxLength: 100
-          time_zone:
-            type: string
-            format: tzinfo
-            description: The preferred time zone name. If null, the account's time zone will be used.
-          color:
-            type: string
-            description: The schedule color.
-          role:
-            description: The user role. Account must have the `read_only_users` ability to set a user as a `read_only_user` or a `read_only_limited_user`, and must have advanced permissions abilities to set a user as `observer` or `restricted_access`.
-            type: string
-            enum:
-            - admin
-            - limited_user
-            - observer
-            - owner
-            - read_only_user
-            - restricted_access
-            - read_only_limited_user
-            - user
-          avatar_url:
-            type: string
-            format: url
-            description: The URL of the user's avatar.
-            readOnly: true
-          description:
-            type:
-            - string
-            - 'null'
-            description: The user's bio.
-          invitation_sent:
-            type: boolean
-            readOnly: true
-            description: If true, the user has an outstanding invitation.
-          job_title:
-            type: string
-            description: The user's title.
-            maxLength: 100
-          teams:
-            type: array
-            readOnly: true
-            description: The list of teams to which the user belongs. Account must have the `teams` ability to set this.
-            items:
-              $ref: '#/components/schemas/TeamReference'
-          contact_methods:
-            type: array
-            readOnly: true
-            description: The list of contact methods for the user.
-            items:
-              $ref: '#/components/schemas/ContactMethodReference'
-          notification_rules:
-            readOnly: true
-            type: array
-            description: The list of notification rules for the user.
-            items:
-              $ref: '#/components/schemas/NotificationRuleReference'
-        required:
-        - name
-        - email
-        - type
-        example:
-          type: user
-          name: Earline Greenholt
-          email: 125.greenholt.earline@graham.name
-          time_zone: America/Lima
-          color: green
-          role: admin
-          job_title: Director of Engineering
-          avatar_url: https://secure.gravatar.com/avatar/1d1a39d4635208d5664082a6c654a73f.png?d=mm&r=PG
-          description: I'm the boss
+            - team_reference
     PushContactMethod:
       description: The Push Contact Method of the User.
       allOf:
@@ -2715,6 +2529,61 @@ components:
           label: work
           device_type: android
           address: '12341234'
+    NotificationSubscribable:
+      title: NotificationSubscribable
+      description: A reference of a subscribable entity.
+      type: object
+      properties:
+        subscribable_id:
+          type: string
+          description: The ID of the entity to subscribe to
+        subscribable_type:
+          type: string
+          description: The type of the entity being subscribed to
+          enum:
+          - incident
+          - business_service
+      example:
+        subscribable_id: PD1234
+        subscribable_type: incident
+    PhoneContactMethod:
+      description: The Phone Contact Method of the User, used for Voice or SMS.
+      allOf:
+      - $ref: '#/components/schemas/ContactMethod'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - phone_contact_method
+            - sms_contact_method
+          country_code:
+            type: integer
+            description: The 1-to-3 digit country calling code.
+            minimum: 1
+            maximum: 1999
+          enabled:
+            type: boolean
+            description: If true, this phone is capable of receiving SMS messages.
+            readOnly: true
+          blacklisted:
+            type: boolean
+            description: If true, this phone has been blacklisted by PagerDuty and no messages will be sent to it.
+            readOnly: true
+        required:
+        - country_code
+        example:
+          type: phone_contact_method
+          label: work
+          country_code: 123
+          address: '1234567'
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     NotificationSubscriptionWithContext:
       title: NotificationSubscriptionWithContext
       type: object
@@ -2756,85 +2625,6 @@ components:
           - duplicate
           - unauthorized
           description: The resulting status of the subscription
-    EmailContactMethod:
-      description: The Email Contact Method of the User.
-      allOf:
-      - $ref: '#/components/schemas/ContactMethod'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - email_contact_method
-          send_short_email:
-            type: boolean
-            description: Send an abbreviated email message instead of the standard email output. Useful for email-to-SMS gateways and email based pagers.
-            default: false
-        example:
-          type: email_contact_method
-          label: work
-          address: grady.haylie.126@hickle.net
-          send_short_email: false
-    PhoneContactMethod:
-      description: The Phone Contact Method of the User, used for Voice or SMS.
-      allOf:
-      - $ref: '#/components/schemas/ContactMethod'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - phone_contact_method
-            - sms_contact_method
-          country_code:
-            type: integer
-            description: The 1-to-3 digit country calling code.
-            minimum: 1
-            maximum: 1999
-          enabled:
-            type: boolean
-            description: If true, this phone is capable of receiving SMS messages.
-            readOnly: true
-          blacklisted:
-            type: boolean
-            description: If true, this phone has been blacklisted by PagerDuty and no messages will be sent to it.
-            readOnly: true
-        required:
-        - country_code
-        example:
-          type: phone_contact_method
-          label: work
-          country_code: 123
-          address: '1234567'
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    AuditMetadata:
-      type: object
-      properties:
-        messages:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            example: Message about the result
     HandoffNotificationRule:
       type: object
       description: A rule for contacting the user for Handoff Notifications.
@@ -2867,48 +2657,6 @@ components:
         contact_method:
           id: PXPGF42
           type: email_contact_method_reference
-    PushContactMethodSound:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of sound.
-          enum:
-          - alert_high_urgency
-          - alert_low_urgency
-        file:
-          type: string
-          description: The sound file name.
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    TeamReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - team_reference
     ContactMethodReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
@@ -2921,108 +2669,37 @@ components:
             - phone_contact_method_reference
             - push_notification_contact_method_reference
             - sms_contact_method_reference
-    LicenseReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - license_reference
-    NotificationRule:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        description: A rule for contacting the user.
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: assignment_notification_rule
-            enum:
-            - assignment_notification_rule
-          start_delay_in_minutes:
-            type: integer
-            description: The delay before firing the rule, in minutes.
-            minimum: 0
-          contact_method:
-            $ref: '#/components/schemas/ContactMethodReference'
-          urgency:
-            type: string
-            enum:
-            - high
-            - low
-            description: Which incident urgency this rule is used for. Account must have the `urgencies` ability to have a low urgency notification rule.
-        required:
-        - start_delay_in_minutes
-        - urgency
-        - contact_method
-        - type
-        example:
-          type: assignment_notification_rule
-          start_delay_in_minutes: 0
-          contact_method:
-            id: PXPGF42
-            type: email_contact_method_reference
-          urgency: high
-    NotificationSubscribable:
-      title: NotificationSubscribable
-      description: A reference of a subscribable entity.
+    CursorPagination:
       type: object
       properties:
-        subscribable_id:
-          type: string
-          description: The ID of the entity to subscribe to
-        subscribable_type:
-          type: string
-          description: The type of the entity being subscribed to
-          enum:
-          - incident
-          - business_service
-      example:
-        subscribable_id: PD1234
-        subscribable_type: incident
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    NotificationSubscription:
-      title: NotificationSubscription
-      description: An object describing the relationship of a NotificationSubscriber and a NotificationSubscribable.
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
+    PushContactMethodSound:
       type: object
       properties:
-        subscriber_id:
+        type:
           type: string
-          description: The ID of the entity being subscribed
-        subscriber_type:
-          type: string
-          description: The type of the entity being subscribed
+          description: The type of sound.
           enum:
-          - user
-          - team
-        subscribable_id:
+          - alert_high_urgency
+          - alert_low_urgency
+        file:
           type: string
-          description: The ID of the entity being subscribed to
-        subscribable_type:
-          type: string
-          description: The type of the entity being subscribed to
-          enum:
-          - incident
-          - business_service
-        account_id:
-          type: string
-          description: The ID of the account belonging to the subscriber entity
-      x-examples:
-        example-1:
-          subscriber_id: string
-          subscriber_type: user
-          subscribable_id: string
-          subscribable_type: incident
-          account_id: string
+          description: The sound file name.
     UserSession:
       type: object
       properties:
@@ -3060,6 +2737,77 @@ components:
         created_at: '2018-10-06T21:30:42Z'
         summary: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36
         type: browser
+    LicenseWithCounts:
+      allOf:
+      - type: object
+        required:
+        - id
+        - description
+        - name
+        - valid_roles
+        properties:
+          id:
+            type: string
+            description: Uniquely identifies the resource
+          description:
+            type: string
+            description: 'Description of the License. May include the names of add-ons associated with
+
+              the License, if there are any.
+
+              '
+          name:
+            type: string
+            description: 'Name of the License.
+
+              '
+          valid_roles:
+            type: array
+            description: The roles a User with this License can have
+            items:
+              type: string
+          role_group:
+            type: string
+            enum:
+            - FullUser
+            - Stakeholder
+            description: Indicates whether this License is assignable to full or stakeholder Users
+            example: FullUser
+          type:
+            type: string
+            description: Type of object
+          self:
+            type: string
+            description: API URL to access the License
+          html_url:
+            type: string
+            description: HTML URL to access the License
+          summary:
+            type: string
+            description: Summary of the License
+      - type: object
+        properties:
+          current_value:
+            type: integer
+            description: How many of these Licenses are currently allocated to Users
+          allocations_available:
+            type:
+            - integer
+            - 'null'
+            description: 'How many of these licenses are available to be allocated to a user. If this
+
+              value is "null" then there is no limit on the number of allocations allowed.
+
+              '
+    NotificationRuleReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - assignment_notification_rule_reference
     AuditRecord:
       type: object
       readOnly: true
@@ -3210,18 +2958,16 @@ components:
       - method
       - root_resource
       - action
-    StatusUpdateNotificationRule:
+    AuditMetadata:
       type: object
-      description: A rule for contacting the user for Incident Status Updates.
       properties:
-        contact_method:
-          $ref: '#/components/schemas/ContactMethodReference'
-      required:
-      - contact_method
-      example:
-        contact_method:
-          id: PXPGF42
-          type: email_contact_method_reference
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
     ContactMethod:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -3248,82 +2994,96 @@ components:
         - type
         - label
         - address
-    LicenseWithCounts:
+    User:
       allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
       - type: object
-        required:
-        - id
-        - description
-        - name
-        - valid_roles
         properties:
-          id:
-            type: string
-            description: Uniquely identifies the resource
-          description:
-            type: string
-            description: 'Description of the License. May include the names of add-ons associated with
-
-              the License, if there are any.
-
-              '
           name:
             type: string
-            description: 'Name of the License.
-
-              '
-          valid_roles:
-            type: array
-            description: The roles a User with this License can have
-            items:
-              type: string
-          role_group:
-            type: string
-            enum:
-            - FullUser
-            - Stakeholder
-            description: Indicates whether this License is assignable to full or stakeholder Users
-            example: FullUser
+            description: The name of the user.
+            maxLength: 100
           type:
             type: string
-            description: Type of object
-          self:
+            description: The type of object being created.
+            default: user
+            enum:
+            - user
+          email:
             type: string
-            description: API URL to access the License
-          html_url:
+            format: email
+            description: The user's email address.
+            minLength: 6
+            maxLength: 100
+          time_zone:
             type: string
-            description: HTML URL to access the License
-          summary:
+            format: tzinfo
+            description: The preferred time zone name. If null, the account's time zone will be used.
+          color:
             type: string
-            description: Summary of the License
-      - type: object
-        properties:
-          current_value:
-            type: integer
-            description: How many of these Licenses are currently allocated to Users
-          allocations_available:
+            description: The schedule color.
+          role:
+            description: The user role. Account must have the `read_only_users` ability to set a user as a `read_only_user` or a `read_only_limited_user`, and must have advanced permissions abilities to set a user as `observer` or `restricted_access`.
+            type: string
+            enum:
+            - admin
+            - limited_user
+            - observer
+            - owner
+            - read_only_user
+            - restricted_access
+            - read_only_limited_user
+            - user
+          avatar_url:
+            type: string
+            format: url
+            description: The URL of the user's avatar.
+            readOnly: true
+          description:
             type:
-            - integer
+            - string
             - 'null'
-            description: 'How many of these licenses are available to be allocated to a user. If this
-
-              value is "null" then there is no limit on the number of allocations allowed.
-
-              '
-    AuditRecordResponseSchema:
-      allOf:
-      - type: object
-        properties:
-          records:
+            description: The user's bio.
+          invitation_sent:
+            type: boolean
+            readOnly: true
+            description: If true, the user has an outstanding invitation.
+          job_title:
+            type: string
+            description: The user's title.
+            maxLength: 100
+          teams:
             type: array
+            readOnly: true
+            description: The list of teams to which the user belongs. Account must have the `teams` ability to set this.
             items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
+              $ref: '#/components/schemas/TeamReference'
+          contact_methods:
+            type: array
+            readOnly: true
+            description: The list of contact methods for the user.
+            items:
+              $ref: '#/components/schemas/ContactMethodReference'
+          notification_rules:
+            readOnly: true
+            type: array
+            description: The list of notification rules for the user.
+            items:
+              $ref: '#/components/schemas/NotificationRuleReference'
         required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
+        - name
+        - email
+        - type
+        example:
+          type: user
+          name: Earline Greenholt
+          email: 125.greenholt.earline@graham.name
+          time_zone: America/Lima
+          color: green
+          role: admin
+          job_title: Director of Engineering
+          avatar_url: https://secure.gravatar.com/avatar/1d1a39d4635208d5664082a6c654a73f.png?d=mm&r=PG
+          description: I'm the boss
     Tag:
       allOf:
       - type: object
@@ -3373,94 +3133,334 @@ components:
         example:
           type: tag
           label: Batman
-  responses:
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    UnprocessableEntity:
-      description: Unprocessable Entity. Some arguments failed validation checks.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
+    NotificationSubscription:
+      title: NotificationSubscription
+      description: An object describing the relationship of a NotificationSubscriber and a NotificationSubscribable.
+      type: object
+      properties:
+        subscriber_id:
+          type: string
+          description: The ID of the entity being subscribed
+        subscriber_type:
+          type: string
+          description: The type of the entity being subscribed
+          enum:
+          - user
+          - team
+        subscribable_id:
+          type: string
+          description: The ID of the entity being subscribed to
+        subscribable_type:
+          type: string
+          description: The type of the entity being subscribed to
+          enum:
+          - incident
+          - business_service
+        account_id:
+          type: string
+          description: The ID of the account belonging to the subscriber entity
+      x-examples:
+        example-1:
+          subscriber_id: string
+          subscriber_type: user
+          subscribable_id: string
+          subscribable_type: incident
+          account_id: string
+    EmailContactMethod:
+      description: The Email Contact Method of the User.
+      allOf:
+      - $ref: '#/components/schemas/ContactMethod'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - email_contact_method
+          send_short_email:
+            type: boolean
+            description: Send an abbreviated email message instead of the standard email output. Useful for email-to-SMS gateways and email based pagers.
+            default: false
+        example:
+          type: email_contact_method
+          label: work
+          address: grady.haylie.126@hickle.net
+          send_short_email: false
+    NotificationRule:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        description: A rule for contacting the user.
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: assignment_notification_rule
+            enum:
+            - assignment_notification_rule
+          start_delay_in_minutes:
+            type: integer
+            description: The delay before firing the rule, in minutes.
+            minimum: 0
+          contact_method:
+            $ref: '#/components/schemas/ContactMethodReference'
+          urgency:
+            type: string
+            enum:
+            - high
+            - low
+            description: Which incident urgency this rule is used for. Account must have the `urgencies` ability to have a low urgency notification rule.
+        required:
+        - start_delay_in_minutes
+        - urgency
+        - contact_method
+        - type
+        example:
+          type: assignment_notification_rule
+          start_delay_in_minutes: 0
+          contact_method:
+            id: PXPGF42
+            type: email_contact_method_reference
+          urgency: high
+    AuditRecordResponseSchema:
+      allOf:
+      - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
+        required:
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
+  parameters:
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
 
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+      schema:
+        default: false
+        type: boolean
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    audit_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
+      schema:
+        type: string
+        format: date-time
+    early_access_status-update-notification-rules:
+      name: X-EARLY-ACCESS
+      in: header
+      description: 'This header indicates that this API endpoint is __UNDER CONSTRUCTION__ and may change at any time. You __MUST__ pass in this header and the above value. Do not use this endpoint in production, as it may change!
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+      required: true
+      schema:
+        type: string
+        default: status-update-notification-rules
+        enum:
+        - status-update-notification-rules
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    include_user:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - contact_methods
+        - notification_rules
+        - teams
+        - subdomains
+        uniqueItems: true
+    user_status_update_notification_rule_id:
+      name: status_update_notification_rule_id
+      in: path
+      description: The status update notification rule ID on the user.
+      required: true
+      schema:
+        type: string
+    oncall_handoff_notification_rule_id:
+      name: oncall_handoff_notification_rule_id
+      in: path
+      description: The oncall handoff notification rule ID on the user.
+      required: true
+      schema:
+        type: string
+    type:
+      name: type
+      in: path
+      description: The session type for the user session ID.
+      required: true
+      schema:
+        type: string
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+      schema:
+        type: string
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    from_header:
+      name: From
+      in: header
+      description: The email address of a valid user associated with the account making the request.
+      required: true
+      schema:
+        type: string
+        format: email
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    urgency:
+      name: urgency
+      in: query
+      description: The incident urgency for which the notification rules are applied. If not specified, defaults to `high`.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - high
+        - low
+        - all
+        uniqueItems: true
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    audit_method_type:
+      name: method_type
+      in: query
+      description: Method type filter.
+      schema:
+        type: string
+        description: 'Describes the method used to perform the action:
+
+
+          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
+
+
+          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
+
+
+          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
+
+
+          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
+
+
+          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
+
+          '
+        enum:
+        - browser
+        - oauth
+        - api_token
+        - identity_provider
+        - other
+    session_id:
+      name: session_id
+      in: path
+      description: The session ID for the user.
+      required: true
+      schema:
+        type: string
+    include_notification_rules:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - contact_methods
+        uniqueItems: true
+    user_notification_rule_id:
+      name: notification_rule_id
+      in: path
+      description: The notification rule ID on the user.
+      required: true
+      schema:
+        type: string
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    user_contact_method_id:
+      name: contact_method_id
+      in: path
+      description: The contact method ID on the user.
+      required: true
+      schema:
+        type: string
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
   examples:
     AuditRecordUserResponse:
       summary: Response Example

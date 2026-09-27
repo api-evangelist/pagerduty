@@ -335,106 +335,21 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    addon_filter:
-      name: filter
-      in: query
-      description: Filters the results, showing only Add-ons of the given type
-      schema:
-        type: string
-        enum:
-        - full_page_addon
-        - incident_show_addon
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    include_addon:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services
-        uniqueItems: true
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    addon_services:
-      name: service_ids[]
-      in: query
-      description: Filters the results, showing only Add-ons for the given services
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
   responses:
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     NotFound:
       description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
       content:
         application/json:
           schema:
@@ -476,13 +391,38 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
     Addon:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -510,27 +450,6 @@ components:
           type: full_page_addon
           name: Internal Status Page
           src: https://intranet.example.com/status
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
     Reference:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -538,23 +457,6 @@ components:
         required:
         - type
         - id
-    AddonReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          src:
-            type: string
-            format: url
-            description: The URL source of the Addon
-          name:
-            type: string
-            description: The user entered name of the Addon.
-          type:
-            type: string
-            enum:
-            - full_page_addon_reference
-            - incident_show_addon_reference
     Tag:
       allOf:
       - type: object
@@ -604,6 +506,104 @@ components:
         example:
           type: tag
           label: Batman
+    AddonReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          src:
+            type: string
+            format: url
+            description: The URL source of the Addon
+          name:
+            type: string
+            description: The user entered name of the Addon.
+          type:
+            type: string
+            enum:
+            - full_page_addon_reference
+            - incident_show_addon_reference
+  parameters:
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    include_addon:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services
+        uniqueItems: true
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    addon_filter:
+      name: filter
+      in: query
+      description: Filters the results, showing only Add-ons of the given type
+      schema:
+        type: string
+        enum:
+        - full_page_addon
+        - incident_show_addon
+    addon_services:
+      name: service_ids[]
+      in: query
+      description: Filters the results, showing only Add-ons for the given services
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
   securitySchemes:
     api_key:
       type: apiKey

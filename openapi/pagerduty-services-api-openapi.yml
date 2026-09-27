@@ -1530,51 +1530,6 @@ paths:
           $ref: '#/components/responses/Conflict'
 components:
   parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    sort_by_service:
-      name: sort_by
-      in: query
-      description: Used to specify the field you wish to sort the results on.
-      schema:
-        type: string
-        enum:
-        - name
-        - name:asc
-        - name:desc
-        default: name
     include_ruleset_migrated_metadata:
       name: include[]
       in: query
@@ -1585,20 +1540,6 @@ components:
         enum:
         - migrated_metadata
         uniqueItems: true
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
     offset_total:
       name: total
       in: query
@@ -1612,16 +1553,33 @@ components:
       schema:
         default: false
         type: boolean
-    include_services_integrations:
-      name: include[]
+    sort_by_service:
+      name: sort_by
       in: query
-      description: Array of additional details to include.
-      explode: true
+      description: Used to specify the field you wish to sort the results on.
       schema:
         type: string
         enum:
-        - services
-        - vendors
+        - name
+        - name:asc
+        - name:desc
+        default: name
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
         uniqueItems: true
     audit_until:
       name: until
@@ -1630,6 +1588,14 @@ components:
       schema:
         type: string
         format: date-time
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
     time_zone:
       name: time_zone
       in: query
@@ -1637,33 +1603,13 @@ components:
       schema:
         type: string
         format: tzinfo
-    integration_id:
-      name: integration_id
+    rule_id:
+      name: rule_id
       in: path
-      description: The integration ID on the service.
+      description: The id of the Event Rule to retrieve.
       required: true
       schema:
         type: string
-    service_name:
-      name: name
-      in: query
-      description: Filters the results, showing only services with the specified name.
-      schema:
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
     include_services_id:
       name: include[]
       in: query
@@ -1677,6 +1623,15 @@ components:
         - auto_pause_notifications_parameters
         - integrations
         uniqueItems: true
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
     header_Content-Type:
       name: Content-Type
       in: header
@@ -1686,6 +1641,31 @@ components:
         default: application/json
         enum:
         - application/json
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    include_services_integrations:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services
+        - vendors
+        uniqueItems: true
     audit_method_type:
       name: method_type
       in: query
@@ -1716,20 +1696,40 @@ components:
         - api_token
         - identity_provider
         - other
-    rule_id:
-      name: rule_id
+    integration_id:
+      name: integration_id
       in: path
-      description: The id of the Event Rule to retrieve.
+      description: The integration ID on the service.
       required: true
       schema:
         type: string
-    query:
-      name: query
+    cursor_limit:
+      name: limit
       in: query
-      description: Filters the result, showing only the records whose name matches the query.
       required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    service_name:
+      name: name
+      in: query
+      description: Filters the results, showing only services with the specified name.
       schema:
         type: string
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
     include_services:
       name: include[]
       in: query
@@ -1744,424 +1744,6 @@ components:
         - auto_pause_notifications_parameters
         uniqueItems: true
   schemas:
-    ServiceEventRule:
-      allOf:
-      - $ref: '#/components/schemas/EventRule/allOf/0'
-      - type: object
-        properties:
-          position:
-            type: integer
-            description: Position/index of the Event Rule on the Service.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching Event Rule is found or the end of the list is reached.
-          actions:
-            $ref: '#/components/schemas/EventRuleActionsCommon'
-    EmailParser:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - trigger
-          - resolve
-        match_predicate:
-          $ref: '#/components/schemas/MatchPredicate'
-        value_extractors:
-          type: array
-          description: Additional values that will be pulled in to the Incident object. Exactly one value extractor must have a `value_name` of `incident_key`.
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - entire
-                - regex
-                - between
-              part:
-                type: string
-                enum:
-                - body
-                - subject
-                - from_addresses
-              value_name:
-                type: string
-                minLength: 1
-                description: The field name to set in the Incident object. Exactly one must use the `value_name` of `incident_key`
-              regex:
-                type: string
-              starts_after:
-                type: string
-              ends_with:
-                type: string
-            required:
-            - type
-            - part
-            - value_name
-      required:
-      - action
-      - match_predicate
-    EscalationPolicyReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - escalation_policy_reference
-    IncidentUrgencyRule:
-      allOf:
-      - $ref: '#/components/schemas/IncidentUrgencyType'
-      - type: object
-        properties:
-          during_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
-          outside_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
-    VendorReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - vendor_reference
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    MatchPredicate:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - all
-          - any
-          - not
-          - contains
-          - exactly
-          - regex
-        matcher:
-          type: string
-          description: Required if the type is `contains`, `exactly` or `regex`.
-          minLength: 1
-        part:
-          type: string
-          description: The email field that will attempt to use the matcher expression. Required if the type is `contains`, `exactly` or `regex`.
-          enum:
-          - body
-          - subject
-          - from_addresses
-        children:
-          type: array
-          description: Additional matchers to be run. Must be not empty if the type is `all`, `any`, or `not`.
-          items:
-            $ref: '#/components/schemas/MatchPredicate'
-      required:
-      - type
-      - part
-      - children
-    AuditMetadata:
-      type: object
-      properties:
-        messages:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            example: Message about the result
-    ScheduledAction:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of schedule action. Must be set to urgency_change.
-          enum:
-          - urgency_change
-        at:
-          type: object
-          description: Represents when scheduled action will occur.
-          properties:
-            type:
-              type: string
-              description: Must be set to named_time.
-              enum:
-              - named_time
-            name:
-              type: string
-              description: Designates either the start or the end of support hours.
-              enum:
-              - support_hours_start
-              - support_hours_end
-          required:
-          - type
-          - name
-        to_urgency:
-          type: string
-          description: Urgency level. Must be set to high.
-          enum:
-          - high
-      required:
-      - type
-      - at
-      - to_urgency
-    IntegrationReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - aws_cloudwatch_inbound_integration_reference
-            - cloudkick_inbound_integration_reference
-            - event_transformer_api_inbound_integration_reference
-            - generic_email_inbound_integration_reference
-            - generic_events_api_inbound_integration_reference
-            - keynote_inbound_integration_reference
-            - nagios_inbound_integration_reference
-            - pingdom_inbound_integration_reference
-            - sql_monitor_inbound_integration_reference
-            - events_api_v2_inbound_integration_reference
-            - inbound_integration_reference
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    IncidentUrgencyType:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
-          default: constant
-          enum:
-          - constant
-          - use_support_hours
-        urgency:
-          type: string
-          description: The incidents' urgency, if type is constant.
-          default: high
-          enum:
-          - low
-          - high
-          - severity_based
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    TeamReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - team_reference
-    EventRule:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-            description: ID of the Event Rule.
-          self:
-            type: string
-            format: url
-            description: the API show URL at which the object is accessible.
-            readOnly: true
-          disabled:
-            type: boolean
-            description: Indicates whether the Event Rule is disabled and would therefore not be evaluated.
-          conditions:
-            type: object
-            description: Conditions evaluated to check if an event matches this Event Rule. Is always empty for the catch_all rule, though.
-            properties:
-              operator:
-                type: string
-                description: Operator to combine sub-conditions.
-                enum:
-                - and
-                - or
-              subconditions:
-                type: array
-                description: Array of sub-conditions.
-                items:
-                  type: object
-                  properties:
-                    operator:
-                      type: string
-                      description: The type of operator to apply.
-                      enum:
-                      - exists
-                      - nexists
-                      - equals
-                      - nequals
-                      - contains
-                      - ncontains
-                      - matches
-                      - nmatches
-                    parameters:
-                      type: object
-                      properties:
-                        path:
-                          type: string
-                          description: Path to a field in an event, in dot-notation.  For Event Rules on a serivce, this will have to be a PD-CEF field.
-                        value:
-                          type: string
-                          description: Value to apply to the operator.
-                        options:
-                          type: object
-                          description: Options to configure the operator.
-                      required:
-                      - value
-                      - path
-                  required:
-                  - operator
-                  - parameters
-            required:
-            - operator
-            - subconditions
-          time_frame:
-            description: Time-based conditions for limiting when the rule is active.
-            type: object
-            properties:
-              active_between:
-                type: object
-                required:
-                - start_time
-                - end_time
-                description: A fixed window of time during which the rule is active.
-                properties:
-                  start_time:
-                    type: integer
-                    description: The start time in milliseconds.
-                  end_time:
-                    type: integer
-                    description: End time in milliseconds.
-              scheduled_weekly:
-                type: object
-                required:
-                - start_time
-                - duration
-                - timezone
-                - weekdays
-                description: A reccuring window of time based on the day of the week, during which the rule is active.
-                properties:
-                  start_time:
-                    type: integer
-                    description: The amount of milliseconds into the day at which the window starts.
-                  duration:
-                    type: integer
-                    description: The duration of the window in milliseconds.
-                  timezone:
-                    type: string
-                    description: The timezone.
-                  weekdays:
-                    type: array
-                    description: An array of day values. Ex [1, 3, 5] is Monday, Wednesday, Friday.
-                    items:
-                      type: integer
-          variables:
-            type: array
-            description: '[Early Access] Populate variables from event payloads and use those variables in other event actions.'
-            items:
-              type: object
-              properties:
-                type:
-                  type: string
-                  description: The type of operation to populate the variable.
-                  enum:
-                  - regex
-                name:
-                  type: string
-                  description: The name of the variable.
-                parameters:
-                  type: object
-                  description: The parameters for performing the operation to populate the
-                  properties:
-                    value:
-                      type: string
-                      description: The value for the operation. For example, an RE2 regular expression for regex-type variables.
-                    path:
-                      type: string
-                      description: Path to a field in an event, in dot-notation. For Event Rules on a Service, this will have to be a PD-CEF field.
-                  required:
-                  - value
-                  - path
-              required:
-              - type
-              - name
-              - parameters
-      - type: object
-        properties:
-          position:
-            type: integer
-            description: Position/index of the Event Rule in the Ruleset.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching rule is found.
-          catch_all:
-            type: boolean
-            readOnly: true
-            description: Indicates whether the Event Rule is the last Event Rule of the Ruleset that serves as a catch-all. It has limited functionality compared to other rules and always matches.
-          actions:
-            description: When an event matches this rule, the actions that will be taken to change the resulting alert and incident.
-            allOf:
-            - $ref: '#/components/schemas/EventRuleActionsCommon'
-            - type: object
-              properties:
-                route:
-                  description: Set the service ID of the target service for the resulting alert. You can find the service you want to route to by calling the services endpoint.
-                  type:
-                  - object
-                  - 'null'
-                  required:
-                  - value
-                  properties:
-                    value:
-                      type: string
-                      description: The target service's ID.
     Integration:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -2265,6 +1847,55 @@ components:
             required:
             - type
             - name
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    SupportHours:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of support hours
+          default: fixed_time_per_day
+          enum:
+          - fixed_time_per_day
+        time_zone:
+          type: string
+          format: activesupport-time-zone
+          description: The time zone for the support hours
+        days_of_week:
+          type: array
+          readOnly: true
+          items:
+            type: integer
+            readOnly: true
+            description: The days of the week (1 through 7, for Monday through Sunday)
+        start_time:
+          type: string
+          format: time
+          description: The support hours' starting time of day (date portion is ignored)
+        end_time:
+          type: string
+          format: time
+          description: The support hours' ending time of day (date portion is ignored)
     Service:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -2458,78 +2089,15 @@ components:
           auto_pause_notifications_parameters:
             enabled: true
             timeout: 300
-    TimeBasedAlertGroupingConfiguration:
-      type: object
-      title: Time Grouping
-      description: The configuration for Time Based Alert Grouping
-      properties:
-        timeout:
-          type: integer
-          description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
-    FlexibleTimeWindowIntelligentAlertGroupingConfig:
-      type: object
-      title: Intelligent Alert Grouping
-      description: The configuration for Intelligent Alert Grouping. Note that this configuration is only available for certain plans.
-      properties:
-        time_window:
-          type: integer
-          minimum: 300
-          maximum: 3600
-          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours. To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 and 3600.
-        recommended_time_window:
-          readOnly: true
-          type: integer
-          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
-    ContentBasedAlertGroupingConfiguration:
-      type: object
-      title: Content Only Grouping
-      description: The configuration for Content Based Alert Grouping
-      properties:
-        aggregate:
-          type: string
-          description: Whether Alerts should be grouped if `all` or `any` specified fields match. If `all` is selected, an exact match on every specified field name must occur for Alerts to be grouped. If `any` is selected, Alerts will be grouped when there is an exact match on at least one of the specified fields.
-          enum:
-          - all, any
-        fields:
-          type: array
-          description: An array of strings which represent the fields with which to group against. Depending on the aggregate, Alerts will group if some or all the fields match.
-        time_window:
-          type: integer
-          minimum: 300
-          maximum: 86400
-          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window up to 24 hours and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours (24 hours only applies to single-service settings). To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 <= time_window <= 3600 or 86400(i.e. 24 hours).
-        recommended_time_window:
-          readOnly: true
-          type: integer
-          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
-    AutoPauseNotificationsParameters:
-      title: AutoPauseNotificationsParameters
-      type: object
-      description: Defines how alerts on this service are automatically suspended for a period of time before triggering, when identified as likely being transient. Note that automatically pausing notifications is only available on certain plans.
-      properties:
-        enabled:
-          type: boolean
-          default: false
-          description: Indicates whether alerts should be automatically suspended when identified as transient
-        timeout:
-          type: integer
-          enum:
-          - 120
-          - 180
-          - 300
-          - 600
-          - 900
-          description: Indicates in seconds how long alerts should be suspended before triggering
-      example:
-        enabled: true
-        timeout: 300
-    Reference:
+    TeamReference:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/Reference'
       - type: object
-        required:
-        - type
-        - id
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
     EventRuleActionsCommon:
       type: object
       description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
@@ -2668,6 +2236,381 @@ components:
           - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
           - $ref: '#/components/schemas/TimeBasedAlertGroupingConfiguration'
           - $ref: '#/components/schemas/ContentBasedAlertGroupingConfiguration'
+    MatchPredicate:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - all
+          - any
+          - not
+          - contains
+          - exactly
+          - regex
+        matcher:
+          type: string
+          description: Required if the type is `contains`, `exactly` or `regex`.
+          minLength: 1
+        part:
+          type: string
+          description: The email field that will attempt to use the matcher expression. Required if the type is `contains`, `exactly` or `regex`.
+          enum:
+          - body
+          - subject
+          - from_addresses
+        children:
+          type: array
+          description: Additional matchers to be run. Must be not empty if the type is `all`, `any`, or `not`.
+          items:
+            $ref: '#/components/schemas/MatchPredicate'
+      required:
+      - type
+      - part
+      - children
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
+    EmailParser:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - trigger
+          - resolve
+        match_predicate:
+          $ref: '#/components/schemas/MatchPredicate'
+        value_extractors:
+          type: array
+          description: Additional values that will be pulled in to the Incident object. Exactly one value extractor must have a `value_name` of `incident_key`.
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - entire
+                - regex
+                - between
+              part:
+                type: string
+                enum:
+                - body
+                - subject
+                - from_addresses
+              value_name:
+                type: string
+                minLength: 1
+                description: The field name to set in the Incident object. Exactly one must use the `value_name` of `incident_key`
+              regex:
+                type: string
+              starts_after:
+                type: string
+              ends_with:
+                type: string
+            required:
+            - type
+            - part
+            - value_name
+      required:
+      - action
+      - match_predicate
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    ServiceEventRule:
+      allOf:
+      - $ref: '#/components/schemas/EventRule/allOf/0'
+      - type: object
+        properties:
+          position:
+            type: integer
+            description: Position/index of the Event Rule on the Service.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching Event Rule is found or the end of the list is reached.
+          actions:
+            $ref: '#/components/schemas/EventRuleActionsCommon'
+    AutoPauseNotificationsParameters:
+      title: AutoPauseNotificationsParameters
+      type: object
+      description: Defines how alerts on this service are automatically suspended for a period of time before triggering, when identified as likely being transient. Note that automatically pausing notifications is only available on certain plans.
+      properties:
+        enabled:
+          type: boolean
+          default: false
+          description: Indicates whether alerts should be automatically suspended when identified as transient
+        timeout:
+          type: integer
+          enum:
+          - 120
+          - 180
+          - 300
+          - 600
+          - 900
+          description: Indicates in seconds how long alerts should be suspended before triggering
+      example:
+        enabled: true
+        timeout: 300
+    EventRule:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+            description: ID of the Event Rule.
+          self:
+            type: string
+            format: url
+            description: the API show URL at which the object is accessible.
+            readOnly: true
+          disabled:
+            type: boolean
+            description: Indicates whether the Event Rule is disabled and would therefore not be evaluated.
+          conditions:
+            type: object
+            description: Conditions evaluated to check if an event matches this Event Rule. Is always empty for the catch_all rule, though.
+            properties:
+              operator:
+                type: string
+                description: Operator to combine sub-conditions.
+                enum:
+                - and
+                - or
+              subconditions:
+                type: array
+                description: Array of sub-conditions.
+                items:
+                  type: object
+                  properties:
+                    operator:
+                      type: string
+                      description: The type of operator to apply.
+                      enum:
+                      - exists
+                      - nexists
+                      - equals
+                      - nequals
+                      - contains
+                      - ncontains
+                      - matches
+                      - nmatches
+                    parameters:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                          description: Path to a field in an event, in dot-notation.  For Event Rules on a serivce, this will have to be a PD-CEF field.
+                        value:
+                          type: string
+                          description: Value to apply to the operator.
+                        options:
+                          type: object
+                          description: Options to configure the operator.
+                      required:
+                      - value
+                      - path
+                  required:
+                  - operator
+                  - parameters
+            required:
+            - operator
+            - subconditions
+          time_frame:
+            description: Time-based conditions for limiting when the rule is active.
+            type: object
+            properties:
+              active_between:
+                type: object
+                required:
+                - start_time
+                - end_time
+                description: A fixed window of time during which the rule is active.
+                properties:
+                  start_time:
+                    type: integer
+                    description: The start time in milliseconds.
+                  end_time:
+                    type: integer
+                    description: End time in milliseconds.
+              scheduled_weekly:
+                type: object
+                required:
+                - start_time
+                - duration
+                - timezone
+                - weekdays
+                description: A reccuring window of time based on the day of the week, during which the rule is active.
+                properties:
+                  start_time:
+                    type: integer
+                    description: The amount of milliseconds into the day at which the window starts.
+                  duration:
+                    type: integer
+                    description: The duration of the window in milliseconds.
+                  timezone:
+                    type: string
+                    description: The timezone.
+                  weekdays:
+                    type: array
+                    description: An array of day values. Ex [1, 3, 5] is Monday, Wednesday, Friday.
+                    items:
+                      type: integer
+          variables:
+            type: array
+            description: '[Early Access] Populate variables from event payloads and use those variables in other event actions.'
+            items:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of operation to populate the variable.
+                  enum:
+                  - regex
+                name:
+                  type: string
+                  description: The name of the variable.
+                parameters:
+                  type: object
+                  description: The parameters for performing the operation to populate the
+                  properties:
+                    value:
+                      type: string
+                      description: The value for the operation. For example, an RE2 regular expression for regex-type variables.
+                    path:
+                      type: string
+                      description: Path to a field in an event, in dot-notation. For Event Rules on a Service, this will have to be a PD-CEF field.
+                  required:
+                  - value
+                  - path
+              required:
+              - type
+              - name
+              - parameters
+      - type: object
+        properties:
+          position:
+            type: integer
+            description: Position/index of the Event Rule in the Ruleset.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching rule is found.
+          catch_all:
+            type: boolean
+            readOnly: true
+            description: Indicates whether the Event Rule is the last Event Rule of the Ruleset that serves as a catch-all. It has limited functionality compared to other rules and always matches.
+          actions:
+            description: When an event matches this rule, the actions that will be taken to change the resulting alert and incident.
+            allOf:
+            - $ref: '#/components/schemas/EventRuleActionsCommon'
+            - type: object
+              properties:
+                route:
+                  description: Set the service ID of the target service for the resulting alert. You can find the service you want to route to by calling the services endpoint.
+                  type:
+                  - object
+                  - 'null'
+                  required:
+                  - value
+                  properties:
+                    value:
+                      type: string
+                      description: The target service's ID.
+    IncidentUrgencyType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
+          default: constant
+          enum:
+          - constant
+          - use_support_hours
+        urgency:
+          type: string
+          description: The incidents' urgency, if type is constant.
+          default: high
+          enum:
+          - low
+          - high
+          - severity_based
+    IntegrationReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - aws_cloudwatch_inbound_integration_reference
+            - cloudkick_inbound_integration_reference
+            - event_transformer_api_inbound_integration_reference
+            - generic_email_inbound_integration_reference
+            - generic_events_api_inbound_integration_reference
+            - keynote_inbound_integration_reference
+            - nagios_inbound_integration_reference
+            - pingdom_inbound_integration_reference
+            - sql_monitor_inbound_integration_reference
+            - events_api_v2_inbound_integration_reference
+            - inbound_integration_reference
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
+    VendorReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - vendor_reference
+    ContentBasedAlertGroupingConfiguration:
+      type: object
+      title: Content Only Grouping
+      description: The configuration for Content Based Alert Grouping
+      properties:
+        aggregate:
+          type: string
+          description: Whether Alerts should be grouped if `all` or `any` specified fields match. If `all` is selected, an exact match on every specified field name must occur for Alerts to be grouped. If `any` is selected, Alerts will be grouped when there is an exact match on at least one of the specified fields.
+          enum:
+          - all, any
+        fields:
+          type: array
+          description: An array of strings which represent the fields with which to group against. Depending on the aggregate, Alerts will group if some or all the fields match.
+        time_window:
+          type: integer
+          minimum: 300
+          maximum: 86400
+          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window up to 24 hours and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours (24 hours only applies to single-service settings). To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 <= time_window <= 3600 or 86400(i.e. 24 hours).
+        recommended_time_window:
+          readOnly: true
+          type: integer
+          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
     AuditRecord:
       type: object
       readOnly: true
@@ -2818,65 +2761,59 @@ components:
       - method
       - root_resource
       - action
-    SupportHours:
+    AuditMetadata:
+      type: object
+      properties:
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
+    TimeBasedAlertGroupingConfiguration:
+      type: object
+      title: Time Grouping
+      description: The configuration for Time Based Alert Grouping
+      properties:
+        timeout:
+          type: integer
+          description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
+    ScheduledAction:
       type: object
       properties:
         type:
           type: string
-          description: The type of support hours
-          default: fixed_time_per_day
+          description: The type of schedule action. Must be set to urgency_change.
           enum:
-          - fixed_time_per_day
-        time_zone:
+          - urgency_change
+        at:
+          type: object
+          description: Represents when scheduled action will occur.
+          properties:
+            type:
+              type: string
+              description: Must be set to named_time.
+              enum:
+              - named_time
+            name:
+              type: string
+              description: Designates either the start or the end of support hours.
+              enum:
+              - support_hours_start
+              - support_hours_end
+          required:
+          - type
+          - name
+        to_urgency:
           type: string
-          format: activesupport-time-zone
-          description: The time zone for the support hours
-        days_of_week:
-          type: array
-          readOnly: true
-          items:
-            type: integer
-            readOnly: true
-            description: The days of the week (1 through 7, for Monday through Sunday)
-        start_time:
-          type: string
-          format: time
-          description: The support hours' starting time of day (date portion is ignored)
-        end_time:
-          type: string
-          format: time
-          description: The support hours' ending time of day (date portion is ignored)
-    AddonReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          src:
-            type: string
-            format: url
-            description: The URL source of the Addon
-          name:
-            type: string
-            description: The user entered name of the Addon.
-          type:
-            type: string
-            enum:
-            - full_page_addon_reference
-            - incident_show_addon_reference
-    AuditRecordResponseSchema:
-      allOf:
-      - type: object
-        properties:
-          records:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
-        required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
+          description: Urgency level. Must be set to high.
+          enum:
+          - high
+      required:
+      - type
+      - at
+      - to_urgency
     Tag:
       allOf:
       - type: object
@@ -2926,9 +2863,88 @@ components:
         example:
           type: tag
           label: Batman
+    AddonReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          src:
+            type: string
+            format: url
+            description: The URL source of the Addon
+          name:
+            type: string
+            description: The user entered name of the Addon.
+          type:
+            type: string
+            enum:
+            - full_page_addon_reference
+            - incident_show_addon_reference
+    EscalationPolicyReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - escalation_policy_reference
+    AuditRecordResponseSchema:
+      allOf:
+      - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
+        required:
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
+    IncidentUrgencyRule:
+      allOf:
+      - $ref: '#/components/schemas/IncidentUrgencyType'
+      - type: object
+        properties:
+          during_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+          outside_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+    FlexibleTimeWindowIntelligentAlertGroupingConfig:
+      type: object
+      title: Intelligent Alert Grouping
+      description: The configuration for Intelligent Alert Grouping. Note that this configuration is only available for certain plans.
+      properties:
+        time_window:
+          type: integer
+          minimum: 300
+          maximum: 3600
+          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours. To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 and 3600.
+        recommended_time_window:
+          readOnly: true
+          type: integer
+          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
   responses:
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -2939,18 +2955,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
+    NotAllowed:
+      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
       content:
         application/json:
           schema:
@@ -2992,24 +2998,18 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
 
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotAllowed:
-      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:

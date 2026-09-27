@@ -155,6 +155,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Unauthorized:
       description: 'Caller did not supply credentials or did not provide the correct credentials.
 
@@ -165,12 +171,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -208,28 +210,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
       schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
+        type: integer
     header_Accept:
       name: Accept
       description: The `Accept` header is used as a versioning header.
@@ -238,20 +236,6 @@ components:
       schema:
         type: string
         default: application/vnd.pagerduty+json;version=2
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
     offset_total:
       name: total
       in: query
@@ -265,6 +249,22 @@ components:
       schema:
         default: false
         type: boolean
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
     offset_offset:
       name: offset
       in: query
@@ -273,68 +273,6 @@ components:
       schema:
         type: integer
   schemas:
-    Vendor:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            readOnly: true
-            description: The short name of the vendor
-          website_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of the vendor's main website
-          logo_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of a logo identifying the vendor
-          thumbnail_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of a small thumbnail image identifying the vendor
-          description:
-            type: string
-            readOnly: true
-            description: A short description of this vendor, and common use-cases of integrations for this vendor.
-          integration_guide_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of an integration guide for this vendor
-        example:
-          type: vendor
-          name: Amazon CloudWatch
-          website_url: https://aws.amazon.com/cloudwatch
-          logo_url: https://s3.amazonaws.com/pdpartner/cloudwatch_large.png
-          thumbnail_url: https://s3.amazonaws.com/pdpartner/cloudwatch_thumb.png
-          description: Amazon Web Services CloudWatch provides monitoring for AWS cloud resources and customer-run applications. AWS can collect data, gain insight, and alert users to fix problems within applications and organizations. AWS CloudWatch gives system-wide visibility into resource utilization and notifications can be set for when any metrics cross a specified threshold.
-          integration_guide_url: http://www.pagerduty.com/docs/guides/aws-cloudwatch-integration-guide/
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
     Tag:
       allOf:
       - type: object
@@ -384,6 +322,68 @@ components:
         example:
           type: tag
           label: Batman
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    Vendor:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            readOnly: true
+            description: The short name of the vendor
+          website_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of the vendor's main website
+          logo_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of a logo identifying the vendor
+          thumbnail_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of a small thumbnail image identifying the vendor
+          description:
+            type: string
+            readOnly: true
+            description: A short description of this vendor, and common use-cases of integrations for this vendor.
+          integration_guide_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of an integration guide for this vendor
+        example:
+          type: vendor
+          name: Amazon CloudWatch
+          website_url: https://aws.amazon.com/cloudwatch
+          logo_url: https://s3.amazonaws.com/pdpartner/cloudwatch_large.png
+          thumbnail_url: https://s3.amazonaws.com/pdpartner/cloudwatch_thumb.png
+          description: Amazon Web Services CloudWatch provides monitoring for AWS cloud resources and customer-run applications. AWS can collect data, gain insight, and alert users to fix problems within applications and organizations. AWS CloudWatch gives system-wide visibility into resource utilization and notifications can be set for when any metrics cross a specified threshold.
+          integration_guide_url: http://www.pagerduty.com/docs/guides/aws-cloudwatch-integration-guide/
   securitySchemes:
     api_key:
       type: apiKey

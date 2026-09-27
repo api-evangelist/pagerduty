@@ -1016,165 +1016,79 @@ paths:
 
           Once set, Incidents must be at or above the specified level in order to impact Business Services.  An exception to this rule is if the Incident has been added to the incident directly using the `PUT /incidents/{id}/business_services/{business_service_id}/impacts` endpoint.'
 components:
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    UnprocessableEntity:
+      description: Unprocessable Entity. Some arguments failed validation checks.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
 
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
-      schema:
-        default: false
-        type: boolean
-    ids:
-      name: ids[]
-      description: The IDs of the resources.
-      in: query
-      explode: true
-      schema:
-        type: string
-    impacts_additional_fields:
-      name: additional_fields[]
-      in: query
-      description: Provides access to additional fields such as highest priority per business service and total impacted count
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services.highest_impacting_priority
-        - total_impacted_count
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    NotificationSubscriptionWithContext:
-      title: NotificationSubscriptionWithContext
-      type: object
-      description: An object describing the relationship of a NotificationSubscriber and a NotificationSubscribable with additional context on status of subscription attempt.
-      x-examples:
-        example-1:
-          subscriber_id: string
-          subscriber_type: user
-          subscribable_id: string
-          subscribable_type: incident
-          account_id: string
-          result: success
-      properties:
-        subscriber_id:
-          type: string
-          description: The ID of the entity being subscribed
-        subscriber_type:
-          type: string
-          enum:
-          - user
-          - team
-          description: The type of the entity being subscribed
-        subscribable_id:
-          type: string
-          description: The ID of the entity being subscribed to
-        subscribable_type:
-          type: string
-          enum:
-          - incident
-          - business_service
-          description: The type of the entity being subscribed to
-        account_id:
-          type: string
-          description: The type of the entity being subscribed to
-        result:
-          type: string
-          enum:
-          - success
-          - duplicate
-          - unauthorized
-          description: The resulting status of the subscription
-    Impact:
-      title: Impact
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-        type:
-          type: string
-          description: The kind of object that has been impacted
-          enum:
-          - business_service
-        status:
-          type: string
-          description: The current impact status of the object
-          enum:
-          - impacted
-          - not_impacted
-        additional_fields:
-          type: object
-          properties:
-            highest_impacting_priority:
-              type:
-              - object
-              - 'null'
-              description: Priority information for the highest priority level that is affecting the impacted object.
-              properties:
-                id:
-                  type: string
-                  readOnly: true
-                order:
-                  type: integer
-                  readOnly: true
-    Impactor:
-      title: Impactor
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        type:
-          type: string
-          description: The kind of object that is impacting
-          enum:
-          - incident
     Pagination:
       type: object
       properties:
@@ -1195,34 +1109,6 @@ components:
           - integer
           - 'null'
           description: The total number of records matching the given query.
-          readOnly: true
-    NotificationSubscriber:
-      title: NotificationSubscriber
-      description: A reference of a subscriber entity.
-      type: object
-      properties:
-        subscriber_id:
-          type: string
-          description: The ID of the entity being subscribed
-        subscriber_type:
-          type: string
-          description: The type of the entity being subscribed
-          enum:
-          - user
-          - team
-      example:
-        subscriber_id: PD1234
-        subscriber_type: user
-    LiveListResponse:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
           readOnly: true
     BusinessService:
       allOf:
@@ -1268,6 +1154,94 @@ components:
             type: team_reference
             self: https://api.pagerduty.com/teams/P3ZQXDF
             id: P3ZQXDF
+    NotificationSubscriptionWithContext:
+      title: NotificationSubscriptionWithContext
+      type: object
+      description: An object describing the relationship of a NotificationSubscriber and a NotificationSubscribable with additional context on status of subscription attempt.
+      x-examples:
+        example-1:
+          subscriber_id: string
+          subscriber_type: user
+          subscribable_id: string
+          subscribable_type: incident
+          account_id: string
+          result: success
+      properties:
+        subscriber_id:
+          type: string
+          description: The ID of the entity being subscribed
+        subscriber_type:
+          type: string
+          enum:
+          - user
+          - team
+          description: The type of the entity being subscribed
+        subscribable_id:
+          type: string
+          description: The ID of the entity being subscribed to
+        subscribable_type:
+          type: string
+          enum:
+          - incident
+          - business_service
+          description: The type of the entity being subscribed to
+        account_id:
+          type: string
+          description: The type of the entity being subscribed to
+        result:
+          type: string
+          enum:
+          - success
+          - duplicate
+          - unauthorized
+          description: The resulting status of the subscription
+    LiveListResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+    Impact:
+      title: Impact
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          description: The kind of object that has been impacted
+          enum:
+          - business_service
+        status:
+          type: string
+          description: The current impact status of the object
+          enum:
+          - impacted
+          - not_impacted
+        additional_fields:
+          type: object
+          properties:
+            highest_impacting_priority:
+              type:
+              - object
+              - 'null'
+              description: Priority information for the highest priority level that is affecting the impacted object.
+              properties:
+                id:
+                  type: string
+                  readOnly: true
+                order:
+                  type: integer
+                  readOnly: true
     Tag:
       allOf:
       - type: object
@@ -1317,78 +1291,104 @@ components:
         example:
           type: tag
           label: Batman
-  responses:
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    UnprocessableEntity:
-      description: Unprocessable Entity. Some arguments failed validation checks.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
+    Impactor:
+      title: Impactor
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          description: The kind of object that is impacting
+          enum:
+          - incident
+    NotificationSubscriber:
+      title: NotificationSubscriber
+      description: A reference of a subscriber entity.
+      type: object
+      properties:
+        subscriber_id:
+          type: string
+          description: The ID of the entity being subscribed
+        subscriber_type:
+          type: string
+          description: The type of the entity being subscribed
+          enum:
+          - user
+          - team
+      example:
+        subscriber_id: PD1234
+        subscriber_type: user
+  parameters:
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
 
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+      schema:
+        default: false
+        type: boolean
+    impacts_additional_fields:
+      name: additional_fields[]
+      in: query
+      description: Provides access to additional fields such as highest priority per business service and total impacted count
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services.highest_impacting_priority
+        - total_impacted_count
+    ids:
+      name: ids[]
+      description: The IDs of the resources.
+      in: query
+      explode: true
+      schema:
+        type: string
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
   securitySchemes:
     api_key:
       type: apiKey
