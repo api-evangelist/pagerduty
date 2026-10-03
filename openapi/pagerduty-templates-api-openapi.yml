@@ -514,101 +514,65 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    Pagination:
+    RenderedTemplate:
       type: object
       properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    Reference:
+        templated_fields:
+          type: object
+          properties:
+            email_subject:
+              type: string
+              description: The rendered e-mail subject
+            email_body:
+              type: string
+              description: The rendered e-mail body
+            message:
+              type: string
+              description: The rendered short message (SMS, Push, Slack, etc)
+        warnings:
+          description: 'List of render warnings messages for each rendered field.
+
+            (Ex:  ["{{incident.invalid_field}} does not exist."])'
+          type: object
+          properties:
+            email_subject:
+              type: array
+              description: List of warnings for email_subject
+            email_body:
+              type: array
+              description: List of warnings for email_body
+            message:
+              type: array
+              description: List of warnings for message field
+        errors:
+          description: List of errors
+          type: array
+          items:
+            type: string
+    StatusUpdateTemplateInput:
+      type: object
+      properties:
+        incident_id:
+          type: string
+          description: The incident id to render the template for
+        status_update:
+          type: object
+          properties:
+            message:
+              type: string
+              description: An optional status update message that will be sent to the template
+        external:
+          description: An optional object collection that can be referenced in the template.
+    UserReference:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/Reference'
       - type: object
-        required:
-        - type
-        - id
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
     EditableTemplate:
       type: object
       properties:
@@ -645,90 +609,6 @@ components:
               description: 'The short-message of the template (SMS, Push notification, Slack,
 
                 etc)'
-    Template:
-      allOf:
-      - $ref: '#/components/schemas/EditableTemplate'
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: the API show URL at which the object is accessible
-          html_url:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: a URL at which the entity is uniquely displayed in the Web app
-          type:
-            type: string
-            enum:
-            - template
-          created_by:
-            description: User/Account object reference of the creator
-            oneOf:
-            - $ref: '#/components/schemas/UserReference'
-            - allOf:
-              - $ref: '#/components/schemas/Reference'
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - account_reference
-          updated_by:
-            description: User/Account object reference of the updator
-            oneOf:
-            - $ref: '#/components/schemas/UserReference'
-            - $ref: '#/components/schemas/Template/allOf/1/properties/created_by/oneOf/1'
-    RenderedTemplate:
-      type: object
-      properties:
-        templated_fields:
-          type: object
-          properties:
-            email_subject:
-              type: string
-              description: The rendered e-mail subject
-            email_body:
-              type: string
-              description: The rendered e-mail body
-            message:
-              type: string
-              description: The rendered short message (SMS, Push, Slack, etc)
-        warnings:
-          description: 'List of render warnings messages for each rendered field.
-
-            (Ex:  ["{{incident.invalid_field}} does not exist."])'
-          type: object
-          properties:
-            email_subject:
-              type: array
-              description: List of warnings for email_subject
-            email_body:
-              type: array
-              description: List of warnings for email_body
-            message:
-              type: array
-              description: List of warnings for message field
-        errors:
-          description: List of errors
-          type: array
-          items:
-            type: string
     Tag:
       allOf:
       - type: object
@@ -778,48 +658,168 @@ components:
         example:
           type: tag
           label: Batman
-    UserReference:
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    Reference:
       allOf:
-      - $ref: '#/components/schemas/Reference'
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    Template:
+      allOf:
+      - $ref: '#/components/schemas/EditableTemplate'
       - type: object
         properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
           type:
             type: string
             enum:
-            - user_reference
-    StatusUpdateTemplateInput:
-      type: object
-      properties:
-        incident_id:
-          type: string
-          description: The incident id to render the template for
-        status_update:
-          type: object
-          properties:
-            message:
-              type: string
-              description: An optional status update message that will be sent to the template
-        external:
-          description: An optional object collection that can be referenced in the template.
-  parameters:
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+            - template
+          created_by:
+            description: User/Account object reference of the creator
+            oneOf:
+            - $ref: '#/components/schemas/UserReference'
+            - allOf:
+              - $ref: '#/components/schemas/Reference'
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - account_reference
+          updated_by:
+            description: User/Account object reference of the updator
+            oneOf:
+            - $ref: '#/components/schemas/UserReference'
+            - $ref: '#/components/schemas/Template/allOf/1/properties/created_by/oneOf/1'
+  responses:
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
 
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  parameters:
+    template_type:
+      name: template_type
+      description: Filters templates by type.
+      in: query
       schema:
-        default: false
-        type: boolean
+        type: string
+        default: status_update
     id:
       name: id
       description: The ID of the resource.
       in: path
       required: true
+      schema:
+        type: string
+    template_query:
+      name: query
+      description: Template name or description to search
+      in: query
       schema:
         type: string
     sort_by_template:
@@ -855,31 +855,31 @@ components:
         default: application/json
         enum:
         - application/json
-    offset_limit:
-      name: limit
+    offset_total:
+      name: total
       in: query
       required: false
-      description: The number of results per page.
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
       schema:
-        type: integer
-    template_query:
-      name: query
-      description: Template name or description to search
-      in: query
-      schema:
-        type: string
-    template_type:
-      name: template_type
-      description: Filters templates by type.
-      in: query
-      schema:
-        type: string
-        default: status_update
+        default: false
+        type: boolean
     offset_offset:
       name: offset
       in: query
       required: false
       description: Offset to start pagination search results.
+      schema:
+        type: integer
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
       schema:
         type: integer
   securitySchemes:

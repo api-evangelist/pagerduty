@@ -155,28 +155,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -204,8 +182,12 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
       content:
         application/json:
           schema:
@@ -220,14 +202,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
     header_Accept:
       name: Accept
       description: The `Accept` header is used as a versioning header.
@@ -236,6 +229,29 @@ components:
       schema:
         type: string
         default: application/vnd.pagerduty+json;version=2
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
     offset_total:
       name: total
       in: query
@@ -249,30 +265,55 @@ components:
       schema:
         default: false
         type: boolean
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
+    offset_limit:
+      name: limit
       in: query
       required: false
-      description: Offset to start pagination search results.
+      description: The number of results per page.
       schema:
         type: integer
   schemas:
+    Vendor:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            readOnly: true
+            description: The short name of the vendor
+          website_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of the vendor's main website
+          logo_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of a logo identifying the vendor
+          thumbnail_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of a small thumbnail image identifying the vendor
+          description:
+            type: string
+            readOnly: true
+            description: A short description of this vendor, and common use-cases of integrations for this vendor.
+          integration_guide_url:
+            type: string
+            format: url
+            readOnly: true
+            description: URL of an integration guide for this vendor
+        example:
+          type: vendor
+          name: Amazon CloudWatch
+          website_url: https://aws.amazon.com/cloudwatch
+          logo_url: https://s3.amazonaws.com/pdpartner/cloudwatch_large.png
+          thumbnail_url: https://s3.amazonaws.com/pdpartner/cloudwatch_thumb.png
+          description: Amazon Web Services CloudWatch provides monitoring for AWS cloud resources and customer-run applications. AWS can collect data, gain insight, and alert users to fix problems within applications and organizations. AWS CloudWatch gives system-wide visibility into resource utilization and notifications can be set for when any metrics cross a specified threshold.
+          integration_guide_url: http://www.pagerduty.com/docs/guides/aws-cloudwatch-integration-guide/
     Tag:
       allOf:
       - type: object
@@ -343,47 +384,6 @@ components:
           - 'null'
           description: The total number of records matching the given query.
           readOnly: true
-    Vendor:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            readOnly: true
-            description: The short name of the vendor
-          website_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of the vendor's main website
-          logo_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of a logo identifying the vendor
-          thumbnail_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of a small thumbnail image identifying the vendor
-          description:
-            type: string
-            readOnly: true
-            description: A short description of this vendor, and common use-cases of integrations for this vendor.
-          integration_guide_url:
-            type: string
-            format: url
-            readOnly: true
-            description: URL of an integration guide for this vendor
-        example:
-          type: vendor
-          name: Amazon CloudWatch
-          website_url: https://aws.amazon.com/cloudwatch
-          logo_url: https://s3.amazonaws.com/pdpartner/cloudwatch_large.png
-          thumbnail_url: https://s3.amazonaws.com/pdpartner/cloudwatch_thumb.png
-          description: Amazon Web Services CloudWatch provides monitoring for AWS cloud resources and customer-run applications. AWS can collect data, gain insight, and alert users to fix problems within applications and organizations. AWS CloudWatch gives system-wide visibility into resource utilization and notifications can be set for when any metrics cross a specified threshold.
-          integration_guide_url: http://www.pagerduty.com/docs/guides/aws-cloudwatch-integration-guide/
   securitySchemes:
     api_key:
       type: apiKey

@@ -107,35 +107,76 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    Reference:
+    UserReference:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/Reference'
       - type: object
-        required:
-        - type
-        - id
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
     Notification:
       type: object
       properties:
@@ -218,15 +259,34 @@ components:
         example:
           type: tag
           label: Batman
-    UserReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
           type:
-            type: string
-            enum:
-            - user_reference
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
   parameters:
     until_notifications:
       name: until
@@ -236,6 +296,59 @@ components:
       schema:
         type: string
         format: date-time
+    since_notifications:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. The time element is optional.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    include_notifications:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - users
+        uniqueItems: true
+    time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the account time zone.
+      schema:
+        type: string
+        format: tzinfo
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    filter_notifications:
+      name: filter
+      in: query
+      description: Return notification of this type only.
+      schema:
+        type: string
+        enum:
+        - sms_notification
+        - email_notification
+        - phone_notification
+        - push_notification
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
     offset_total:
       name: total
       in: query
@@ -249,55 +362,6 @@ components:
       schema:
         default: false
         type: boolean
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the account time zone.
-      schema:
-        type: string
-        format: tzinfo
-    since_notifications:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. The time element is optional.
-      required: true
-      schema:
-        type: string
-        format: date-time
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    include_notifications:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - users
-        uniqueItems: true
     offset_offset:
       name: offset
       in: query
@@ -305,77 +369,13 @@ components:
       description: Offset to start pagination search results.
       schema:
         type: integer
-    filter_notifications:
-      name: filter
+    offset_limit:
+      name: limit
       in: query
-      description: Return notification of this type only.
+      required: false
+      description: The number of results per page.
       schema:
-        type: string
-        enum:
-        - sms_notification
-        - email_notification
-        - phone_notification
-        - push_notification
-  responses:
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+        type: integer
   securitySchemes:
     api_key:
       type: apiKey

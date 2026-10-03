@@ -193,25 +193,54 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  parameters:
+    paused_incident_reports_service_id:
+      name: service_id
+      in: query
+      description: Specifies a filter to limit the scope of reporting to a particular service
+      schema:
+        type: string
+        example: P123456
+    since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    paused_incident_reports_suspended_by:
+      name: suspended_by
+      in: query
+      description: Specifies a filter to scope the response to either alerts suspended by Auto Pause or Event Rules.
+      schema:
+        enum:
+        - auto_pause
+        - rules
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -239,12 +268,6 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Forbidden:
       description: 'Caller is not authorized to view the requested resource.
 
@@ -255,53 +278,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    paused_incident_reports_service_id:
-      name: service_id
-      in: query
-      description: Specifies a filter to limit the scope of reporting to a particular service
-      schema:
-        type: string
-        example: P123456
-    until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search.
-      schema:
-        type: string
-        format: date-time
-    since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search.
-      schema:
-        type: string
-        format: date-time
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    paused_incident_reports_suspended_by:
-      name: suspended_by
-      in: query
-      description: Specifies a filter to scope the response to either alerts suspended by Auto Pause or Event Rules.
-      schema:
-        enum:
-        - auto_pause
-        - rules
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   securitySchemes:
     api_key:
       type: apiKey

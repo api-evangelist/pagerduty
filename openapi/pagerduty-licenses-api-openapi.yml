@@ -191,22 +191,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -234,6 +218,22 @@ components:
                 example:
                   message: Not Found
                   code: 2100
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Forbidden:
       description: 'Caller is not authorized to view the requested resource.
 
@@ -244,39 +244,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
   schemas:
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     Tag:
       allOf:
       - type: object
@@ -388,6 +363,15 @@ components:
               value is "null" then there is no limit on the number of allocations allowed.
 
               '
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
     Pagination:
       type: object
       properties:
@@ -409,22 +393,38 @@ components:
           - 'null'
           description: The total number of records matching the given query.
           readOnly: true
-    UserReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - user_reference
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
+  parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
   securitySchemes:
     api_key:
       type: apiKey

@@ -415,95 +415,8 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    TeamReference:
+    ServiceReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -511,7 +424,16 @@ components:
           type:
             type: string
             enum:
-            - team_reference
+            - service_reference
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
     MaintenanceWindow:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -563,22 +485,6 @@ components:
           services:
           - id: PIJ90N7
             type: service_reference
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
     Tag:
       allOf:
       - type: object
@@ -628,7 +534,28 @@ components:
         example:
           type: tag
           label: Batman
-    UserReference:
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    TeamReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -636,8 +563,123 @@ components:
           type:
             type: string
             enum:
-            - user_reference
+            - team_reference
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+  responses:
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
+    include_maintenance_window:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - teams
+        - services
+        - users
+        uniqueItems: true
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    from_header:
+      name: From
+      in: header
+      description: The email address of a valid user associated with the account making the request.
+      required: true
+      schema:
+        type: string
+        format: email
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
     offset_total:
       name: total
       in: query
@@ -651,31 +693,6 @@ components:
       schema:
         default: false
         type: boolean
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
     header_Content-Type:
       name: Content-Type
       in: header
@@ -685,49 +702,13 @@ components:
         default: application/json
         enum:
         - application/json
-    from_header:
-      name: From
-      in: header
-      description: The email address of a valid user associated with the account making the request.
-      required: true
-      schema:
-        type: string
-        format: email
-    offset_limit:
-      name: limit
+    offset_offset:
+      name: offset
       in: query
       required: false
-      description: The number of results per page.
+      description: Offset to start pagination search results.
       schema:
         type: integer
-    include_maintenance_window:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - teams
-        - services
-        - users
-        uniqueItems: true
-    services:
-      name: service_ids[]
-      in: query
-      description: An array of service IDs. Only results related to these services will be returned.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
     filter_maintenance_windows:
       name: filter
       in: query
@@ -740,11 +721,30 @@ components:
         - ongoing
         - open
         - all
-    offset_offset:
-      name: offset
+    services:
+      name: service_ids[]
+      in: query
+      description: An array of service IDs. Only results related to these services will be returned.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    offset_limit:
+      name: limit
       in: query
       required: false
-      description: Offset to start pagination search results.
+      description: The number of results per page.
       schema:
         type: integer
   securitySchemes:

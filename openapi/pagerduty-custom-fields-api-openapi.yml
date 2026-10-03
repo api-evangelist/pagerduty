@@ -736,6 +736,61 @@ components:
         - data
         - created_at
         - updated_at
+    CustomFieldsField:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableField'
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+            description: The ID of the resource.
+          name:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: The API show URL at which the object is accessible
+          type:
+            type: string
+            enum:
+            - field
+            readOnly: true
+          created_at:
+            type: string
+            format: date-time
+            description: The date/time the object was created at.
+            readOnly: true
+          updated_at:
+            type: string
+            format: date-time
+            description: The date/time the object was last updated.
+            readOnly: true
+          data_type:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/data_type'
+          field_type:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/field_type'
+      required:
+      - id
+      - summary
+      - self
+      - type
+      - created_at
+      - updated_at
+      - data_type
+      - namespace
+      - name
+      - display_name
+      - field_type
     CustomFieldsEditableField:
       type: object
       properties:
@@ -797,61 +852,6 @@ components:
       - created_at
       - updated_at
       description: ''
-    CustomFieldsField:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldsEditableField'
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-            description: The ID of the resource.
-          name:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: The API show URL at which the object is accessible
-          type:
-            type: string
-            enum:
-            - field
-            readOnly: true
-          created_at:
-            type: string
-            format: date-time
-            description: The date/time the object was created at.
-            readOnly: true
-          updated_at:
-            type: string
-            format: date-time
-            description: The date/time the object was last updated.
-            readOnly: true
-          data_type:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/data_type'
-          field_type:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/field_type'
-      required:
-      - id
-      - summary
-      - self
-      - type
-      - created_at
-      - updated_at
-      - data_type
-      - namespace
-      - name
-      - display_name
-      - field_type
     CustomFieldsFieldWithOptions:
       allOf:
       - $ref: '#/components/schemas/CustomFieldsField'
@@ -865,14 +865,12 @@ components:
             items:
               $ref: '#/components/schemas/CustomFieldsFieldOption'
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:
@@ -904,23 +902,32 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     InternalServerError:
       description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
+    field_id:
+      name: field_id
+      description: The ID of the field.
+      in: path
+      required: true
+      schema:
+        type: string
     include_customfields_field:
       name: include[]
       description: Array of additional details to include.
@@ -934,13 +941,6 @@ components:
     field_option_id:
       name: field_option_id
       description: The ID of the field option.
-      in: path
-      required: true
-      schema:
-        type: string
-    field_id:
-      name: field_id
-      description: The ID of the field.
       in: path
       required: true
       schema:

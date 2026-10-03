@@ -1149,9 +1149,180 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  parameters:
+    triggers_path_service_id:
+      name: service_id
+      description: Identifier for the Service
+      required: true
+      in: path
+      schema:
+        type: string
+    triggers_filter_workflow_name_contains:
+      name: workflow_name_contains
+      description: If provided, only show triggers configured to start workflows whose name contain the provided value.
+      in: query
+      schema:
+        type: string
+        example: High Priority
+    triggers_path_trigger_id:
+      name: trigger_id
+      description: Identifier for the Trigger
+      required: true
+      in: path
+      schema:
+        type: string
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    include_incident_workflow_children:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - steps
+        - team
+        uniqueItems: true
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    triggers_filter_incident_id:
+      name: incident_id
+      description: If provided, only show triggers configured on the service of the given incident. Useful for finding manual triggers that are configured on the service for a specific incident. Cannot be specified if `service_id` is provided.
+      in: query
+      schema:
+        type: string
+        example: Q2LAR4ADCXC8IB
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
+    triggers_filter_service_id:
+      name: service_id
+      description: If provided, only show triggers configured for incidents in the given service. Useful for listing all workflows associated with the given service. Cannot be specified if `incident_id` is provided.
+      in: query
+      schema:
+        type: string
+        example: P4RG7YW
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    actions_filter_keyword:
+      name: keyword
+      description: If provided, only show actions tagged with the specified keyword
+      in: query
+      schema:
+        type: string
+        example: slack
+    triggers_filter_trigger_type:
+      name: trigger_type
+      description: If provided, only show triggers of the given type. For example “manual” to search for manual triggers
+      in: query
+      schema:
+        type: string
+        enum:
+        - manual
+        - conditional
+    triggers_sort_by:
+      name: sort_by
+      description: If provided, returns triggers sorted by the specified property.
+      in: query
+      schema:
+        type: string
+        enum:
+        - workflow_id
+        - workflow_id asc
+        - workflow_id desc
+        - workflow_name
+        - workflow_name asc
+        - workflow_name desc
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    triggers_filter_workflow_id:
+      name: workflow_id
+      description: If provided, only show triggers configured to start the given workflow. Useful for listing all services associated with the given workflow
+      in: query
+      schema:
+        type: string
+        example: P4RG7YW
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:
@@ -1160,28 +1331,6 @@ components:
       description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
 
         You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
       content:
@@ -1215,191 +1364,25 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    IncidentWorkflowTrigger:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - workflow_trigger
-          trigger_type_name:
-            type: string
-            readOnly: true
-            description: Human readable name for the trigger type
-          trigger_type:
-            type: string
-            enum:
-            - conditional
-            - manual
-          condition:
-            type: string
-            description: 'A PCL condition string.
-
-
-              If specified, the trigger will execute when the condition is met on an incident.
-
-
-              If unspecified, the trigger will execute on incident creation.
-
-
-              Required if trigger_type is “conditional”, not allowed if trigger_type is “manual”.
-
-              '
-          trigger_url:
-            type: string
-            format: url
-            readOnly: true
-          workflow:
-            type: object
-            description: Workflow to start when this trigger is invoked
-            properties:
-              id:
-                type: string
-              type:
-                type: string
-                readOnly: true
-                description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-                enum:
-                - workflow_reference
-              name:
-                type: string
-                readOnly: true
-                description: A descriptive name for the Incident Workflow
-              self:
-                type:
-                - string
-                - 'null'
-                readOnly: true
-                format: url
-                description: the API show URL at which the object is accessible
-              html_url:
-                type:
-                - string
-                - 'null'
-                readOnly: true
-                format: url
-                description: a URL at which the entity is uniquely displayed in the Web app
-          services:
-            type: array
-            description: An optional array of Services associated with this workflow. Incidents in any of the listed Services are eligible to fire this Trigger
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                summary:
-                  type:
-                  - string
-                  - 'null'
-                  readOnly: true
-                  description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-                type:
-                  type: string
-                  readOnly: true
-                  description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-                  enum:
-                  - service
-                self:
-                  type:
-                  - string
-                  - 'null'
-                  readOnly: true
-                  format: url
-                  description: the API show URL at which the object is accessible
-                html_url:
-                  type:
-                  - string
-                  - 'null'
-                  readOnly: true
-                  format: url
-                  description: a URL at which the entity is uniquely displayed in the Web app
-          is_subscribed_to_all_services:
-            type: boolean
-            description: Indicates that the Trigger should be associated with All Services
-          permissions:
-            description: An object detailing who can start this Trigger. Applicable only to manual Triggers.
-            type: object
-            properties:
-              restricted:
-                type: boolean
-                description: If true, indicates that the Trigger can only be started by authorized Users. If false, any user can start this Trigger. Applicable only to manual Triggers.
-              team_id:
-                type: string
-                description: The ID of the team whose members can manually start this Trigger. Required and allowed if and only if permissions.restricted is true.
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    IncidentWorkflowInstance:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        type:
-          type: string
-          readOnly: true
-          description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-          enum:
-          - incident_workflow_instance
-        incident:
-          $ref: '#/components/schemas/Reference'
     IncidentWorkflowAction:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -1530,6 +1513,222 @@ components:
                   - singleChoice
                   - multipleChoice
                   - json
+    IncidentWorkflowTrigger:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - workflow_trigger
+          trigger_type_name:
+            type: string
+            readOnly: true
+            description: Human readable name for the trigger type
+          trigger_type:
+            type: string
+            enum:
+            - conditional
+            - manual
+          condition:
+            type: string
+            description: 'A PCL condition string.
+
+
+              If specified, the trigger will execute when the condition is met on an incident.
+
+
+              If unspecified, the trigger will execute on incident creation.
+
+
+              Required if trigger_type is “conditional”, not allowed if trigger_type is “manual”.
+
+              '
+          trigger_url:
+            type: string
+            format: url
+            readOnly: true
+          workflow:
+            type: object
+            description: Workflow to start when this trigger is invoked
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                readOnly: true
+                description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+                enum:
+                - workflow_reference
+              name:
+                type: string
+                readOnly: true
+                description: A descriptive name for the Incident Workflow
+              self:
+                type:
+                - string
+                - 'null'
+                readOnly: true
+                format: url
+                description: the API show URL at which the object is accessible
+              html_url:
+                type:
+                - string
+                - 'null'
+                readOnly: true
+                format: url
+                description: a URL at which the entity is uniquely displayed in the Web app
+          services:
+            type: array
+            description: An optional array of Services associated with this workflow. Incidents in any of the listed Services are eligible to fire this Trigger
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                summary:
+                  type:
+                  - string
+                  - 'null'
+                  readOnly: true
+                  description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+                type:
+                  type: string
+                  readOnly: true
+                  description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+                  enum:
+                  - service
+                self:
+                  type:
+                  - string
+                  - 'null'
+                  readOnly: true
+                  format: url
+                  description: the API show URL at which the object is accessible
+                html_url:
+                  type:
+                  - string
+                  - 'null'
+                  readOnly: true
+                  format: url
+                  description: a URL at which the entity is uniquely displayed in the Web app
+          is_subscribed_to_all_services:
+            type: boolean
+            description: Indicates that the Trigger should be associated with All Services
+          permissions:
+            description: An object detailing who can start this Trigger. Applicable only to manual Triggers.
+            type: object
+            properties:
+              restricted:
+                type: boolean
+                description: If true, indicates that the Trigger can only be started by authorized Users. If false, any user can start this Trigger. Applicable only to manual Triggers.
+              team_id:
+                type: string
+                description: The ID of the team whose members can manually start this Trigger. Required and allowed if and only if permissions.restricted is true.
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
+    IncidentWorkflowInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+          description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          enum:
+          - incident_workflow_instance
+        incident:
+          $ref: '#/components/schemas/Reference'
+    Tag:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          type:
+            type: string
+            readOnly: true
+            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: tag
+            enum:
+            - tag
+          label:
+            type: string
+            description: The label of the tag.
+            maxLength: 191
+        required:
+        - label
+        - type
+        example:
+          type: tag
+          label: Batman
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
     IncidentWorkflow:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -1730,212 +1929,13 @@ components:
                 required:
                 - name
                 - action_configuration
-    Tag:
+    Reference:
       allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
       - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          type:
-            type: string
-            readOnly: true
-            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: the API show URL at which the object is accessible
-          html_url:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: a URL at which the entity is uniquely displayed in the Web app
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: tag
-            enum:
-            - tag
-          label:
-            type: string
-            description: The label of the tag.
-            maxLength: 191
         required:
-        - label
         - type
-        example:
-          type: tag
-          label: Batman
-  parameters:
-    triggers_filter_incident_id:
-      name: incident_id
-      description: If provided, only show triggers configured on the service of the given incident. Useful for finding manual triggers that are configured on the service for a specific incident. Cannot be specified if `service_id` is provided.
-      in: query
-      schema:
-        type: string
-        example: Q2LAR4ADCXC8IB
-    include_incident_workflow_children:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - steps
-        - team
-        uniqueItems: true
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    triggers_filter_trigger_type:
-      name: trigger_type
-      description: If provided, only show triggers of the given type. For example “manual” to search for manual triggers
-      in: query
-      schema:
-        type: string
-        enum:
-        - manual
-        - conditional
-    triggers_filter_workflow_name_contains:
-      name: workflow_name_contains
-      description: If provided, only show triggers configured to start workflows whose name contain the provided value.
-      in: query
-      schema:
-        type: string
-        example: High Priority
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    triggers_filter_service_id:
-      name: service_id
-      description: If provided, only show triggers configured for incidents in the given service. Useful for listing all workflows associated with the given service. Cannot be specified if `incident_id` is provided.
-      in: query
-      schema:
-        type: string
-        example: P4RG7YW
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    actions_filter_keyword:
-      name: keyword
-      description: If provided, only show actions tagged with the specified keyword
-      in: query
-      schema:
-        type: string
-        example: slack
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    triggers_filter_workflow_id:
-      name: workflow_id
-      description: If provided, only show triggers configured to start the given workflow. Useful for listing all services associated with the given workflow
-      in: query
-      schema:
-        type: string
-        example: P4RG7YW
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
-    triggers_sort_by:
-      name: sort_by
-      description: If provided, returns triggers sorted by the specified property.
-      in: query
-      schema:
-        type: string
-        enum:
-        - workflow_id
-        - workflow_id asc
-        - workflow_id desc
-        - workflow_name
-        - workflow_name asc
-        - workflow_name desc
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    triggers_path_service_id:
-      name: service_id
-      description: Identifier for the Service
-      required: true
-      in: path
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    triggers_path_trigger_id:
-      name: trigger_id
-      description: Identifier for the Trigger
-      required: true
-      in: path
-      schema:
-        type: string
+        - id
   securitySchemes:
     api_key:
       type: apiKey

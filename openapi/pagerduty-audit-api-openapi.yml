@@ -90,9 +90,152 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  parameters:
+    audit_actor_id:
+      name: actor_id
+      in: query
+      description: Actor Id filter. Must be qualified by providing the `actor_type` param.
+      schema:
+        type: string
+        example: P123456
+    audit_method_type:
+      name: method_type
+      in: query
+      description: Method type filter.
+      schema:
+        type: string
+        description: 'Describes the method used to perform the action:
+
+
+          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
+
+
+          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
+
+
+          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
+
+
+          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
+
+
+          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
+
+          '
+        enum:
+        - browser
+        - oauth
+        - api_token
+        - identity_provider
+        - other
+    audit_root_resource_types:
+      name: root_resource_types[]
+      in: query
+      description: Resource type filter for the root_resource.
+      schema:
+        type: string
+        enum:
+        - users
+        - teams
+        - schedules
+        - escalation_policies
+        - services
+        example: users
+    audit_actor_type:
+      name: actor_type
+      in: query
+      description: Actor type filter.
+      schema:
+        type: string
+        enum:
+        - user_reference
+        - api_key_reference
+        - app_reference
+        example: user_reference
+    audit_method_truncated_token:
+      name: method_truncated_token
+      in: query
+      description: Method truncated_token filter. Must be qualified by providing the `method_type` param.
+      schema:
+        type: string
+        example: 3xyz
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    audit_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
+      schema:
+        type: string
+        format: date-time
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    audit_actions:
+      name: actions[]
+      in: query
+      description: Action filter
+      schema:
+        type: string
+        description: 'The action executed on the aggregate
+
+          '
+        enum:
+        - create
+        - update
+        - delete
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:
@@ -101,28 +244,6 @@ components:
       description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
 
         You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
       content:
@@ -156,159 +277,45 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     InternalServerError:
       description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    audit_actions:
-      name: actions[]
-      in: query
-      description: Action filter
-      schema:
-        type: string
-        description: 'The action executed on the aggregate
-
-          '
-        enum:
-        - create
-        - update
-        - delete
-    audit_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
-      schema:
-        type: string
-        format: date-time
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    audit_root_resource_types:
-      name: root_resource_types[]
-      in: query
-      description: Resource type filter for the root_resource.
-      schema:
-        type: string
-        enum:
-        - users
-        - teams
-        - schedules
-        - escalation_policies
-        - services
-        example: users
-    audit_method_type:
-      name: method_type
-      in: query
-      description: Method type filter.
-      schema:
-        type: string
-        description: 'Describes the method used to perform the action:
-
-
-          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
-
-
-          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
-
-
-          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
-
-
-          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
-
-
-          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
-
-          '
-        enum:
-        - browser
-        - oauth
-        - api_token
-        - identity_provider
-        - other
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    audit_actor_id:
-      name: actor_id
-      in: query
-      description: Actor Id filter. Must be qualified by providing the `actor_type` param.
-      schema:
-        type: string
-        example: P123456
-    audit_actor_type:
-      name: actor_type
-      in: query
-      description: Actor type filter.
-      schema:
-        type: string
-        enum:
-        - user_reference
-        - api_key_reference
-        - app_reference
-        example: user_reference
-    audit_method_truncated_token:
-      name: method_truncated_token
-      in: query
-      description: Method truncated_token filter. Must be qualified by providing the `method_type` param.
-      schema:
-        type: string
-        example: 3xyz
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
-    Reference:
+    AuditRecordResponseSchema:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
       - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
         required:
-        - type
-        - id
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
     CursorPagination:
       type: object
       properties:
@@ -328,6 +335,72 @@ components:
       required:
       - limit
       - next_cursor
+    Tag:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          type:
+            type: string
+            readOnly: true
+            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: tag
+            enum:
+            - tag
+          label:
+            type: string
+            description: The label of the tag.
+            maxLength: 191
+        required:
+        - label
+        - type
+        example:
+          type: tag
+          label: Batman
+    AuditMetadata:
+      type: object
+      properties:
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     AuditRecord:
       type: object
       readOnly: true
@@ -478,79 +551,6 @@ components:
       - method
       - root_resource
       - action
-    AuditMetadata:
-      type: object
-      properties:
-        messages:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            example: Message about the result
-    Tag:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          type:
-            type: string
-            readOnly: true
-            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: the API show URL at which the object is accessible
-          html_url:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: a URL at which the entity is uniquely displayed in the Web app
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: tag
-            enum:
-            - tag
-          label:
-            type: string
-            description: The label of the tag.
-            maxLength: 191
-        required:
-        - label
-        - type
-        example:
-          type: tag
-          label: Batman
-    AuditRecordResponseSchema:
-      allOf:
-      - type: object
-        properties:
-          records:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
-        required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
   examples:
     AuditRecordResponse:
       summary: Response Example

@@ -1529,345 +1529,42 @@ paths:
         '409':
           $ref: '#/components/responses/Conflict'
 components:
-  parameters:
-    include_ruleset_migrated_metadata:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - migrated_metadata
-        uniqueItems: true
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    sort_by_service:
-      name: sort_by
-      in: query
-      description: Used to specify the field you wish to sort the results on.
-      schema:
-        type: string
-        enum:
-        - name
-        - name:asc
-        - name:desc
-        default: name
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    audit_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
-      schema:
-        type: string
-        format: date-time
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the account time zone.
-      schema:
-        type: string
-        format: tzinfo
-    rule_id:
-      name: rule_id
-      in: path
-      description: The id of the Event Rule to retrieve.
-      required: true
-      schema:
-        type: string
-    include_services_id:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - escalation_policies
-        - teams
-        - auto_pause_notifications_parameters
-        - integrations
-        uniqueItems: true
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
-    include_services_integrations:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services
-        - vendors
-        uniqueItems: true
-    audit_method_type:
-      name: method_type
-      in: query
-      description: Method type filter.
-      schema:
-        type: string
-        description: 'Describes the method used to perform the action:
-
-
-          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
-
-
-          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
-
-
-          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
-
-
-          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
-
-
-          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
-
-          '
-        enum:
-        - browser
-        - oauth
-        - api_token
-        - identity_provider
-        - other
-    integration_id:
-      name: integration_id
-      in: path
-      description: The integration ID on the service.
-      required: true
-      schema:
-        type: string
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    service_name:
-      name: name
-      in: query
-      description: Filters the results, showing only services with the specified name.
-      schema:
-        type: string
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    include_services:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - escalation_policies
-        - teams
-        - integrations
-        - auto_pause_notifications_parameters
-        uniqueItems: true
   schemas:
-    Integration:
+    ServiceReference:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/Reference'
       - type: object
         properties:
           type:
             type: string
             enum:
-            - aws_cloudwatch_inbound_integration
-            - cloudkick_inbound_integration
-            - event_transformer_api_inbound_integration
-            - generic_email_inbound_integration
-            - generic_events_api_inbound_integration
-            - keynote_inbound_integration
-            - nagios_inbound_integration
-            - pingdom_inbound_integration
-            - sql_monitor_inbound_integration
-            - events_api_v2_inbound_integration
-          name:
-            type: string
-            description: The name of this integration.
-          service:
-            $ref: '#/components/schemas/ServiceReference'
-          created_at:
-            type: string
-            format: date-time
-            description: The date/time when this integration was created.
-            readOnly: true
-          vendor:
-            $ref: '#/components/schemas/VendorReference'
-          integration_email:
-            type: string
-            description: Specify for generic_email_inbound_integration. Must be set to an email address @your-subdomain.pagerduty.com
-          email_incident_creation:
-            type: string
-            description: Specify for generic_email_inbound_integration
-            enum:
-            - on_new_email
-            - on_new_email_subject
-            - only_if_no_open_incidents
-            - use_rules
-          email_filter_mode:
-            type: string
-            description: Specify for generic_email_inbound_integration. May override email_incident_creation
-            enum:
-            - all-email
-            - or-rules-email
-            - and-rules-email
-          email_parsers:
-            type: array
-            description: Specify for generic_email_inbound_integration.
-            uniqueItems: true
-            minItems: 1
-            items:
-              $ref: '#/components/schemas/EmailParser'
-          email_parsing_fallback:
-            type: string
-            description: Specify for generic_email_inbound_integration.
-            enum:
-            - open_new_incident
-            - discard
-          email_filters:
-            type: array
-            description: Specify for generic_email_inbound_integration.
-            uniqueItems: true
-            minItems: 1
-            items:
-              type: object
-              properties:
-                subject_mode:
-                  type: string
-                  enum:
-                  - match
-                  - no-match
-                  - always
-                subject_regex:
-                  type: string
-                  description: Specify if subject_mode is set to match or no-match
-                body_mode:
-                  type: string
-                  enum:
-                  - match
-                  - no-match
-                  - always
-                body_regex:
-                  type: string
-                  description: Specify if body_mode is set to match or no-match
-                from_email_mode:
-                  type: string
-                  enum:
-                  - match
-                  - no-match
-                  - always
-                from_email_regex:
-                  type: string
-                  description: Specify if from_email_mode is set to match or no-match
-              required:
-              - subject_mode
-              - body_mode
-              - from_email_mode
-            required:
-            - type
-            - name
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
+            - service_reference
+    EscalationPolicyReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
           type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
+            type: string
+            enum:
+            - escalation_policy_reference
+    TimeBasedAlertGroupingConfiguration:
+      type: object
+      title: Time Grouping
+      description: The configuration for Time Based Alert Grouping
+      properties:
+        timeout:
+          type: integer
+          description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
+    VendorReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - vendor_reference
     SupportHours:
       type: object
       properties:
@@ -1896,6 +1593,58 @@ components:
           type: string
           format: time
           description: The support hours' ending time of day (date portion is ignored)
+    IntegrationReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - aws_cloudwatch_inbound_integration_reference
+            - cloudkick_inbound_integration_reference
+            - event_transformer_api_inbound_integration_reference
+            - generic_email_inbound_integration_reference
+            - generic_events_api_inbound_integration_reference
+            - keynote_inbound_integration_reference
+            - nagios_inbound_integration_reference
+            - pingdom_inbound_integration_reference
+            - sql_monitor_inbound_integration_reference
+            - events_api_v2_inbound_integration_reference
+            - inbound_integration_reference
+    AuditRecordResponseSchema:
+      allOf:
+      - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
+        required:
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
     Service:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -2089,258 +1838,77 @@ components:
           auto_pause_notifications_parameters:
             enabled: true
             timeout: 300
-    TeamReference:
+    ContentBasedAlertGroupingConfiguration:
+      type: object
+      title: Content Only Grouping
+      description: The configuration for Content Based Alert Grouping
+      properties:
+        aggregate:
+          type: string
+          description: Whether Alerts should be grouped if `all` or `any` specified fields match. If `all` is selected, an exact match on every specified field name must occur for Alerts to be grouped. If `any` is selected, Alerts will be grouped when there is an exact match on at least one of the specified fields.
+          enum:
+          - all, any
+        fields:
+          type: array
+          description: An array of strings which represent the fields with which to group against. Depending on the aggregate, Alerts will group if some or all the fields match.
+        time_window:
+          type: integer
+          minimum: 300
+          maximum: 86400
+          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window up to 24 hours and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours (24 hours only applies to single-service settings). To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 <= time_window <= 3600 or 86400(i.e. 24 hours).
+        recommended_time_window:
+          readOnly: true
+          type: integer
+          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
+    Tag:
       allOf:
-      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          type:
+            type: string
+            readOnly: true
+            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
       - type: object
         properties:
           type:
             type: string
+            description: The type of object being created.
+            default: tag
             enum:
-            - team_reference
-    EventRuleActionsCommon:
-      type: object
-      description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
-      properties:
-        annotate:
-          description: Set a note on the resulting incident.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              description: The content of the note.
-        event_action:
-          description: Set whether the resulting alert status is trigger or resolve.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              enum:
-              - trigger
-              - resolve
-        extractions:
-          type: array
-          description: Dynamically extract values to set and modify new and existing PD-CEF fields.
-          items:
-            oneOf:
-            - type: object
-              required:
-              - target
-              - source
-              - regex
-              properties:
-                target:
-                  type: string
-                  description: The PD-CEF field that will be set with the value from the regex.
-                source:
-                  type: string
-                  description: The path to the event field where the regex will be applied to extract a value.
-                regex:
-                  type: string
-                  description: A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
-            - type: object
-              required:
-              - target
-              - template
-              properties:
-                target:
-                  type: string
-                  description: The PD-CEF field that will be set with the value from the regex.
-                template:
-                  type: string
-                  description: A value that will be used to populate the target PD-CEF field.  You can include variables extracted from the payload by using string interpolation.
-                  example: Error number {{count}} on host {{host}}
-        priority:
-          description: Set the priority ID for the resulting incident. You can find the priority you want by calling the priorities endpoint.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              description: The priority ID.
-        severity:
-          description: Set the severity of the resulting alert.
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: string
-              enum:
-              - info
-              - warning
-              - error
-              - critical
-        suppress:
-          description: Set whether the resulting alert is suppressed. Can optionally be used with a threshold where resulting alerts will be suppressed until the threshold is met in a window of time. If using a threshold the rule must also set a route action.
-          type: object
-          required:
-          - value
-          properties:
-            value:
-              type: boolean
-            threshold_value:
-              type: integer
-              description: The number of occurences needed during the window of time to trigger the theshold.
-            threshold_time_unit:
-              type: string
-              description: The time unit for the window of time.
-              enum:
-              - seconds
-              - minutes
-              - hours
-            threshold_time_amount:
-              type: integer
-              description: The amount of time units for the window of time.
-        suspend:
-          description: Set the length of time to suspend the resulting alert before triggering. Rules with a suspend action must also set a route action, and cannot have a suppress with threshold action
-          type:
-          - object
-          - 'null'
-          required:
-          - value
-          properties:
-            value:
-              type: integer
-              description: The amount of time to suspend the alert in seconds.
-    AlertGroupingParameters:
-      type: object
-      description: 'Defines how alerts on this service will be automatically grouped into incidents. Note that the alert grouping features are available only on certain plans. To turn grouping off set the type to null.
-
-        '
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - time
-          - intelligent
-          - content_based
-          - null
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
-          - $ref: '#/components/schemas/TimeBasedAlertGroupingConfiguration'
-          - $ref: '#/components/schemas/ContentBasedAlertGroupingConfiguration'
-    MatchPredicate:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - all
-          - any
-          - not
-          - contains
-          - exactly
-          - regex
-        matcher:
-          type: string
-          description: Required if the type is `contains`, `exactly` or `regex`.
-          minLength: 1
-        part:
-          type: string
-          description: The email field that will attempt to use the matcher expression. Required if the type is `contains`, `exactly` or `regex`.
-          enum:
-          - body
-          - subject
-          - from_addresses
-        children:
-          type: array
-          description: Additional matchers to be run. Must be not empty if the type is `all`, `any`, or `not`.
-          items:
-            $ref: '#/components/schemas/MatchPredicate'
-      required:
-      - type
-      - part
-      - children
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
+            - tag
+          label:
             type: string
-            enum:
-            - service_reference
-    EmailParser:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - trigger
-          - resolve
-        match_predicate:
-          $ref: '#/components/schemas/MatchPredicate'
-        value_extractors:
-          type: array
-          description: Additional values that will be pulled in to the Incident object. Exactly one value extractor must have a `value_name` of `incident_key`.
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - entire
-                - regex
-                - between
-              part:
-                type: string
-                enum:
-                - body
-                - subject
-                - from_addresses
-              value_name:
-                type: string
-                minLength: 1
-                description: The field name to set in the Incident object. Exactly one must use the `value_name` of `incident_key`
-              regex:
-                type: string
-              starts_after:
-                type: string
-              ends_with:
-                type: string
-            required:
-            - type
-            - part
-            - value_name
-      required:
-      - action
-      - match_predicate
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
+            description: The label of the tag.
+            maxLength: 191
         required:
+        - label
         - type
-        - id
-    ServiceEventRule:
-      allOf:
-      - $ref: '#/components/schemas/EventRule/allOf/0'
-      - type: object
-        properties:
-          position:
-            type: integer
-            description: Position/index of the Event Rule on the Service.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching Event Rule is found or the end of the list is reached.
-          actions:
-            $ref: '#/components/schemas/EventRuleActionsCommon'
+        example:
+          type: tag
+          label: Batman
     AutoPauseNotificationsParameters:
       title: AutoPauseNotificationsParameters
       type: object
@@ -2362,6 +1930,47 @@ components:
       example:
         enabled: true
         timeout: 300
+    ServiceEventRule:
+      allOf:
+      - $ref: '#/components/schemas/EventRule/allOf/0'
+      - type: object
+        properties:
+          position:
+            type: integer
+            description: Position/index of the Event Rule on the Service.  Starting from position 0 (the first rule), rules are evaluated one-by-one until a matching Event Rule is found or the end of the list is reached.
+          actions:
+            $ref: '#/components/schemas/EventRuleActionsCommon'
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    AuditMetadata:
+      type: object
+      properties:
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
     EventRule:
       allOf:
       - type: object
@@ -2524,93 +2133,101 @@ components:
                     value:
                       type: string
                       description: The target service's ID.
-    IncidentUrgencyType:
+    EmailParser:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - trigger
+          - resolve
+        match_predicate:
+          $ref: '#/components/schemas/MatchPredicate'
+        value_extractors:
+          type: array
+          description: Additional values that will be pulled in to the Incident object. Exactly one value extractor must have a `value_name` of `incident_key`.
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - entire
+                - regex
+                - between
+              part:
+                type: string
+                enum:
+                - body
+                - subject
+                - from_addresses
+              value_name:
+                type: string
+                minLength: 1
+                description: The field name to set in the Incident object. Exactly one must use the `value_name` of `incident_key`
+              regex:
+                type: string
+              starts_after:
+                type: string
+              ends_with:
+                type: string
+            required:
+            - type
+            - part
+            - value_name
+      required:
+      - action
+      - match_predicate
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    MatchPredicate:
       type: object
       properties:
         type:
           type: string
-          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
-          default: constant
           enum:
-          - constant
-          - use_support_hours
-        urgency:
+          - all
+          - any
+          - not
+          - contains
+          - exactly
+          - regex
+        matcher:
           type: string
-          description: The incidents' urgency, if type is constant.
-          default: high
-          enum:
-          - low
-          - high
-          - severity_based
-    IntegrationReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - aws_cloudwatch_inbound_integration_reference
-            - cloudkick_inbound_integration_reference
-            - event_transformer_api_inbound_integration_reference
-            - generic_email_inbound_integration_reference
-            - generic_events_api_inbound_integration_reference
-            - keynote_inbound_integration_reference
-            - nagios_inbound_integration_reference
-            - pingdom_inbound_integration_reference
-            - sql_monitor_inbound_integration_reference
-            - events_api_v2_inbound_integration_reference
-            - inbound_integration_reference
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    VendorReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - vendor_reference
-    ContentBasedAlertGroupingConfiguration:
-      type: object
-      title: Content Only Grouping
-      description: The configuration for Content Based Alert Grouping
-      properties:
-        aggregate:
+          description: Required if the type is `contains`, `exactly` or `regex`.
+          minLength: 1
+        part:
           type: string
-          description: Whether Alerts should be grouped if `all` or `any` specified fields match. If `all` is selected, an exact match on every specified field name must occur for Alerts to be grouped. If `any` is selected, Alerts will be grouped when there is an exact match on at least one of the specified fields.
+          description: The email field that will attempt to use the matcher expression. Required if the type is `contains`, `exactly` or `regex`.
           enum:
-          - all, any
-        fields:
+          - body
+          - subject
+          - from_addresses
+        children:
           type: array
-          description: An array of strings which represent the fields with which to group against. Depending on the aggregate, Alerts will group if some or all the fields match.
-        time_window:
-          type: integer
-          minimum: 300
-          maximum: 86400
-          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window up to 24 hours and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours (24 hours only applies to single-service settings). To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 <= time_window <= 3600 or 86400(i.e. 24 hours).
-        recommended_time_window:
-          readOnly: true
-          type: integer
-          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
+          description: Additional matchers to be run. Must be not empty if the type is `all`, `any`, or `not`.
+          items:
+            $ref: '#/components/schemas/MatchPredicate'
+      required:
+      - type
+      - part
+      - children
+    TeamReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
     AuditRecord:
       type: object
       readOnly: true
@@ -2761,24 +2378,273 @@ components:
       - method
       - root_resource
       - action
-    AuditMetadata:
+    AlertGroupingParameters:
       type: object
+      description: 'Defines how alerts on this service will be automatically grouped into incidents. Note that the alert grouping features are available only on certain plans. To turn grouping off set the type to null.
+
+        '
       properties:
-        messages:
+        type:
           type:
-          - array
+          - string
           - 'null'
-          items:
+          enum:
+          - time
+          - intelligent
+          - content_based
+          - null
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
+          - $ref: '#/components/schemas/TimeBasedAlertGroupingConfiguration'
+          - $ref: '#/components/schemas/ContentBasedAlertGroupingConfiguration'
+    Integration:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          type:
             type: string
-            example: Message about the result
-    TimeBasedAlertGroupingConfiguration:
+            enum:
+            - aws_cloudwatch_inbound_integration
+            - cloudkick_inbound_integration
+            - event_transformer_api_inbound_integration
+            - generic_email_inbound_integration
+            - generic_events_api_inbound_integration
+            - keynote_inbound_integration
+            - nagios_inbound_integration
+            - pingdom_inbound_integration
+            - sql_monitor_inbound_integration
+            - events_api_v2_inbound_integration
+          name:
+            type: string
+            description: The name of this integration.
+          service:
+            $ref: '#/components/schemas/ServiceReference'
+          created_at:
+            type: string
+            format: date-time
+            description: The date/time when this integration was created.
+            readOnly: true
+          vendor:
+            $ref: '#/components/schemas/VendorReference'
+          integration_email:
+            type: string
+            description: Specify for generic_email_inbound_integration. Must be set to an email address @your-subdomain.pagerduty.com
+          email_incident_creation:
+            type: string
+            description: Specify for generic_email_inbound_integration
+            enum:
+            - on_new_email
+            - on_new_email_subject
+            - only_if_no_open_incidents
+            - use_rules
+          email_filter_mode:
+            type: string
+            description: Specify for generic_email_inbound_integration. May override email_incident_creation
+            enum:
+            - all-email
+            - or-rules-email
+            - and-rules-email
+          email_parsers:
+            type: array
+            description: Specify for generic_email_inbound_integration.
+            uniqueItems: true
+            minItems: 1
+            items:
+              $ref: '#/components/schemas/EmailParser'
+          email_parsing_fallback:
+            type: string
+            description: Specify for generic_email_inbound_integration.
+            enum:
+            - open_new_incident
+            - discard
+          email_filters:
+            type: array
+            description: Specify for generic_email_inbound_integration.
+            uniqueItems: true
+            minItems: 1
+            items:
+              type: object
+              properties:
+                subject_mode:
+                  type: string
+                  enum:
+                  - match
+                  - no-match
+                  - always
+                subject_regex:
+                  type: string
+                  description: Specify if subject_mode is set to match or no-match
+                body_mode:
+                  type: string
+                  enum:
+                  - match
+                  - no-match
+                  - always
+                body_regex:
+                  type: string
+                  description: Specify if body_mode is set to match or no-match
+                from_email_mode:
+                  type: string
+                  enum:
+                  - match
+                  - no-match
+                  - always
+                from_email_regex:
+                  type: string
+                  description: Specify if from_email_mode is set to match or no-match
+              required:
+              - subject_mode
+              - body_mode
+              - from_email_mode
+            required:
+            - type
+            - name
+    AddonReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          src:
+            type: string
+            format: url
+            description: The URL source of the Addon
+          name:
+            type: string
+            description: The user entered name of the Addon.
+          type:
+            type: string
+            enum:
+            - full_page_addon_reference
+            - incident_show_addon_reference
+    EventRuleActionsCommon:
       type: object
-      title: Time Grouping
-      description: The configuration for Time Based Alert Grouping
+      description: When an event matches this Event Rule, the actions that will be taken to change the resulting Alert and Incident.
       properties:
-        timeout:
-          type: integer
-          description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
+        annotate:
+          description: Set a note on the resulting incident.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              description: The content of the note.
+        event_action:
+          description: Set whether the resulting alert status is trigger or resolve.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              enum:
+              - trigger
+              - resolve
+        extractions:
+          type: array
+          description: Dynamically extract values to set and modify new and existing PD-CEF fields.
+          items:
+            oneOf:
+            - type: object
+              required:
+              - target
+              - source
+              - regex
+              properties:
+                target:
+                  type: string
+                  description: The PD-CEF field that will be set with the value from the regex.
+                source:
+                  type: string
+                  description: The path to the event field where the regex will be applied to extract a value.
+                regex:
+                  type: string
+                  description: A RE2 regular expression.  If it contains one or more capture groups, their values will be extracted and appended together.  If it contains no capture groups, the whole match is used.
+            - type: object
+              required:
+              - target
+              - template
+              properties:
+                target:
+                  type: string
+                  description: The PD-CEF field that will be set with the value from the regex.
+                template:
+                  type: string
+                  description: A value that will be used to populate the target PD-CEF field.  You can include variables extracted from the payload by using string interpolation.
+                  example: Error number {{count}} on host {{host}}
+        priority:
+          description: Set the priority ID for the resulting incident. You can find the priority you want by calling the priorities endpoint.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              description: The priority ID.
+        severity:
+          description: Set the severity of the resulting alert.
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: string
+              enum:
+              - info
+              - warning
+              - error
+              - critical
+        suppress:
+          description: Set whether the resulting alert is suppressed. Can optionally be used with a threshold where resulting alerts will be suppressed until the threshold is met in a window of time. If using a threshold the rule must also set a route action.
+          type: object
+          required:
+          - value
+          properties:
+            value:
+              type: boolean
+            threshold_value:
+              type: integer
+              description: The number of occurences needed during the window of time to trigger the theshold.
+            threshold_time_unit:
+              type: string
+              description: The time unit for the window of time.
+              enum:
+              - seconds
+              - minutes
+              - hours
+            threshold_time_amount:
+              type: integer
+              description: The amount of time units for the window of time.
+        suspend:
+          description: Set the length of time to suspend the resulting alert before triggering. Rules with a suspend action must also set a route action, and cannot have a suppress with threshold action
+          type:
+          - object
+          - 'null'
+          required:
+          - value
+          properties:
+            value:
+              type: integer
+              description: The amount of time to suspend the alert in seconds.
+    IncidentUrgencyRule:
+      allOf:
+      - $ref: '#/components/schemas/IncidentUrgencyType'
+      - type: object
+        properties:
+          during_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+          outside_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
     ScheduledAction:
       type: object
       properties:
@@ -2814,104 +2680,24 @@ components:
       - type
       - at
       - to_urgency
-    Tag:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          type:
-            type: string
-            readOnly: true
-            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: the API show URL at which the object is accessible
-          html_url:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: a URL at which the entity is uniquely displayed in the Web app
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: tag
-            enum:
-            - tag
-          label:
-            type: string
-            description: The label of the tag.
-            maxLength: 191
-        required:
-        - label
-        - type
-        example:
-          type: tag
-          label: Batman
-    AddonReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          src:
-            type: string
-            format: url
-            description: The URL source of the Addon
-          name:
-            type: string
-            description: The user entered name of the Addon.
-          type:
-            type: string
-            enum:
-            - full_page_addon_reference
-            - incident_show_addon_reference
-    EscalationPolicyReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - escalation_policy_reference
-    AuditRecordResponseSchema:
-      allOf:
-      - type: object
-        properties:
-          records:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
-        required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
-    IncidentUrgencyRule:
-      allOf:
-      - $ref: '#/components/schemas/IncidentUrgencyType'
-      - type: object
-        properties:
-          during_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
-          outside_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
+    IncidentUrgencyType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
+          default: constant
+          enum:
+          - constant
+          - use_support_hours
+        urgency:
+          type: string
+          description: The incidents' urgency, if type is constant.
+          default: high
+          enum:
+          - low
+          - high
+          - severity_based
     FlexibleTimeWindowIntelligentAlertGroupingConfig:
       type: object
       title: Intelligent Alert Grouping
@@ -2926,45 +2712,235 @@ components:
           readOnly: true
           type: integer
           description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+  parameters:
+    sort_by_service:
+      name: sort_by
+      in: query
+      description: Used to specify the field you wish to sort the results on.
+      schema:
+        type: string
+        enum:
+        - name
+        - name:asc
+        - name:desc
+        default: name
+    service_name:
+      name: name
+      in: query
+      description: Filters the results, showing only services with the specified name.
+      schema:
+        type: string
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    include_ruleset_migrated_metadata:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - migrated_metadata
+        uniqueItems: true
+    audit_method_type:
+      name: method_type
+      in: query
+      description: Method type filter.
+      schema:
+        type: string
+        description: 'Describes the method used to perform the action:
 
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
+
+
+          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
+
+
+          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
+
+
+          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
+
+
+          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
+
+          '
+        enum:
+        - browser
+        - oauth
+        - api_token
+        - identity_provider
+        - other
+    include_services_integrations:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services
+        - vendors
+        uniqueItems: true
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
+
+        '
+      schema:
+        type: string
+    rule_id:
+      name: rule_id
+      in: path
+      description: The id of the Event Rule to retrieve.
+      required: true
+      schema:
+        type: string
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    audit_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
+      schema:
+        type: string
+        format: date-time
+    include_services_id:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - escalation_policies
+        - teams
+        - auto_pause_notifications_parameters
+        - integrations
+        uniqueItems: true
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the account time zone.
+      schema:
+        type: string
+        format: tzinfo
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    integration_id:
+      name: integration_id
+      in: path
+      description: The integration ID on the service.
+      required: true
+      schema:
+        type: string
+    include_services:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - escalation_policies
+        - teams
+        - integrations
+        - auto_pause_notifications_parameters
+        uniqueItems: true
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotAllowed:
-      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
 
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
       content:
@@ -2998,10 +2974,10 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
 
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
       content:
@@ -3010,6 +2986,30 @@ components:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
     InternalServerError:
       description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotAllowed:
+      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
