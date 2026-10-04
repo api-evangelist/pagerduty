@@ -726,16 +726,6 @@ components:
       - data_type
       - field_type
       - description
-    CustomFieldsFieldOption:
-      allOf:
-      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
-      - type: object
-        required:
-        - id
-        - type
-        - data
-        - created_at
-        - updated_at
     CustomFieldsField:
       allOf:
       - $ref: '#/components/schemas/CustomFieldsEditableField'
@@ -791,21 +781,16 @@ components:
       - name
       - display_name
       - field_type
-    CustomFieldsEditableField:
-      type: object
-      properties:
-        display_name:
-          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
-        description:
-          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
-        default_value:
-          oneOf:
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
-          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
+    CustomFieldsFieldOption:
+      allOf:
+      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
+      - type: object
+        required:
+        - id
+        - type
+        - data
+        - created_at
+        - updated_at
     CustomFieldsEditableFieldOption:
       type: object
       properties:
@@ -864,7 +849,28 @@ components:
             description: The fixed list of value options that may be stored in this field.
             items:
               $ref: '#/components/schemas/CustomFieldsFieldOption'
+    CustomFieldsEditableField:
+      type: object
+      properties:
+        display_name:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/display_name'
+        description:
+          $ref: '#/components/schemas/CustomFieldsFieldValue/properties/description'
+        default_value:
+          oneOf:
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
+          - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
   responses:
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Forbidden:
       description: 'Caller is not authorized to view the requested resource.
 
@@ -902,20 +908,14 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:

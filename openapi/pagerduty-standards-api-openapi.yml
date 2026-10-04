@@ -257,129 +257,17 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    active_standard:
-      in: query
-      name: active
-      required: false
-      schema:
-        type: boolean
-    id_standard:
-      in: path
-      name: id
-      required: true
-      description: Id of the standard
-      schema:
-        type: string
-    resource_ids_standard:
-      in: query
-      name: ids
-      required: true
-      description: Ids of resources to apply the standards. Maximum of 100 items
-      schema:
-        type: array
-        items:
-          type: string
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    resource_type_standard:
-      in: path
-      name: resource_type
-      required: true
-      schema:
-        type: string
-        enum:
-        - technical_services
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    query_resource_type_standard:
-      in: query
-      name: resource_type
-      schema:
-        type: string
-        enum:
-        - technical_service
-    resource_id_standard:
-      in: path
-      name: id
-      required: true
-      description: Id of the resource to apply the standards.
-      schema:
-        type: string
-  responses:
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    UnprocessableEntity:
-      description: Unprocessable Entity. Some arguments failed validation checks.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
+    StandardInclusionExclusion:
+      title: StandardInclusionExclusion
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - technical_service_reference
+        id:
+          type: string
     StandardApplied:
       title: StandardApplied
       type: object
@@ -414,16 +302,6 @@ components:
                 type: string
               pass:
                 type: boolean
-    StandardInclusionExclusion:
-      title: StandardInclusionExclusion
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - technical_service_reference
-        id:
-          type: string
     Standard:
       title: Standard
       type: object
@@ -450,6 +328,128 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StandardInclusionExclusion'
+  parameters:
+    resource_id_standard:
+      in: path
+      name: id
+      required: true
+      description: Id of the resource to apply the standards.
+      schema:
+        type: string
+    id_standard:
+      in: path
+      name: id
+      required: true
+      description: Id of the standard
+      schema:
+        type: string
+    resource_type_standard:
+      in: path
+      name: resource_type
+      required: true
+      schema:
+        type: string
+        enum:
+        - technical_services
+    active_standard:
+      in: query
+      name: active
+      required: false
+      schema:
+        type: boolean
+    resource_ids_standard:
+      in: query
+      name: ids
+      required: true
+      description: Ids of resources to apply the standards. Maximum of 100 items
+      schema:
+        type: array
+        items:
+          type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    query_resource_type_standard:
+      in: query
+      name: resource_type
+      schema:
+        type: string
+        enum:
+        - technical_service
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+  responses:
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    UnprocessableEntity:
+      description: Unprocessable Entity. Some arguments failed validation checks.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   securitySchemes:
     api_key:
       type: apiKey

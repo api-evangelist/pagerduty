@@ -1083,7 +1083,77 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    EscalationPolicyReference:
+    ScheduleLayer:
+      type: object
+      properties:
+        id:
+          type: string
+        start:
+          type: string
+          format: date-time
+          description: The start time of this layer.
+        end:
+          type: string
+          format: date-time
+          description: The end time of this layer. If `null`, the layer does not end.
+        users:
+          type: array
+          description: The ordered list of users on this layer. The position of the user on the list determines their order in the layer.
+          items:
+            $ref: '#/components/schemas/ScheduleLayerUser'
+        restrictions:
+          type: array
+          description: An array of restrictions for the layer. A restriction is a limit on which period of the day or week the schedule layer can accept assignments. Restrictions respect the `time_zone` parameter of the request.
+          items:
+            $ref: '#/components/schemas/Restriction'
+        rotation_virtual_start:
+          type: string
+          format: date-time
+          description: The effective start time of the layer. This can be before the start time of the schedule.
+        rotation_turn_length_seconds:
+          type: integer
+          description: The duration of each on-call shift in seconds.
+        name:
+          type: string
+          description: The name of the schedule layer.
+        rendered_schedule_entries:
+          type: array
+          readOnly: true
+          description: This is a list of entries on the computed layer for the current time range. Since or until must be set in order for this field to be populated.
+          items:
+            $ref: '#/components/schemas/ScheduleLayerEntry'
+        rendered_coverage_percentage:
+          type: number
+          readOnly: true
+          description: The percentage of the time range covered by this layer. Returns null unless since or until are set.
+      required:
+      - start
+      - users
+      - rotation_virtual_start
+      - rotation_turn_length_seconds
+    SubSchedule:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+          description: The name of the subschedule
+          enum:
+          - Final Schedule
+          - Overrides
+        rendered_schedule_entries:
+          type: array
+          readOnly: true
+          description: This is a list of entries on the computed layer for the current time range. Since or until must be set in order for this field to be populated.
+          items:
+            $ref: '#/components/schemas/ScheduleLayerEntry'
+        rendered_coverage_percentage:
+          type: number
+          readOnly: true
+          description: The percentage of the time range covered by this layer. Returns null unless since or until are set.
+      required:
+      - name
+    UserReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -1091,7 +1161,7 @@ components:
           type:
             type: string
             enum:
-            - escalation_policy_reference
+            - user_reference
     ScheduleLayerEntry:
       type: object
       properties:
@@ -1110,6 +1180,62 @@ components:
       required:
       - start
       - end
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    Tag:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          type:
+            type: string
+            readOnly: true
+            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: tag
+            enum:
+            - tag
+          label:
+            type: string
+            description: The label of the tag.
+            maxLength: 191
+        required:
+        - label
+        - type
+        example:
+          type: tag
+          label: Batman
     ScheduleLayerUser:
       type: object
       properties:
@@ -1117,7 +1243,53 @@ components:
           $ref: '#/components/schemas/UserReference'
       required:
       - user
-    UserReference:
+    Restriction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Specify the types of `restriction`.
+          enum:
+          - daily_restriction
+          - weekly_restriction
+        duration_seconds:
+          type: integer
+          description: The duration of the restriction in seconds.
+        start_time_of_day:
+          type: string
+          format: partial-time
+          description: The start time in HH:mm:ss format.
+        start_day_of_week:
+          type: integer
+          description: Only required for use with a `weekly_restriction` restriction type. The first day of the weekly rotation schedule as [ISO 8601 day](https://en.wikipedia.org/wiki/ISO_week_date) (1 is Monday, etc.)
+          minimum: 1
+          maximum: 7
+      discriminator:
+        propertyName: type
+      required:
+      - type
+      - duration_seconds
+      - start_time_of_day
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
+    NotificationRuleReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -1125,21 +1297,66 @@ components:
           type:
             type: string
             enum:
-            - user_reference
-    AuditRecordResponseSchema:
+            - assignment_notification_rule_reference
+    Override:
       allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
       - type: object
         properties:
-          records:
-            type: array
-            items:
-              $ref: '#/components/schemas/AuditRecord'
-          response_metadata:
-            anyOf:
-            - $ref: '#/components/schemas/AuditMetadata'
+          id:
+            type: string
+            readOnly: true
+          start:
+            description: The start date and time for the override.
+            type: string
+            format: date-time
+          end:
+            description: The end date and time for the override.
+            type: string
+            format: date-time
+          user:
+            $ref: '#/components/schemas/UserReference'
         required:
-        - records
-      - $ref: '#/components/schemas/CursorPagination'
+        - start
+        - end
+        - user
+        example:
+          start: '2012-07-01T00:00:00-04:00'
+          end: '2012-07-02T00:00:00-04:00'
+          user:
+            id: PEYSGVF
+            type: user_reference
+    AuditMetadata:
+      type: object
+      properties:
+        messages:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            example: Message about the result
+    ContactMethodReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - email_contact_method_reference
+            - phone_contact_method_reference
+            - push_notification_contact_method_reference
+            - sms_contact_method_reference
+    EscalationPolicyReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - escalation_policy_reference
     User:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -1230,337 +1447,6 @@ components:
           job_title: Director of Engineering
           avatar_url: https://secure.gravatar.com/avatar/1d1a39d4635208d5664082a6c654a73f.png?d=mm&r=PG
           description: I'm the boss
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    Override:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          start:
-            description: The start date and time for the override.
-            type: string
-            format: date-time
-          end:
-            description: The end date and time for the override.
-            type: string
-            format: date-time
-          user:
-            $ref: '#/components/schemas/UserReference'
-        required:
-        - start
-        - end
-        - user
-        example:
-          start: '2012-07-01T00:00:00-04:00'
-          end: '2012-07-02T00:00:00-04:00'
-          user:
-            id: PEYSGVF
-            type: user_reference
-    NotificationRuleReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - assignment_notification_rule_reference
-    ScheduleLayer:
-      type: object
-      properties:
-        id:
-          type: string
-        start:
-          type: string
-          format: date-time
-          description: The start time of this layer.
-        end:
-          type: string
-          format: date-time
-          description: The end time of this layer. If `null`, the layer does not end.
-        users:
-          type: array
-          description: The ordered list of users on this layer. The position of the user on the list determines their order in the layer.
-          items:
-            $ref: '#/components/schemas/ScheduleLayerUser'
-        restrictions:
-          type: array
-          description: An array of restrictions for the layer. A restriction is a limit on which period of the day or week the schedule layer can accept assignments. Restrictions respect the `time_zone` parameter of the request.
-          items:
-            $ref: '#/components/schemas/Restriction'
-        rotation_virtual_start:
-          type: string
-          format: date-time
-          description: The effective start time of the layer. This can be before the start time of the schedule.
-        rotation_turn_length_seconds:
-          type: integer
-          description: The duration of each on-call shift in seconds.
-        name:
-          type: string
-          description: The name of the schedule layer.
-        rendered_schedule_entries:
-          type: array
-          readOnly: true
-          description: This is a list of entries on the computed layer for the current time range. Since or until must be set in order for this field to be populated.
-          items:
-            $ref: '#/components/schemas/ScheduleLayerEntry'
-        rendered_coverage_percentage:
-          type: number
-          readOnly: true
-          description: The percentage of the time range covered by this layer. Returns null unless since or until are set.
-      required:
-      - start
-      - users
-      - rotation_virtual_start
-      - rotation_turn_length_seconds
-    Tag:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          type:
-            type: string
-            readOnly: true
-            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: the API show URL at which the object is accessible
-          html_url:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: a URL at which the entity is uniquely displayed in the Web app
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: tag
-            enum:
-            - tag
-          label:
-            type: string
-            description: The label of the tag.
-            maxLength: 191
-        required:
-        - label
-        - type
-        example:
-          type: tag
-          label: Batman
-    AuditMetadata:
-      type: object
-      properties:
-        messages:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            example: Message about the result
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    Schedule:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: schedule
-            enum:
-            - schedule
-          schedule_layers:
-            type: array
-            description: A list of schedule layers.
-            items:
-              $ref: '#/components/schemas/ScheduleLayer'
-          time_zone:
-            type: string
-            format: activesupport-time-zone
-            description: The time zone of the schedule.
-          name:
-            type: string
-            description: The name of the schedule
-          description:
-            type: string
-            description: The description of the schedule
-          final_schedule:
-            $ref: '#/components/schemas/SubSchedule'
-          overrides_subschedule:
-            $ref: '#/components/schemas/SubSchedule'
-          escalation_policies:
-            type: array
-            readOnly: true
-            description: An array of all of the escalation policies that uses this schedule.
-            items:
-              $ref: '#/components/schemas/EscalationPolicyReference'
-          users:
-            type: array
-            readOnly: true
-            description: An array of all of the users on the schedule.
-            items:
-              $ref: '#/components/schemas/UserReference'
-          teams:
-            type: array
-            readOnly: true
-            description: An array of all of the teams on the schedule.
-            items:
-              $ref: '#/components/schemas/TeamReference'
-        required:
-        - time_zone
-        - type
-        example:
-          name: Daily Engineering Rotation
-          type: schedule
-          time_zone: America/New_York
-          description: Rotation schedule for engineering
-          schedule_layers:
-          - name: Night Shift
-            start: '2015-11-06T20:00:00-05:00'
-            end: '2016-11-06T20:00:00-05:00'
-            rotation_virtual_start: '2015-11-06T20:00:00-05:00'
-            rotation_turn_length_seconds: 86400
-            users:
-            - user:
-                id: PXPGF42
-                type: user_reference
-            restrictions:
-            - type: daily_restriction
-              start_time_of_day: 08:00:00
-              duration_seconds: 32400
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    Restriction:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Specify the types of `restriction`.
-          enum:
-          - daily_restriction
-          - weekly_restriction
-        duration_seconds:
-          type: integer
-          description: The duration of the restriction in seconds.
-        start_time_of_day:
-          type: string
-          format: partial-time
-          description: The start time in HH:mm:ss format.
-        start_day_of_week:
-          type: integer
-          description: Only required for use with a `weekly_restriction` restriction type. The first day of the weekly rotation schedule as [ISO 8601 day](https://en.wikipedia.org/wiki/ISO_week_date) (1 is Monday, etc.)
-          minimum: 1
-          maximum: 7
-      discriminator:
-        propertyName: type
-      required:
-      - type
-      - duration_seconds
-      - start_time_of_day
-    SubSchedule:
-      type: object
-      properties:
-        name:
-          type: string
-          readOnly: true
-          description: The name of the subschedule
-          enum:
-          - Final Schedule
-          - Overrides
-        rendered_schedule_entries:
-          type: array
-          readOnly: true
-          description: This is a list of entries on the computed layer for the current time range. Since or until must be set in order for this field to be populated.
-          items:
-            $ref: '#/components/schemas/ScheduleLayerEntry'
-        rendered_coverage_percentage:
-          type: number
-          readOnly: true
-          description: The percentage of the time range covered by this layer. Returns null unless since or until are set.
-      required:
-      - name
-    TeamReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - team_reference
-    ContactMethodReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - email_contact_method_reference
-            - phone_contact_method_reference
-            - push_notification_contact_method_reference
-            - sms_contact_method_reference
     AuditRecord:
       type: object
       readOnly: true
@@ -1711,13 +1597,346 @@ components:
       - method
       - root_resource
       - action
-  responses:
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+    Schedule:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: schedule
+            enum:
+            - schedule
+          schedule_layers:
+            type: array
+            description: A list of schedule layers.
+            items:
+              $ref: '#/components/schemas/ScheduleLayer'
+          time_zone:
+            type: string
+            format: activesupport-time-zone
+            description: The time zone of the schedule.
+          name:
+            type: string
+            description: The name of the schedule
+          description:
+            type: string
+            description: The description of the schedule
+          final_schedule:
+            $ref: '#/components/schemas/SubSchedule'
+          overrides_subschedule:
+            $ref: '#/components/schemas/SubSchedule'
+          escalation_policies:
+            type: array
+            readOnly: true
+            description: An array of all of the escalation policies that uses this schedule.
+            items:
+              $ref: '#/components/schemas/EscalationPolicyReference'
+          users:
+            type: array
+            readOnly: true
+            description: An array of all of the users on the schedule.
+            items:
+              $ref: '#/components/schemas/UserReference'
+          teams:
+            type: array
+            readOnly: true
+            description: An array of all of the teams on the schedule.
+            items:
+              $ref: '#/components/schemas/TeamReference'
+        required:
+        - time_zone
+        - type
+        example:
+          name: Daily Engineering Rotation
+          type: schedule
+          time_zone: America/New_York
+          description: Rotation schedule for engineering
+          schedule_layers:
+          - name: Night Shift
+            start: '2015-11-06T20:00:00-05:00'
+            end: '2016-11-06T20:00:00-05:00'
+            rotation_virtual_start: '2015-11-06T20:00:00-05:00'
+            rotation_turn_length_seconds: 86400
+            users:
+            - user:
+                id: PXPGF42
+                type: user_reference
+            restrictions:
+            - type: daily_restriction
+              start_time_of_day: 08:00:00
+              duration_seconds: 32400
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    TeamReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
+    AuditRecordResponseSchema:
+      allOf:
+      - type: object
+        properties:
+          records:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuditRecord'
+          response_metadata:
+            anyOf:
+            - $ref: '#/components/schemas/AuditMetadata'
+        required:
+        - records
+      - $ref: '#/components/schemas/CursorPagination'
+  parameters:
+    cursor_cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
 
         '
+      schema:
+        type: string
+    schedule_list_time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the current user's time zone and then the account's time zone.
+      schema:
+        type: string
+        format: tzinfo
+    since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    include_schedules:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - schedule_layers
+        uniqueItems: true
+    since_schedules:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    schedule_overflow:
+      name: overflow
+      in: query
+      description: 'Any on-call schedule entries that pass the date range bounds will be truncated at the bounds, unless the parameter `overflow=true` is passed. This parameter defaults to false.
+
+        For instance, if your schedule is a rotation that changes daily at midnight UTC, and your date range is from `2011-06-01T10:00:00Z` to `2011-06-01T14:00:00Z`:
+
+
+
+        - If you don''t pass the `overflow=true` parameter, you will get one schedule entry returned with a start of `2011-06-01T10:00:00Z` and end of `2011-06-01T14:00:00Z`.
+
+        - If you do pass the `overflow=true` parameter, you will get one schedule entry returned with a start of `2011-06-01T00:00:00Z` and end of `2011-06-02T00:00:00Z`.
+
+        '
+      schema:
+        type: boolean
+        default: false
+    schedule_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to show schedule entries. Defaults to 2 weeks after since if a since is given.
+      schema:
+        type: string
+        format: date-time
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    schedule_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to show schedule entries. Defaults to 2 weeks before until if an until is given.
+      schema:
+        type: string
+        format: date-time
+    audit_until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
+      schema:
+        type: string
+        format: date-time
+    overflow_schedules:
+      name: overflow
+      in: query
+      description: Any on-call schedule entries that pass the date range bounds will be truncated at the bounds, unless the parameter overflow=true is passed. This parameter defaults to false.
+      schema:
+        type: boolean
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    query:
+      name: query
+      in: query
+      description: Filters the result, showing only the records whose name matches the query.
+      required: false
+      schema:
+        type: string
+    schedule_time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the schedule's time zone.
+      schema:
+        type: string
+        format: tzinfo
+    audit_method_type:
+      name: method_type
+      in: query
+      description: Method type filter.
+      schema:
+        type: string
+        description: 'Describes the method used to perform the action:
+
+
+          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
+
+
+          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
+
+
+          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
+
+
+          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
+
+
+          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
+
+          '
+        enum:
+        - browser
+        - oauth
+        - api_token
+        - identity_provider
+        - other
+    until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    until_schedules:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search.
+      required: true
+      schema:
+        type: string
+        format: date-time
+    audit_since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
+      schema:
+        type: string
+        format: date-time
+    editable_schedules:
+      name: editable
+      in: query
+      description: When this parameter is present, only editable overrides will be returned. The result will only include the id of the override if this parameter is present. Only future overrides are editable.
+      schema:
+        type: boolean
+    cursor_limit:
+      name: limit
+      in: query
+      required: false
+      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+      schema:
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    schedule_override_id:
+      name: override_id
+      in: path
+      description: The override ID on the schedule.
+      required: true
+      schema:
+        type: string
+  responses:
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -1726,16 +1945,6 @@ components:
       description: 'Caller is not authorized to view the requested resource.
 
         While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
       content:
@@ -1769,6 +1978,32 @@ components:
                 example:
                   message: Not Found
                   code: 2100
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     InternalServerError:
       description: Internal Server Error the PagerDuty server experienced an error.
       content:
@@ -1781,241 +2016,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search.
-      schema:
-        type: string
-        format: date-time
-    overflow_schedules:
-      name: overflow
-      in: query
-      description: Any on-call schedule entries that pass the date range bounds will be truncated at the bounds, unless the parameter overflow=true is passed. This parameter defaults to false.
-      schema:
-        type: boolean
-    query:
-      name: query
-      in: query
-      description: Filters the result, showing only the records whose name matches the query.
-      required: false
-      schema:
-        type: string
-    audit_method_type:
-      name: method_type
-      in: query
-      description: Method type filter.
-      schema:
-        type: string
-        description: 'Describes the method used to perform the action:
-
-
-          `browser` -- authenticated user session. Session value is not returned in the `truncated_token` field.
-
-
-          `oauth` -- access token obtained via the OAuth flow. Truncated token value is returned in the `truncated_token` field.
-
-
-          `api_token` -- Pagerduty API token. Truncated token value is returned in the `truncated_token` field.
-
-
-          `identity_provider` -- action performed by an Identity provider on behalf of a user. No value is returned in the `truncated_token` field.
-
-
-          `other` -- Method that does not fall in the predefined categories. Truncated token value MAY be returned in the `truncated_token` field.
-
-          '
-        enum:
-        - browser
-        - oauth
-        - api_token
-        - identity_provider
-        - other
-    since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search.
-      schema:
-        type: string
-        format: date-time
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    cursor_cursor:
-      name: cursor
-      in: query
-      required: false
-      description: 'Optional parameter used to request the "next" set of results from an API.  The value provided here is most commonly obtained from the `next_cursor` field of the previous request.  When no value is provided, the request starts at the beginning of the result set.
-
-        '
-      schema:
-        type: string
-    schedule_overflow:
-      name: overflow
-      in: query
-      description: 'Any on-call schedule entries that pass the date range bounds will be truncated at the bounds, unless the parameter `overflow=true` is passed. This parameter defaults to false.
-
-        For instance, if your schedule is a rotation that changes daily at midnight UTC, and your date range is from `2011-06-01T10:00:00Z` to `2011-06-01T14:00:00Z`:
-
-
-
-        - If you don''t pass the `overflow=true` parameter, you will get one schedule entry returned with a start of `2011-06-01T10:00:00Z` and end of `2011-06-01T14:00:00Z`.
-
-        - If you do pass the `overflow=true` parameter, you will get one schedule entry returned with a start of `2011-06-01T00:00:00Z` and end of `2011-06-02T00:00:00Z`.
-
-        '
-      schema:
-        type: boolean
-        default: false
-    schedule_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to show schedule entries. Defaults to 2 weeks after since if a since is given.
-      schema:
-        type: string
-        format: date-time
-    schedule_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to show schedule entries. Defaults to 2 weeks before until if an until is given.
-      schema:
-        type: string
-        format: date-time
-    schedule_time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the schedule's time zone.
-      schema:
-        type: string
-        format: tzinfo
-    include_schedules:
-      name: include[]
-      in: query
-      description: Array of additional details to include.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - schedule_layers
-        uniqueItems: true
-    cursor_limit:
-      name: limit
-      in: query
-      required: false
-      description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-      schema:
-        type: integer
-    audit_until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search. If not specified, defaults to `now()`. May not be more than 31 days after `since`.
-      schema:
-        type: string
-        format: date-time
-    editable_schedules:
-      name: editable
-      in: query
-      description: When this parameter is present, only editable overrides will be returned. The result will only include the id of the override if this parameter is present. Only future overrides are editable.
-      schema:
-        type: boolean
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    audit_since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search. If not specified, defaults to `now() - 24 hours` (past 24 hours)
-      schema:
-        type: string
-        format: date-time
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    schedule_list_time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the current user's time zone and then the account's time zone.
-      schema:
-        type: string
-        format: tzinfo
-    since_schedules:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search.
-      required: true
-      schema:
-        type: string
-        format: date-time
-    until_schedules:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search.
-      required: true
-      schema:
-        type: string
-        format: date-time
-    schedule_override_id:
-      name: override_id
-      in: path
-      description: The override ID on the schedule.
-      required: true
-      schema:
-        type: string
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
   examples:
     AuditRecordScheduleResponse:
       summary: Response Example

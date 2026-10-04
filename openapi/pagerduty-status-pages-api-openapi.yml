@@ -1684,206 +1684,36 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    status_page_impact_id:
-      name: impact_id
-      description: The ID of the Status Page Impact.
-      in: path
-      required: true
-      schema:
-        type: string
-    status_page_severity_post_type:
-      name: post_type
-      description: Filter by Post type.
-      in: query
-      required: false
-      schema:
-        enum:
-        - incident
-        - maintenance
-        type: string
-    status_page_severity_id:
-      name: severity_id
-      description: The ID of the Status Page severity.
-      in: path
-      required: true
-      schema:
-        type: string
-    status_page_subscription_status:
-      name: status
-      description: Filter by Subscription status.
-      in: query
-      required: false
-      schema:
-        enum:
-        - active
-        - pending
-        type: string
-    status_page_post_id:
-      name: post_id
-      description: The ID of the Status Page Post.
-      in: path
-      required: true
-      schema:
-        type: string
-    status_page_status_id:
-      name: status_id
-      description: The ID of the Status Page status.
-      in: path
-      required: true
-      schema:
-        type: string
-    status_page_service_id:
-      name: service_id
-      description: The ID of the Status Page service.
-      in: path
-      required: true
-      schema:
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    status_page_subscription_id:
-      name: subscription_id
-      description: The ID of the Status Page subscription.
-      in: path
-      required: true
-      schema:
-        type: string
-    status_page_post_update_reviewed_status:
-      name: reviewed_status
-      description: Filter by the reviewed status of the Post Update to retrieve.
-      in: query
-      required: false
-      schema:
-        enum:
-        - approved
-        - not_reviewed
-        type: string
-    status_page_impact_post_type:
-      name: post_type
-      description: Filter by Post type.
-      in: query
-      required: false
-      schema:
-        enum:
-        - incident
-        - maintenance
-        type: string
-    status_page_post_update_id:
-      name: post_update_id
-      description: The ID of the Status Page Post Update.
-      in: path
-      required: true
-      schema:
-        type: string
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    status_page_post_status:
-      name: status[]
-      description: Filter by an array of Status identifiers.
-      in: query
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    status_page_post_include:
-      name: include[]
-      description: Array of additional Models to include in response.
-      in: query
-      required: false
-      schema:
-        items:
-          enum:
-          - status_page_post_update
-          type: string
-        type: array
-    status_page_post_reviewed_status:
-      name: reviewed_status
-      description: Filter by the reviewed status of the Post to retrieve.
-      in: query
-      required: false
-      schema:
-        enum:
-        - approved
-        - not_reviewed
-        type: string
-    status_page_post_type:
-      name: post_type
-      description: Filter by Post type.
-      in: query
-      required: false
-      schema:
-        enum:
-        - incident
-        - maintenance
-        type: string
-    status_page_subscription_channel:
-      name: channel
-      description: Filter by Subscription channel.
-      in: query
-      required: false
-      schema:
-        enum:
-        - webhook
-        - email
-        - slack
-        type: string
-    status_page_type:
-      name: status_page_type
-      description: The type of the Status Page.
-      in: query
-      required: false
-      schema:
-        enum:
-        - public
-        - private
-        type: string
-    status_page_status_post_type:
-      name: post_type
-      description: Filter by Post type.
-      in: query
-      required: false
-      schema:
-        enum:
-        - incident
-        - maintenance
-        type: string
   schemas:
-    StatusPageImpact:
+    StatusPageSubscription:
       type: object
-      title: StatusPageImpact
-      description: A StatusPageImpact resource represents a level of impact for a given Status Page Post.
+      title: StatusPageSubscription
+      description: A StatusPageSubscription resource represents a subscription to a specific status page entity.
       properties:
-        id:
-          type: string
-          description: An unique identifier within Status Page scope that defines a Impact entry.
-          readOnly: true
-        self:
-          type: string
-          description: The API resource URL of the Impact.
-          readOnly: true
-        description:
-          type: string
-          description: The description is a human-readable text that describes the Impact level.
-        post_type:
-          type: string
-          description: The type of the Post.
+        channel:
+          description: The channel of the subscription.
           enum:
-          - incident
-          - maintenance
+          - webhook
+          - email
+          - slack
+          title: SubscriptionChannel
+          type: string
+        contact:
+          description: The subscriber's contact - email address, webhook URL, etc...
+          type: string
+        id:
+          description: The ID of the Subscription.
+          type: string
+        self:
+          description: The path in which the Subscription resource is accessible.
+          type: string
+        status:
+          description: The status of the Subscription.
+          enum:
+          - active
+          - pending
+          title: SubscriptionStatus
+          type: string
         status_page:
           description: Status Page
           properties:
@@ -1896,125 +1726,24 @@ components:
           required:
           - id
           type: object
+        subscribable_object:
+          description: The subscribed entity for a given subscription.
+          properties:
+            id:
+              description: The ID of the subscribed entity.
+              type: string
+            type:
+              description: The type of the subscribed entity.
+              enum:
+              - status_page
+              - status_page_service
+              - status_page_post
+              type: string
+          title: SubscribableObject
+          type: object
         type:
+          description: A string that determines the schema of the object.
           type: string
-          description: The type of the object returned by the API - in this case, a Status Page Impact.
-    StatusPagePostUpdateRequest:
-      type: object
-      title: StatusPagePostUpdateRequest
-      description: Attributes for Post Update creation/update
-      properties:
-        self:
-          type: string
-          description: The path to which the Post Update resource is accessible.
-          readOnly: true
-        post:
-          description: Status Page Post
-          properties:
-            id:
-              description: Status page post unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        message:
-          type: string
-          description: The message of the Post Update.
-        status:
-          description: Status Page Status
-          properties:
-            id:
-              description: Status page Status unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        severity:
-          description: Status Page Severity
-          properties:
-            id:
-              description: Status page Severity unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        impacted_services:
-          type: array
-          description: Impacted services represent the status page services affected by a post update, and its impact.
-          items:
-            $ref: '#/components/schemas/StatusPagePostUpdate/properties/impacted_services/items'
-          minItems: 0
-        update_frequency_ms:
-          type:
-          - integer
-          - 'null'
-          description: The frequency of the next Post Update in milliseconds.
-        notify_subscribers:
-          type: boolean
-          description: Determines if the subscribers should be notified of the Post Update.
-        reported_at:
-          type:
-          - string
-          - 'null'
-          description: The date and time the Post Update was reported.
-          format: date-time
-        type:
-          type: string
-          description: The type of the object returned by the API - in this case, a Status Page Post Update.
-      required:
-      - type
-      - message
-      - status
-      - severity
-      - update_frequency_ms
-      - notify_subscribers
-      - impacted_services
-      - post
-    StatusPagePostmortemRequest:
-      type: object
-      title: PostmortemRequest
-      description: Request to create/update a given Postmortem resource.
-      properties:
-        type:
-          type: string
-          description: The type of the object returned by the API - in this case, a Status Page Post Postmortem.
-          readOnly: true
-          enum:
-          - status_page_post_postmortem
-          default: status_page_post_postmortem
-        post:
-          description: Status Page Post
-          properties:
-            id:
-              description: Status page post unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        message:
-          type: string
-          description: The message of the Postmortem (supports Rich-Text).
-          maxLength: 10000
-        notify_subscribers:
-          type: boolean
-          description: Whether or not subscribers of the Status Page should be notified about the Postmortem.
-      required:
-      - type
-      - message
-      - post
-      - notify_subscribers
     StatusPagePostPostRequest:
       type: object
       title: StatusPagePostRequest
@@ -2075,22 +1804,24 @@ components:
       - ends_at
       - updates
       - status_page
-    StatusPageStatus:
+    StatusPagePost:
       type: object
-      title: StatusPageStatus
-      description: A Status represents a level of undergoing work and/or assessment for a given Status Page post.
+      title: StatusPagePost
+      description: A Post represents a communication resource presented in the Status Page about certain aspects of one or more services associated.
       properties:
         id:
           type: string
-          description: An unique identifier within Status Page scope that defines a Status entry.
+          description: An unique identifier within Status Page scope that defines a single Post resource.
           readOnly: true
         self:
           type: string
-          description: The API resource URL of the Status.
+          description: The API resource URL of the Post.
           readOnly: true
-        description:
+        type:
           type: string
-          description: The description is a human-readable text that describes the Status level.
+          description: The type of the object returned by the API - in this case, a Status Page Post.
+          readOnly: true
+          default: status_page_post
         post_type:
           type: string
           description: The type of the Post.
@@ -2109,9 +1840,55 @@ components:
           required:
           - id
           type: object
-        type:
+        linked_resource:
+          description: Linked resource
+          properties:
+            id:
+              description: Linked resource unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        postmortem:
+          description: Postmortem
+          properties:
+            id:
+              description: Postmortem unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        title:
           type: string
-          description: The type of the object returned by the API - in this case, a Status Page Status.
+          description: The title given to a Post.
+        starts_at:
+          type:
+          - string
+          - 'null'
+          description: The date and time the Post intent becomes effective - only for maintenance post type.
+          format: date-time
+        ends_at:
+          type:
+          - string
+          - 'null'
+          description: The date and time the Post intent is concluded - only for maintenance post type.
+          format: date-time
+        updates:
+          type: array
+          description: List of status_page_post_update references associated to a Post.
+          items:
+            type: object
+            description: Post Update associated to a given Post as a referenced or included resource
+            anyOf:
+            - $ref: '#/components/schemas/StatusPagePostUpdate'
+          minItems: 1
+          maxItems: 50
     StatusPagePostUpdate:
       type: object
       title: StatusPagePostUpdate
@@ -2216,167 +1993,22 @@ components:
         type:
           type: string
           description: The type of the object returned by the API - in this case, a Status Page Post Update.
-    Pagination:
+    StatusPageImpact:
       type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
-          type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
-    StatusPagePostmortem:
-      type: object
-      title: StatusPagePostmortem
-      description: A Postmortem represents a communication resource presented in the Status Page about follow-up made to a certain Post.
+      title: StatusPageImpact
+      description: A StatusPageImpact resource represents a level of impact for a given Status Page Post.
       properties:
         id:
           type: string
-          description: An unique identifier within Status Page scope that defines a single Postmortem resource.
+          description: An unique identifier within Status Page scope that defines a Impact entry.
           readOnly: true
         self:
           type: string
-          description: The API resource URL of the Postmortem.
-          readOnly: true
-        post:
-          description: Status Page Post
-          properties:
-            id:
-              description: The id of the status page post.
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        message:
-          type: string
-          description: The message of the Postmortem (supports Rich-Text).
-          maxLength: 10000
-        notify_subscribers:
-          type: boolean
-          description: Whether or not subscribers of the Status Page should be notified about the Postmortem.
-        reported_at:
-          type: string
-          description: The date and time the Postmortem was reported.
-          format: date-time
-        type:
-          type: string
-          description: The type of the object returned by the API - in this case, a Status Page Post Postmortem.
-    StatusPagePost:
-      type: object
-      title: StatusPagePost
-      description: A Post represents a communication resource presented in the Status Page about certain aspects of one or more services associated.
-      properties:
-        id:
-          type: string
-          description: An unique identifier within Status Page scope that defines a single Post resource.
-          readOnly: true
-        self:
-          type: string
-          description: The API resource URL of the Post.
-          readOnly: true
-        type:
-          type: string
-          description: The type of the object returned by the API - in this case, a Status Page Post.
-          readOnly: true
-          default: status_page_post
-        post_type:
-          type: string
-          description: The type of the Post.
-          enum:
-          - incident
-          - maintenance
-        status_page:
-          description: Status Page
-          properties:
-            id:
-              description: Status page unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        linked_resource:
-          description: Linked resource
-          properties:
-            id:
-              description: Linked resource unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        postmortem:
-          description: Postmortem
-          properties:
-            id:
-              description: Postmortem unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
-          type: object
-        title:
-          type: string
-          description: The title given to a Post.
-        starts_at:
-          type:
-          - string
-          - 'null'
-          description: The date and time the Post intent becomes effective - only for maintenance post type.
-          format: date-time
-        ends_at:
-          type:
-          - string
-          - 'null'
-          description: The date and time the Post intent is concluded - only for maintenance post type.
-          format: date-time
-        updates:
-          type: array
-          description: List of status_page_post_update references associated to a Post.
-          items:
-            type: object
-            description: Post Update associated to a given Post as a referenced or included resource
-            anyOf:
-            - $ref: '#/components/schemas/StatusPagePostUpdate'
-          minItems: 1
-          maxItems: 50
-    StatusPageSeverity:
-      type: object
-      title: StatusPageSeverity
-      description: A Severity represents a level of impact for a given Status Page post.
-      properties:
-        id:
-          type: string
-          description: An unique identifier within Status Page scope that defines a Severity entry.
-          readOnly: true
-        self:
-          type: string
-          description: The API resource URL of the Severity.
+          description: The API resource URL of the Impact.
           readOnly: true
         description:
           type: string
-          description: The description is a human-readable text that describes the Severity level.
+          description: The description is a human-readable text that describes the Impact level.
         post_type:
           type: string
           description: The type of the Post.
@@ -2397,57 +2029,29 @@ components:
           type: object
         type:
           type: string
-          description: The type of the object returned by the API - in this case, a Status Page Severity.
-    StatusPage:
+          description: The type of the object returned by the API - in this case, a Status Page Impact.
+    StatusPageStatus:
       type: object
-      title: StatusPage
-      description: A Status Page with all the configuration needed to present the system status in a public or private manner.
+      title: StatusPageStatus
+      description: A Status represents a level of undergoing work and/or assessment for a given Status Page post.
       properties:
         id:
           type: string
-          description: An unique identifier within Status Page scope that defines a Status Page entry.
-          readOnly: true
-        name:
-          type: string
-          description: The name of a Status Page to be presented as a brand title (for example, the rendered Status Page HTML header).
-          minLength: 1
-          maxLength: 125
-        published_at:
-          type:
-          - string
-          - 'null'
-          description: The date time moment when a Status Page was published to be publicly available.
-          readOnly: true
-          format: date-time
-        status_page_type:
-          type: string
-          description: The type of Status Pages to retrieve - public is accessible to everyone on the internet or private requiring some sort of authentication/authorization layer.
-          enum:
-          - public
-          - private
-        url:
-          type: string
-          description: The URL from which the Status Page can be accessed on the internet (either customer's domain or default *.trust.pagerduty.com).
-          format: url
-        type:
-          type: string
-          description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by _reference if the object is a reference.
-    StatusPageService:
-      type: object
-      title: StatusPageService
-      description: A Service represents a PagerDuty service that is linked to a Status Page.
-      properties:
-        id:
-          description: An unique identifier within Status Page scope that defines a Service entry.
-          type: string
+          description: An unique identifier within Status Page scope that defines a Status entry.
           readOnly: true
         self:
           type: string
-          description: The API resource URL of the Service.
+          description: The API resource URL of the Status.
           readOnly: true
-        name:
+        description:
           type: string
-          description: The name of the Service.
+          description: The description is a human-readable text that describes the Status level.
+        post_type:
+          type: string
+          description: The type of the Post.
+          enum:
+          - incident
+          - maintenance
         status_page:
           description: Status Page
           properties:
@@ -2460,20 +2064,9 @@ components:
           required:
           - id
           type: object
-        business_service:
-          description: Business Service
-          properties:
-            id:
-              description: Business Service unique identifier
-              type: string
-            type:
-              description: A string that determines the schema of the object.
-              type: string
-          required:
-          - id
         type:
           type: string
-          description: A string that determines the schema of the object.
+          description: The type of the object returned by the API - in this case, a Status Page Status.
     StatusPagePostPutRequest:
       type: object
       title: StatusPagePostPutRequest
@@ -2526,35 +2119,22 @@ components:
       - starts_at
       - ends_at
       - status_page
-    StatusPageSubscription:
+    StatusPageService:
       type: object
-      title: StatusPageSubscription
-      description: A StatusPageSubscription resource represents a subscription to a specific status page entity.
+      title: StatusPageService
+      description: A Service represents a PagerDuty service that is linked to a Status Page.
       properties:
-        channel:
-          description: The channel of the subscription.
-          enum:
-          - webhook
-          - email
-          - slack
-          title: SubscriptionChannel
-          type: string
-        contact:
-          description: The subscriber's contact - email address, webhook URL, etc...
-          type: string
         id:
-          description: The ID of the Subscription.
+          description: An unique identifier within Status Page scope that defines a Service entry.
           type: string
+          readOnly: true
         self:
-          description: The path in which the Subscription resource is accessible.
           type: string
-        status:
-          description: The status of the Subscription.
-          enum:
-          - active
-          - pending
-          title: SubscriptionStatus
+          description: The API resource URL of the Service.
+          readOnly: true
+        name:
           type: string
+          description: The name of the Service.
         status_page:
           description: Status Page
           properties:
@@ -2567,31 +2147,447 @@ components:
           required:
           - id
           type: object
-        subscribable_object:
-          description: The subscribed entity for a given subscription.
+        business_service:
+          description: Business Service
           properties:
             id:
-              description: The ID of the subscribed entity.
+              description: Business Service unique identifier
               type: string
             type:
-              description: The type of the subscribed entity.
-              enum:
-              - status_page
-              - status_page_service
-              - status_page_post
+              description: A string that determines the schema of the object.
               type: string
-          title: SubscribableObject
+          required:
+          - id
+        type:
+          type: string
+          description: A string that determines the schema of the object.
+    StatusPagePostUpdateRequest:
+      type: object
+      title: StatusPagePostUpdateRequest
+      description: Attributes for Post Update creation/update
+      properties:
+        self:
+          type: string
+          description: The path to which the Post Update resource is accessible.
+          readOnly: true
+        post:
+          description: Status Page Post
+          properties:
+            id:
+              description: Status page post unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        message:
+          type: string
+          description: The message of the Post Update.
+        status:
+          description: Status Page Status
+          properties:
+            id:
+              description: Status page Status unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        severity:
+          description: Status Page Severity
+          properties:
+            id:
+              description: Status page Severity unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        impacted_services:
+          type: array
+          description: Impacted services represent the status page services affected by a post update, and its impact.
+          items:
+            $ref: '#/components/schemas/StatusPagePostUpdate/properties/impacted_services/items'
+          minItems: 0
+        update_frequency_ms:
+          type:
+          - integer
+          - 'null'
+          description: The frequency of the next Post Update in milliseconds.
+        notify_subscribers:
+          type: boolean
+          description: Determines if the subscribers should be notified of the Post Update.
+        reported_at:
+          type:
+          - string
+          - 'null'
+          description: The date and time the Post Update was reported.
+          format: date-time
+        type:
+          type: string
+          description: The type of the object returned by the API - in this case, a Status Page Post Update.
+      required:
+      - type
+      - message
+      - status
+      - severity
+      - update_frequency_ms
+      - notify_subscribers
+      - impacted_services
+      - post
+    StatusPage:
+      type: object
+      title: StatusPage
+      description: A Status Page with all the configuration needed to present the system status in a public or private manner.
+      properties:
+        id:
+          type: string
+          description: An unique identifier within Status Page scope that defines a Status Page entry.
+          readOnly: true
+        name:
+          type: string
+          description: The name of a Status Page to be presented as a brand title (for example, the rendered Status Page HTML header).
+          minLength: 1
+          maxLength: 125
+        published_at:
+          type:
+          - string
+          - 'null'
+          description: The date time moment when a Status Page was published to be publicly available.
+          readOnly: true
+          format: date-time
+        status_page_type:
+          type: string
+          description: The type of Status Pages to retrieve - public is accessible to everyone on the internet or private requiring some sort of authentication/authorization layer.
+          enum:
+          - public
+          - private
+        url:
+          type: string
+          description: The URL from which the Status Page can be accessed on the internet (either customer's domain or default *.trust.pagerduty.com).
+          format: url
+        type:
+          type: string
+          description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by _reference if the object is a reference.
+    StatusPagePostmortem:
+      type: object
+      title: StatusPagePostmortem
+      description: A Postmortem represents a communication resource presented in the Status Page about follow-up made to a certain Post.
+      properties:
+        id:
+          type: string
+          description: An unique identifier within Status Page scope that defines a single Postmortem resource.
+          readOnly: true
+        self:
+          type: string
+          description: The API resource URL of the Postmortem.
+          readOnly: true
+        post:
+          description: Status Page Post
+          properties:
+            id:
+              description: The id of the status page post.
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        message:
+          type: string
+          description: The message of the Postmortem (supports Rich-Text).
+          maxLength: 10000
+        notify_subscribers:
+          type: boolean
+          description: Whether or not subscribers of the Status Page should be notified about the Postmortem.
+        reported_at:
+          type: string
+          description: The date and time the Postmortem was reported.
+          format: date-time
+        type:
+          type: string
+          description: The type of the object returned by the API - in this case, a Status Page Post Postmortem.
+    StatusPagePostmortemRequest:
+      type: object
+      title: PostmortemRequest
+      description: Request to create/update a given Postmortem resource.
+      properties:
+        type:
+          type: string
+          description: The type of the object returned by the API - in this case, a Status Page Post Postmortem.
+          readOnly: true
+          enum:
+          - status_page_post_postmortem
+          default: status_page_post_postmortem
+        post:
+          description: Status Page Post
+          properties:
+            id:
+              description: Status page post unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
+          type: object
+        message:
+          type: string
+          description: The message of the Postmortem (supports Rich-Text).
+          maxLength: 10000
+        notify_subscribers:
+          type: boolean
+          description: Whether or not subscribers of the Status Page should be notified about the Postmortem.
+      required:
+      - type
+      - message
+      - post
+      - notify_subscribers
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    StatusPageSeverity:
+      type: object
+      title: StatusPageSeverity
+      description: A Severity represents a level of impact for a given Status Page post.
+      properties:
+        id:
+          type: string
+          description: An unique identifier within Status Page scope that defines a Severity entry.
+          readOnly: true
+        self:
+          type: string
+          description: The API resource URL of the Severity.
+          readOnly: true
+        description:
+          type: string
+          description: The description is a human-readable text that describes the Severity level.
+        post_type:
+          type: string
+          description: The type of the Post.
+          enum:
+          - incident
+          - maintenance
+        status_page:
+          description: Status Page
+          properties:
+            id:
+              description: Status page unique identifier
+              type: string
+            type:
+              description: A string that determines the schema of the object.
+              type: string
+          required:
+          - id
           type: object
         type:
-          description: A string that determines the schema of the object.
           type: string
+          description: The type of the object returned by the API - in this case, a Status Page Severity.
+  parameters:
+    status_page_post_update_reviewed_status:
+      name: reviewed_status
+      description: Filter by the reviewed status of the Post Update to retrieve.
+      in: query
+      required: false
+      schema:
+        enum:
+        - approved
+        - not_reviewed
+        type: string
+    status_page_type:
+      name: status_page_type
+      description: The type of the Status Page.
+      in: query
+      required: false
+      schema:
+        enum:
+        - public
+        - private
+        type: string
+    status_page_subscription_status:
+      name: status
+      description: Filter by Subscription status.
+      in: query
+      required: false
+      schema:
+        enum:
+        - active
+        - pending
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_service_id:
+      name: service_id
+      description: The ID of the Status Page service.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_post_id:
+      name: post_id
+      description: The ID of the Status Page Post.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_post_include:
+      name: include[]
+      description: Array of additional Models to include in response.
+      in: query
+      required: false
+      schema:
+        items:
+          enum:
+          - status_page_post_update
+          type: string
+        type: array
+    status_page_status_id:
+      name: status_id
+      description: The ID of the Status Page status.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_post_update_id:
+      name: post_update_id
+      description: The ID of the Status Page Post Update.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_impact_id:
+      name: impact_id
+      description: The ID of the Status Page Impact.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_post_reviewed_status:
+      name: reviewed_status
+      description: Filter by the reviewed status of the Post to retrieve.
+      in: query
+      required: false
+      schema:
+        enum:
+        - approved
+        - not_reviewed
+        type: string
+    status_page_subscription_channel:
+      name: channel
+      description: Filter by Subscription channel.
+      in: query
+      required: false
+      schema:
+        enum:
+        - webhook
+        - email
+        - slack
+        type: string
+    status_page_status_post_type:
+      name: post_type
+      description: Filter by Post type.
+      in: query
+      required: false
+      schema:
+        enum:
+        - incident
+        - maintenance
+        type: string
+    status_page_post_type:
+      name: post_type
+      description: Filter by Post type.
+      in: query
+      required: false
+      schema:
+        enum:
+        - incident
+        - maintenance
+        type: string
+    status_page_impact_post_type:
+      name: post_type
+      description: Filter by Post type.
+      in: query
+      required: false
+      schema:
+        enum:
+        - incident
+        - maintenance
+        type: string
+    status_page_subscription_id:
+      name: subscription_id
+      description: The ID of the Status Page subscription.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_severity_id:
+      name: severity_id
+      description: The ID of the Status Page severity.
+      in: path
+      required: true
+      schema:
+        type: string
+    status_page_severity_post_type:
+      name: post_type
+      description: Filter by Post type.
+      in: query
+      required: false
+      schema:
+        enum:
+        - incident
+        - maintenance
+        type: string
+    status_page_post_status:
+      name: status[]
+      description: Filter by an array of Status identifiers.
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
   responses:
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -2633,20 +2629,24 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
       content:
         application/json:
           schema:

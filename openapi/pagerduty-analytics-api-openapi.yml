@@ -1977,317 +1977,6 @@ paths:
         Scoped OAuth requires: `analytics.read`'
 components:
   schemas:
-    AnalyticsRawIncidentResponses:
-      title: Analytics Raw Incident Responses
-      type: object
-      properties:
-        responder_name:
-          type: string
-          description: Name of the user associated with the Incident Response.
-        responder_id:
-          type: string
-          description: ID of the user associated with the Incident Response.
-        response_status:
-          type: string
-          description: Status of the user's interaction with the Incident notification.
-          enum:
-          - joined
-          - pending
-          - declined
-        responder_type:
-          type: string
-          description: 'Type of responder, where `assigned` means the user was added to the Incident via Assignment at Incident creation,
-
-            `reassigned` means the user was added to the Incident via Reassignment, `escalated` means the user was added via Escalation,
-
-            and `added_responder` means the user was added via Responder Reqeuest.'
-          enum:
-          - assigned
-          - reassigned
-          - escalated
-          - added_responder
-        requested_at:
-          type: string
-          description: Timestamp of when the user was requested.
-        responded_at:
-          type: string
-          description: Timestamp of when the user responded to the request.
-        time_to_respond_seconds:
-          type: integer
-          description: Measures the time it took for the user to respond to the Incident request. In other words, `responded_at - requested_at`.
-    AnalyticsIncidentMetricsEscalationPolicy:
-      title: Analytics Incident Metrics Escalation Policy
-      type: object
-      properties:
-        distinct_responder_count:
-          type: integer
-          description: Distinct count of responders who engaged in incidents on the escalation policy
-        escalation_policy_id:
-          type: string
-          description: ID of the escalation policy the incident was last assigned to. Not included when aggregating by all.
-        escalation_policy_name:
-          type: string
-          description: Name of the escalation policy the incident was last assigned to. Not included when aggregating by all.
-        mean_assignment_count:
-          type: integer
-          description: Mean count of instances where responders were assigned an incident (including through reassignment or escalation) or accepted a responder request.
-        mean_engaged_seconds:
-          type: integer
-          description: 'Mean engaged time across all responders.
-
-            Engaged time is measured from the time a user engages with an incident (by
-
-            acknowledging or accepting a responder request) until the incident is resolved.
-
-            This may include periods in which the incidents were snoozed.'
-        mean_engaged_user_count:
-          type: integer
-          description: 'Mean number of users who engaged with an incident. *Engaged* is defined as
-
-            acknowledging an incident or accepting a responder request in it.'
-        mean_seconds_to_engage:
-          type: integer
-          description: 'A measure of *people response time*. This metric measures the time from
-
-            the first user engagement (acknowledge or responder accept) to the last.
-
-            This metric is only used for incidents with **multiple responders**;
-
-            for incidents with one or no engaged users, this value is null.'
-        mean_seconds_to_first_ack:
-          type: integer
-          description: Mean time between the start of an incident, and the first responder to acknowledge.
-        mean_seconds_to_mobilize:
-          type: integer
-          description: 'Mean time between the start of an incident, and the last additional responder
-
-            to acknowledge. For incidents with one or no engaged users, this value is null.'
-        mean_seconds_to_resolve:
-          type: integer
-          description: Mean time from when an incident was triggered until it was resolved.
-        mean_user_defined_engaged_seconds:
-          type: integer
-          description: "Mean engaged time across all responders. Engaged time is measured from the time \na user engages with an incident (by acknowledging or accepting a responder request) \nuntil the incident is resolved. This may include periods in which the incidents were snoozed.\nThis metric uses the incident response effort values that \n[users have defined](https://support.pagerduty.com/docs/edit-incidents#edit-incident-duration),\nif they exist."
-        range_start:
-          type: string
-          description: Start of the date range that the metrics were calculated for. Only included when an aggregate unit is specified in the request.
-        team_id:
-          type: string
-          description: ID of the team the incident was assigned to. Not included when aggregating by all.
-        team_name:
-          type: string
-          description: Name of the team the incident was assigned to. Not included when aggregating by all.
-        total_business_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during business hours; 8am-6pm Mon-Fri, based on the user’s time zone.
-        total_engaged_seconds:
-          type: integer
-          description: 'Total engaged time across all responders. Engaged time is measured from
-
-            the time a user engages with an incident (by acknowledging or accepting a responder request)
-
-            until the incident is resolved. This may include periods in which the incidents were snoozed.'
-        total_escalation_count:
-          type: integer
-          description: 'Total count of instances where an incident is escalated between responders
-
-            assigned to an escalation policy.'
-        total_incident_count:
-          type: integer
-          description: The total number of incidents that were created.
-        total_incidents_acknowledged:
-          type: integer
-          description: "The total count of assigned incidents acknowledged. \nOnly explicit incident acknowledgment counts; reassign, resolve, and escalation actions do not imply acknowledgement."
-        total_incidents_auto_resolved:
-          description: "The total count of incidents that were resolved automatically. \nThis count includes incidents resolved via an integration and those that were [auto-resolved in PagerDuty](https://support.pagerduty.com/docs/configurable-service-settings#auto-resolution)."
-        total_incidents_manual_escalated:
-          type: integer
-          description: The total count of incidents that were manually escalated.
-        total_incidents_reassigned:
-          type: integer
-          description: The total count of incidents that were reassigned.
-        total_incidents_timeout_escalated:
-          type: integer
-          description: The total count of incidents that were escalated due to timeouts.
-        total_interruptions:
-          type: integer
-          description: Total number of unique interruptions.
-        total_notifications:
-          type: integer
-          description: The total count of incident notifications sent via email, SMS, phone call and push.
-        total_off_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
-        total_sleep_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during sleep hours; 10pm-8am every day, based on the user’s time zone.
-        total_snoozed_seconds:
-          type: integer
-          description: Total number of seconds incidents were snoozed.
-        total_user_defined_engaged_seconds:
-          type: integer
-          description: "Total engaged time across all responders. Engaged time is measured from\nthe time a user engages with an incident (by acknowledging or accepting a responder request)\nuntil the incident is resolved. This may include periods in which the incidents were snoozed.\nThis metric uses the edited incident response effort values that \n[users have defined](https://support.pagerduty.com/docs/edit-incidents#edit-incident-duration),\nif they exist."
-        up_time_pct:
-          type: number
-          description: 'The percentage of time in the defined date range that the service was not interrupted
-
-            by a [major incident](https://support.pagerduty.com/docs/operational-reviews#major-incidents). Not included when aggregating by all.'
-    AnalyticsResponderFilter:
-      type: object
-      properties:
-        filters:
-          type: object
-          description: Accepts a set of filters to apply to the Incidents before aggregating.  Any incidents that do not match the included filters will be omitted from the results
-          properties:
-            date_range_start:
-              type: string
-              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at less than this value will be omitted from the results. The maximum supported time range in conjunction with date_range_end is one year.
-              example: '2023-10-01T00:00:00+05:00'
-            date_range_end:
-              type: string
-              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at greater than or equal to this value will be omitted from the results. The maximum supported time range in conjunction with date_range_start is one year.
-              example: '2023-10-01T00:00:00Z'
-            urgency:
-              type: string
-              description: Any incidents whose urgency does not match the provided string will be omitted from the results.
-              example: high
-              enum:
-              - high
-              - low
-            team_ids:
-              type: array
-              description: An array of team IDs. Only incidents related to these teams will be included in the results. If omitted, all teams the requestor has access to will be included in the results.
-              items:
-                type: string
-              example:
-              - P373JQQ
-              - PAECHJV
-              - P7SYGW6
-            responder_ids:
-              type: array
-              description: An array of responder IDs. Only incidents related to these responders will be included in the results. If omitted, all responders the requestor has access to will be included in the results.
-              items:
-                type: string
-              example:
-              - PDJXDF3
-              - PG4EHNS
-            priority_ids:
-              type: array
-              description: An array of priority IDs. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
-              items:
-                type: string
-              example:
-              - PC8O0L3
-              - PX01HJD
-              - P5FK83M
-            priority_names:
-              type: array
-              description: An array of user-defined priority names. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
-              items:
-                type: string
-              example:
-              - P1
-              - P2
-              - P3
-        time_zone:
-          type: string
-          description: The time zone to use for the results and grouping.
-          example: Etc/UTC
-        order:
-          type: string
-          description: The order in which the results were sorted; asc for ascending, desc for descending.
-          enum:
-          - asc
-          - desc
-        order_by:
-          type: string
-          description: The column that was used for ordering the results.
-          example: user_id
-    AnalyticsResponderMetrics:
-      title: Analytics Responder Metrics
-      type: object
-      properties:
-        mean_engaged_seconds:
-          type: integer
-          description: 'Mean engaged time across all responders for incidents that match the given filters.
-
-            Engaged time is measured from the time a user engages with an incident (by
-
-            acknowledging or accepting a responder request) until the incident is resolved.
-
-            This may include periods in which the incidents were snoozed.'
-        mean_time_to_acknowledge_seconds:
-          type: integer
-          description: 'The average time between when an incident is first assigned to a user and when the incident is first acknowledged by that user.
-
-            Reassign, resolve, and escalation actions do not imply acknowledgement.'
-        responder_id:
-          type: integer
-          description: ID of the responder (user). Not included when aggregating by all responders.
-        responder_name:
-          type: string
-          description: Name of the responder (user). Not included when aggregating by all responders.
-        team_id:
-          type: string
-          description: ID of the team associated with the responder. Not included when aggregating by all responders.
-        team_name:
-          type: string
-          description: Name of the team associated with the responder. Not included when aggregating by all responders.
-        total_business_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during business hours; 8am-6pm Mon-Fri, based on the user’s time zone.
-        total_engaged_seconds:
-          type: integer
-          description: 'Total engaged time across all responders for incidents. Engaged time is measured from
-
-            the time a user engages with an incident (by acknowledging or accepting a responder request)
-
-            until the incident is resolved. This may include periods in which the incidents were snoozed.'
-        total_incident_count:
-          type: integer
-          description: The total number of incidents that were created.
-        total_incidents_acknowledged:
-          type: integer
-          description: "The total count of assigned incidents acknowledged by the user. \nOnly explicit incident acknowledgment counts; reassign, resolve, and escalation actions do not imply acknowledgement."
-        total_incidents_manual_escalated_from:
-          type: integer
-          description: The total count of the user’s assigned incidents that were manually escalated away from a user without acknowledgement.
-        total_incidents_manual_escalated_to:
-          type: integer
-          description: The total count of incidents the user was manually escalated to.
-        total_incidents_reassigned_from:
-          type: integer
-          description: The total count of a user's assigned incidents that were reassigned away from the user to another user or escalation policy.
-        total_incidents_reassigned_to:
-          type: integer
-          description: The total count of incidents the user was reassigned to.
-        total_incidents_timeout_escalated_from:
-          type: integer
-          description: The total count of the user’s assigned incidents that were escalated due to timeouts.
-        total_incidents_timeout_escalated_to:
-          type: integer
-          description: The total count of incidents the user was escalated to due to timeouts.
-        total_interruptions:
-          type: integer
-          description: Total number of unique interruptions.
-        total_notifications:
-          type: integer
-          description: The total count of incident notifications sent via email, SMS, phone call and push.
-        total_off_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
-        total_seconds_on_call:
-          type: integer
-          description: Total seconds the responder was on call.
-        total_seconds_on_call_level_1:
-          type: integer
-          description: Total seconds the responder was on call at level 1 of their escalation policy.
-        total_seconds_on_call_level_2_plus:
-          type: integer
-          description: Total seconds the responder was on call at level 2 or higher of their escalation policy.
-        total_sleep_hour_interruptions:
-          type: integer
-          description: Total number of unique interruptions during sleep hours; 10pm-8am every day, based on the user’s time zone.
     AnalyticsRawIncident:
       title: Analytics Raw Incident
       type: object
@@ -2465,6 +2154,317 @@ components:
           description: 'The total response effort in seconds,
 
             [as defined by the user](https://support.pagerduty.com/docs/editing-incidents#edit-incident-duration).'
+    AnalyticsIncidentMetricsEscalationPolicy:
+      title: Analytics Incident Metrics Escalation Policy
+      type: object
+      properties:
+        distinct_responder_count:
+          type: integer
+          description: Distinct count of responders who engaged in incidents on the escalation policy
+        escalation_policy_id:
+          type: string
+          description: ID of the escalation policy the incident was last assigned to. Not included when aggregating by all.
+        escalation_policy_name:
+          type: string
+          description: Name of the escalation policy the incident was last assigned to. Not included when aggregating by all.
+        mean_assignment_count:
+          type: integer
+          description: Mean count of instances where responders were assigned an incident (including through reassignment or escalation) or accepted a responder request.
+        mean_engaged_seconds:
+          type: integer
+          description: 'Mean engaged time across all responders.
+
+            Engaged time is measured from the time a user engages with an incident (by
+
+            acknowledging or accepting a responder request) until the incident is resolved.
+
+            This may include periods in which the incidents were snoozed.'
+        mean_engaged_user_count:
+          type: integer
+          description: 'Mean number of users who engaged with an incident. *Engaged* is defined as
+
+            acknowledging an incident or accepting a responder request in it.'
+        mean_seconds_to_engage:
+          type: integer
+          description: 'A measure of *people response time*. This metric measures the time from
+
+            the first user engagement (acknowledge or responder accept) to the last.
+
+            This metric is only used for incidents with **multiple responders**;
+
+            for incidents with one or no engaged users, this value is null.'
+        mean_seconds_to_first_ack:
+          type: integer
+          description: Mean time between the start of an incident, and the first responder to acknowledge.
+        mean_seconds_to_mobilize:
+          type: integer
+          description: 'Mean time between the start of an incident, and the last additional responder
+
+            to acknowledge. For incidents with one or no engaged users, this value is null.'
+        mean_seconds_to_resolve:
+          type: integer
+          description: Mean time from when an incident was triggered until it was resolved.
+        mean_user_defined_engaged_seconds:
+          type: integer
+          description: "Mean engaged time across all responders. Engaged time is measured from the time \na user engages with an incident (by acknowledging or accepting a responder request) \nuntil the incident is resolved. This may include periods in which the incidents were snoozed.\nThis metric uses the incident response effort values that \n[users have defined](https://support.pagerduty.com/docs/edit-incidents#edit-incident-duration),\nif they exist."
+        range_start:
+          type: string
+          description: Start of the date range that the metrics were calculated for. Only included when an aggregate unit is specified in the request.
+        team_id:
+          type: string
+          description: ID of the team the incident was assigned to. Not included when aggregating by all.
+        team_name:
+          type: string
+          description: Name of the team the incident was assigned to. Not included when aggregating by all.
+        total_business_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during business hours; 8am-6pm Mon-Fri, based on the user’s time zone.
+        total_engaged_seconds:
+          type: integer
+          description: 'Total engaged time across all responders. Engaged time is measured from
+
+            the time a user engages with an incident (by acknowledging or accepting a responder request)
+
+            until the incident is resolved. This may include periods in which the incidents were snoozed.'
+        total_escalation_count:
+          type: integer
+          description: 'Total count of instances where an incident is escalated between responders
+
+            assigned to an escalation policy.'
+        total_incident_count:
+          type: integer
+          description: The total number of incidents that were created.
+        total_incidents_acknowledged:
+          type: integer
+          description: "The total count of assigned incidents acknowledged. \nOnly explicit incident acknowledgment counts; reassign, resolve, and escalation actions do not imply acknowledgement."
+        total_incidents_auto_resolved:
+          description: "The total count of incidents that were resolved automatically. \nThis count includes incidents resolved via an integration and those that were [auto-resolved in PagerDuty](https://support.pagerduty.com/docs/configurable-service-settings#auto-resolution)."
+        total_incidents_manual_escalated:
+          type: integer
+          description: The total count of incidents that were manually escalated.
+        total_incidents_reassigned:
+          type: integer
+          description: The total count of incidents that were reassigned.
+        total_incidents_timeout_escalated:
+          type: integer
+          description: The total count of incidents that were escalated due to timeouts.
+        total_interruptions:
+          type: integer
+          description: Total number of unique interruptions.
+        total_notifications:
+          type: integer
+          description: The total count of incident notifications sent via email, SMS, phone call and push.
+        total_off_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
+        total_sleep_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during sleep hours; 10pm-8am every day, based on the user’s time zone.
+        total_snoozed_seconds:
+          type: integer
+          description: Total number of seconds incidents were snoozed.
+        total_user_defined_engaged_seconds:
+          type: integer
+          description: "Total engaged time across all responders. Engaged time is measured from\nthe time a user engages with an incident (by acknowledging or accepting a responder request)\nuntil the incident is resolved. This may include periods in which the incidents were snoozed.\nThis metric uses the edited incident response effort values that \n[users have defined](https://support.pagerduty.com/docs/edit-incidents#edit-incident-duration),\nif they exist."
+        up_time_pct:
+          type: number
+          description: 'The percentage of time in the defined date range that the service was not interrupted
+
+            by a [major incident](https://support.pagerduty.com/docs/operational-reviews#major-incidents). Not included when aggregating by all.'
+    AnalyticsRawIncidentResponses:
+      title: Analytics Raw Incident Responses
+      type: object
+      properties:
+        responder_name:
+          type: string
+          description: Name of the user associated with the Incident Response.
+        responder_id:
+          type: string
+          description: ID of the user associated with the Incident Response.
+        response_status:
+          type: string
+          description: Status of the user's interaction with the Incident notification.
+          enum:
+          - joined
+          - pending
+          - declined
+        responder_type:
+          type: string
+          description: 'Type of responder, where `assigned` means the user was added to the Incident via Assignment at Incident creation,
+
+            `reassigned` means the user was added to the Incident via Reassignment, `escalated` means the user was added via Escalation,
+
+            and `added_responder` means the user was added via Responder Reqeuest.'
+          enum:
+          - assigned
+          - reassigned
+          - escalated
+          - added_responder
+        requested_at:
+          type: string
+          description: Timestamp of when the user was requested.
+        responded_at:
+          type: string
+          description: Timestamp of when the user responded to the request.
+        time_to_respond_seconds:
+          type: integer
+          description: Measures the time it took for the user to respond to the Incident request. In other words, `responded_at - requested_at`.
+    AnalyticsResponderMetrics:
+      title: Analytics Responder Metrics
+      type: object
+      properties:
+        mean_engaged_seconds:
+          type: integer
+          description: 'Mean engaged time across all responders for incidents that match the given filters.
+
+            Engaged time is measured from the time a user engages with an incident (by
+
+            acknowledging or accepting a responder request) until the incident is resolved.
+
+            This may include periods in which the incidents were snoozed.'
+        mean_time_to_acknowledge_seconds:
+          type: integer
+          description: 'The average time between when an incident is first assigned to a user and when the incident is first acknowledged by that user.
+
+            Reassign, resolve, and escalation actions do not imply acknowledgement.'
+        responder_id:
+          type: integer
+          description: ID of the responder (user). Not included when aggregating by all responders.
+        responder_name:
+          type: string
+          description: Name of the responder (user). Not included when aggregating by all responders.
+        team_id:
+          type: string
+          description: ID of the team associated with the responder. Not included when aggregating by all responders.
+        team_name:
+          type: string
+          description: Name of the team associated with the responder. Not included when aggregating by all responders.
+        total_business_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during business hours; 8am-6pm Mon-Fri, based on the user’s time zone.
+        total_engaged_seconds:
+          type: integer
+          description: 'Total engaged time across all responders for incidents. Engaged time is measured from
+
+            the time a user engages with an incident (by acknowledging or accepting a responder request)
+
+            until the incident is resolved. This may include periods in which the incidents were snoozed.'
+        total_incident_count:
+          type: integer
+          description: The total number of incidents that were created.
+        total_incidents_acknowledged:
+          type: integer
+          description: "The total count of assigned incidents acknowledged by the user. \nOnly explicit incident acknowledgment counts; reassign, resolve, and escalation actions do not imply acknowledgement."
+        total_incidents_manual_escalated_from:
+          type: integer
+          description: The total count of the user’s assigned incidents that were manually escalated away from a user without acknowledgement.
+        total_incidents_manual_escalated_to:
+          type: integer
+          description: The total count of incidents the user was manually escalated to.
+        total_incidents_reassigned_from:
+          type: integer
+          description: The total count of a user's assigned incidents that were reassigned away from the user to another user or escalation policy.
+        total_incidents_reassigned_to:
+          type: integer
+          description: The total count of incidents the user was reassigned to.
+        total_incidents_timeout_escalated_from:
+          type: integer
+          description: The total count of the user’s assigned incidents that were escalated due to timeouts.
+        total_incidents_timeout_escalated_to:
+          type: integer
+          description: The total count of incidents the user was escalated to due to timeouts.
+        total_interruptions:
+          type: integer
+          description: Total number of unique interruptions.
+        total_notifications:
+          type: integer
+          description: The total count of incident notifications sent via email, SMS, phone call and push.
+        total_off_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during off hours; 6pm-10pm Mon-Fri and all day Sat-Sun, based on the user’s time zone.
+        total_seconds_on_call:
+          type: integer
+          description: Total seconds the responder was on call.
+        total_seconds_on_call_level_1:
+          type: integer
+          description: Total seconds the responder was on call at level 1 of their escalation policy.
+        total_seconds_on_call_level_2_plus:
+          type: integer
+          description: Total seconds the responder was on call at level 2 or higher of their escalation policy.
+        total_sleep_hour_interruptions:
+          type: integer
+          description: Total number of unique interruptions during sleep hours; 10pm-8am every day, based on the user’s time zone.
+    AnalyticsResponderFilter:
+      type: object
+      properties:
+        filters:
+          type: object
+          description: Accepts a set of filters to apply to the Incidents before aggregating.  Any incidents that do not match the included filters will be omitted from the results
+          properties:
+            date_range_start:
+              type: string
+              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at less than this value will be omitted from the results. The maximum supported time range in conjunction with date_range_end is one year.
+              example: '2023-10-01T00:00:00+05:00'
+            date_range_end:
+              type: string
+              description: Accepts an ISO8601 DateTime string. Any incidents with a created_at greater than or equal to this value will be omitted from the results. The maximum supported time range in conjunction with date_range_start is one year.
+              example: '2023-10-01T00:00:00Z'
+            urgency:
+              type: string
+              description: Any incidents whose urgency does not match the provided string will be omitted from the results.
+              example: high
+              enum:
+              - high
+              - low
+            team_ids:
+              type: array
+              description: An array of team IDs. Only incidents related to these teams will be included in the results. If omitted, all teams the requestor has access to will be included in the results.
+              items:
+                type: string
+              example:
+              - P373JQQ
+              - PAECHJV
+              - P7SYGW6
+            responder_ids:
+              type: array
+              description: An array of responder IDs. Only incidents related to these responders will be included in the results. If omitted, all responders the requestor has access to will be included in the results.
+              items:
+                type: string
+              example:
+              - PDJXDF3
+              - PG4EHNS
+            priority_ids:
+              type: array
+              description: An array of priority IDs. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
+              items:
+                type: string
+              example:
+              - PC8O0L3
+              - PX01HJD
+              - P5FK83M
+            priority_names:
+              type: array
+              description: An array of user-defined priority names. Only incidents with these priorities will be included in the results. If omitted, all priorities will be included in the results.
+              items:
+                type: string
+              example:
+              - P1
+              - P2
+              - P3
+        time_zone:
+          type: string
+          description: The time zone to use for the results and grouping.
+          example: Etc/UTC
+        order:
+          type: string
+          description: The order in which the results were sorted; asc for ascending, desc for descending.
+          enum:
+          - asc
+          - desc
+        order_by:
+          type: string
+          description: The column that was used for ordering the results.
+          example: user_id
     AnalyticsModel:
       type: object
       properties:
@@ -2789,6 +2789,12 @@ components:
 
             Only included when aggregating by team, escalation policy, service, or all services.'
   responses:
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Conflict:
       description: The request conflicts with the current state of the server.
       content:
@@ -2828,20 +2834,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
-    responder_id:
-      name: responder_id
-      description: The ID of the responder.
-      in: path
-      required: true
-      schema:
-        type: string
     id:
       name: id
       description: The ID of the resource.
@@ -2857,6 +2850,13 @@ components:
       schema:
         type: string
         default: application/vnd.pagerduty+json;version=2
+    responder_id:
+      name: responder_id
+      description: The ID of the responder.
+      in: path
+      required: true
+      schema:
+        type: string
     header_Content-Type:
       name: Content-Type
       in: header

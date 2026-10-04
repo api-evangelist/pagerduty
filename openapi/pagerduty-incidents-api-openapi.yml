@@ -2767,126 +2767,147 @@ paths:
         description: The entities to unsubscribe.
 components:
   schemas:
-    CustomFieldsFieldValue:
+    RelatedIncidentServiceDependencyRelationship:
+      type: object
+      description: 'The data for a type of relationship where the Incident is related due to Business or Technical Service dependencies.
+
+
+        Both `dependent_services` and `supporting_services` are returned to signify the dependencies between the Services
+
+        that the Incident and Related Incident belong to.
+
+
+        Each Service reference returned in the list of supporting and dependent Services has a type of:
+
+        [business_service_reference, technical_service_reference].
+
+        '
+      properties:
+        dependent_services:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedIncidentServiceDependencyBase'
+        supporting_services:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedIncidentServiceDependencyBase'
+    IncidentsRespondersReference:
       type: object
       properties:
-        id:
+        state:
           type: string
-          description: Id of the field.
-        name:
+          description: The status of the responder being added to the incident
+          example: pending
+        user:
+          $ref: '#/components/schemas/UserReference'
+        incident:
+          $ref: '#/components/schemas/IncidentReference'
+        updated_at:
           type: string
-          title: Field Name
-          description: The name of the field. May include ASCII characters, specifically lowercase letters, digits, and underescores. The `name` for a Field must be unique.
-          maxLength: 50
-        type:
+        message:
           type: string
-          description: Determines the type of the reference.
-          enum:
-          - field_value
-        display_name:
+          description: The message sent with the responder request
+        requester:
+          $ref: '#/components/schemas/UserReference'
+        requested_at:
           type: string
-          description: The human-readable name of the field. This must be unique across an account.
-          maxLength: 50
-        field_type:
+    ResponderRequest:
+      type: object
+      properties:
+        incident:
+          $ref: '#/components/schemas/IncidentReference'
+        requester:
+          $ref: '#/components/schemas/UserReference'
+        requested_at:
           type: string
-          description: The type of data this field contains. In combination with the `data_type` field.
-          enum:
-          - single_value
-          - single_value_fixed
-          - multi_value
-          - multi_value_fixed
-        data_type:
+          description: The time the request was made
+        message:
           type: string
-          description: The kind of data the custom field is allowed to contain.
-          enum:
-          - boolean
-          - integer
-          - float
-          - string
-          - datetime
-          - url
-        description:
-          type:
-          - string
-          - 'null'
-          description: A description of the data this field contains.
-          maxLength: 1000
-        value:
-          oneOf:
-          - type: object
-            title: Boolean
-            properties:
-              value:
-                type:
-                - boolean
-                - 'null'
-          - type: object
-            title: Float
-            properties:
-              value:
-                type:
-                - number
-                - 'null'
-          - type: object
-            title: Integer
-            properties:
-              value:
-                type:
-                - integer
-                - 'null'
-          - type: object
-            title: String
-            properties:
-              value:
-                oneOf:
-                - type:
-                  - string
-                  - 'null'
-                  maxLength: 200
-                - type:
-                  - array
-                  - 'null'
-                  items:
-                    type: string
-                    maxLength: 200
-                  maxItems: 10
-                  uniqueItems: true
-          - type: object
-            title: Datetime
-            properties:
-              value:
-                type:
-                - string
-                - 'null'
-                format: date-time
-          - type: object
-            title: Url
-            properties:
-              value:
-                type:
-                - string
-                - 'null'
-                format: uri
-                maxLength: 200
-      required:
-      - id
-      - type
-      - name
-      - value
-      - display_name
-      - data_type
-      - field_type
-      - description
-    ResolveLogEntry:
+          description: The message sent with the responder request
+        responder_request_targets:
+          type: array
+          description: The array of targets the responder request is being sent to
+          items:
+            $ref: '#/components/schemas/ResponderRequestTargetReference'
+    NotifyLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
+          created_at:
+            type: string
+            format: date-time
+            readOnly: true
+            description: Time at which the log entry was created
+          user:
+            $ref: '#/components/schemas/UserReference'
           type:
             type: string
             enum:
-            - resolve_log_entry
-    UserReference:
+            - notify_log_entry
+    SnoozeLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          changed_actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/IncidentAction'
+          type:
+            type: string
+            enum:
+            - snooze_log_entry
+    Tag:
+      allOf:
+      - type: object
+        properties:
+          id:
+            type: string
+            readOnly: true
+          summary:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
+          type:
+            type: string
+            readOnly: true
+            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
+          self:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: the API show URL at which the object is accessible
+          html_url:
+            type:
+            - string
+            - 'null'
+            readOnly: true
+            format: url
+            description: a URL at which the entity is uniquely displayed in the Web app
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: tag
+            enum:
+            - tag
+          label:
+            type: string
+            description: The label of the tag.
+            maxLength: 191
+        required:
+        - label
+        - type
+        example:
+          type: tag
+          label: Batman
+    IncidentReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -2894,147 +2915,116 @@ components:
           type:
             type: string
             enum:
-            - user_reference
-    Notification:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        type:
-          type: string
-          description: The type of notification.
-          enum:
-          - sms_notification
-          - email_notification
-          - phone_notification
-          - push_notification
-          readOnly: true
-        started_at:
-          type: string
-          format: date-time
-          description: The time at which the notification was sent
-          readOnly: true
-        address:
-          type: string
-          description: The address where the notification was sent. This will be null for notification type `push_notification`.
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/UserReference'
-        conferenceAddress:
-          type: string
-          description: The address of the conference bridge
-        status:
-          type: string
-        ? ''
-        : type: string
-    CursorPagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
-          readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
-          readOnly: true
-      required:
-      - limit
-      - next_cursor
-    IncidentBody:
-      type: object
-      properties:
-        details:
-          type: object
-          description: Additional incident details.
-      required:
-      - type
-    EscalationPolicy:
+            - incident_reference
+    ServiceReference:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
+      - $ref: '#/components/schemas/Reference'
       - type: object
         properties:
           type:
             type: string
-            description: The type of object being created.
-            default: escalation_policy
             enum:
-            - escalation_policy
+            - service_reference
+    IntegrationReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - aws_cloudwatch_inbound_integration_reference
+            - cloudkick_inbound_integration_reference
+            - event_transformer_api_inbound_integration_reference
+            - generic_email_inbound_integration_reference
+            - generic_events_api_inbound_integration_reference
+            - keynote_inbound_integration_reference
+            - nagios_inbound_integration_reference
+            - pingdom_inbound_integration_reference
+            - sql_monitor_inbound_integration_reference
+            - events_api_v2_inbound_integration_reference
+            - inbound_integration_reference
+    ContactMethodReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - email_contact_method_reference
+            - phone_contact_method_reference
+            - push_notification_contact_method_reference
+            - sms_contact_method_reference
+    EscalationPolicyReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - escalation_policy_reference
+    AddonReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          src:
+            type: string
+            format: url
+            description: The URL source of the Addon
           name:
             type: string
-            description: The name of the escalation policy.
-          description:
+            description: The user entered name of the Addon.
+          type:
             type: string
-            description: Escalation policy description.
-          num_loops:
-            type: integer
-            description: The number of times the escalation policy will repeat after reaching the end of its escalation.
-            default: 0
-            minimum: 0
-          on_call_handoff_notifications:
-            type: string
-            description: Determines how on call handoff notifications will be sent for users on the escalation policy. Defaults to "if_has_services".
             enum:
-            - if_has_services
-            - always
-          escalation_rules:
-            type: array
-            items:
-              $ref: '#/components/schemas/EscalationRule'
-          services:
-            type: array
-            items:
-              $ref: '#/components/schemas/ServiceReference'
-            minLength: 0
-            readOnly: true
-          teams:
-            type: array
-            description: Team associated with the policy. Account must have the `teams` ability to use this parameter. Only one team may be associated with the policy.
-            items:
-              $ref: '#/components/schemas/TeamReference'
-            minLength: 0
-        required:
-        - type
-        - name
-        - escalation_rules
-        example:
-          id: PQIL2IX
-          type: escalation_policy
-          name: Engineering Escalation Policy
-          escalation_rules:
-          - escalation_delay_in_minutes: 30
-            targets:
-            - id: PEYSGVF
-              type: user_reference
-            escalation_rule_assignment_strategy:
-            - type: round_robin
-          services:
-          - id: PIJ90N7
-            type: service_reference
-          num_loops: 2
-          on_call_handoff_notifications: if_has_services
-          teams:
-          - id: PQ9K7I8
-            type: team_reference
-          description: Here is the ep for the engineering team.
-    ResolveReason:
+            - full_page_addon_reference
+            - incident_show_addon_reference
+    IncidentAction:
+      description: An incident action is a pending change to an incident that will automatically happen at some future time.
       type: object
       properties:
         type:
           type: string
-          description: The reason the incident was resolved. The only reason currently supported is merge.
-          default: merge_resolve_reason
           enum:
-          - merge_resolve_reason
-        incident:
-          $ref: '#/components/schemas/IncidentReference'
-    TriggerLogEntry:
+          - unacknowledge
+          - escalate
+          - resolve
+          - urgency_change
+        at:
+          type: string
+          format: date-time
+        to:
+          description: The urgency that the incident will change to. This field is only present when the type is `urgency_change`.
+          type: string
+          enum:
+          - high
+      discriminator:
+        propertyName: type
+      required:
+      - type
+      - at
+    IncidentUrgencyType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
+          default: constant
+          enum:
+          - constant
+          - use_support_hours
+        urgency:
+          type: string
+          description: The incidents' urgency, if type is constant.
+          default: high
+          enum:
+          - low
+          - high
+          - severity_based
+    UnacknowledgeLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
@@ -3042,7 +3032,16 @@ components:
           type:
             type: string
             enum:
-            - trigger_log_entry
+            - unacknowledge_log_entry
+    ReachTriggerLimitLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - reach_trigger_limit_log_entry
     Pagination:
       type: object
       properties:
@@ -3064,340 +3063,15 @@ components:
           - 'null'
           description: The total number of records matching the given query.
           readOnly: true
-    Reference:
+    ReachAckLimitLogEntry:
       allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
-    EscalationRule:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        escalation_delay_in_minutes:
-          type: integer
-          description: The number of minutes before an unacknowledged incident escalates away from this rule.
-        targets:
-          type: array
-          minItems: 1
-          maxItems: 10
-          description: The targets an incident should be assigned to upon reaching this rule.
-          items:
-            $ref: '#/components/schemas/EscalationTargetReference'
-        escalation_rule_assignment_strategy:
-          type: string
-          description: The strategy used to assign the escalation rule to an incident.
-          enum:
-          - round_robin
-          - assign_to_everyone
-      required:
-      - escalation_delay_in_minutes
-      - targets
-      example:
-        escalation_delay_in_minutes: 30
-        targets:
-        - id: PAM4FGS
-          type: user_reference
-        - id: PI7DH85
-          type: schedule_reference
-    Team:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: team
-            enum:
-            - team
-          name:
-            type: string
-            description: The name of the team.
-            maxLength: 100
-          description:
-            type: string
-            description: The description of the team.
-            maxLength: 1024
-          default_role:
-            type: string
-            description: The team is private if the value is "none", or public if it is "manager" (the default permissions for a non-member of the team are either "none", or their base role up until "manager").
-            default: manager
-            enum:
-            - manager
-            - none
-        required:
-        - name
-        - type
-        example:
-          type: team
-          name: Engineering
-          description: The engineering team
-    StatusUpdate:
-      type: object
-      properties:
-        id:
-          type: string
-        message:
-          type: string
-          description: The message of the status update.
-        created_at:
-          type: string
-          description: The date/time when this status update was created.
-        sender:
-          $ref: '#/components/schemas/UserReference'
-        subject:
-          type: string
-          description: The subject of the custom html email status update. Present if included in request body.
-        html_message:
-          type: string
-          description: The html content of the custom html email status update. Present if included in request body.
-    ScheduledAction:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of schedule action. Must be set to urgency_change.
-          enum:
-          - urgency_change
-        at:
-          type: object
-          description: Represents when scheduled action will occur.
-          properties:
-            type:
-              type: string
-              description: Must be set to named_time.
-              enum:
-              - named_time
-            name:
-              type: string
-              description: Designates either the start or the end of support hours.
-              enum:
-              - support_hours_start
-              - support_hours_end
-          required:
-          - type
-          - name
-        to_urgency:
-          type: string
-          description: Urgency level. Must be set to high.
-          enum:
-          - high
-      required:
-      - type
-      - at
-      - to_urgency
-    Context:
-      type: object
-      discriminator:
-        propertyName: type
-      properties:
-        type:
-          type: string
-          description: The type of context being attached to the incident.
-          enum:
-          - link
-          - image
-        href:
-          type: string
-          description: The link's target url
-        src:
-          type: string
-          description: The image's source url
-        text:
-          type: string
-          description: The alternate display for an image
-      required:
-      - type
-    NotificationSubscriber:
-      title: NotificationSubscriber
-      description: A reference of a subscriber entity.
-      type: object
-      properties:
-        subscriber_id:
-          type: string
-          description: The ID of the entity being subscribed
-        subscriber_type:
-          type: string
-          description: The type of the entity being subscribed
-          enum:
-          - user
-          - team
-      example:
-        subscriber_id: PD1234
-        subscriber_type: user
-    SupportHours:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of support hours
-          default: fixed_time_per_day
-          enum:
-          - fixed_time_per_day
-        time_zone:
-          type: string
-          format: activesupport-time-zone
-          description: The time zone for the support hours
-        days_of_week:
-          type: array
-          readOnly: true
-          items:
-            type: integer
-            readOnly: true
-            description: The days of the week (1 through 7, for Monday through Sunday)
-        start_time:
-          type: string
-          format: time
-          description: The support hours' starting time of day (date portion is ignored)
-        end_time:
-          type: string
-          format: time
-          description: The support hours' ending time of day (date portion is ignored)
-    IncidentNote:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        user:
-          allOf:
-          - $ref: '#/components/schemas/Reference'
-          - type: object
-            description: The user who created a Note. If a service created this Note the `user.type` will be "bot_user_reference" and `user.summary` will list the name of the service rather than the user.
-            properties:
-              type:
-                type: string
-                enum:
-                - user_reference
-                - bot_user_reference
-        channel:
-          type: object
-          readOnly: true
-          description: The means by which this Note was created. Has different formats depending on type.
-          properties:
-            summary:
-              type: string
-              description: A string describing the source of the Note.
-              readOnly: true
-            id:
-              type: string
-              readOnly: true
-            type:
-              type: string
-              description: A string that determines the schema of the object
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-            html_url:
-              type: string
-              format: url
-              description: a URL at which the entity is uniquely displayed in the Web app
-              readOnly: true
-          required:
-          - summary
-        content:
-          type: string
-          description: The note content
-        created_at:
-          type: string
-          format: date-time
-          description: The time at which the note was submitted
-          readOnly: true
-      required:
-      - content
-      example:
-        content: Firefighters are on the scene.
-    NotificationSubscriberWithContext:
-      title: NotificationSubscriberWithContext
-      description: A reference of a subscriber entity with additional subscription context.
-      type: object
-      example:
-        subscriber_id: PD1234
-        subscriber_type: user
-      properties:
-        subscriber_id:
-          type: string
-          description: The ID of the entity being subscribed
-        subscriber_type:
-          type: string
-          description: The type of the entity being subscribed
-          enum:
-          - user
-          - team
-        has_indirect_subscription:
-          type: boolean
-          description: If this subcriber has an indirect subscription to this incident via another object
-        subscribed_via:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The id of the object this subscriber is subscribed via
-              name:
-                type: string
-                description: The type of the object this subscriber is subscribed via
-    PriorityReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
+      - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
           type:
             type: string
             enum:
-            - priority_reference
-    Channel:
-      type: object
-      description: Polymorphic object representation of the means by which the action was channeled. Has different formats depending on type, indicated by channel[type]. Will be one of `auto`, `email`, `api`, `nagios`, or `timeout` if `agent[type]` is `service`. Will be one of `email`, `sms`, `website`, `web_trigger`, or `note` if `agent[type]` is `user`. See [below](https://developer.pagerduty.com/documentation/rest/log_entries/show#channel_types) for detailed information about channel formats.
-      properties:
-        type:
-          type: string
-          description: type
-        user:
-          type: object
-        team:
-          type: object
-        notification:
-          $ref: '#/components/schemas/Notification'
-        channel:
-          type: object
-          description: channel
-      required:
-      - type
-    AgentReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        description: The agent (user, service or integration) that created or modified the Incident Log Entry.
-        properties:
-          type:
-            enum:
-            - user_reference
-            - service_reference
-            - integration_reference
-            type: string
-        readOnly: true
-    Priority:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: The user-provided short name of the priority.
-          description:
-            type: string
-            description: The user-provided description of the priority.
+            - reach_ack_limit_log_entry
     Incident:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -3549,314 +3223,116 @@ components:
             description: The additional incident body details. Only returned if the `include[]=body` query parameter is provided.
             allOf:
             - $ref: '#/components/schemas/IncidentBody'
-    IncidentReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - incident_reference
-    IncidentsRespondersReference:
-      type: object
-      properties:
-        state:
-          type: string
-          description: The status of the responder being added to the incident
-          example: pending
-        user:
-          $ref: '#/components/schemas/UserReference'
-        incident:
-          $ref: '#/components/schemas/IncidentReference'
-        updated_at:
-          type: string
-        message:
-          type: string
-          description: The message sent with the responder request
-        requester:
-          $ref: '#/components/schemas/UserReference'
-        requested_at:
-          type: string
-    CustomFieldsEditableFieldValue:
-      title: Custom Field Value
-      oneOf:
-      - type: object
-        title: Value by Field Name
-        properties:
-          name:
-            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
-          value:
-            oneOf:
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
-      - type: object
-        title: Value by Field ID
-        properties:
-          id:
-            type: string
-            description: The ID of the Field.
-          value:
-            oneOf:
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
-            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
-    AcknowledgeLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          acknowledgement_timeout:
-            type: integer
-            description: Duration for which the acknowledgement lasts, in seconds. Services can contain an `acknowledgement_timeout` property, which specifies the length of time acknowledgements should last for. Each time an incident is acknowledged, this timeout is copied into the acknowledgement log entry. This property is optional, as older log entries may not contain it. It may also be `null`, as acknowledgements can be performed on incidents whose services have no `acknowledgement_timeout` set.
-          type:
-            type: string
-            enum:
-            - acknowledgement_log_entry
-    AddonReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          src:
-            type: string
-            format: url
-            description: The URL source of the Addon
-          name:
-            type: string
-            description: The user entered name of the Addon.
-          type:
-            type: string
-            enum:
-            - full_page_addon_reference
-            - incident_show_addon_reference
-    IncidentAction:
-      description: An incident action is a pending change to an incident that will automatically happen at some future time.
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - unacknowledge
-          - escalate
-          - resolve
-          - urgency_change
-        at:
-          type: string
-          format: date-time
-        to:
-          description: The urgency that the incident will change to. This field is only present when the type is `urgency_change`.
-          type: string
-          enum:
-          - high
-      discriminator:
-        propertyName: type
-      required:
-      - type
-      - at
-    IncidentUrgencyType:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'The type of incident urgency: whether it''s constant, or it''s dependent on the support hours.'
-          default: constant
-          enum:
-          - constant
-          - use_support_hours
-        urgency:
-          type: string
-          description: The incidents' urgency, if type is constant.
-          default: high
-          enum:
-          - low
-          - high
-          - severity_based
-    FlexibleTimeWindowIntelligentAlertGroupingConfig:
-      type: object
-      title: Intelligent Alert Grouping
-      description: The configuration for Intelligent Alert Grouping. Note that this configuration is only available for certain plans.
-      properties:
-        time_window:
-          type: integer
-          minimum: 300
-          maximum: 3600
-          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours. To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 and 3600.
-        recommended_time_window:
-          readOnly: true
-          type: integer
-          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
-    ConferenceBridge:
-      type: object
-      properties:
-        conference_number:
-          type: string
-          description: The phone number of the conference call for the conference bridge. Phone numbers should be formatted like +1 415-555-1212,,,,1234#, where a comma (,) represents a one-second wait and pound (#) completes access code input.
-        conference_url:
-          type: string
-          format: url
-          description: An URL for the conference bridge. This could be a link to a web conference or Slack channel.
-    RepeatEscalationPathLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - repeat_escalation_path_log_entry
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    NotifyLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          created_at:
-            type: string
-            format: date-time
-            readOnly: true
-            description: Time at which the log entry was created
-          user:
-            $ref: '#/components/schemas/UserReference'
-          type:
-            type: string
-            enum:
-            - notify_log_entry
-    Alert:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          created_at:
-            type: string
-            format: date-time
-            readOnly: true
-            description: The date/time the alert was first triggered.
-          type:
-            type: string
-            default: alert
-            description: The type of object being created.
-            enum:
-            - alert
-          status:
-            type: string
-            description: The current status of the alert.
-            enum:
-            - triggered
-            - resolved
-          alert_key:
-            type: string
-            readOnly: true
-            description: The alert's de-duplication key.
-          service:
-            $ref: '#/components/schemas/ServiceReference'
-          first_trigger_log_entry:
-            $ref: '#/components/schemas/LogEntryReference'
-          incident:
-            $ref: '#/components/schemas/IncidentReference'
-          suppressed:
-            type: boolean
-            readOnly: true
-            description: Whether or not an alert is suppressed. Suppressed alerts are not created with a parent incident.
-            default: false
-          severity:
-            type: string
-            readOnly: true
-            description: The magnitude of the problem as reported by the monitoring tool.
-            enum:
-            - info
-            - warning
-            - error
-            - critical
-          integration:
-            $ref: '#/components/schemas/IntegrationReference'
-          body:
-            type: object
-            readOnly: true
-            description: A JSON object containing data describing the alert.
-            title: Body
-            properties:
-              type:
-                type: string
-                description: The type of the body.
-                enum:
-                - alert_body
-              contexts:
-                type: array
-                readOnly: true
-                description: Contexts to be included with the body such as links to graphs or images.
-                items:
-                  $ref: '#/components/schemas/Context'
-              details:
-                type: object
-                readOnly: true
-                description: An arbitrary JSON object or string containing any data explaining the nature of the alert.
-        required:
-        - type
-        example:
-          type: alert
-          status: resolved
-          incident:
-            id: PEYSGVF
-            type: incident_reference
-          body:
-            type: alert_body
-            contexts:
-            - type: link
-            details:
-              customKey: Server is on fire!
-              customKey2: Other stuff!
-    Impact:
-      title: Impact
+    CustomFieldsFieldValue:
       type: object
       properties:
         id:
           type: string
-          readOnly: true
+          description: Id of the field.
         name:
           type: string
-          readOnly: true
+          title: Field Name
+          description: The name of the field. May include ASCII characters, specifically lowercase letters, digits, and underescores. The `name` for a Field must be unique.
+          maxLength: 50
         type:
           type: string
-          description: The kind of object that has been impacted
+          description: Determines the type of the reference.
           enum:
-          - business_service
-        status:
+          - field_value
+        display_name:
           type: string
-          description: The current impact status of the object
+          description: The human-readable name of the field. This must be unique across an account.
+          maxLength: 50
+        field_type:
+          type: string
+          description: The type of data this field contains. In combination with the `data_type` field.
           enum:
-          - impacted
-          - not_impacted
-        additional_fields:
-          type: object
-          properties:
-            highest_impacting_priority:
-              type:
-              - object
-              - 'null'
-              description: Priority information for the highest priority level that is affecting the impacted object.
-              properties:
-                id:
-                  type: string
-                  readOnly: true
-                order:
-                  type: integer
-                  readOnly: true
+          - single_value
+          - single_value_fixed
+          - multi_value
+          - multi_value_fixed
+        data_type:
+          type: string
+          description: The kind of data the custom field is allowed to contain.
+          enum:
+          - boolean
+          - integer
+          - float
+          - string
+          - datetime
+          - url
+        description:
+          type:
+          - string
+          - 'null'
+          description: A description of the data this field contains.
+          maxLength: 1000
+        value:
+          oneOf:
+          - type: object
+            title: Boolean
+            properties:
+              value:
+                type:
+                - boolean
+                - 'null'
+          - type: object
+            title: Float
+            properties:
+              value:
+                type:
+                - number
+                - 'null'
+          - type: object
+            title: Integer
+            properties:
+              value:
+                type:
+                - integer
+                - 'null'
+          - type: object
+            title: String
+            properties:
+              value:
+                oneOf:
+                - type:
+                  - string
+                  - 'null'
+                  maxLength: 200
+                - type:
+                  - array
+                  - 'null'
+                  items:
+                    type: string
+                    maxLength: 200
+                  maxItems: 10
+                  uniqueItems: true
+          - type: object
+            title: Datetime
+            properties:
+              value:
+                type:
+                - string
+                - 'null'
+                format: date-time
+          - type: object
+            title: Url
+            properties:
+              value:
+                type:
+                - string
+                - 'null'
+                format: uri
+                maxLength: 200
+      required:
+      - id
+      - type
+      - name
+      - value
+      - display_name
+      - data_type
+      - field_type
+      - description
     EscalateLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
@@ -3872,6 +3348,79 @@ components:
             type: string
             enum:
             - escalate_log_entry
+    Priority:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The user-provided short name of the priority.
+          description:
+            type: string
+            description: The user-provided description of the priority.
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
+    UrgencyChangeLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - urgency_change_log_entry
+    TimeBasedAlertGroupingConfiguration:
+      type: object
+      title: Time Grouping
+      description: The configuration for Time Based Alert Grouping
+      properties:
+        timeout:
+          type: integer
+          description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
+    NotificationSubscriber:
+      title: NotificationSubscriber
+      description: A reference of a subscriber entity.
+      type: object
+      properties:
+        subscriber_id:
+          type: string
+          description: The ID of the entity being subscribed
+        subscriber_type:
+          type: string
+          description: The type of the entity being subscribed
+          enum:
+          - user
+          - team
+      example:
+        subscriber_id: PD1234
+        subscriber_type: user
+    RepeatEscalationPathLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - repeat_escalation_path_log_entry
+    AcknowledgeLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          acknowledgement_timeout:
+            type: integer
+            description: Duration for which the acknowledgement lasts, in seconds. Services can contain an `acknowledgement_timeout` property, which specifies the length of time acknowledgements should last for. Each time an incident is acknowledged, this timeout is copied into the acknowledgement log entry. This property is optional, as older log entries may not contain it. It may also be `null`, as acknowledgements can be performed on incidents whose services have no `acknowledgement_timeout` set.
+          type:
+            type: string
+            enum:
+            - acknowledgement_log_entry
     NotificationSubscriptionWithContext:
       title: NotificationSubscriptionWithContext
       type: object
@@ -3913,6 +3462,102 @@ components:
           - duplicate
           - unauthorized
           description: The resulting status of the subscription
+    ContentBasedAlertGroupingConfiguration:
+      type: object
+      title: Content Only Grouping
+      description: The configuration for Content Based Alert Grouping
+      properties:
+        aggregate:
+          type: string
+          description: Whether Alerts should be grouped if `all` or `any` specified fields match. If `all` is selected, an exact match on every specified field name must occur for Alerts to be grouped. If `any` is selected, Alerts will be grouped when there is an exact match on at least one of the specified fields.
+          enum:
+          - all, any
+        fields:
+          type: array
+          description: An array of strings which represent the fields with which to group against. Depending on the aggregate, Alerts will group if some or all the fields match.
+        time_window:
+          type: integer
+          minimum: 300
+          maximum: 86400
+          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window up to 24 hours and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours (24 hours only applies to single-service settings). To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 <= time_window <= 3600 or 86400(i.e. 24 hours).
+        recommended_time_window:
+          readOnly: true
+          type: integer
+          description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
+    ResolveLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - resolve_log_entry
+    NotificationRuleReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - assignment_notification_rule_reference
+    LogEntryReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - acknowledge_log_entry_reference
+            - annotate_log_entry_reference
+            - assign_log_entry_reference
+            - escalate_log_entry_reference
+            - exhaust_escalation_path_log_entry_reference
+            - notify_log_entry_reference
+            - reach_trigger_limit_log_entry_reference
+            - repeat_escalation_path_log_entry_reference
+            - resolve_log_entry_reference
+            - snooze_log_entry_reference
+            - trigger_log_entry_reference
+            - unacknowledge_log_entry_reference
+    Impact:
+      title: Impact
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          description: The kind of object that has been impacted
+          enum:
+          - business_service
+        status:
+          type: string
+          description: The current impact status of the object
+          enum:
+          - impacted
+          - not_impacted
+        additional_fields:
+          type: object
+          properties:
+            highest_impacting_priority:
+              type:
+              - object
+              - 'null'
+              description: Priority information for the highest priority level that is affecting the impacted object.
+              properties:
+                id:
+                  type: string
+                  readOnly: true
+                order:
+                  type: integer
+                  readOnly: true
     User:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -4003,6 +3648,634 @@ components:
           job_title: Director of Engineering
           avatar_url: https://secure.gravatar.com/avatar/1d1a39d4635208d5664082a6c654a73f.png?d=mm&r=PG
           description: I'm the boss
+    AlertGroupingParameters:
+      type: object
+      description: 'Defines how alerts on this service will be automatically grouped into incidents. Note that the alert grouping features are available only on certain plans. To turn grouping off set the type to null.
+
+        '
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - time
+          - intelligent
+          - content_based
+          - null
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
+          - $ref: '#/components/schemas/TimeBasedAlertGroupingConfiguration'
+          - $ref: '#/components/schemas/ContentBasedAlertGroupingConfiguration'
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          description: The type of notification.
+          enum:
+          - sms_notification
+          - email_notification
+          - phone_notification
+          - push_notification
+          readOnly: true
+        started_at:
+          type: string
+          format: date-time
+          description: The time at which the notification was sent
+          readOnly: true
+        address:
+          type: string
+          description: The address where the notification was sent. This will be null for notification type `push_notification`.
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserReference'
+        conferenceAddress:
+          type: string
+          description: The address of the conference bridge
+        status:
+          type: string
+        ? ''
+        : type: string
+    ResponderRequestTargetReference:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of target (either a user or an escalation policy)
+        id:
+          type: string
+          description: The id of the user or escalation policy
+        summary:
+          type: string
+        incident_responders:
+          type: array
+          description: An array of responders associated with the specified incident
+          items:
+            $ref: '#/components/schemas/IncidentsRespondersReference'
+    ScheduledAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of schedule action. Must be set to urgency_change.
+          enum:
+          - urgency_change
+        at:
+          type: object
+          description: Represents when scheduled action will occur.
+          properties:
+            type:
+              type: string
+              description: Must be set to named_time.
+              enum:
+              - named_time
+            name:
+              type: string
+              description: Designates either the start or the end of support hours.
+              enum:
+              - support_hours_start
+              - support_hours_end
+          required:
+          - type
+          - name
+        to_urgency:
+          type: string
+          description: Urgency level. Must be set to high.
+          enum:
+          - high
+      required:
+      - type
+      - at
+      - to_urgency
+    PriorityReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - priority_reference
+    Assignment:
+      type: object
+      properties:
+        at:
+          type: string
+          format: date-time
+          description: Time at which the assignment was created.
+        assignee:
+          oneOf:
+          - $ref: '#/components/schemas/UserReference'
+          - $ref: '#/components/schemas/User'
+      required:
+      - at
+      - assignee
+    SupportHours:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of support hours
+          default: fixed_time_per_day
+          enum:
+          - fixed_time_per_day
+        time_zone:
+          type: string
+          format: activesupport-time-zone
+          description: The time zone for the support hours
+        days_of_week:
+          type: array
+          readOnly: true
+          items:
+            type: integer
+            readOnly: true
+            description: The days of the week (1 through 7, for Monday through Sunday)
+        start_time:
+          type: string
+          format: time
+          description: The support hours' starting time of day (date portion is ignored)
+        end_time:
+          type: string
+          format: time
+          description: The support hours' ending time of day (date portion is ignored)
+    TriggerLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - trigger_log_entry
+    IncidentUrgencyRule:
+      allOf:
+      - $ref: '#/components/schemas/IncidentUrgencyType'
+      - type: object
+        properties:
+          during_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+          outside_support_hours:
+            $ref: '#/components/schemas/IncidentUrgencyType'
+    Context:
+      type: object
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          type: string
+          description: The type of context being attached to the incident.
+          enum:
+          - link
+          - image
+        href:
+          type: string
+          description: The link's target url
+        src:
+          type: string
+          description: The image's source url
+        text:
+          type: string
+          description: The alternate display for an image
+      required:
+      - type
+    ExhaustEscalationPathLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - exhaust_escalation_path_log_entry
+    IncidentNote:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/Reference'
+          - type: object
+            description: The user who created a Note. If a service created this Note the `user.type` will be "bot_user_reference" and `user.summary` will list the name of the service rather than the user.
+            properties:
+              type:
+                type: string
+                enum:
+                - user_reference
+                - bot_user_reference
+        channel:
+          type: object
+          readOnly: true
+          description: The means by which this Note was created. Has different formats depending on type.
+          properties:
+            summary:
+              type: string
+              description: A string describing the source of the Note.
+              readOnly: true
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+            html_url:
+              type: string
+              format: url
+              description: a URL at which the entity is uniquely displayed in the Web app
+              readOnly: true
+          required:
+          - summary
+        content:
+          type: string
+          description: The note content
+        created_at:
+          type: string
+          format: date-time
+          description: The time at which the note was submitted
+          readOnly: true
+      required:
+      - content
+      example:
+        content: Firefighters are on the scene.
+    EscalationPolicy:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: escalation_policy
+            enum:
+            - escalation_policy
+          name:
+            type: string
+            description: The name of the escalation policy.
+          description:
+            type: string
+            description: Escalation policy description.
+          num_loops:
+            type: integer
+            description: The number of times the escalation policy will repeat after reaching the end of its escalation.
+            default: 0
+            minimum: 0
+          on_call_handoff_notifications:
+            type: string
+            description: Determines how on call handoff notifications will be sent for users on the escalation policy. Defaults to "if_has_services".
+            enum:
+            - if_has_services
+            - always
+          escalation_rules:
+            type: array
+            items:
+              $ref: '#/components/schemas/EscalationRule'
+          services:
+            type: array
+            items:
+              $ref: '#/components/schemas/ServiceReference'
+            minLength: 0
+            readOnly: true
+          teams:
+            type: array
+            description: Team associated with the policy. Account must have the `teams` ability to use this parameter. Only one team may be associated with the policy.
+            items:
+              $ref: '#/components/schemas/TeamReference'
+            minLength: 0
+        required:
+        - type
+        - name
+        - escalation_rules
+        example:
+          id: PQIL2IX
+          type: escalation_policy
+          name: Engineering Escalation Policy
+          escalation_rules:
+          - escalation_delay_in_minutes: 30
+            targets:
+            - id: PEYSGVF
+              type: user_reference
+            escalation_rule_assignment_strategy:
+            - type: round_robin
+          services:
+          - id: PIJ90N7
+            type: service_reference
+          num_loops: 2
+          on_call_handoff_notifications: if_has_services
+          teams:
+          - id: PQ9K7I8
+            type: team_reference
+          description: Here is the ep for the engineering team.
+    AnnotateLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - annotate_log_entry
+    CursorPagination:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          readOnly: true
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
+          readOnly: true
+      required:
+      - limit
+      - next_cursor
+    CustomFieldsEditableFieldValue:
+      title: Custom Field Value
+      oneOf:
+      - type: object
+        title: Value by Field Name
+        properties:
+          name:
+            $ref: '#/components/schemas/CustomFieldsFieldValue/properties/name'
+          value:
+            oneOf:
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
+      - type: object
+        title: Value by Field ID
+        properties:
+          id:
+            type: string
+            description: The ID of the Field.
+          value:
+            oneOf:
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/0'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/1'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/2'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
+            - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
+    LogEntry:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - acknowledge_log_entry
+            - annotate_log_entry
+            - assign_log_entry
+            - delegate_log_entry
+            - escalate_log_entry
+            - exhaust_escalation_path_log_entry
+            - notify_log_entry
+            - reach_ack_limit_log_entry
+            - reach_trigger_limit_log_entry
+            - repeat_escalation_path_log_entry
+            - resolve_log_entry
+            - snooze_log_entry
+            - trigger_log_entry
+            - unacknowledge_log_entry
+            - urgency_change_log_entry
+          created_at:
+            type: string
+            format: date-time
+            readOnly: true
+            description: Time at which the log entry was created.
+          channel:
+            $ref: '#/components/schemas/Channel'
+          agent:
+            $ref: '#/components/schemas/AgentReference'
+          note:
+            type: string
+            readOnly: true
+            description: Optional field containing a note, if one was included with the log entry.
+          contexts:
+            type: array
+            readOnly: true
+            description: Contexts to be included with the trigger such as links to graphs or images.
+            items:
+              $ref: '#/components/schemas/Context'
+          service:
+            $ref: '#/components/schemas/ServiceReference'
+          incident:
+            $ref: '#/components/schemas/IncidentReference'
+          teams:
+            type: array
+            readOnly: true
+            description: Will consist of references unless included
+            items:
+              $ref: '#/components/schemas/TeamReference'
+          event_details:
+            type: object
+            readOnly: true
+            properties:
+              description:
+                type: string
+                description: Additional details about the event.
+    TeamReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
+    AcknowledgerReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - description: The acknowledger represents the entity that made the acknowledgement for an incident.
+        type: object
+        properties:
+          type:
+            enum:
+            - user_reference
+            - service_reference
+            type: string
+    Team:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          type:
+            type: string
+            description: The type of object being created.
+            default: team
+            enum:
+            - team
+          name:
+            type: string
+            description: The name of the team.
+            maxLength: 100
+          description:
+            type: string
+            description: The description of the team.
+            maxLength: 1024
+          default_role:
+            type: string
+            description: The team is private if the value is "none", or public if it is "manager" (the default permissions for a non-member of the team are either "none", or their base role up until "manager").
+            default: manager
+            enum:
+            - manager
+            - none
+        required:
+        - name
+        - type
+        example:
+          type: team
+          name: Engineering
+          description: The engineering team
+    Alert:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          created_at:
+            type: string
+            format: date-time
+            readOnly: true
+            description: The date/time the alert was first triggered.
+          type:
+            type: string
+            default: alert
+            description: The type of object being created.
+            enum:
+            - alert
+          status:
+            type: string
+            description: The current status of the alert.
+            enum:
+            - triggered
+            - resolved
+          alert_key:
+            type: string
+            readOnly: true
+            description: The alert's de-duplication key.
+          service:
+            $ref: '#/components/schemas/ServiceReference'
+          first_trigger_log_entry:
+            $ref: '#/components/schemas/LogEntryReference'
+          incident:
+            $ref: '#/components/schemas/IncidentReference'
+          suppressed:
+            type: boolean
+            readOnly: true
+            description: Whether or not an alert is suppressed. Suppressed alerts are not created with a parent incident.
+            default: false
+          severity:
+            type: string
+            readOnly: true
+            description: The magnitude of the problem as reported by the monitoring tool.
+            enum:
+            - info
+            - warning
+            - error
+            - critical
+          integration:
+            $ref: '#/components/schemas/IntegrationReference'
+          body:
+            type: object
+            readOnly: true
+            description: A JSON object containing data describing the alert.
+            title: Body
+            properties:
+              type:
+                type: string
+                description: The type of the body.
+                enum:
+                - alert_body
+              contexts:
+                type: array
+                readOnly: true
+                description: Contexts to be included with the body such as links to graphs or images.
+                items:
+                  $ref: '#/components/schemas/Context'
+              details:
+                type: object
+                readOnly: true
+                description: An arbitrary JSON object or string containing any data explaining the nature of the alert.
+        required:
+        - type
+        example:
+          type: alert
+          status: resolved
+          incident:
+            id: PEYSGVF
+            type: incident_reference
+          body:
+            type: alert_body
+            contexts:
+            - type: link
+            details:
+              customKey: Server is on fire!
+              customKey2: Other stuff!
+    Acknowledgement:
+      type: object
+      properties:
+        at:
+          type: string
+          format: date-time
+          description: Time at which the acknowledgement was created.
+        acknowledger:
+          oneOf:
+          - $ref: '#/components/schemas/AcknowledgerReference'
+          - $ref: '#/components/schemas/User'
+          - $ref: '#/components/schemas/Service'
+      required:
+      - at
+      - acknowledger
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
+    AutoPauseNotificationsParameters:
+      title: AutoPauseNotificationsParameters
+      type: object
+      description: Defines how alerts on this service are automatically suspended for a period of time before triggering, when identified as likely being transient. Note that automatically pausing notifications is only available on certain plans.
+      properties:
+        enabled:
+          type: boolean
+          default: false
+          description: Indicates whether alerts should be automatically suspended when identified as transient
+        timeout:
+          type: integer
+          enum:
+          - 120
+          - 180
+          - 300
+          - 600
+          - 900
+          description: Indicates in seconds how long alerts should be suspended before triggering
+      example:
+        enabled: true
+        timeout: 300
     Service:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -4196,199 +4469,6 @@ components:
           auto_pause_notifications_parameters:
             enabled: true
             timeout: 300
-    RelatedIncidentServiceDependencyRelationship:
-      type: object
-      description: 'The data for a type of relationship where the Incident is related due to Business or Technical Service dependencies.
-
-
-        Both `dependent_services` and `supporting_services` are returned to signify the dependencies between the Services
-
-        that the Incident and Related Incident belong to.
-
-
-        Each Service reference returned in the list of supporting and dependent Services has a type of:
-
-        [business_service_reference, technical_service_reference].
-
-        '
-      properties:
-        dependent_services:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelatedIncidentServiceDependencyBase'
-        supporting_services:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelatedIncidentServiceDependencyBase'
-    Acknowledgement:
-      type: object
-      properties:
-        at:
-          type: string
-          format: date-time
-          description: Time at which the acknowledgement was created.
-        acknowledger:
-          oneOf:
-          - $ref: '#/components/schemas/AcknowledgerReference'
-          - $ref: '#/components/schemas/User'
-          - $ref: '#/components/schemas/Service'
-      required:
-      - at
-      - acknowledger
-    AssignLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          assignees:
-            type: array
-            readOnly: true
-            description: An array of assigned Users for this log entry
-            items:
-              $ref: '#/components/schemas/UserReference'
-          type:
-            type: string
-            enum:
-            - assign_log_entry
-    DelegateLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          assignees:
-            type: array
-            readOnly: true
-            description: An array of assigned Users for this log entry
-            items:
-              $ref: '#/components/schemas/UserReference'
-          type:
-            type: string
-            enum:
-            - delegate_log_entry
-    Tag:
-      allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-            readOnly: true
-          summary:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to `name`, though it is not intended to be an identifier.
-          type:
-            type: string
-            readOnly: true
-            description: A string that determines the schema of the object. This must be the standard name for the entity, suffixed by `_reference` if the object is a reference.
-          self:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: the API show URL at which the object is accessible
-          html_url:
-            type:
-            - string
-            - 'null'
-            readOnly: true
-            format: url
-            description: a URL at which the entity is uniquely displayed in the Web app
-      - type: object
-        properties:
-          type:
-            type: string
-            description: The type of object being created.
-            default: tag
-            enum:
-            - tag
-          label:
-            type: string
-            description: The label of the tag.
-            maxLength: 191
-        required:
-        - label
-        - type
-        example:
-          type: tag
-          label: Batman
-    ExhaustEscalationPathLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - exhaust_escalation_path_log_entry
-    TeamReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - team_reference
-    Assignment:
-      type: object
-      properties:
-        at:
-          type: string
-          format: date-time
-          description: Time at which the assignment was created.
-        assignee:
-          oneOf:
-          - $ref: '#/components/schemas/UserReference'
-          - $ref: '#/components/schemas/User'
-      required:
-      - at
-      - assignee
-    AcknowledgerReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - description: The acknowledger represents the entity that made the acknowledgement for an incident.
-        type: object
-        properties:
-          type:
-            enum:
-            - user_reference
-            - service_reference
-            type: string
-    AlertCount:
-      type: object
-      properties:
-        triggered:
-          type: integer
-          description: The count of triggered alerts grouped into this incident
-        resolved:
-          type: integer
-          description: The count of resolved alerts grouped into this incident
-        all:
-          type: integer
-          description: The total count of alerts grouped into this incident
-    AlertGroupingParameters:
-      type: object
-      description: 'Defines how alerts on this service will be automatically grouped into incidents. Note that the alert grouping features are available only on certain plans. To turn grouping off set the type to null.
-
-        '
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - time
-          - intelligent
-          - content_based
-          - null
-        config:
-          anyOf:
-          - $ref: '#/components/schemas/FlexibleTimeWindowIntelligentAlertGroupingConfig'
-          - $ref: '#/components/schemas/TimeBasedAlertGroupingConfiguration'
-          - $ref: '#/components/schemas/ContentBasedAlertGroupingConfiguration'
     RelatedIncidentServiceDependencyBase:
       type: object
       properties:
@@ -4409,157 +4489,55 @@ components:
           readOnly: true
           format: url
           description: The API show URL at which the object is accessible.
-    ReachTriggerLimitLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - reach_trigger_limit_log_entry
-    UnacknowledgeLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - unacknowledge_log_entry
-    LogEntryReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - acknowledge_log_entry_reference
-            - annotate_log_entry_reference
-            - assign_log_entry_reference
-            - escalate_log_entry_reference
-            - exhaust_escalation_path_log_entry_reference
-            - notify_log_entry_reference
-            - reach_trigger_limit_log_entry_reference
-            - repeat_escalation_path_log_entry_reference
-            - resolve_log_entry_reference
-            - snooze_log_entry_reference
-            - trigger_log_entry_reference
-            - unacknowledge_log_entry_reference
-    AnnotateLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - annotate_log_entry
-    EscalationPolicyReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - escalation_policy_reference
-    TimeBasedAlertGroupingConfiguration:
+    ResolveReason:
       type: object
-      title: Time Grouping
-      description: The configuration for Time Based Alert Grouping
       properties:
-        timeout:
-          type: integer
-          description: The duration in minutes within which to automatically group incoming Alerts.  To continue grouping Alerts until the Incident is resolved, set this value to 0.
-    ReachAckLimitLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - reach_ack_limit_log_entry
-    LogEntry:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - acknowledge_log_entry
-            - annotate_log_entry
-            - assign_log_entry
-            - delegate_log_entry
-            - escalate_log_entry
-            - exhaust_escalation_path_log_entry
-            - notify_log_entry
-            - reach_ack_limit_log_entry
-            - reach_trigger_limit_log_entry
-            - repeat_escalation_path_log_entry
-            - resolve_log_entry
-            - snooze_log_entry
-            - trigger_log_entry
-            - unacknowledge_log_entry
-            - urgency_change_log_entry
-          created_at:
-            type: string
-            format: date-time
-            readOnly: true
-            description: Time at which the log entry was created.
-          channel:
-            $ref: '#/components/schemas/Channel'
-          agent:
-            $ref: '#/components/schemas/AgentReference'
-          note:
-            type: string
-            readOnly: true
-            description: Optional field containing a note, if one was included with the log entry.
-          contexts:
-            type: array
-            readOnly: true
-            description: Contexts to be included with the trigger such as links to graphs or images.
-            items:
-              $ref: '#/components/schemas/Context'
-          service:
-            $ref: '#/components/schemas/ServiceReference'
-          incident:
-            $ref: '#/components/schemas/IncidentReference'
-          teams:
-            type: array
-            readOnly: true
-            description: Will consist of references unless included
-            items:
-              $ref: '#/components/schemas/TeamReference'
-          event_details:
-            type: object
-            readOnly: true
-            properties:
-              description:
-                type: string
-                description: Additional details about the event.
-    IntegrationReference:
+        type:
+          type: string
+          description: The reason the incident was resolved. The only reason currently supported is merge.
+          default: merge_resolve_reason
+          enum:
+          - merge_resolve_reason
+        incident:
+          $ref: '#/components/schemas/IncidentReference'
+    EscalationTargetReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
+        description: The escalation target is the entity that will be assigned an incident upon escalation.
         properties:
           type:
-            type: string
             enum:
-            - aws_cloudwatch_inbound_integration_reference
-            - cloudkick_inbound_integration_reference
-            - event_transformer_api_inbound_integration_reference
-            - generic_email_inbound_integration_reference
-            - generic_events_api_inbound_integration_reference
-            - keynote_inbound_integration_reference
-            - nagios_inbound_integration_reference
-            - pingdom_inbound_integration_reference
-            - sql_monitor_inbound_integration_reference
-            - events_api_v2_inbound_integration_reference
-            - inbound_integration_reference
+            - user
+            - schedule
+            - user_reference
+            - schedule_reference
+            type: string
+    AlertCount:
+      type: object
+      properties:
+        triggered:
+          type: integer
+          description: The count of triggered alerts grouped into this incident
+        resolved:
+          type: integer
+          description: The count of resolved alerts grouped into this incident
+        all:
+          type: integer
+          description: The total count of alerts grouped into this incident
+    AgentReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        description: The agent (user, service or integration) that created or modified the Incident Log Entry.
+        properties:
+          type:
+            enum:
+            - user_reference
+            - service_reference
+            - integration_reference
+            type: string
+        readOnly: true
     RelatedIncidentMachineLearningRelationship:
       type: object
       description: 'The data for a type of relationship where the Incident is related due to our machine learning algorithm.
@@ -4590,156 +4568,226 @@ components:
             negative_feedback_count:
               type: integer
               description: The total number of times Users disagreed that the Incidents are related.
-    ContentBasedAlertGroupingConfiguration:
+    IncidentBody:
       type: object
-      title: Content Only Grouping
-      description: The configuration for Content Based Alert Grouping
       properties:
-        aggregate:
+        details:
+          type: object
+          description: Additional incident details.
+      required:
+      - type
+    Channel:
+      type: object
+      description: Polymorphic object representation of the means by which the action was channeled. Has different formats depending on type, indicated by channel[type]. Will be one of `auto`, `email`, `api`, `nagios`, or `timeout` if `agent[type]` is `service`. Will be one of `email`, `sms`, `website`, `web_trigger`, or `note` if `agent[type]` is `user`. See [below](https://developer.pagerduty.com/documentation/rest/log_entries/show#channel_types) for detailed information about channel formats.
+      properties:
+        type:
           type: string
-          description: Whether Alerts should be grouped if `all` or `any` specified fields match. If `all` is selected, an exact match on every specified field name must occur for Alerts to be grouped. If `any` is selected, Alerts will be grouped when there is an exact match on at least one of the specified fields.
-          enum:
-          - all, any
-        fields:
+          description: type
+        user:
+          type: object
+        team:
+          type: object
+        notification:
+          $ref: '#/components/schemas/Notification'
+        channel:
+          type: object
+          description: channel
+      required:
+      - type
+    EscalationRule:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        escalation_delay_in_minutes:
+          type: integer
+          description: The number of minutes before an unacknowledged incident escalates away from this rule.
+        targets:
           type: array
-          description: An array of strings which represent the fields with which to group against. Depending on the aggregate, Alerts will group if some or all the fields match.
+          minItems: 1
+          maxItems: 10
+          description: The targets an incident should be assigned to upon reaching this rule.
+          items:
+            $ref: '#/components/schemas/EscalationTargetReference'
+        escalation_rule_assignment_strategy:
+          type: string
+          description: The strategy used to assign the escalation rule to an incident.
+          enum:
+          - round_robin
+          - assign_to_everyone
+      required:
+      - escalation_delay_in_minutes
+      - targets
+      example:
+        escalation_delay_in_minutes: 30
+        targets:
+        - id: PAM4FGS
+          type: user_reference
+        - id: PI7DH85
+          type: schedule_reference
+    ConferenceBridge:
+      type: object
+      properties:
+        conference_number:
+          type: string
+          description: The phone number of the conference call for the conference bridge. Phone numbers should be formatted like +1 415-555-1212,,,,1234#, where a comma (,) represents a one-second wait and pound (#) completes access code input.
+        conference_url:
+          type: string
+          format: url
+          description: An URL for the conference bridge. This could be a link to a web conference or Slack channel.
+    FlexibleTimeWindowIntelligentAlertGroupingConfig:
+      type: object
+      title: Intelligent Alert Grouping
+      description: The configuration for Intelligent Alert Grouping. Note that this configuration is only available for certain plans.
+      properties:
         time_window:
           type: integer
           minimum: 300
-          maximum: 86400
-          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window up to 24 hours and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours (24 hours only applies to single-service settings). To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 <= time_window <= 3600 or 86400(i.e. 24 hours).
+          maximum: 3600
+          description: The maximum amount of time allowed between Alerts. Any Alerts arriving greater than `time_window` seconds apart will not be grouped together. This is a rolling time window and is counted from the most recently grouped alert. The window is extended every time a new alert is added to the group, up to 24 hours. To use the "recommended_time_window," set the value to 0, otherwise the value must be between 300 and 3600.
         recommended_time_window:
           readOnly: true
           type: integer
           description: In order to ensure your Service has the optimal grouping window, we use data science to calculate your Service`s average Alert inter-arrival time. We encourage customer`s to use this value, please set `time_window` to 0 to use the `recommended_time_window`.
-    NotificationRuleReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - assignment_notification_rule_reference
-    ResponderRequest:
+    NotificationSubscriberWithContext:
+      title: NotificationSubscriberWithContext
+      description: A reference of a subscriber entity with additional subscription context.
       type: object
-      properties:
-        incident:
-          $ref: '#/components/schemas/IncidentReference'
-        requester:
-          $ref: '#/components/schemas/UserReference'
-        requested_at:
-          type: string
-          description: The time the request was made
-        message:
-          type: string
-          description: The message sent with the responder request
-        responder_request_targets:
-          type: array
-          description: The array of targets the responder request is being sent to
-          items:
-            $ref: '#/components/schemas/ResponderRequestTargetReference'
-    SnoozeLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          changed_actions:
-            type: array
-            items:
-              $ref: '#/components/schemas/IncidentAction'
-          type:
-            type: string
-            enum:
-            - snooze_log_entry
-    AutoPauseNotificationsParameters:
-      title: AutoPauseNotificationsParameters
-      type: object
-      description: Defines how alerts on this service are automatically suspended for a period of time before triggering, when identified as likely being transient. Note that automatically pausing notifications is only available on certain plans.
-      properties:
-        enabled:
-          type: boolean
-          default: false
-          description: Indicates whether alerts should be automatically suspended when identified as transient
-        timeout:
-          type: integer
-          enum:
-          - 120
-          - 180
-          - 300
-          - 600
-          - 900
-          description: Indicates in seconds how long alerts should be suspended before triggering
       example:
-        enabled: true
-        timeout: 300
-    UrgencyChangeLogEntry:
+        subscriber_id: PD1234
+        subscriber_type: user
+      properties:
+        subscriber_id:
+          type: string
+          description: The ID of the entity being subscribed
+        subscriber_type:
+          type: string
+          description: The type of the entity being subscribed
+          enum:
+          - user
+          - team
+        has_indirect_subscription:
+          type: boolean
+          description: If this subcriber has an indirect subscription to this incident via another object
+        subscribed_via:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The id of the object this subscriber is subscribed via
+              name:
+                type: string
+                description: The type of the object this subscriber is subscribed via
+    AssignLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
+          assignees:
+            type: array
+            readOnly: true
+            description: An array of assigned Users for this log entry
+            items:
+              $ref: '#/components/schemas/UserReference'
           type:
             type: string
             enum:
-            - urgency_change_log_entry
-    EscalationTargetReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        description: The escalation target is the entity that will be assigned an incident upon escalation.
-        properties:
-          type:
-            enum:
-            - user
-            - schedule
-            - user_reference
-            - schedule_reference
-            type: string
-    ContactMethodReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - email_contact_method_reference
-            - phone_contact_method_reference
-            - push_notification_contact_method_reference
-            - sms_contact_method_reference
-    ResponderRequestTargetReference:
+            - assign_log_entry
+    StatusUpdate:
       type: object
       properties:
-        type:
-          type: string
-          description: The type of target (either a user or an escalation policy)
         id:
           type: string
-          description: The id of the user or escalation policy
-        summary:
+        message:
           type: string
-        incident_responders:
-          type: array
-          description: An array of responders associated with the specified incident
-          items:
-            $ref: '#/components/schemas/IncidentsRespondersReference'
-    IncidentUrgencyRule:
+          description: The message of the status update.
+        created_at:
+          type: string
+          description: The date/time when this status update was created.
+        sender:
+          $ref: '#/components/schemas/UserReference'
+        subject:
+          type: string
+          description: The subject of the custom html email status update. Present if included in request body.
+        html_message:
+          type: string
+          description: The html content of the custom html email status update. Present if included in request body.
+    DelegateLogEntry:
       allOf:
-      - $ref: '#/components/schemas/IncidentUrgencyType'
+      - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
-          during_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
-          outside_support_hours:
-            $ref: '#/components/schemas/IncidentUrgencyType'
+          assignees:
+            type: array
+            readOnly: true
+            description: An array of assigned Users for this log entry
+            items:
+              $ref: '#/components/schemas/UserReference'
+          type:
+            type: string
+            enum:
+            - delegate_log_entry
   parameters:
-    incident_list_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page. Maximum of 10000.
+    since_incidents:
       schema:
-        type: integer
+        type: string
+      in: query
+      name: since
+      description: The start of the date range over which you want to search. Maximum range is 6 months and default is 1 month.
+    additional_details:
+      name: additional_details[]
+      in: query
+      description: Array of additional attributes to any of the returned incidents for related incidents.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - incident
+        uniqueItems: true
+    include_log_entry:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - incidents
+        - services
+        - channels
+        - teams
+        uniqueItems: true
+    time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the account time zone.
+      schema:
+        type: string
+        format: tzinfo
+    statuses_incidents:
+      name: statuses[]
+      in: query
+      description: 'Return only incidents with the given statuses. To query multiple statuses, pass `statuses[]` more than once, for example: `https://api.pagerduty.com/incidents?statuses[]=triggered&statuses[]=acknowledged`. (More status codes may be introduced in the future.)'
+      explode: true
+      schema:
+        type: string
+        enum:
+        - triggered
+        - acknowledged
+        - resolved
+        uniqueItems: true
+    until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
     include_incidents:
       name: include[]
       description: Array of additional details to include.
@@ -4759,31 +4807,15 @@ components:
         - teams
         - users
         uniqueItems: true
-    alert_key:
-      name: alert_key
+    incident_services:
+      name: service_ids[]
       in: query
-      description: Alert de-duplication key.
-      schema:
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    include_log_entry:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
+      description: Returns only the incidents associated with the passed service(s). This expects one or more service IDs.
       explode: true
       schema:
-        type: string
-        enum:
-        - incidents
-        - services
-        - channels
-        - teams
+        type: array
+        items:
+          type: string
         uniqueItems: true
     statuses_incident_alerts:
       name: statuses[]
@@ -4796,21 +4828,113 @@ components:
         - triggered
         - resolved
         uniqueItems: true
-    until_incidents:
-      schema:
-        type: string
+    sort_by_incidents:
+      name: sort_by
       in: query
-      name: until
-      description: The end of the date range over which you want to search. Maximum range is 6 months and default is 1 month.
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
+      description: Used to specify both the field you wish to sort the results on (incident_number/created_at/resolved_at/urgency), as well as the direction (asc/desc) of the results. The sort_by field and direction should be separated by a colon. A maximum of two fields can be included, separated by a comma. Sort direction defaults to ascending. The account must have the `urgencies` ability to sort by the urgency.
+      style: form
+      explode: false
       schema:
         type: array
         items:
           type: string
+        maxItems: 2
+        uniqueItems: true
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    date_range:
+      name: date_range
+      in: query
+      description: When set to all, the since and until parameters and defaults are ignored.
+      schema:
+        type: string
+        enum:
+        - all
+    from_header:
+      name: From
+      in: header
+      description: The email address of a valid user associated with the account making the request.
+      required: true
+      schema:
+        type: string
+        format: email
+    past_incidents_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in the response body is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated with the total number of Past Incidents.
+
+        '
+      schema:
+        type: boolean
+        default: false
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    log_entry_is_overview:
+      name: is_overview
+      in: query
+      description: If `true`, will return a subset of log entries that show only the most important changes to the incident.
+      required: false
+      schema:
+        type: boolean
+        default: false
+    include_incident_alerts:
+      name: include[]
+      in: query
+      description: Array of additional details to include.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services
+        - first_trigger_log_entries
+        - incidents
+        uniqueItems: true
+    past_incidents_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results to be returned in the response.
+      schema:
+        type: integer
+        default: 5
+        minimum: 1
+        maximum: 999
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    incident_list_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page. Maximum of 10000.
+      schema:
+        type: integer
+    incident_urgencies:
+      name: urgencies[]
+      in: query
+      description: Array of the urgencies of the incidents to be returned. Defaults to all urgencies. Account must have the `urgencies` ability to do this.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - high
+        - low
         uniqueItems: true
     business_service_id:
       name: business_service_id
@@ -4836,25 +4960,26 @@ components:
         - resolved_at:desc
         maxItems: 2
         uniqueItems: true
-    include_incident_alerts:
-      name: include[]
+    team_ids:
+      name: team_ids[]
       in: query
-      description: Array of additional details to include.
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
       explode: true
       schema:
-        type: string
-        enum:
-        - services
-        - first_trigger_log_entries
-        - incidents
+        type: array
+        items:
+          type: string
         uniqueItems: true
-    since:
-      name: since
+    incident_assigned_to_user:
+      name: user_ids[]
       in: query
-      description: The start of the date range over which you want to search.
+      description: 'Returns only the incidents currently assigned to the passed user(s). This expects one or more user IDs. Note: When using the assigned_to_user filter, you will only receive incidents with statuses of triggered or acknowledged. This is because resolved incidents are not assigned to any user.'
+      explode: true
       schema:
-        type: string
-        format: date-time
+        type: array
+        items:
+          type: string
+        uniqueItems: true
     offset_total:
       name: total
       in: query
@@ -4868,12 +4993,26 @@ components:
       schema:
         default: false
         type: boolean
+    since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
     incident_key:
       name: incident_key
       in: query
       description: Incident de-duplication key. Incidents with child alerts do not have an incident key; querying by incident key will return incidents whose alerts have alert_key matching the given incident key.
       schema:
         type: string
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
     include_incident:
       name: include[]
       in: query
@@ -4894,38 +5033,6 @@ components:
         - teams
         - users
         uniqueItems: true
-    from_header:
-      name: From
-      in: header
-      description: The email address of a valid user associated with the account making the request.
-      required: true
-      schema:
-        type: string
-        format: email
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    date_range:
-      name: date_range
-      in: query
-      description: When set to all, the since and until parameters and defaults are ignored.
-      schema:
-        type: string
-        enum:
-        - all
-    log_entry_is_overview:
-      name: is_overview
-      in: query
-      description: If `true`, will return a subset of log entries that show only the most important changes to the incident.
-      required: false
-      schema:
-        type: boolean
-        default: false
     alert_id:
       name: alert_id
       in: path
@@ -4933,92 +5040,18 @@ components:
       required: true
       schema:
         type: string
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
+    until_incidents:
       schema:
-        type: integer
-    sort_by_incidents:
-      name: sort_by
+        type: string
       in: query
-      description: Used to specify both the field you wish to sort the results on (incident_number/created_at/resolved_at/urgency), as well as the direction (asc/desc) of the results. The sort_by field and direction should be separated by a colon. A maximum of two fields can be included, separated by a comma. Sort direction defaults to ascending. The account must have the `urgencies` ability to sort by the urgency.
-      style: form
-      explode: false
-      schema:
-        type: array
-        items:
-          type: string
-        maxItems: 2
-        uniqueItems: true
-    until:
       name: until
+      description: The end of the date range over which you want to search. Maximum range is 6 months and default is 1 month.
+    alert_key:
+      name: alert_key
       in: query
-      description: The end of the date range over which you want to search.
+      description: Alert de-duplication key.
       schema:
         type: string
-        format: date-time
-    past_incidents_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results to be returned in the response.
-      schema:
-        type: integer
-        default: 5
-        minimum: 1
-        maximum: 999
-    incident_urgencies:
-      name: urgencies[]
-      in: query
-      description: Array of the urgencies of the incidents to be returned. Defaults to all urgencies. Account must have the `urgencies` ability to do this.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - high
-        - low
-        uniqueItems: true
-    statuses_incidents:
-      name: statuses[]
-      in: query
-      description: 'Return only incidents with the given statuses. To query multiple statuses, pass `statuses[]` more than once, for example: `https://api.pagerduty.com/incidents?statuses[]=triggered&statuses[]=acknowledged`. (More status codes may be introduced in the future.)'
-      explode: true
-      schema:
-        type: string
-        enum:
-        - triggered
-        - acknowledged
-        - resolved
-        uniqueItems: true
-    time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the account time zone.
-      schema:
-        type: string
-        format: tzinfo
-    incident_services:
-      name: service_ids[]
-      in: query
-      description: Returns only the incidents associated with the passed service(s). This expects one or more service IDs.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    additional_details:
-      name: additional_details[]
-      in: query
-      description: Array of additional attributes to any of the returned incidents for related incidents.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - incident
-        uniqueItems: true
     header_Content-Type:
       name: Content-Type
       in: header
@@ -5028,58 +5061,31 @@ components:
         default: application/json
         enum:
         - application/json
-    incident_assigned_to_user:
-      name: user_ids[]
-      in: query
-      description: 'Returns only the incidents currently assigned to the passed user(s). This expects one or more user IDs. Note: When using the assigned_to_user filter, you will only receive incidents with statuses of triggered or acknowledged. This is because resolved incidents are not assigned to any user.'
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    past_incidents_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in the response body is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated with the total number of Past Incidents.
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable Entity. Some arguments failed validation checks.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
 
         '
-      schema:
-        type: boolean
-        default: false
-    since_incidents:
-      schema:
-        type: string
-      in: query
-      name: since
-      description: The start of the date range over which you want to search. Maximum range is 6 months and default is 1 month.
-  responses:
-    RequestEntityTooLarge:
-      description: Caller provided a request that is too large to process.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
     ArgumentError:
       description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
       content:
         application/json:
           schema:
@@ -5100,10 +5106,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    RequestEntityTooLarge:
+      description: Caller provided a request that is too large to process.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
 
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
       content:
@@ -5137,24 +5155,6 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    UnprocessableEntity:
-      description: Unprocessable Entity. Some arguments failed validation checks.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   securitySchemes:
     api_key:
       type: apiKey
