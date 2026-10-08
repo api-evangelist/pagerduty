@@ -801,6 +801,10 @@ apis:
   - type: AsyncAPI
     url: asyncapi/pagerduty-events-asyncapi.yml
 common:
+- type: RateLimits
+  url: rate-limits/pagerduty-rate-limits.yml
+- type: FinOps
+  url: finops/pagerduty-finops.yml
 - type: VendorFacets
   url: vendor-facets/pagerduty-vendor-facets.yml
 - type: Pricing
