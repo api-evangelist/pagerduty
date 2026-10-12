@@ -8,6 +8,7 @@ checked:
 - https://composio.dev/toolkits/pagerduty
 - https://monid.ai/tools/pagerduty
 - https://n8n.io/integrations/pagerduty/
+- https://www.pagerduty.com/integrations/
 - https://zapier.com/apps/pagerduty/integrations
 summary: null
 marketplace_apps:
@@ -680,6 +681,14 @@ marketplace_apps:
   - key: PAGERDUTY_UPDATE_USER_NOTIFICATION_RULE_BY_ID
   - key: PAGERDUTY_UPDATE_USER_ROLE_ON_TEAM
   - key: PAGERDUTY_UPDATE_WORKFLOW_INTEGRATION_CONNECTION
+- marketplace: own
+  channel: partner-built
+  app: pagerduty
+  url: https://www.pagerduty.com/integrations/
+  app_count: null
+  adapter: sweep-observability.py:unreadable
+  listed: 0
+  status: not-machine-readable (HTTP 200; client-rendered; no per-integration links or builder signal in the HTML)
 edges:
 - partner_name: Slack
   partner: slack
