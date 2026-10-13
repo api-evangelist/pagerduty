@@ -1,0 +1,89 @@
+# DERIVED by derive-integration-map.py (roadmap#949): each integration workflow, step by step,
+# resolved to spec file -> tag -> business capability (Turbo EA, CC BY 4.0) and the operation's
+# phrasing intent. Read from our own files; an unmapped link says why.
+slug: pagerduty
+workflows:
+- file: pagerduty-slack-new-message-incident.yml
+  title: PagerDuty Slack new message incident
+  partner: slack
+  template: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack
+  repos:
+  - slack
+  - pagerduty
+  steps:
+  - step: read-latest-message
+    repo: slack
+    spec_file: slack-conversations-api-openapi.yml
+    operationId: getConversationsHistory
+    tag: Conversations
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Read a channel's message history
+    effect: read
+    unmapped: no capability edge for this spec file
+  - step: create-incident
+    repo: pagerduty
+    spec_file: pagerduty-incidents-api-openapi.yml
+    operationId: createIncident
+    tag: Incidents
+    capability_id: BC-4220.30
+    capability: Incident Response Management
+    capability_l1: BC-4220
+    intent: null
+    effect: null
+    unmapped: null
+  connects:
+    slack:
+      capabilities: []
+      tags:
+      - Conversations
+    pagerduty:
+      capabilities:
+      - BC-4220.30
+      tags:
+      - Incidents
+  intents:
+  - Read a channel's message history
+- file: pagerduty-slack-on-call-channel-topic.yml
+  title: PagerDuty Slack on-call channel topic
+  partner: slack
+  template: https://zapier.com/apps/schedule/integrations/slack/255646764/update-slack-channel-topic-with-on-call-user-from-pagerduty
+  repos:
+  - pagerduty
+  - slack
+  steps:
+  - step: get-on-call
+    repo: pagerduty
+    spec_file: pagerduty-on-calls-api-openapi.yml
+    operationId: listOnCalls
+    tag: On-Calls
+    capability_id: BC-4220.30
+    capability: Incident Response Management
+    capability_l1: BC-4220
+    intent: null
+    effect: null
+    unmapped: null
+  - step: set-topic
+    repo: slack
+    spec_file: slack-conversations-api-openapi.yml
+    operationId: postConversationsSettopic
+    tag: Conversations
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Set a channel's topic
+    effect: write
+    unmapped: no capability edge for this spec file
+  connects:
+    pagerduty:
+      capabilities:
+      - BC-4220.30
+      tags:
+      - On-Calls
+    slack:
+      capabilities: []
+      tags:
+      - Conversations
+  intents:
+  - Set a channel's topic

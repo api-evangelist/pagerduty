@@ -1,0 +1,64 @@
+arazzo: 1.0.1
+info:
+  title: PagerDuty Slack on-call channel topic
+  summary: Update Slack channel topic with on-call user from PagerDuty
+  description: Looks up who is on call for a PagerDuty schedule and sets a Slack channel topic to that user's name. Recreated from the Zapier template linked in x-integration.
+  version: 1.0.0
+sourceDescriptions:
+- name: pagerdutyOnCalls
+  url: https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/openapi/pagerduty-on-calls-api-openapi.yml
+  type: openapi
+- name: slackConversations
+  url: https://raw.githubusercontent.com/api-evangelist/slack/refs/heads/main/openapi/slack-conversations-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pagerduty-on-call-to-slack-topic
+  summary: Set a Slack topic to the current PagerDuty on-call
+  description: Reads current on-calls for a schedule and writes the on-call user into the channel topic.
+  inputs:
+    type: object
+    properties:
+      scheduleId:
+        type: string
+      slackToken:
+        type: string
+      channel:
+        type: string
+  steps:
+  - stepId: get-on-call
+    description: List current on-calls for the schedule.
+    operationId: $sourceDescriptions.pagerdutyOnCalls.listOnCalls
+    parameters:
+    - name: schedule_ids[]
+      in: query
+      value:
+      - $inputs.scheduleId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      onCallUser: $response.body#/oncalls/0/user/summary
+  - stepId: set-topic
+    description: Set the Slack channel topic to the on-call user.
+    operationId: $sourceDescriptions.slackConversations.postConversationsSettopic
+    parameters:
+    - name: token
+      in: header
+      value: $inputs.slackToken
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        channel: $inputs.channel
+        topic: $steps.get-on-call.outputs.onCallUser
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    onCallUser: $steps.get-on-call.outputs.onCallUser
+x-integration:
+  partner: slack
+  template: https://zapier.com/apps/schedule/integrations/slack/255646764/update-slack-channel-topic-with-on-call-user-from-pagerduty
+  edge_evidence: https://zapier.com/apps/schedule/integrations/slack/255646764/update-slack-channel-topic-with-on-call-user-from-pagerduty
+  edge_type: marketplace
+  method: generated
+  generated: '2026-10-13'
+  generator: claude-opus-5.5 market-workflows
+  guessed_steps: []

@@ -1,0 +1,80 @@
+arazzo: 1.0.1
+info:
+  title: PagerDuty Slack new message incident
+  summary: Trigger PagerDuty incidents for new messages in Slack
+  description: Reads the newest message in a Slack channel and opens a PagerDuty incident on a service with the message text as the title. Recreated from the Zapier template linked in x-integration.
+  version: 1.0.0
+sourceDescriptions:
+- name: slackConversations
+  url: https://raw.githubusercontent.com/api-evangelist/slack/refs/heads/main/openapi/slack-conversations-api-openapi.yml
+  type: openapi
+- name: pagerdutyIncidents
+  url: https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/openapi/pagerduty-incidents-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: slack-message-to-pagerduty-incident
+  summary: Open a PagerDuty incident from the latest Slack message
+  description: Reads the latest message in a channel and creates a PagerDuty incident from it.
+  inputs:
+    type: object
+    properties:
+      slackToken:
+        type: string
+      channel:
+        type: string
+        description: Slack channel ID to watch
+      serviceId:
+        type: string
+        description: PagerDuty service ID
+      fromEmail:
+        type: string
+        description: Email of a valid PagerDuty user (From header)
+  steps:
+  - stepId: read-latest-message
+    description: Read the latest message in the Slack channel.
+    operationId: $sourceDescriptions.slackConversations.getConversationsHistory
+    parameters:
+    - name: token
+      in: query
+      value: $inputs.slackToken
+    - name: channel
+      in: query
+      value: $inputs.channel
+    - name: limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      text: $response.body#/messages/0/text
+  - stepId: create-incident
+    description: Create the PagerDuty incident.
+    operationId: $sourceDescriptions.pagerdutyIncidents.createIncident
+    parameters:
+    - name: From
+      in: header
+      value: $inputs.fromEmail
+    requestBody:
+      contentType: application/json
+      payload:
+        incident:
+          type: incident
+          title: $steps.read-latest-message.outputs.text
+          service:
+            id: $inputs.serviceId
+            type: service_reference
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      incidentId: $response.body#/incident/id
+  outputs:
+    incidentId: $steps.create-incident.outputs.incidentId
+x-integration:
+  partner: slack
+  template: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack
+  edge_evidence: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack
+  edge_type: marketplace
+  method: generated
+  generated: '2026-10-13'
+  generator: claude-opus-5.5 market-workflows
+  guessed_steps: []
