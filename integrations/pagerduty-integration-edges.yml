@@ -6,6 +6,8 @@ source:
 - https://composio.dev/toolkits/pagerduty
 checked:
 - https://composio.dev/toolkits/pagerduty
+- https://github.com/marketplace?type=actions
+- https://marketplace.atlassian.com/
 - https://monid.ai/tools/pagerduty
 - https://n8n.io/integrations/pagerduty/
 - https://www.pagerduty.com/integrations/
@@ -1020,6 +1022,42 @@ edges:
   direction: third-party
   category: Phone & SMS
   partner_url: https://telnyx.com/
+- partner_name: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/actions/pagerduty-change-events
+  listing_count: 1
+  apps:
+  - PagerDuty Change Events
+  publisher_name: PagerDuty
+  badges:
+  - Verified creator
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: Atlassian Marketplace
+  partner: atlassian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: atlassian
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.atlassian.com/vendors/1212216/pagerduty
+  listing_count: 6
+  apps:
+  - PagerDuty for Jira Cloud
+  - PagerDuty for Jira Server & Data Center
+  - PagerDuty for Jira Cloud (EU only version)
+  - PagerDuty for Jira Server & Data Center (EU only version)
+  - PagerDuty Incident Workflows for Confluence (EU only)
+  publisher_name: PagerDuty
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 templates:
 - title: Trigger PagerDuty incidents for new messages in Slack
   url: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack
