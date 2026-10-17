@@ -615,6 +615,62 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error the PagerDuty server experienced an error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
   schemas:
     CustomFieldsFieldValue:
       type: object
@@ -781,16 +837,18 @@ components:
       - name
       - display_name
       - field_type
-    CustomFieldsFieldOption:
+    CustomFieldsFieldWithOptions:
       allOf:
-      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
+      - $ref: '#/components/schemas/CustomFieldsField'
       - type: object
-        required:
-        - id
-        - type
-        - data
-        - created_at
-        - updated_at
+        properties:
+          field_options:
+            type:
+            - array
+            - 'null'
+            description: The fixed list of value options that may be stored in this field.
+            items:
+              $ref: '#/components/schemas/CustomFieldsFieldOption'
     CustomFieldsEditableFieldOption:
       type: object
       properties:
@@ -837,18 +895,16 @@ components:
       - created_at
       - updated_at
       description: ''
-    CustomFieldsFieldWithOptions:
+    CustomFieldsFieldOption:
       allOf:
-      - $ref: '#/components/schemas/CustomFieldsField'
+      - $ref: '#/components/schemas/CustomFieldsEditableFieldOption'
       - type: object
-        properties:
-          field_options:
-            type:
-            - array
-            - 'null'
-            description: The fixed list of value options that may be stored in this field.
-            items:
-              $ref: '#/components/schemas/CustomFieldsFieldOption'
+        required:
+        - id
+        - type
+        - data
+        - created_at
+        - updated_at
     CustomFieldsEditableField:
       type: object
       properties:
@@ -864,66 +920,17 @@ components:
           - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/3'
           - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/4'
           - $ref: '#/components/schemas/CustomFieldsFieldValue/properties/value/oneOf/5'
-  responses:
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    InternalServerError:
-      description: Internal Server Error the PagerDuty server experienced an error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
     field_id:
       name: field_id
       description: The ID of the field.
+      in: path
+      required: true
+      schema:
+        type: string
+    field_option_id:
+      name: field_option_id
+      description: The ID of the field option.
       in: path
       required: true
       schema:
@@ -938,13 +945,6 @@ components:
         enum:
         - field_options
         uniqueItems: true
-    field_option_id:
-      name: field_option_id
-      description: The ID of the field option.
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     api_key:
       type: apiKey

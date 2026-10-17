@@ -292,210 +292,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-  parameters:
-    since:
-      name: since
-      in: query
-      description: The start of the date range over which you want to search.
-      schema:
-        type: string
-        format: date-time
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    include_log_entry:
-      name: include[]
-      in: query
-      description: Array of additional Models to include in response.
-      explode: true
-      schema:
-        type: string
-        enum:
-        - incidents
-        - services
-        - channels
-        - teams
-        uniqueItems: true
-    time_zone:
-      name: time_zone
-      in: query
-      description: Time zone in which results will be rendered. This will default to the account time zone.
-      schema:
-        type: string
-        format: tzinfo
-    until:
-      name: until
-      in: query
-      description: The end of the date range over which you want to search.
-      schema:
-        type: string
-        format: date-time
-    from_header:
-      name: From
-      in: header
-      description: The email address of a valid user associated with the account making the request.
-      required: true
-      schema:
-        type: string
-        format: email
-    team_ids:
-      name: team_ids[]
-      in: query
-      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-        uniqueItems: true
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
-    log_entry_is_overview:
-      name: is_overview
-      in: query
-      description: If `true`, will return a subset of log entries that show only the most important changes to the incident.
-      required: false
-      schema:
-        type: boolean
-        default: false
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
   schemas:
-    UserReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - user_reference
-    NotifyLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          created_at:
-            type: string
-            format: date-time
-            readOnly: true
-            description: Time at which the log entry was created
-          user:
-            $ref: '#/components/schemas/UserReference'
-          type:
-            type: string
-            enum:
-            - notify_log_entry
     Reference:
       allOf:
       - $ref: '#/components/schemas/Tag/allOf/0'
@@ -503,28 +300,30 @@ components:
         required:
         - type
         - id
-    SnoozeLogEntry:
+    TeamReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - team_reference
+    DelegateLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
-          changed_actions:
+          assignees:
             type: array
+            readOnly: true
+            description: An array of assigned Users for this log entry
             items:
-              $ref: '#/components/schemas/IncidentAction'
+              $ref: '#/components/schemas/UserReference'
           type:
             type: string
             enum:
-            - snooze_log_entry
-    UrgencyChangeLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - urgency_change_log_entry
+            - delegate_log_entry
     TriggerLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
@@ -534,6 +333,156 @@ components:
             type: string
             enum:
             - trigger_log_entry
+    AssignLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          assignees:
+            type: array
+            readOnly: true
+            description: An array of assigned Users for this log entry
+            items:
+              $ref: '#/components/schemas/UserReference'
+          type:
+            type: string
+            enum:
+            - assign_log_entry
+    Pagination:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Echoes offset pagination property.
+          readOnly: true
+        limit:
+          type: integer
+          description: Echoes limit pagination property.
+          readOnly: true
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
+          readOnly: true
+        total:
+          type:
+          - integer
+          - 'null'
+          description: The total number of records matching the given query.
+          readOnly: true
+    ResolveLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - resolve_log_entry
+    AnnotateLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - annotate_log_entry
+    ExhaustEscalationPathLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - exhaust_escalation_path_log_entry
+    ReachAckLimitLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - reach_ack_limit_log_entry
+    UserReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user_reference
+    ServiceReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - service_reference
+    UrgencyChangeLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - urgency_change_log_entry
+    AcknowledgeLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          acknowledgement_timeout:
+            type: integer
+            description: Duration for which the acknowledgement lasts, in seconds. Services can contain an `acknowledgement_timeout` property, which specifies the length of time acknowledgements should last for. Each time an incident is acknowledged, this timeout is copied into the acknowledgement log entry. This property is optional, as older log entries may not contain it. It may also be `null`, as acknowledgements can be performed on incidents whose services have no `acknowledgement_timeout` set.
+          type:
+            type: string
+            enum:
+            - acknowledgement_log_entry
+    IncidentAction:
+      description: An incident action is a pending change to an incident that will automatically happen at some future time.
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - unacknowledge
+          - escalate
+          - resolve
+          - urgency_change
+        at:
+          type: string
+          format: date-time
+        to:
+          description: The urgency that the incident will change to. This field is only present when the type is `urgency_change`.
+          type: string
+          enum:
+          - high
+      discriminator:
+        propertyName: type
+      required:
+      - type
+      - at
+    EscalateLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          assignees:
+            type: array
+            readOnly: true
+            description: An array of assigned Users for this log entry
+            items:
+              $ref: '#/components/schemas/UserReference'
+          type:
+            type: string
+            enum:
+            - escalate_log_entry
     Context:
       type: object
       discriminator:
@@ -556,7 +505,7 @@ components:
           description: The alternate display for an image
       required:
       - type
-    RepeatEscalationPathLogEntry:
+    ReachTriggerLimitLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
@@ -564,16 +513,7 @@ components:
           type:
             type: string
             enum:
-            - repeat_escalation_path_log_entry
-    ExhaustEscalationPathLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - exhaust_escalation_path_log_entry
+            - reach_trigger_limit_log_entry
     Tag:
       allOf:
       - type: object
@@ -623,67 +563,6 @@ components:
         example:
           type: tag
           label: Batman
-    AcknowledgeLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          acknowledgement_timeout:
-            type: integer
-            description: Duration for which the acknowledgement lasts, in seconds. Services can contain an `acknowledgement_timeout` property, which specifies the length of time acknowledgements should last for. Each time an incident is acknowledged, this timeout is copied into the acknowledgement log entry. This property is optional, as older log entries may not contain it. It may also be `null`, as acknowledgements can be performed on incidents whose services have no `acknowledgement_timeout` set.
-          type:
-            type: string
-            enum:
-            - acknowledgement_log_entry
-    IncidentReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - incident_reference
-    ServiceReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - service_reference
-    AgentReference:
-      allOf:
-      - $ref: '#/components/schemas/Reference'
-      - type: object
-        description: The agent (user, service or integration) that created or modified the Incident Log Entry.
-        properties:
-          type:
-            enum:
-            - user_reference
-            - service_reference
-            - integration_reference
-            type: string
-        readOnly: true
-    ResolveLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - resolve_log_entry
-    AnnotateLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - annotate_log_entry
     Channel:
       type: object
       description: Polymorphic object representation of the means by which the action was channeled. Has different formats depending on type, indicated by channel[type]. Will be one of `auto`, `email`, `api`, `nagios`, or `timeout` if `agent[type]` is `service`. Will be one of `email`, `sms`, `website`, `web_trigger`, or `note` if `agent[type]` is `user`. See [below](https://developer.pagerduty.com/documentation/rest/log_entries/show#channel_types) for detailed information about channel formats.
@@ -761,64 +640,7 @@ components:
               description:
                 type: string
                 description: Additional details about the event.
-    IncidentAction:
-      description: An incident action is a pending change to an incident that will automatically happen at some future time.
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - unacknowledge
-          - escalate
-          - resolve
-          - urgency_change
-        at:
-          type: string
-          format: date-time
-        to:
-          description: The urgency that the incident will change to. This field is only present when the type is `urgency_change`.
-          type: string
-          enum:
-          - high
-      discriminator:
-        propertyName: type
-      required:
-      - type
-      - at
-    AssignLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          assignees:
-            type: array
-            readOnly: true
-            description: An array of assigned Users for this log entry
-            items:
-              $ref: '#/components/schemas/UserReference'
-          type:
-            type: string
-            enum:
-            - assign_log_entry
-    UnacknowledgeLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - unacknowledge_log_entry
-    ReachTriggerLimitLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - reach_trigger_limit_log_entry
-    TeamReference:
+    IncidentReference:
       allOf:
       - $ref: '#/components/schemas/Reference'
       - type: object
@@ -826,28 +648,20 @@ components:
           type:
             type: string
             enum:
-            - team_reference
-    Pagination:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Echoes offset pagination property.
-          readOnly: true
-        limit:
-          type: integer
-          description: Echoes limit pagination property.
-          readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
-          readOnly: true
-        total:
+            - incident_reference
+    AgentReference:
+      allOf:
+      - $ref: '#/components/schemas/Reference'
+      - type: object
+        description: The agent (user, service or integration) that created or modified the Incident Log Entry.
+        properties:
           type:
-          - integer
-          - 'null'
-          description: The total number of records matching the given query.
-          readOnly: true
+            enum:
+            - user_reference
+            - service_reference
+            - integration_reference
+            type: string
+        readOnly: true
     Notification:
       type: object
       properties:
@@ -881,45 +695,231 @@ components:
           type: string
         ? ''
         : type: string
-    ReachAckLimitLogEntry:
+    NotifyLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
-          type:
+          created_at:
             type: string
-            enum:
-            - reach_ack_limit_log_entry
-    DelegateLogEntry:
-      allOf:
-      - $ref: '#/components/schemas/LogEntry'
-      - type: object
-        properties:
-          assignees:
-            type: array
+            format: date-time
             readOnly: true
-            description: An array of assigned Users for this log entry
-            items:
-              $ref: '#/components/schemas/UserReference'
+            description: Time at which the log entry was created
+          user:
+            $ref: '#/components/schemas/UserReference'
           type:
             type: string
             enum:
-            - delegate_log_entry
-    EscalateLogEntry:
+            - notify_log_entry
+    UnacknowledgeLogEntry:
       allOf:
       - $ref: '#/components/schemas/LogEntry'
       - type: object
         properties:
-          assignees:
-            type: array
-            readOnly: true
-            description: An array of assigned Users for this log entry
-            items:
-              $ref: '#/components/schemas/UserReference'
           type:
             type: string
             enum:
-            - escalate_log_entry
+            - unacknowledge_log_entry
+    RepeatEscalationPathLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - repeat_escalation_path_log_entry
+    SnoozeLogEntry:
+      allOf:
+      - $ref: '#/components/schemas/LogEntry'
+      - type: object
+        properties:
+          changed_actions:
+            type: array
+            items:
+              $ref: '#/components/schemas/IncidentAction'
+          type:
+            type: string
+            enum:
+            - snooze_log_entry
+  responses:
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+  parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    team_ids:
+      name: team_ids[]
+      in: query
+      description: An array of team IDs. Only results related to these teams will be returned. Account must have the `teams` ability to use this parameter.
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
+    until:
+      name: until
+      in: query
+      description: The end of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    from_header:
+      name: From
+      in: header
+      description: The email address of a valid user associated with the account making the request.
+      required: true
+      schema:
+        type: string
+        format: email
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    log_entry_is_overview:
+      name: is_overview
+      in: query
+      description: If `true`, will return a subset of log entries that show only the most important changes to the incident.
+      required: false
+      schema:
+        type: boolean
+        default: false
+    time_zone:
+      name: time_zone
+      in: query
+      description: Time zone in which results will be rendered. This will default to the account time zone.
+      schema:
+        type: string
+        format: tzinfo
+    since:
+      name: since
+      in: query
+      description: The start of the date range over which you want to search.
+      schema:
+        type: string
+        format: date-time
+    include_log_entry:
+      name: include[]
+      in: query
+      description: Array of additional Models to include in response.
+      explode: true
+      schema:
+        type: string
+        enum:
+        - incidents
+        - services
+        - channels
+        - teams
+        uniqueItems: true
   securitySchemes:
     api_key:
       type: apiKey

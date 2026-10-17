@@ -313,39 +313,6 @@ paths:
       - $ref: '#/components/parameters/url_slug'
       - $ref: '#/components/parameters/impacts_additional_fields'
 components:
-  parameters:
-    url_slug:
-      name: url_slug
-      in: path
-      description: The `url_slug` for a status dashboard
-      required: true
-      schema:
-        type: string
-    id:
-      name: id
-      description: The ID of the resource.
-      in: path
-      required: true
-      schema:
-        type: string
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    impacts_additional_fields:
-      name: additional_fields[]
-      in: query
-      description: Provides access to additional fields such as highest priority per business service and total impacted count
-      explode: true
-      schema:
-        type: string
-        enum:
-        - services.highest_impacting_priority
-        - total_impacted_count
   responses:
     Forbidden:
       description: 'Caller is not authorized to view the requested resource.
@@ -357,18 +324,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
       content:
         application/json:
           schema:
@@ -400,8 +357,18 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -412,28 +379,59 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
+  parameters:
+    id:
+      name: id
+      description: The ID of the resource.
+      in: path
+      required: true
+      schema:
+        type: string
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    url_slug:
+      name: url_slug
+      in: path
+      description: The `url_slug` for a status dashboard
+      required: true
+      schema:
+        type: string
+    impacts_additional_fields:
+      name: additional_fields[]
+      in: query
+      description: Provides access to additional fields such as highest priority per business service and total impacted count
+      explode: true
+      schema:
+        type: string
+        enum:
+        - services.highest_impacting_priority
+        - total_impacted_count
   schemas:
-    StatusDashboard:
-      title: StatusDashboard
-      type: object
-      properties:
-        id:
-          type: string
-        url_slug:
-          type: string
-        name:
-          type: string
-    LiveListResponse:
+    CursorPagination:
       type: object
       properties:
         limit:
           type: integer
-          description: Echoes limit pagination property.
+          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
           readOnly: true
-        more:
-          type: boolean
-          description: Indicates if there are additional records to return
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
+
+            '
+          example: dXNlcjaVMzc5V0ZYTlo=
           readOnly: true
+      required:
+      - limit
+      - next_cursor
     Impact:
       title: Impact
       type: object
@@ -470,25 +468,27 @@ components:
                 order:
                   type: integer
                   readOnly: true
-    CursorPagination:
+    StatusDashboard:
+      title: StatusDashboard
+      type: object
+      properties:
+        id:
+          type: string
+        url_slug:
+          type: string
+        name:
+          type: string
+    LiveListResponse:
       type: object
       properties:
         limit:
           type: integer
-          description: The minimum of the `limit` parameter used in the request or the maximum request size of the API.
+          description: Echoes limit pagination property.
           readOnly: true
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: 'An opaque string than will deliver the next set of results when provided as the `cursor` parameter in a subsequent request.  A `null` value for this field indicates that there are no additional results.
-
-            '
-          example: dXNlcjaVMzc5V0ZYTlo=
+        more:
+          type: boolean
+          description: Indicates if there are additional records to return
           readOnly: true
-      required:
-      - limit
-      - next_cursor
   securitySchemes:
     api_key:
       type: apiKey

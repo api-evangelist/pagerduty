@@ -116,6 +116,16 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
+    PaymentRequired:
+      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
+
+        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     Forbidden:
       description: 'Caller is not authorized to view the requested resource.
 
@@ -126,8 +136,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    TooManyRequests:
+      description: Too many requests have been made, the rate limit has been reached.
       content:
         application/json:
           schema:
@@ -138,6 +148,12 @@ components:
         If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -169,22 +185,6 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    TooManyRequests:
-      description: Too many requests have been made, the rate limit has been reached.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    PaymentRequired:
-      description: 'Account does not have the abilities to perform the action. Please review the response for the required abilities.
-
-        You can also use the [Abilities API](#resource_Abilities) to determine what features are available to your account.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   schemas:
     Pagination:
       type: object
@@ -207,17 +207,6 @@ components:
           - 'null'
           description: The total number of records matching the given query.
           readOnly: true
-    Priority:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: The user-provided short name of the priority.
-          description:
-            type: string
-            description: The user-provided description of the priority.
     Tag:
       allOf:
       - type: object
@@ -267,20 +256,18 @@ components:
         example:
           type: tag
           label: Batman
+    Priority:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: The user-provided short name of the priority.
+          description:
+            type: string
+            description: The user-provided description of the priority.
   parameters:
-    offset_total:
-      name: total
-      in: query
-      required: false
-      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
-
-
-        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
-
-        '
-      schema:
-        default: false
-        type: boolean
     header_Accept:
       name: Accept
       description: The `Accept` header is used as a versioning header.
@@ -296,13 +283,6 @@ components:
       description: The number of results per page.
       schema:
         type: integer
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
     header_Content-Type:
       name: Content-Type
       in: header
@@ -312,6 +292,26 @@ components:
         default: application/json
         enum:
         - application/json
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    offset_total:
+      name: total
+      in: query
+      required: false
+      description: 'By default the `total` field in pagination responses is set to `null` to provide the fastest possible response times. Set `total` to `true` for this field to be populated.
+
+
+        See our [Pagination Docs](https://developer.pagerduty.com/docs/rest-api-v2/pagination/) for more information.
+
+        '
+      schema:
+        default: false
+        type: boolean
   securitySchemes:
     api_key:
       type: apiKey

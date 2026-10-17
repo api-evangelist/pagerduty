@@ -467,8 +467,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    ArgumentError:
-      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -479,6 +479,12 @@ components:
         If you are using an API key, it may be invalid or your Authorization header may be malformed.
 
         '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    ArgumentError:
+      description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
@@ -510,12 +516,6 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
     id:
       name: id

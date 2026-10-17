@@ -2160,29 +2160,83 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  examples:
+    OrchestrationPathGlobalTypeResponse:
+      summary: Example Response
+      value:
+        orchestration_path:
+          type: global
+          parent:
+            id: b02e973d-9620-4e0a-9edc-00fedf7d4694
+            self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
+            type: event_orchestration_reference
+          self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/global
+          sets:
+          - id: start
+            rules:
+            - label: Always apply some consistent event transformations to all events
+              id: c91f72f3
+              conditions: []
+              actions:
+                variables:
+                - name: hostname
+                  path: event.component
+                  value: 'hostname: (.*)'
+                  type: regex
+                extractions:
+                - template: '{{variables.hostname}}'
+                  target: event.custom_details.hostname
+                - source: event.source
+                  regex: www (.*) service
+                  target: event.source
+                incident_custom_field_updates:
+                - id: PEXCK89
+                  value: '#my-team-channel'
+                - id: PN1C4A2
+                  value: '{{event.timestamp}}'
+                route_to: step-two
+          - id: step-two
+            rules:
+            - label: All critical alerts should be treated as P1 incidents
+              id: 7c54529d
+              conditions:
+              - expression: event.severity matches 'critical'
+              actions:
+                priority: P0IN2KQ
+                suppress: false
+                incident_custom_field_updates:
+                - id: PEXCK89
+                  value: '#p1-incident-response'
+            - label: Drop all events from the very-noisy monitoring tool
+              id: 1f6d9a33
+              conditions:
+              - expression: event.source matches part 'very-noisy'
+              actions:
+                drop_event: true
+            - label: Never bother the on-call for info-level events outside of work hours
+              id: cd770384
+              conditions:
+              - expression: event.severity matches 'info' and not (now in Mon,Tue,Wed,Thu,Fri 09:00:00 to 17:00:00 America/Los_Angeles)
+              actions:
+                suppress: true
+          catch_all:
+            actions:
+              suppress: true
+              incident_custom_field_updates:
+              - id: PEXCK89
+                value: '#general-incident-notifications'
+          created_at: '2021-11-18T16:42:01Z'
+          created_by:
+            id: P8B9WR8
+            self: https://api.pagerduty.com/users/P8B9WR8
+            type: user_reference
+          updated_at: '2021-11-18T16:42:01Z'
+          updated_by:
+            id: P8B9WR8
+            self: https://api.pagerduty.com/users/P8B9WR8
+            type: user_reference
+          version: rn1Mja13T1HBdmPChqFilSQXUW2fWXM_
   schemas:
-    OrchestrationIntegration:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Integration.
-          readOnly: true
-        label:
-          type: string
-          description: Name of the Integration.
-        parameters:
-          type: object
-          readOnly: true
-          properties:
-            routing_key:
-              type: string
-              description: Routing Key used to send Events to this Orchestration
-              readOnly: true
-            type:
-              type: string
-              default: global
-              readOnly: true
     ServiceOrchestration:
       allOf:
       - $ref: '#/components/schemas/OrchestrationGlobal/allOf/0'
@@ -2669,96 +2723,112 @@ components:
           - 'null'
           description: The total number of records matching the given query.
           readOnly: true
-    Orchestration:
+    OrchestrationWarningIneligible:
+      type: object
+      description: This rule is using a feature that is currently unavailable on the current account plan.
+      properties:
+        message:
+          type: string
+          description: A description of the warning and any potential side effects.
+        rule_id:
+          type: string
+          description: The ID of the rule using the feature.
+        feature:
+          type: string
+          description: 'The feature that the current account plan does not have access to.
+
+
+            Example values include:
+
+            * `threshold_condition`
+
+            * `nested_rules`
+
+            * `suspend`
+
+            * `automation_actions`
+
+            * `cache_variable:automation_actions`
+
+            * `cache_variable:annotate`
+
+            * `variables`
+
+            * `interpolation:annotate`
+
+            * `interpolation:extractions`
+
+            * `interpolation:incident_custom_field_updates`
+
+            * `suppress`
+
+            * `incident_custom_field_updates`
+
+            '
+        feature_type:
+          type: string
+          description: 'Specifies whether the feature is a part of the rule''s conditions, or its actions.
+
+
+            Example values include:
+
+            * `conditions`
+
+            * `actions`
+
+            * `nested_rules`
+
+            * `global_orchestrations`
+
+            '
+        warning_type:
+          type: string
+          description: The type of warning that is being returned for the rule.
+          enum:
+          - forbidden_feature
+    OrchestrationIntegration:
       type: object
       properties:
         id:
           type: string
-          description: ID of the Orchestration.
+          description: ID of the Integration.
           readOnly: true
-        self:
+        label:
           type: string
-          format: url
-          description: The API show URL at which the object is accessible
-          readOnly: true
-        name:
-          type: string
-          description: Name of the Orchestration.
-        description:
-          type: string
-          description: A description of this Orchestration's purpose.
-        team:
+          description: Name of the Integration.
+        parameters:
           type: object
-          description: Reference to the team that owns the Orchestration. If none is specified, only admins have access.
+          readOnly: true
           properties:
-            id:
+            routing_key:
               type: string
-            type:
-              type: string
-              description: A string that determines the schema of the object
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-        integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrchestrationIntegration'
-          readOnly: true
-        routes:
-          type: integer
-          description: Number of different Service Orchestration being routed to
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: The date the Orchestration was created at.
-          readOnly: true
-        created_by:
-          type: object
-          description: Reference to the user that has created the Orchestration.
-          properties:
-            id:
-              type: string
+              description: Routing Key used to send Events to this Orchestration
               readOnly: true
             type:
               type: string
-              description: A string that determines the schema of the object
+              default: global
               readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-          readOnly: true
-        updated_at:
+    OrchestrationWarningInvalidData:
+      type: object
+      description: This rule includes invalid data for a feature item.
+      properties:
+        message:
           type: string
-          format: date-time
-          description: The date the Orchestration was last updated.
-          readOnly: true
-        updated_by:
-          type: object
-          description: Reference to the user that has updated the Orchestration last.
-          properties:
-            id:
-              type: string
-              readOnly: true
-            type:
-              type: string
-              description: A string that determines the schema of the object
-              readOnly: true
-            self:
-              type: string
-              format: url
-              description: The API show URL at which the object is accessible
-              readOnly: true
-          readOnly: true
-        version:
+          description: A description of the warning and any potential side effects.
+        rule_id:
           type: string
-          description: Version of the Orchestration.
-          readOnly: true
+          description: The ID of the rule using the feature.
+        feature:
+          type: string
+          description: "The feature that includes invalid data.\n\nExample values include:\n  * `incident_custom_field_updates`\n  * `cache_variable:annotate`\n  * `cache_variable:conditions`\n  * `cache_variable:automation_actions`\n"
+        feature_type:
+          type: string
+          description: "Specifies the feature type of the impacted item.\n\nExample values include:\n  * `actions`\n  * `conditions`\n"
+        warning_type:
+          type: string
+          description: The type of warning that is being returned for the rule.
+          enum:
+          - invalid_data
     OrchestrationCacheVariable:
       type: object
       properties:
@@ -2880,69 +2950,6 @@ components:
       required:
       - name
       - configuration
-    OrchestrationWarningIneligible:
-      type: object
-      description: This rule is using a feature that is currently unavailable on the current account plan.
-      properties:
-        message:
-          type: string
-          description: A description of the warning and any potential side effects.
-        rule_id:
-          type: string
-          description: The ID of the rule using the feature.
-        feature:
-          type: string
-          description: 'The feature that the current account plan does not have access to.
-
-
-            Example values include:
-
-            * `threshold_condition`
-
-            * `nested_rules`
-
-            * `suspend`
-
-            * `automation_actions`
-
-            * `cache_variable:automation_actions`
-
-            * `cache_variable:annotate`
-
-            * `variables`
-
-            * `interpolation:annotate`
-
-            * `interpolation:extractions`
-
-            * `interpolation:incident_custom_field_updates`
-
-            * `suppress`
-
-            * `incident_custom_field_updates`
-
-            '
-        feature_type:
-          type: string
-          description: 'Specifies whether the feature is a part of the rule''s conditions, or its actions.
-
-
-            Example values include:
-
-            * `conditions`
-
-            * `actions`
-
-            * `nested_rules`
-
-            * `global_orchestrations`
-
-            '
-        warning_type:
-          type: string
-          description: The type of warning that is being returned for the rule.
-          enum:
-          - forbidden_feature
     OrchestrationUnrouted:
       allOf:
       - $ref: '#/components/schemas/OrchestrationGlobal/allOf/0'
@@ -3164,86 +3171,187 @@ components:
               self: https://api.pagerduty.com/users/P8B9WR8
               type: user_reference
             version: 9co0z4b152oICsoV91_PW2.ww8ip_xap
-    OrchestrationWarningInvalidData:
+    Orchestration:
       type: object
-      description: This rule includes invalid data for a feature item.
       properties:
-        message:
+        id:
           type: string
-          description: A description of the warning and any potential side effects.
-        rule_id:
+          description: ID of the Orchestration.
+          readOnly: true
+        self:
           type: string
-          description: The ID of the rule using the feature.
-        feature:
+          format: url
+          description: The API show URL at which the object is accessible
+          readOnly: true
+        name:
           type: string
-          description: "The feature that includes invalid data.\n\nExample values include:\n  * `incident_custom_field_updates`\n  * `cache_variable:annotate`\n  * `cache_variable:conditions`\n  * `cache_variable:automation_actions`\n"
-        feature_type:
+          description: Name of the Orchestration.
+        description:
           type: string
-          description: "Specifies the feature type of the impacted item.\n\nExample values include:\n  * `actions`\n  * `conditions`\n"
-        warning_type:
+          description: A description of this Orchestration's purpose.
+        team:
+          type: object
+          description: Reference to the team that owns the Orchestration. If none is specified, only admins have access.
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrchestrationIntegration'
+          readOnly: true
+        routes:
+          type: integer
+          description: Number of different Service Orchestration being routed to
+          readOnly: true
+        created_at:
           type: string
-          description: The type of warning that is being returned for the rule.
-          enum:
-          - invalid_data
+          format: date-time
+          description: The date the Orchestration was created at.
+          readOnly: true
+        created_by:
+          type: object
+          description: Reference to the user that has created the Orchestration.
+          properties:
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: The date the Orchestration was last updated.
+          readOnly: true
+        updated_by:
+          type: object
+          description: Reference to the user that has updated the Orchestration last.
+          properties:
+            id:
+              type: string
+              readOnly: true
+            type:
+              type: string
+              description: A string that determines the schema of the object
+              readOnly: true
+            self:
+              type: string
+              format: url
+              description: The API show URL at which the object is accessible
+              readOnly: true
+          readOnly: true
+        version:
+          type: string
+          description: Version of the Orchestration.
+          readOnly: true
   responses:
+    OrchestrationCacheVariableListResponse:
+      description: The Cache Variables for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variables:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            response:
+              summary: Response Example
+              value:
+                cache_variables:
+                - id: 294c3ee9-ae83-4da7-828d-107c71dc9316
+                  name: cache_var_1
+                  conditions:
+                  - expression: event.source exists
+                  - expression: event.severity matches 'critical'
+                  configuration:
+                    type: recent_value
+                    source: event.source
+                    regex: www (.*) service
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                - id: 2a6d02d5-6365-4326-aaf1-6a719e990245
+                  name: cache_var_2
+                  conditions: []
+                  configuration:
+                    type: trigger_event_count
+                    ttl_seconds: 60
+                  disabled: true
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                total: 2
+    OrchestrationPathServiceActiveResponse:
+      description: An object with the active status.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              active:
+                type: boolean
+                description: The status of the service orchestration.
+          examples:
+            response:
+              summary: Example Response
+              value:
+                active: false
+    NotAllowed:
+      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     ArgumentError:
       description: Caller provided invalid arguments. Please review the response for error details. Retrying with the same arguments will *not* work.
       content:
         application/json:
           schema:
             $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    OrchestrationCacheVariablePostResponse:
-      description: The created Cache Variable for this Event Orchestration.
+    Forbidden:
+      description: 'Caller is not authorized to view the requested resource.
+
+        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
+
+        '
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              cache_variable:
-                $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            recent_value:
-              summary: 'Response Example: Recent value cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: not event.custom_details.errors exists
-                  configuration:
-                    type: recent_value
-                    source: event.summary
-                    regex: .*
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-            trigger_event_count:
-              summary: 'Response Example: Trigger event count cache variable'
-              value:
-                cache_variable:
-                - id: f08cdd8d-10a5-4c70-b508-82ab5c365a43
-                  name: example_2
-                  conditions: []
-                  configuration:
-                    type: trigger_event_count
-                    ttl_seconds: 30
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     OrchestrationCacheVariableGetResponse:
       description: The fetched Cache Variable for this Event Orchestration.
       content:
@@ -3276,157 +3384,6 @@ components:
                     id: P8B9WR8
                     self: https://api.pagerduty.com/users/P8B9WR8
                     type: user_reference
-    Forbidden:
-      description: 'Caller is not authorized to view the requested resource.
-
-        While your authentication is valid, the authenticated user or token does not have permission to perform this action.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    OrchestrationCacheVariablePutResponse:
-      description: The updated Cache Variable for this Event Orchestration.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              cache_variable:
-                $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            update_conditions:
-              summary: 'Response Example: Recent value cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: event.summary matches 'exception'
-                  - expression: event.summary matches 'error'
-                  configuration:
-                    type: recent_value
-                    source: event.summary
-                    regex: .*
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-            update_configuration:
-              summary: 'Response Example: Trigger event count cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: not event.custom_details.errors exists
-                  configuration:
-                    type: trigger_event_count
-                    ttl_seconds: 2
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-            update_disabled:
-              summary: 'Response Example: Disabled cache variable'
-              value:
-                cache_variable:
-                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
-                  name: example_1
-                  conditions:
-                  - expression: not event.custom_details.errors exists
-                  configuration:
-                    type: recent_value
-                    source: event.summary
-                    regex: .*
-                  disabled: true
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-    OrchestrationPathServiceActiveResponse:
-      description: An object with the active status.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              active:
-                type: boolean
-                description: The status of the service orchestration.
-          examples:
-            response:
-              summary: Example Response
-              value:
-                active: false
-    Conflict:
-      description: The request conflicts with the current state of the server.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    readOnly: true
-                  message:
-                    type: string
-                    readOnly: true
-                    description: Error message string
-                  errors:
-                    type: array
-                    readOnly: true
-                    items:
-                      type: string
-                      readOnly: true
-                      description: Human-readable error details
-                example:
-                  message: Not Found
-                  code: 2100
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    NotAllowed:
-      description: The request was received and recognized by the server, but its HTTP method was rejected for the requested resource.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
-    Unauthorized:
-      description: 'Caller did not supply credentials or did not provide the correct credentials.
-
-        If you are using an API key, it may be invalid or your Authorization header may be malformed.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     OrchestrationPathServiceTypeResponse:
       description: The Service Orchestration object.
       content:
@@ -3537,6 +3494,145 @@ components:
                   migrated_status: completed
                   migrated_via: UI
                   version: rn1Mja13T1HBdmPChqFilSQXUW2fWXM_
+    OrchestrationCacheVariablePutResponse:
+      description: The updated Cache Variable for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variable:
+                $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            update_conditions:
+              summary: 'Response Example: Recent value cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: event.summary matches 'exception'
+                  - expression: event.summary matches 'error'
+                  configuration:
+                    type: recent_value
+                    source: event.summary
+                    regex: .*
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+            update_configuration:
+              summary: 'Response Example: Trigger event count cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: not event.custom_details.errors exists
+                  configuration:
+                    type: trigger_event_count
+                    ttl_seconds: 2
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+            update_disabled:
+              summary: 'Response Example: Disabled cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: not event.custom_details.errors exists
+                  configuration:
+                    type: recent_value
+                    source: event.summary
+                    regex: .*
+                  disabled: true
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+    OrchestrationCacheVariablePostResponse:
+      description: The created Cache Variable for this Event Orchestration.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cache_variable:
+                $ref: '#/components/schemas/OrchestrationCacheVariable'
+          examples:
+            recent_value:
+              summary: 'Response Example: Recent value cache variable'
+              value:
+                cache_variable:
+                - id: 66bb56c3-2a17-44f3-9193-06b166d759ad
+                  name: example_1
+                  conditions:
+                  - expression: not event.custom_details.errors exists
+                  configuration:
+                    type: recent_value
+                    source: event.summary
+                    regex: .*
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+            trigger_event_count:
+              summary: 'Response Example: Trigger event count cache variable'
+              value:
+                cache_variable:
+                - id: f08cdd8d-10a5-4c70-b508-82ab5c365a43
+                  name: example_2
+                  conditions: []
+                  configuration:
+                    type: trigger_event_count
+                    ttl_seconds: 30
+                  created_at: '2021-11-18T16:42:01Z'
+                  created_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+                  updated_at: '2021-11-18T16:42:01Z'
+                  updated_by:
+                    id: P8B9WR8
+                    self: https://api.pagerduty.com/users/P8B9WR8
+                    type: user_reference
+    Unauthorized:
+      description: 'Caller did not supply credentials or did not provide the correct credentials.
+
+        If you are using an API key, it may be invalid or your Authorization header may be malformed.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     OrchestrationPathRouterTypeResponse:
       description: The Orchestration Router object.
       content:
@@ -3584,6 +3680,39 @@ components:
                     self: https://api.pagerduty.com/users/P8B9WR8
                     type: user_reference
                   version: 9co0z4b152oICsoV91_PW2.ww8ip_xap
+    Conflict:
+      description: The request conflicts with the current state of the server.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                    description: Error message string
+                  errors:
+                    type: array
+                    readOnly: true
+                    items:
+                      type: string
+                      readOnly: true
+                      description: Human-readable error details
+                example:
+                  message: Not Found
+                  code: 2100
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
     OrchestrationPathUnroutedTypeResponse:
       description: The Unrouted Orchestration object.
       content:
@@ -3631,60 +3760,59 @@ components:
                     self: https://api.pagerduty.com/users/P8B9WR8
                     type: user_reference
                   version: aZO.EEf9zWb9Vg0NYq.Uqad1hOC2Maod
-    OrchestrationCacheVariableListResponse:
-      description: The Cache Variables for this Event Orchestration.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              cache_variables:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OrchestrationCacheVariable'
-          examples:
-            response:
-              summary: Response Example
-              value:
-                cache_variables:
-                - id: 294c3ee9-ae83-4da7-828d-107c71dc9316
-                  name: cache_var_1
-                  conditions:
-                  - expression: event.source exists
-                  - expression: event.severity matches 'critical'
-                  configuration:
-                    type: recent_value
-                    source: event.source
-                    regex: www (.*) service
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                - id: 2a6d02d5-6365-4326-aaf1-6a719e990245
-                  name: cache_var_2
-                  conditions: []
-                  configuration:
-                    type: trigger_event_count
-                    ttl_seconds: 60
-                  disabled: true
-                  created_at: '2021-11-18T16:42:01Z'
-                  created_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                  updated_at: '2021-11-18T16:42:01Z'
-                  updated_by:
-                    id: P8B9WR8
-                    self: https://api.pagerduty.com/users/P8B9WR8
-                    type: user_reference
-                total: 2
   parameters:
+    header_Accept:
+      name: Accept
+      description: The `Accept` header is used as a versioning header.
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/vnd.pagerduty+json;version=2
+    header_Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      schema:
+        type: string
+        default: application/json
+        enum:
+        - application/json
+    event_orchestration_integration_id:
+      name: integration_id
+      description: The ID of an Integration.
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_limit:
+      name: limit
+      in: query
+      required: false
+      description: The number of results per page.
+      schema:
+        type: integer
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
+    service_id:
+      name: service_id
+      in: path
+      description: The service ID
+      required: true
+      schema:
+        type: string
+    event_orchestration_cache_variable_id:
+      name: cache_variable_id
+      description: The ID of a Cache Variable.
+      in: path
+      required: true
+      schema:
+        type: string
     sort_by_event_orchestration:
       name: sort_by
       in: query
@@ -3699,35 +3827,6 @@ components:
         - created_at:asc
         - created_at:desc
         default: name:asc
-    header_Accept:
-      name: Accept
-      description: The `Accept` header is used as a versioning header.
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/vnd.pagerduty+json;version=2
-    offset_limit:
-      name: limit
-      in: query
-      required: false
-      description: The number of results per page.
-      schema:
-        type: integer
-    event_orchestration_integration_id:
-      name: integration_id
-      description: The ID of an Integration.
-      in: path
-      required: true
-      schema:
-        type: string
-    service_id:
-      name: service_id
-      in: path
-      description: The service ID
-      required: true
-      schema:
-        type: string
     include_ruleset_migrated_metadata:
       name: include[]
       in: query
@@ -3738,29 +3837,6 @@ components:
         enum:
         - migrated_metadata
         uniqueItems: true
-    header_Content-Type:
-      name: Content-Type
-      in: header
-      required: true
-      schema:
-        type: string
-        default: application/json
-        enum:
-        - application/json
-    event_orchestration_cache_variable_id:
-      name: cache_variable_id
-      description: The ID of a Cache Variable.
-      in: path
-      required: true
-      schema:
-        type: string
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
     event_orchestration_id:
       name: id
       description: The ID of an Event Orchestration.
@@ -3832,82 +3908,6 @@ components:
                 cache_variable:
                   name: example_1
                   disabled: true
-  examples:
-    OrchestrationPathGlobalTypeResponse:
-      summary: Example Response
-      value:
-        orchestration_path:
-          type: global
-          parent:
-            id: b02e973d-9620-4e0a-9edc-00fedf7d4694
-            self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694
-            type: event_orchestration_reference
-          self: https://api.pagerduty.com/event_orchestrations/b02e973d-9620-4e0a-9edc-00fedf7d4694/global
-          sets:
-          - id: start
-            rules:
-            - label: Always apply some consistent event transformations to all events
-              id: c91f72f3
-              conditions: []
-              actions:
-                variables:
-                - name: hostname
-                  path: event.component
-                  value: 'hostname: (.*)'
-                  type: regex
-                extractions:
-                - template: '{{variables.hostname}}'
-                  target: event.custom_details.hostname
-                - source: event.source
-                  regex: www (.*) service
-                  target: event.source
-                incident_custom_field_updates:
-                - id: PEXCK89
-                  value: '#my-team-channel'
-                - id: PN1C4A2
-                  value: '{{event.timestamp}}'
-                route_to: step-two
-          - id: step-two
-            rules:
-            - label: All critical alerts should be treated as P1 incidents
-              id: 7c54529d
-              conditions:
-              - expression: event.severity matches 'critical'
-              actions:
-                priority: P0IN2KQ
-                suppress: false
-                incident_custom_field_updates:
-                - id: PEXCK89
-                  value: '#p1-incident-response'
-            - label: Drop all events from the very-noisy monitoring tool
-              id: 1f6d9a33
-              conditions:
-              - expression: event.source matches part 'very-noisy'
-              actions:
-                drop_event: true
-            - label: Never bother the on-call for info-level events outside of work hours
-              id: cd770384
-              conditions:
-              - expression: event.severity matches 'info' and not (now in Mon,Tue,Wed,Thu,Fri 09:00:00 to 17:00:00 America/Los_Angeles)
-              actions:
-                suppress: true
-          catch_all:
-            actions:
-              suppress: true
-              incident_custom_field_updates:
-              - id: PEXCK89
-                value: '#general-incident-notifications'
-          created_at: '2021-11-18T16:42:01Z'
-          created_by:
-            id: P8B9WR8
-            self: https://api.pagerduty.com/users/P8B9WR8
-            type: user_reference
-          updated_at: '2021-11-18T16:42:01Z'
-          updated_by:
-            id: P8B9WR8
-            self: https://api.pagerduty.com/users/P8B9WR8
-            type: user_reference
-          version: rn1Mja13T1HBdmPChqFilSQXUW2fWXM_
   securitySchemes:
     api_key:
       type: apiKey

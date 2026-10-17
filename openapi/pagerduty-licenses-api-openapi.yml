@@ -191,6 +191,13 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Reference:
+      allOf:
+      - $ref: '#/components/schemas/Tag/allOf/0'
+      - type: object
+        required:
+        - type
+        - id
     LicenseWithCounts:
       allOf:
       - type: object
@@ -332,13 +339,6 @@ components:
         example:
           type: tag
           label: Batman
-    Reference:
-      allOf:
-      - $ref: '#/components/schemas/Tag/allOf/0'
-      - type: object
-        required:
-        - type
-        - id
   responses:
     Forbidden:
       description: 'Caller is not authorized to view the requested resource.
@@ -346,6 +346,12 @@ components:
         While your authentication is valid, the authenticated user or token does not have permission to perform this action.
 
         '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/Conflict/content/application~1json/schema'
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -387,12 +393,6 @@ components:
                 example:
                   message: Not Found
                   code: 2100
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/responses/Conflict/content/application~1json/schema'
   parameters:
     header_Accept:
       name: Accept
@@ -402,13 +402,6 @@ components:
       schema:
         type: string
         default: application/vnd.pagerduty+json;version=2
-    offset_offset:
-      name: offset
-      in: query
-      required: false
-      description: Offset to start pagination search results.
-      schema:
-        type: integer
     offset_limit:
       name: limit
       in: query
@@ -425,6 +418,13 @@ components:
         default: application/json
         enum:
         - application/json
+    offset_offset:
+      name: offset
+      in: query
+      required: false
+      description: Offset to start pagination search results.
+      schema:
+        type: integer
   securitySchemes:
     api_key:
       type: apiKey
