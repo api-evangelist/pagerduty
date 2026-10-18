@@ -516,7 +516,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: pagerduty-fivetran
   label: Fivetran
@@ -542,7 +542,7 @@
     - connectors/applications/pagerduty
     vendor_link: https://www.pagerduty.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: pagerduty-meltano
   label: Meltano
@@ -573,7 +573,7 @@
     - silver
     - unknown
     builder: 'community (Meltano Hub variant maintainers: goodeggs, jacksonh)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: pagerduty-microsoft-teams-own
   label: Microsoft Teams (own)
