@@ -1,9 +1,10 @@
-generated: '2026-10-12'
+generated: '2026-10-20'
 method: searched
 source:
 - https://zapier.com/apps/pagerduty/integrations
 - https://n8n.io/integrations/pagerduty/
 - https://composio.dev/toolkits/pagerduty
+- https://www.pagerduty.com/integrations/
 checked:
 - https://cloudsecurityalliance.org/star/registry
 - https://composio.dev/toolkits/pagerduty
@@ -30,6 +31,14 @@ checked:
 - zoom/integrations/zoom-integration-edges.yml
 summary: null
 marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: pagerduty
+  url: https://www.pagerduty.com/integrations/
+  app_count: null
+  adapter: sweep-observability.py:unreadable
+  listed: 0
+  status: not-machine-readable (HTTP 200; client-rendered; no per-integration links or builder signal in the HTML)
 - marketplace: zapier
   channel: ipaas-listing
   app: pagerduty
@@ -56,279 +65,12 @@ marketplace_apps:
   app: pagerduty
   url: https://n8n.io/integrations/pagerduty/
   identity: title
-  pair_pages: 271
+  pair_pages: 4
   pairs:
-  - paperform
-  - papyrs
-  - parsehub
-  - parseprompt
-  - passcreator
-  - passslot
-  - patreon
-  - paymo
-  - paypal
-  - peekalink
-  - perplexity
-  - persio
-  - personal-ai
-  - phantombuster
-  - philips-hue
-  - phrase
-  - pinata
-  - pinboard
-  - pinterest
-  - pipedrive
-  - pipefy
-  - pirate-weather
-  - pitchly
-  - pivotal-tracker
-  - planview-leankit
-  - planyo-online-booking
-  - platformly
-  - plecto
-  - plivo
-  - postbin
   - postgres
-  - posthog
-  - practitest
-  - predisai
-  - prodia
-  - product-hunt
-  - profitwell
-  - project-bubble-proprofs-project
-  - prompthub
-  - prospe-ai
-  - pushbullet
-  - pushcut
-  - pusher
-  - pushover
-  - qradar
-  - qualaroo
-  - qualys
-  - quentn
-  - questdb
-  - quick-base
-  - quickbooks-online
-  - quickchart
-  - quintadb
-  - rabbitmq
-  - radar
-  - raindrop
-  - rapid7-insightvm
-  - raven-tools
-  - rawg-video-games-database
-  - read-ai
-  - realphonevalidation
-  - recharge
-  - recorded-future
-  - redash
-  - reddit
   - redis
-  - relevance-ai
-  - relink-url-shortener
-  - relysia
-  - replyio
-  - retable
-  - reverse-contact
-  - rewardful
-  - ritekit
-  - roboflow
-  - robolytix
-  - roboresponseai
-  - rocketchat
-  - rollbar
-  - rootly
-  - route4me
-  - rundeck
-  - s3
-  - sales-simplify
-  - salesforce
-  - salesmaa
-  - salesmate
-  - salesmsg
-  - salesrocks
-  - samsung-smartthings
-  - scrape-itcloud
-  - scrapeninja
-  - seamless-ai
-  - search-and-save
-  - seatable
-  - securityscorecard
-  - segment
-  - sekoia
-  - sellix
-  - sembly-ai
-  - sendgrid
-  - sendy
-  - sentryio
-  - servicenow
-  - sharly-ai
-  - shiphero
-  - shipstation
-  - shopify
-  - shortio
-  - shuffler
-  - sierra-interactive
-  - sifter
-  - signaturit
-  - signl4
-  - signrequest
-  - simpleem
-  - simplehash
-  - simplekpi
-  - simplelocalize
-  - simplero
-  - simpletexting
-  - sitecreatorio
-  - sitespeakai
   - slack
-  - smaily
-  - smartreach
-  - smartsuite
-  - sms-it
-  - sms-magic
-  - sms77
-  - snapdocs
-  - snatchbot
-  - snipcart
-  - snowflake
-  - solve-data
-  - specter
-  - splunk
-  - spondyr
-  - spontit
-  - sportsdata
-  - spotify
-  - spydra
-  - sslmate-cert-spotter-api
-  - stackby
-  - stammerai
-  - starton
-  - statuscake
-  - storyblok
-  - strapi
-  - strava
-  - stripe
-  - studio-by-ai21-labs
-  - suitedash
-  - supabase
-  - supernormal
-  - superpowered
-  - supportivekoala
-  - survicate
-  - swagup
-  - switchboard
-  - syncly
-  - syncromsp
-  - synthesia
-  - taiga
-  - talentlms
-  - talknotes
-  - tapfiliate
-  - td-ameritrade
-  - teachable
-  - team-up
-  - teamdeck
-  - teamgate
-  - teknoir
   - telegram
-  - testmonitor
-  - textcortex-ai
-  - textgain
-  - textkit
-  - textmagic
-  - thankster
-  - the-customer-factor
-  - the-leap
-  - thehive
-  - thehive-5
-  - thoughtfulgpt
-  - thrivecart
-  - tidb-cloud
-  - tierion
-  - tilda
-  - timescaledb
-  - timetonic
-  - tinyurl
-  - tisane-labs
-  - todoist
-  - token-metrics
-  - toket
-  - totango
-  - trackvia
-  - transifex
-  - travisci
-  - trellix-epo
-  - trello
-  - trengo
-  - trevorio
-  - turbohire
-  - tuskr
-  - tuulio
-  - twake
-  - twilio
-  - twist
-  - twitter
-  - unbounce
-  - unisender
-  - unleashed-software
-  - upkeep
-  - uplead
-  - uproc
-  - uptimerobot
-  - uptimetoolbox
-  - urlscanio
-  - uservoice
-  - venafi-tls-protect-cloud
-  - venafi-tls-protect-datacenter
-  - venly
-  - verifalia
-  - vero
-  - vimeo
-  - virustotal
-  - vivifyscrum
-  - voicit
-  - vonage
-  - vowel
-  - watchsignals
-  - waveline-extract
-  - webex-by-cisco
-  - webflow
-  - webscraperio
-  - wekan
-  - whal3s
-  - whatconverts
-  - whatsapp-business-cloud
-  - wise
-  - wizychat
-  - wonderchat
-  - wondercraft
-  - woocommerce
-  - woodpeckerco
-  - wordpress
-  - workast
-  - workboard
-  - woxo
-  - writesonic
-  - wubook-ratechecker
-  - xero
-  - xtractly
-  - ybug
-  - ycode
-  - yodiz
-  - yourls
-  - youtube
-  - zabbix
-  - zammad
-  - zendesk
-  - zenrows
-  - zoho-books
-  - zoho-crm
-  - zoho-desk
-  - zonka-feedback
-  - zoom
-  - zscaler-zia
-  - zulip
 - marketplace: composio
   channel: agent-gateway
   app: pagerduty
@@ -343,17 +85,14 @@ marketplace_apps:
   - key: PAGERDUTY_AUDIT_ESCALATION_POLICY_RECORDS
   - key: PAGERDUTY_CONVERT_SERVICE_RULE_BY_ID
   - key: PAGERDUTY_COUNT_PAUSED_INCIDENT_REPORTS
-  - key: PAGERDUTY_CREATE_AND_MANAGE_CUSTOM_INCIDENT_FIELDS
   - key: PAGERDUTY_CREATE_AN_INCIDENT_TYPE
   - key: PAGERDUTY_CREATE_AUTOMATION_RUNNER_ENDPOINT
   - key: PAGERDUTY_CREATE_A_CUSTOM_FIELD_FOR_AN_INCIDENT_TYPE
   - key: PAGERDUTY_CREATE_A_FIELD_OPTION_FOR_A_CUSTOM_FIELD
-  - key: PAGERDUTY_CREATE_A_RULESET
   - key: PAGERDUTY_CREATE_A_TRIGGER
   - key: PAGERDUTY_CREATE_BUSINESS_SERVICE
   - key: PAGERDUTY_CREATE_ESCALATION_POLICY
   - key: PAGERDUTY_CREATE_EVENT_ORCHESTRATION
-  - key: PAGERDUTY_CREATE_EVENT_RULE_IN_RULESET
   - key: PAGERDUTY_CREATE_EXTENSION_OBJECT
   - key: PAGERDUTY_CREATE_HANDOFF_NOTIFICATION_RULE
   - key: PAGERDUTY_CREATE_INCIDENT_FIELD_OPTION
@@ -371,9 +110,7 @@ marketplace_apps:
   - key: PAGERDUTY_CREATE_OR_UPDATE_STATUS_PAGE_POST
   - key: PAGERDUTY_CREATE_OR_UPDATE_STATUS_PAGE_POSTMORTEM
   - key: PAGERDUTY_CREATE_OR_UPDATE_STATUS_PAGE_POST_UPDATE_INFORMATION
-  - key: PAGERDUTY_CREATE_RESPONSE_PLAY_FOR_INCIDENTS
   - key: PAGERDUTY_CREATE_SCHEDULE_OVERRIDES_CONFIGURATION
-  - key: PAGERDUTY_CREATE_SERVICE_EVENT_RULE
   - key: PAGERDUTY_CREATE_STATUS_PAGE_SUBSCRIPTION
   - key: PAGERDUTY_CREATE_STATUS_UPDATE_TEMPLATE
   - key: PAGERDUTY_CREATE_USER_NOTIFICATION_RULE
@@ -407,6 +144,7 @@ marketplace_apps:
   - key: PAGERDUTY_DELETE_POST_FROM_STATUS_PAGE
   - key: PAGERDUTY_DELETE_POST_UPDATE_BY_ID
   - key: PAGERDUTY_DELETE_RULESET_BY_ID
+  - key: PAGERDUTY_DELETE_RULE_FROM_RULESET_BY_ID
   - key: PAGERDUTY_DELETE_RUNNER_TEAM_ASSOCIATION
   - key: PAGERDUTY_DELETE_SCHEDULE_BY_ID
   - key: PAGERDUTY_DELETE_SCHEDULE_OVERRIDE_BY_ID
@@ -432,7 +170,6 @@ marketplace_apps:
   - key: PAGERDUTY_EDIT_WEBHOOK_SUBSCRIPTION_BY_ID
   - key: PAGERDUTY_ENABLE_EXTENSION_BY_ID
   - key: PAGERDUTY_ENABLE_WEBHOOK_SUBSCRIPTION_BY_ID
-  - key: PAGERDUTY_EXECUTE_RESPONSE_PLAY_BY_ID
   - key: PAGERDUTY_FETCH_CACHE_VARIABLE_FOR_EVENT_ORCHESTRATION
   - key: PAGERDUTY_FETCH_CUSTOM_INCIDENT_FIELD_BY_ID
   - key: PAGERDUTY_FETCH_ESCALATION_POLICES_LIST
@@ -681,7 +418,6 @@ marketplace_apps:
   - key: PAGERDUTY_UPDATE_MAINTENANCE_WINDOW_BY_ID
   - key: PAGERDUTY_UPDATE_ONCALL_HANDOFF_NOTIFICATION_RULE
   - key: PAGERDUTY_UPDATE_ORCHESTRATION_ROUTER_DETAILS
-  - key: PAGERDUTY_UPDATE_RESPONSE_PLAY_BY_ID
   - key: PAGERDUTY_UPDATE_RULESET_BY_ID
   - key: PAGERDUTY_UPDATE_SCHEDULE_BY_ID
   - key: PAGERDUTY_UPDATE_SERVICE_BY_ID
@@ -689,7 +425,6 @@ marketplace_apps:
   - key: PAGERDUTY_UPDATE_STANDARD_BY_ID
   - key: PAGERDUTY_UPDATE_STATUS_PAGE_POST
   - key: PAGERDUTY_UPDATE_STATUS_PAGE_POST_INFO
-  - key: PAGERDUTY_UPDATE_STATUS_PAGE_POST_POSTMORTEM
   - key: PAGERDUTY_UPDATE_STATUS_PAGE_POST_RESOURCE
   - key: PAGERDUTY_UPDATE_TEAM_BY_ID
   - key: PAGERDUTY_UPDATE_TEMPLATE_BY_ID
@@ -699,345 +434,7 @@ marketplace_apps:
   - key: PAGERDUTY_UPDATE_USER_NOTIFICATION_RULE_BY_ID
   - key: PAGERDUTY_UPDATE_USER_ROLE_ON_TEAM
   - key: PAGERDUTY_UPDATE_WORKFLOW_INTEGRATION_CONNECTION
-- marketplace: own
-  channel: partner-built
-  app: pagerduty
-  url: https://www.pagerduty.com/integrations/
-  app_count: null
-  adapter: sweep-observability.py:unreadable
-  listed: 0
-  status: not-machine-readable (HTTP 200; client-rendered; no per-integration links or builder signal in the HTML)
 edges:
-- partner_name: Slack
-  partner: slack
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/slack
-  direction: third-party
-  category: Team Chat
-  partner_url: https://slack.com/
-- partner_name: Jira Software Cloud
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/jira-software-cloud
-  direction: third-party
-  category: Project Management
-  partner_url: https://www.atlassian.com/software/jira
-- partner_name: HubSpot
-  partner: hubspot
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/hubspot
-  direction: third-party
-  category: Marketing Automation
-  partner_url: http://www.hubspot.com/
-- partner_name: ConnectWise Manage
-  partner: null
-  partner_match: null
-  partner_candidate: skykick
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/connectwise-manage
-  direction: third-party
-  category: CRM (Customer Relationship Management)
-  partner_url: http://www.connectwise.com/
-- partner_name: Gmail
-  partner: gmail
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/gmail
-  direction: third-party
-  category: Email
-  partner_url: https://mail.google.com/
-- partner_name: Linear
-  partner: linear-app
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/linear
-  direction: third-party
-  category: Team Collaboration
-  partner_url: https://linear.app/
-- partner_name: Jira Service Management
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/jira-service-management
-  direction: third-party
-  category: Customer Support
-  partner_url: https://www.atlassian.com/software/jira/service-desk
-- partner_name: ClickUp
-  partner: clickup
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/clickup
-  direction: third-party
-  category: Project Management
-  partner_url: https://clickup.com/zapier
-- partner_name: Google Forms
-  partner: google-forms
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/google-forms
-  direction: third-party
-  category: Forms & Surveys
-  partner_url: http://google.com/
-- partner_name: monday.com
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/monday
-  direction: third-party
-  category: Project Management
-  partner_url: https://monday.com/
-- partner_name: Intercom
-  partner: intercom
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/intercom
-  direction: third-party
-  category: Customer Support
-  partner_url: https://www.intercom.com/welcome-to-intercom?utm_source=external-website&utm_medium=partner&utm_campaign=20220503_all_oc_all_global_gl_all_all_par_extmktplc&utm_term=zapier
-- partner_name: Google Calendar
-  partner: google-calendar
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/google-calendar
-  direction: third-party
-  category: Calendar
-  partner_url: https://calendar.google.com/
-- partner_name: Wufoo
-  partner: wufoo
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/wufoo
-  direction: third-party
-  category: Forms & Surveys
-  partner_url: https://www.wufoo.com/
-- partner_name: Autotask
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/autotask
-  direction: third-party
-  category: CRM (Customer Relationship Management)
-  partner_url: http://www.autotask.com/
-- partner_name: Microsoft Outlook
-  partner: microsoft-outlook
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/microsoft-outlook
-  direction: third-party
-  category: Calendar
-  partner_url: https://outlook.live.com/
-- partner_name: ManageEngine ServiceDesk Plus Cloud
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/manageengine-servicedesk-cloud
-  direction: third-party
-  category: Productivity
-  partner_url: https://servicedeskplus.com/
-- partner_name: Updown.io
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/updownio
-  direction: third-party
-  category: Server Monitoring
-  partner_url: https://updown.io/
-- partner_name: Freshdesk
-  partner: freshdesk
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/freshdesk
-  direction: third-party
-  category: Customer Support
-  partner_url: http://freshdesk.com/
-- partner_name: Freshping
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/freshping
-  direction: third-party
-  category: Server Monitoring
-  partner_url: https://www.freshping.com/
-- partner_name: Notion
-  partner: notion
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/notion
-  direction: third-party
-  category: Task Management
-  partner_url: https://www.notion.so/
-- partner_name: Twilio
-  partner: twilio
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/twilio
-  direction: third-party
-  category: Phone & SMS
-  partner_url: https://www.twilio.com/
-- partner_name: Discord
-  partner: discord
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/discord
-  direction: third-party
-  category: Team Chat
-  partner_url: https://discordapp.com/
-- partner_name: WhatsApp Notifications
-  partner: null
-  partner_match: null
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/whatsapp-notifications
-  direction: third-party
-  category: Communication
-  partner_url: null
-- partner_name: Freshservice
-  partner: freshservice
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/freshservice
-  direction: third-party
-  category: Server Monitoring
-  partner_url: https://freshservice.com/
-- partner_name: Better Stack
-  partner: betterstack
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/better-stack
-  direction: third-party
-  category: Server Monitoring
-  partner_url: https://betterstack.com/
-- partner_name: Hive
-  partner: hive
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/hive
-  direction: third-party
-  category: Team Collaboration
-  partner_url: https://hiveteams.com/
-- partner_name: Google Sheets
-  partner: google-sheets
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/google-sheets
-  direction: third-party
-  category: Google
-  partner_url: http://sheets.google.com/
-- partner_name: Asana
-  partner: asana
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/asana
-  direction: third-party
-  category: Project Management
-  partner_url: http://asana.com/
-- partner_name: Podio
-  partner: podio
-  partner_match: domain
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/podio
-  direction: third-party
-  category: Project Management
-  partner_url: https://podio.com/
-- partner_name: Telnyx
-  partner: telnyx
-  partner_match: name-exact
-  partner_candidate: null
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/telnyx
-  direction: third-party
-  category: Phone & SMS
-  partner_url: https://telnyx.com/
 - partner_name: GitHub Marketplace (actions)
   partner: github-actions
   partner_match: aggregator
@@ -1337,6 +734,366 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
+- partner_name: Slack
+  partner: slack
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/slack
+  direction: third-party
+  category: Team Chat
+  partner_url: https://slack.com/
+- partner_name: Jira Software Cloud
+  partner: jira
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/jira-software-cloud
+  direction: third-party
+  category: Project Management
+  partner_url: https://www.atlassian.com/software/jira
+- partner_name: HubSpot
+  partner: hubspot
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/hubspot
+  direction: third-party
+  category: Marketing Automation
+  partner_url: http://www.hubspot.com/
+- partner_name: ClickUp
+  partner: clickup
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/clickup
+  direction: third-party
+  category: Project Management
+  partner_url: https://clickup.com/zapier
+- partner_name: ConnectWise Manage
+  partner: null
+  partner_match: null
+  partner_candidate: skykick
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/connectwise-manage
+  direction: third-party
+  category: CRM (Customer Relationship Management)
+  partner_url: http://www.connectwise.com/
+- partner_name: Gmail
+  partner: gmail
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/gmail
+  direction: third-party
+  category: Email
+  partner_url: https://mail.google.com/
+- partner_name: Notion
+  partner: notion
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/notion
+  direction: third-party
+  category: Task Management
+  partner_url: https://www.notion.so/
+- partner_name: Linear
+  partner: linear-app
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/linear
+  direction: third-party
+  category: Team Collaboration
+  partner_url: https://linear.app/
+- partner_name: Jira Service Management
+  partner: jira
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/jira-service-management
+  direction: third-party
+  category: Customer Support
+  partner_url: https://www.atlassian.com/software/jira/service-desk
+- partner_name: Google Forms
+  partner: google-forms
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/google-forms
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: http://google.com/
+- partner_name: monday.com
+  partner: monday-com
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/monday
+  direction: third-party
+  category: Project Management
+  partner_url: https://monday.com/
+- partner_name: Intercom
+  partner: intercom
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/intercom
+  direction: third-party
+  category: Customer Support
+  partner_url: https://www.intercom.com/welcome-to-intercom?utm_source=external-website&utm_medium=partner&utm_campaign=20220503_all_oc_all_global_gl_all_all_par_extmktplc&utm_term=zapier
+- partner_name: Google Calendar
+  partner: google-calendar
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/google-calendar
+  direction: third-party
+  category: Calendar
+  partner_url: https://calendar.google.com/
+- partner_name: Wufoo
+  partner: wufoo
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/wufoo
+  direction: third-party
+  category: Forms & Surveys
+  partner_url: https://www.wufoo.com/
+- partner_name: Autotask
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/autotask
+  direction: third-party
+  category: CRM (Customer Relationship Management)
+  partner_url: http://www.autotask.com/
+- partner_name: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/microsoft-outlook
+  direction: third-party
+  category: Calendar
+  partner_url: https://outlook.live.com/
+- partner_name: ManageEngine ServiceDesk Plus Cloud
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/manageengine-servicedesk-cloud
+  direction: third-party
+  category: Productivity
+  partner_url: https://servicedeskplus.com/
+- partner_name: Updown.io
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/updownio
+  direction: third-party
+  category: Server Monitoring
+  partner_url: https://updown.io/
+- partner_name: Discord
+  partner: discord
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/discord
+  direction: third-party
+  category: Team Chat
+  partner_url: https://discordapp.com/
+- partner_name: Freshdesk
+  partner: freshdesk
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/freshdesk
+  direction: third-party
+  category: Customer Support
+  partner_url: http://freshdesk.com/
+- partner_name: Freshping
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/freshping
+  direction: third-party
+  category: Server Monitoring
+  partner_url: https://www.freshping.com/
+- partner_name: Twilio
+  partner: twilio
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/twilio
+  direction: third-party
+  category: Phone & SMS
+  partner_url: https://www.twilio.com/
+- partner_name: WhatsApp Notifications
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/whatsapp-notifications
+  direction: third-party
+  category: Communication
+  partner_url: null
+- partner_name: Freshservice
+  partner: freshservice
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/freshservice
+  direction: third-party
+  category: Server Monitoring
+  partner_url: https://freshservice.com/
+- partner_name: Better Stack
+  partner: betterstack
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/better-stack
+  direction: third-party
+  category: Server Monitoring
+  partner_url: https://betterstack.com/
+- partner_name: Hive
+  partner: hive
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/hive
+  direction: third-party
+  category: Team Collaboration
+  partner_url: https://hiveteams.com/
+- partner_name: Google Sheets
+  partner: google-sheets
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/google-sheets
+  direction: third-party
+  category: Google
+  partner_url: http://sheets.google.com/
+- partner_name: Asana
+  partner: asana
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/asana
+  direction: third-party
+  category: Project Management
+  partner_url: http://asana.com/
+- partner_name: Podio
+  partner: podio
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/podio
+  direction: third-party
+  category: Project Management
+  partner_url: https://podio.com/
+- partner_name: Telnyx
+  partner: telnyx
+  partner_match: domain+name-among-holders
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  relationship: ipaas-bridge
+  evidence: https://zapier.com/apps/pagerduty/integrations/telnyx
+  direction: third-party
+  category: Phone & SMS
+  partner_url: https://telnyx.com/
 templates:
 - title: Trigger PagerDuty incidents for new messages in Slack
   url: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack

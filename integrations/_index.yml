@@ -17,6 +17,7 @@
   source: template
   related_arazzo:
   - pagerduty-slack-on-call-channel-topic.yml
+  relationship: ipaas-bridge
   arazzo: pagerduty-slack-new-message-incident.yml
   status: arazzo
 - slug: pagerduty-add-events-in-pagerduty-when-new-better-stack-incidents-are-created
@@ -31,6 +32,7 @@
   evidence: https://zapier.com/apps/better-stack/integrations/pagerduty/109641/add-events-in-pagerduty-when-new-better-stack-incidents-are-created
   template: https://zapier.com/apps/better-stack/integrations/pagerduty/109641/add-events-in-pagerduty-when-new-better-stack-incidents-are-created
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: pagerduty-add-new-rows-on-google-sheets-for-new-incidents-on-pagerduty
@@ -45,6 +47,7 @@
   evidence: https://zapier.com/apps/google-sheets/integrations/pagerduty/6700/add-new-rows-on-google-sheets-for-new-incidents-on-pagerduty
   template: https://zapier.com/apps/google-sheets/integrations/pagerduty/6700/add-new-rows-on-google-sheets-for-new-incidents-on-pagerduty
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: pagerduty-trigger-new-incidents-in-pagerduty-for-new-freshping-alerts
@@ -58,6 +61,7 @@
   evidence: https://zapier.com/apps/freshping/integrations/pagerduty/1146377/trigger-new-incidents-in-pagerduty-for-new-freshping-alerts
   template: https://zapier.com/apps/freshping/integrations/pagerduty/1146377/trigger-new-incidents-in-pagerduty-for-new-freshping-alerts
   source: template
+  relationship: ipaas-bridge
   status: pending-partner-spec
   arazzo: null
 - slug: pagerduty-create-pagerduty-events-for-new-freshdesk-tickets
@@ -72,6 +76,7 @@
   evidence: https://zapier.com/apps/freshdesk/integrations/pagerduty/1592612/create-pagerduty-events-for-new-freshdesk-tickets
   template: https://zapier.com/apps/freshdesk/integrations/pagerduty/1592612/create-pagerduty-events-for-new-freshdesk-tickets
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: pagerduty-send-new-channel-messages-in-discord-for-new-incidents-in-pagerduty
@@ -86,6 +91,7 @@
   evidence: https://zapier.com/apps/discord/integrations/pagerduty/1146374/send-new-channel-messages-in-discord-for-new-incidents-in-pagerduty
   template: https://zapier.com/apps/discord/integrations/pagerduty/1146374/send-new-channel-messages-in-discord-for-new-incidents-in-pagerduty
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: pagerduty-update-slack-channel-topic-with-on-call-user-from-pagerduty
@@ -102,6 +108,7 @@
   source: template
   related_arazzo:
   - pagerduty-slack-new-message-incident.yml
+  relationship: ipaas-bridge
   arazzo: pagerduty-slack-on-call-channel-topic.yml
   status: arazzo
 - slug: pagerduty-add-asana-tasks-for-new-pagerduty-incidents
@@ -116,6 +123,7 @@
   evidence: https://zapier.com/apps/asana/integrations/pagerduty/6701/add-asana-tasks-for-new-pagerduty-incidents
   template: https://zapier.com/apps/asana/integrations/pagerduty/6701/add-asana-tasks-for-new-pagerduty-incidents
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
   arazzo: null
 - slug: pagerduty-create-new-linear-issues-from-new-or-updated-pagerduty-incidents
@@ -130,263 +138,8 @@
   evidence: https://zapier.com/apps/linear/integrations/pagerduty/1729541/create-new-linear-issues-from-new-or-updated-pagerduty-incidents
   template: https://zapier.com/apps/linear/integrations/pagerduty/1729541/create-new-linear-issues-from-new-or-updated-pagerduty-incidents
   source: template
+  relationship: ipaas-bridge
   status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-jira-software-cloud
-  label: Jira Software Cloud
-  partner_name: Jira Software Cloud
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/jira-software-cloud
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-hubspot
-  label: HubSpot
-  partner: hubspot
-  partner_name: HubSpot
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/hubspot
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-connectwise-manage
-  label: ConnectWise Manage
-  partner_name: ConnectWise Manage
-  category: CRM (Customer Relationship Management)
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/connectwise-manage
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-gmail
-  label: Gmail
-  partner: gmail
-  partner_name: Gmail
-  category: Email
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/gmail
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-jira-service-management
-  label: Jira Service Management
-  partner_name: Jira Service Management
-  category: Customer Support
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/jira-service-management
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-clickup
-  label: ClickUp
-  partner: clickup
-  partner_name: ClickUp
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/clickup
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-google-forms
-  label: Google Forms
-  partner: google-forms
-  partner_name: Google Forms
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/google-forms
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-monday-com
-  label: monday.com
-  partner_name: monday.com
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/monday
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-intercom
-  label: Intercom
-  partner: intercom
-  partner_name: Intercom
-  category: Customer Support
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/intercom
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-google-calendar
-  label: Google Calendar
-  partner: google-calendar
-  partner_name: Google Calendar
-  category: Calendar
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/google-calendar
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-wufoo
-  label: Wufoo
-  partner: wufoo
-  partner_name: Wufoo
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/wufoo
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-autotask
-  label: Autotask
-  partner_name: Autotask
-  category: CRM (Customer Relationship Management)
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/autotask
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-microsoft-outlook
-  label: Microsoft Outlook
-  partner: microsoft-outlook
-  partner_name: Microsoft Outlook
-  category: Calendar
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/microsoft-outlook
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-manageengine-servicedesk-plus-cloud
-  label: ManageEngine ServiceDesk Plus Cloud
-  partner_name: ManageEngine ServiceDesk Plus Cloud
-  category: Productivity
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/manageengine-servicedesk-cloud
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-updown-io
-  label: Updown.io
-  partner_name: Updown.io
-  category: Server Monitoring
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/updownio
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-notion
-  label: Notion
-  partner: notion
-  partner_name: Notion
-  category: Task Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/notion
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-twilio
-  label: Twilio
-  partner: twilio
-  partner_name: Twilio
-  category: Phone & SMS
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/twilio
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-whatsapp-notifications
-  label: WhatsApp Notifications
-  partner_name: WhatsApp Notifications
-  category: Communication
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/whatsapp-notifications
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: pagerduty-freshservice
-  label: Freshservice
-  partner: freshservice
-  partner_name: Freshservice
-  category: Server Monitoring
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/freshservice
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-hive
-  label: Hive
-  partner: hive
-  partner_name: Hive
-  category: Team Collaboration
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/hive
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-podio
-  label: Podio
-  partner: podio
-  partner_name: Podio
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/podio
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: pagerduty-telnyx
-  label: Telnyx
-  partner: telnyx
-  partner_name: Telnyx
-  category: Phone & SMS
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/pagerduty/integrations/telnyx
-  source: edge
-  status: pending-generation
   arazzo: null
 - slug: pagerduty-github-marketplace-actions
   label: GitHub Marketplace (actions)
@@ -656,4 +409,285 @@
     detected_by: sweep-compliance-assurance.py
     detected: '2026-10-20'
   status: not-a-workflow
+  arazzo: null
+- slug: pagerduty-jira-software-cloud
+  label: Jira Software Cloud
+  partner: jira
+  partner_name: Jira Software Cloud
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/jira-software-cloud
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-hubspot
+  label: HubSpot
+  partner: hubspot
+  partner_name: HubSpot
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/hubspot
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-clickup
+  label: ClickUp
+  partner: clickup
+  partner_name: ClickUp
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/clickup
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-connectwise-manage
+  label: ConnectWise Manage
+  partner_name: ConnectWise Manage
+  category: CRM (Customer Relationship Management)
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/connectwise-manage
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: pagerduty-gmail
+  label: Gmail
+  partner: gmail
+  partner_name: Gmail
+  category: Email
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/gmail
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: pagerduty-notion
+  label: Notion
+  partner: notion
+  partner_name: Notion
+  category: Task Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/notion
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-jira-service-management
+  label: Jira Service Management
+  partner: jira
+  partner_name: Jira Service Management
+  category: Customer Support
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/jira-service-management
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-google-forms
+  label: Google Forms
+  partner: google-forms
+  partner_name: Google Forms
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/google-forms
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-monday-com
+  label: monday.com
+  partner: monday-com
+  partner_name: monday.com
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/monday
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-intercom
+  label: Intercom
+  partner: intercom
+  partner_name: Intercom
+  category: Customer Support
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/intercom
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-google-calendar
+  label: Google Calendar
+  partner: google-calendar
+  partner_name: Google Calendar
+  category: Calendar
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/google-calendar
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-wufoo
+  label: Wufoo
+  partner: wufoo
+  partner_name: Wufoo
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/wufoo
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-autotask
+  label: Autotask
+  partner_name: Autotask
+  category: CRM (Customer Relationship Management)
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/autotask
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: pagerduty-microsoft-outlook
+  label: Microsoft Outlook
+  partner: microsoft-outlook
+  partner_name: Microsoft Outlook
+  category: Calendar
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/microsoft-outlook
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-manageengine-servicedesk-plus-cloud
+  label: ManageEngine ServiceDesk Plus Cloud
+  partner_name: ManageEngine ServiceDesk Plus Cloud
+  category: Productivity
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/manageengine-servicedesk-cloud
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: pagerduty-updown-io
+  label: Updown.io
+  partner_name: Updown.io
+  category: Server Monitoring
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/updownio
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: pagerduty-twilio
+  label: Twilio
+  partner: twilio
+  partner_name: Twilio
+  category: Phone & SMS
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/twilio
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-whatsapp-notifications
+  label: WhatsApp Notifications
+  partner_name: WhatsApp Notifications
+  category: Communication
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/whatsapp-notifications
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: pagerduty-freshservice
+  label: Freshservice
+  partner: freshservice
+  partner_name: Freshservice
+  category: Server Monitoring
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/freshservice
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-hive
+  label: Hive
+  partner: hive
+  partner_name: Hive
+  category: Team Collaboration
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/hive
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-podio
+  label: Podio
+  partner: podio
+  partner_name: Podio
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/podio
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: pagerduty-telnyx
+  label: Telnyx
+  partner: telnyx
+  partner_name: Telnyx
+  category: Phone & SMS
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/pagerduty/integrations/telnyx
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
   arazzo: null
