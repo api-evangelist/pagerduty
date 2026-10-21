@@ -36,6 +36,13 @@ checked:
 - https://www.ycombinator.com/companies
 - opentofu/integrations/opentofu-integration-edges.yml
 - terraform/integrations/terraform-integration-edges.yml
+- https://a16z.com/portfolio/
+- https://www.battery.com/company/
+- https://www.battery.com/wp-admin/admin-ajax.php
+- https://www.indexventures.com/companies/
+- https://www.sequoiacap.com/our-companies/
+- https://www.sequoiacap.com/sitemap.xml
+- cisco-meraki/integrations/cisco-meraki-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: own
@@ -1059,6 +1066,35 @@ edges:
     status: Public
   detected_by: sweep-accelerator-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Andreessen Horowitz (a16z)
+  partner: a16z
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://a16z.com/companies/pagerduty/
+  category: vc portfolio participation
+  contract_reference:
+    register: a16z portfolio (a16z.com/portfolio/, the page's own data-companies JSON)
+    standard: null
+    spec_file: null
+    role: vc-portfolio-company
+    registered_name: PagerDuty
+    register_id: https://a16z.com/companies/pagerduty/
+    register_country: null
+    register_website: https://pagerduty.com
+    matched_domain: pagerduty.com
+    matched_by: domain
+    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-vc-portfolios.py
+    detected: '2026-10-21'
+    year: '2013'
+    status: Exits
+    sector: Enterprise
+  detected_by: sweep-vc-portfolios.py
+  first_seen: '2026-10-21'
 - partner_name: Microsoft Teams (own)
   partner: microsoft-teams
   partner_match: mirror
@@ -1165,6 +1201,23 @@ edges:
   category: infrastructure-as-code provider registry listing
   badges:
   - Verified publisher (Terraform partner tier)
+- partner_name: Cisco Meraki (own)
+  partner: cisco-meraki
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.cisco.com/en-US/apps/380727
+  mirror_of: cisco-meraki/integrations/cisco-meraki-integration-edges.yml
+  apps:
+  - PagerDuty Platform for Action
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: Automation & Orchestration
 templates:
 - title: Trigger PagerDuty incidents for new messages in Slack
   url: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack
