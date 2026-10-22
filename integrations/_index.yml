@@ -698,6 +698,47 @@
     sector: Enterprise
   status: not-a-workflow
   arazzo: null
+- slug: pagerduty-raycast
+  label: Raycast
+  partner: raycast
+  partner_name: Raycast
+  category: Raycast Store extension (community wrapper)
+  type: marketplace
+  marketplace: raycast-store
+  channel: connector-listing
+  evidence: https://www.raycast.com/horimislime/pagerduty
+  source: edge
+  relationship: connector-coverage
+  contract_reference:
+    register: Raycast Store (raycast/extensions monorepo + store_listings JSON)
+    spec_file: null
+    role: raycast-community-wrapper
+    builder: community
+    authors:
+    - horimislime
+    matched_domain: pagerduty.com
+    matched_by: domain
+    monorepo_commit: 84f9ac51336a8c69f70974a75bc067c0feae3658
+    listings:
+    - title: PagerDuty
+      store_url: https://www.raycast.com/horimislime/pagerduty
+      installs: 449
+      categories:
+      - Developer Tools
+      - Productivity
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/pagerduty/
+      author: horimislime
+    categories:
+    - Developer Tools
+    - Productivity
+    identity_note: the extension's own source calls a host on the product's domain AND its title / package name
+      passes partner_link's name check; built by Raycast community developers, not the vendor
+    signal_note: 'coverage: Raycast''s store reaches the product through community-built extensions; one edge per
+      (product, store); install / listing counts are context, never counted'
+    detected_by: sweep-raycast-store-extensions.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
 - slug: pagerduty-microsoft-teams-own
   label: Microsoft Teams (own)
   partner: microsoft-teams
@@ -785,6 +826,19 @@
   marketplace: own
   channel: partner-built
   evidence: https://marketplace.cisco.com/en-US/apps/380727
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: pagerduty-backstage-own
+  label: Backstage (own)
+  partner: backstage
+  partner_name: Backstage (own)
+  category: Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/backstage/backstage/tree/d72327203d5d0812bee2eace8688fa5ab22867be/microsite/data/plugins/pager-duty.yaml
   source: edge
   relationship: platform-app
   status: not-a-workflow
