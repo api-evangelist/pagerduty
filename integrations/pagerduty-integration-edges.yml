@@ -50,6 +50,9 @@ checked:
 - chef-software/integrations/chef-software-integration-edges.yml
 - https://store.servicenow.com/store/app/
 - https://store.servicenow.com/store/sitemap_xml
+- https://ifttt.com/explore/services
+- https://ifttt.com/pagerduty
+- https://ifttt.com/sitemap_services.xml
 summary: null
 marketplace_apps:
 - marketplace: own
@@ -1398,6 +1401,31 @@ edges:
     detected_by: sweep-servicenow-store.py
     detected: '2026-10-23'
   detected_by: sweep-servicenow-store.py
+  first_seen: '2026-10-23'
+- partner_name: IFTTT
+  partner: ifttt
+  partner_match: aggregator
+  type: marketplace
+  marketplace: ifttt-services
+  channel: ipaas-listing
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://ifttt.com/pagerduty
+  category: null
+  contract_reference:
+    register: IFTTT service directory (ifttt.com/explore/services; ifttt.com/<service>)
+    spec_file: null
+    role: ipaas-connector:ifttt
+    registered_name: PagerDuty
+    matched_domain: pagerduty.com
+    matched_by: domain
+    app_slug: pagerduty
+    ifttt_category: Developer tools
+    builder: unknown (the service page does not say who built it)
+    detected_by: sweep-ifttt-services.py
+    detected: '2026-10-23'
+    signal_note: one edge per (provider, platform); triggers, actions and applet counts are context, never read
+  detected_by: sweep-ifttt-services.py
   first_seen: '2026-10-23'
 templates:
 - title: Trigger PagerDuty incidents for new messages in Slack
