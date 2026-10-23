@@ -48,6 +48,8 @@ checked:
 - backstage/integrations/backstage-integration-edges.yml
 - https://dir.texas.gov/resource-library-item/tx-ramp-certified-cloud-products
 - chef-software/integrations/chef-software-integration-edges.yml
+- https://store.servicenow.com/store/app/
+- https://store.servicenow.com/store/sitemap_xml
 summary: null
 marketplace_apps:
 - marketplace: own
@@ -1345,6 +1347,58 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: configuration-management content listing (Chef cookbook)
+- partner_name: ServiceNow Store (partner apps)
+  partner: servicenow
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://store.servicenow.com/store/seller/f7f656526fb7390056fb8e4c2c3ee49b
+  category: ServiceNow Store partner app / app certification
+  contract_reference:
+    register: ServiceNow Store (store.servicenow.com/store/sitemap_xml -> /store/app/<id> server-rendered pages)
+    standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+    spec_file: null
+    role: servicenow-store-partner
+    registered_name: PagerDuty Inc
+    register_id: f7f656526fb7390056fb8e4c2c3ee49b
+    matched_domain: pagerduty.com
+    matched_by: domain
+    identity_source: the listing's own seller website link (no lookup)
+    certified_products:
+    - product: ServiceNow Certified App (scoped_app / integration)
+      product_type: scoped_app / integration
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: false
+      products_sample:
+      - PagerDuty Platform for Real-Time Operations
+      releases:
+      - Zurich
+      - Australia
+      - Brazil
+    - product: ServiceNow Certified App (scoped_app / standalone)
+      product_type: scoped_app / standalone
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: false
+      products_sample:
+      - PagerDuty for Customer Service Management
+      releases:
+      - Yokohama
+      - Zurich
+      - Australia
+    products_sample:
+    - PagerDuty Automation
+    - PagerDuty Platform for Real-Time Operations
+    - PagerDuty for Customer Service Management
+    signal_note: 'listing alone = standard-participant; certified_products = one entry per Application type the
+      seller holds a ServiceNow Certified App badge for, standard named on each; lapsed: true when none of that
+      type''s certified apps lists either of the two newest release families on the Store; app counts are context,
+      never counted'
+    detected_by: sweep-servicenow-store.py
+    detected: '2026-10-23'
+  detected_by: sweep-servicenow-store.py
+  first_seen: '2026-10-23'
 templates:
 - title: Trigger PagerDuty incidents for new messages in Slack
   url: https://zapier.com/apps/pagerduty/integrations/slack/6682/trigger-pagerduty-incidents-for-new-messages-in-slack
