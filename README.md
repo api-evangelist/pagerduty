@@ -1,4 +1,4 @@
-# PagerDuty (pagerduty)
+# PagerDuty
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,76 +66,219 @@
 
 PagerDuty is a digital operations management platform that helps teams detect problems and resolve incidents with automated alerting, on-call management, and incident response workflows.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/pagerduty/refs/heads/main/apis.yml)
+**Areas:** Alerting · DevOps · Incident Management · On-Call Management · pagerduty · Monitoring · Incident Response
 
-## Scope
+## PagerDuty on APIs.io
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+Everything profiled for PagerDuty is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pagerduty/](https://apis.io/providers/pagerduty/)** — or go straight to one of the APIs or properties below.
 
-## Tags:
+### APIs (38)
 
- - Incident Management, Alerting, On-Call Management, DevOps
+- [PagerDuty Events API](https://apis.io/apis/pagerduty/pagerduty-events-api/) — The PagerDuty Events API is a system for triggering, acknowledging, and resolving alerts from monitoring tools and other data sources.
+- [PagerDuty Abilities API](https://apis.io/apis/pagerduty/pagerduty-abilities-api/) — This describes your account's abilities by feature name. For example `"teams"`. An ability may be available to your account based on things like your…
+- [PagerDuty Add-Ons API](https://apis.io/apis/pagerduty/pagerduty-add-ons-api/) — Developers can write their own functionality to insert into PagerDuty's UI.
+- [PagerDuty Alert Grouping Settings API](https://apis.io/apis/pagerduty/pagerduty-alert-grouping-settings-api/) — Alert Grouping Settings allow you to configure how alerts in services are grouped together into incidents.
+- [PagerDuty Analytics API](https://apis.io/apis/pagerduty/pagerduty-analytics-api/) — Provides enriched incident data.
+- [PagerDuty Audit API](https://apis.io/apis/pagerduty/pagerduty-audit-api/) — Provides audit record data.
+- [PagerDuty Automation Actions API](https://apis.io/apis/pagerduty/pagerduty-automation-actions-api/) — Automation Actions invoke jobs that are staged in Runbook Automation or Process Automation.
+- [PagerDuty Business Services API](https://apis.io/apis/pagerduty/pagerduty-business-services-api/) — Business services model capabilities that span multiple technical services and that may be owned by several different teams.
+- [PagerDuty Change Events API](https://apis.io/apis/pagerduty/pagerduty-change-events-api/) — Change Events enable you to send informational events about recent changes such as code deploys and system config changes from any system that can make an…
+- [PagerDuty Change Tags API](https://apis.io/apis/pagerduty/pagerduty-change-tags-api/) — The Change Tags API from PagerDuty — 1 operation(s) for change tags.
+- [PagerDuty Custom Fields API](https://apis.io/apis/pagerduty/pagerduty-custom-fields-api/) — Custom fields allow you to enrich PagerDuty incidents with critical and helpful metadata throughout the incident lifecycle.
+- [PagerDuty Escalation Policies API](https://apis.io/apis/pagerduty/pagerduty-escalation-policies-api/) — Escalation policies define which user should be alerted at which time.
+- [PagerDuty Event Orchestrations API](https://apis.io/apis/pagerduty/pagerduty-event-orchestrations-api/) — Event Orchestrations allow you to route events to an endpoint and create collections of Event Orchestrations, which define sets of actions to take based on…
+- [PagerDuty Extension Schemas API](https://apis.io/apis/pagerduty/pagerduty-extension-schemas-api/) — A PagerDuty extension vendor represents a specific type of outbound extension such as Generic Webhook, Slack, ServiceNow.
+- [PagerDuty Extensions API](https://apis.io/apis/pagerduty/pagerduty-extensions-api/) — Extensions are representations of Extension Schema objects that are attached to Services.
+- [PagerDuty Incident Workflows API](https://apis.io/apis/pagerduty/pagerduty-incident-workflows-api/) — An Incident Workflow is a sequence of configurable Steps and associated Triggers that can execute automated Actions for a given Incident.
+- [PagerDuty Incidents API](https://apis.io/apis/pagerduty/pagerduty-incidents-api/) — An incident represents a problem or an issue that needs to be addressed and resolved. Incidents trigger on a service, which prompts notifications to go out…
+- [PagerDuty Licenses API](https://apis.io/apis/pagerduty/pagerduty-licenses-api/) — Licenses are allocated to Users to allow for per-User access to PagerDuty functionality within an Account.
+- [PagerDuty Log Entries API](https://apis.io/apis/pagerduty/pagerduty-log-entries-api/) — A log of all the events that happen to an Incident, and these are exposed as Log Entries.
+- [PagerDuty Maintenance Windows API](https://apis.io/apis/pagerduty/pagerduty-maintenance-windows-api/) — A Maintenance Window is used to temporarily disable one or more Services for a set period of time.
+- [PagerDuty Notifications API](https://apis.io/apis/pagerduty/pagerduty-notifications-api/) — A Notification is created when an Incident is triggered or escalated.
+- [PagerDuty On-Calls API](https://apis.io/apis/pagerduty/pagerduty-on-calls-api/) — An on-call represents a contiguous unit of time for which a User will be on call for a given Escalation Policy and Escalation Rules
+- [PagerDuty Paused Incident Reports API](https://apis.io/apis/pagerduty/pagerduty-paused-incident-reports-api/) — Provides paused Incident reporting data on services and accounts that have paused Alerts.
+- [PagerDuty Priorities API](https://apis.io/apis/pagerduty/pagerduty-priorities-api/) — A priority is a label representing the importance and impact of an incident. This feature is only available on Standard and Enterprise plans.
+- [PagerDuty Response Plays API](https://apis.io/apis/pagerduty/pagerduty-response-plays-api/) — Response Plays are a package of Incident Actions that can be applied during an Incident's life cycle.
+- [PagerDuty Rulesets API](https://apis.io/apis/pagerduty/pagerduty-rulesets-api/) — Rulesets allow you to route events to an endpoint and create collections of Event Rules, which define sets of actions to take based on event content.
+- [PagerDuty Schedules API](https://apis.io/apis/pagerduty/pagerduty-schedules-api/) — A Schedule determines the time periods that users are On-Call.
+- [PagerDuty Service Dependencies API](https://apis.io/apis/pagerduty/pagerduty-service-dependencies-api/) — Services are categorized into technical and business services. Dependencies can be created via any combination of these services.
+- [PagerDuty Services API](https://apis.io/apis/pagerduty/pagerduty-services-api/) — The Services API from PagerDuty — 8 operation(s) for services.
+- [PagerDuty Standards API](https://apis.io/apis/pagerduty/pagerduty-standards-api/) — Standards help provide a clear understanding of what a good service configuration looks like, allowing to share and enforce organization guidelines across…
+- [PagerDuty Status Dashboards API](https://apis.io/apis/pagerduty/pagerduty-status-dashboards-api/) — Status Dashboards represent user-defined views for the Status Dashboard product that are limited to specific Business Services rather than the whole set of…
+- [PagerDuty Status Pages API](https://apis.io/apis/pagerduty/pagerduty-status-pages-api/) — Status Pages can be public or private read-only pages, that display the status of some predefined set of services, to be shared with customers or internal…
+- [PagerDuty Tags API](https://apis.io/apis/pagerduty/pagerduty-tags-api/) — The Tags API from PagerDuty — 4 operation(s) for tags.
+- [PagerDuty Teams API](https://apis.io/apis/pagerduty/pagerduty-teams-api/) — A team is a collection of Users and Escalation Policies that represent a group of people within an organization.
+- [PagerDuty Templates API](https://apis.io/apis/pagerduty/pagerduty-templates-api/) — Templates is a new feature which will allow customers to create message templates to be leveraged by (but not limited to) status updates. The API will be…
+- [PagerDuty Users API](https://apis.io/apis/pagerduty/pagerduty-users-api/) — Users are members of a PagerDuty account that have the ability to interact with Incidents and other data on the account.
+- [PagerDuty Vendors API](https://apis.io/apis/pagerduty/pagerduty-vendors-api/) — A PagerDuty Vendor represents a specific type of integration. AWS Cloudwatch, Splunk, Datadog are all examples of vendors
+- [PagerDuty Webhooks API](https://apis.io/apis/pagerduty/pagerduty-webhooks-api/) — A webhook is a way to receive events that occur on the PagerDuty platform via an HTTP POST request. V3 webhooks are set up by creating a webhook subscription.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16 
-- **Modified:** 2026-04-28 
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### PagerDuty REST API
-The PagerDuty REST API provides programmatic access to PagerDuty incidents, services, escalation policies, schedules, and users.
+Event-driven and webhook contracts.
 
-**Human URL:** [https://developer.pagerduty.com/api-reference/](https://developer.pagerduty.com/api-reference/)
+- [PagerDuty Events](https://apis.io/asyncapis/pagerduty/pagerduty-events-asyncapi/)
 
+#### Event channels (3)
 
-#### Tags:
+Individual events and webhooks the provider emits.
 
- - Incidents, Alerting, On-Call, Services
+- [/pagerduty/webhook](https://apis.io/channels/pagerduty/pagerduty-webhook/)
+- [/v2/change/enqueue](https://apis.io/channels/pagerduty/v2-change-enqueue/)
+- [/v2/enqueue](https://apis.io/channels/pagerduty/v2-enqueue/)
 
-#### Properties
+#### GraphQL (1)
 
-- [Documentation](https://developer.pagerduty.com/api-reference/)
-- [OpenAPI](openapi/pagerduty-openapi-original.yml)
-- [Authentication](https://developer.pagerduty.com/docs/authentication)
-- [Getting Started](https://developer.pagerduty.com/docs/rest-api-v2/rest-api/)
+GraphQL schemas.
 
-### PagerDuty Events API
-The PagerDuty Events API is a system for triggering, acknowledging, and resolving alerts from monitoring tools and other data sources.
+- [Moved to /providers/pagerduty/](https://apis.io/graphqls/pagerduty/pagerduty-graphql/)
 
-**Human URL:** [https://developer.pagerduty.com/docs/events-api-v2/overview/](https://developer.pagerduty.com/docs/events-api-v2/overview/)
+#### MCP servers (2)
 
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags:
+- [MCP Server](https://apis.io/servers/pagerduty/mcp-server/)
+- [pagerduty](https://apis.io/servers/pagerduty/pagerduty/)
 
- - Events, Alerting, Monitoring
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://developer.pagerduty.com/docs/events-api-v2/overview/)
-- [Getting Started](https://developer.pagerduty.com/docs/events-api-v2/send-an-alert/)
+- [Pagerduty Agentic Access](https://apis.io/agentic-access/pagerduty/pagerduty-agentic-access/)
 
-## Common Properties
+#### Collections (74)
 
-- [Portal](https://developer.pagerduty.com/)
-- [Documentation](https://developer.pagerduty.com/docs/)
-- [Getting Started](https://developer.pagerduty.com/docs/getting-started/)
-- [Authentication](https://developer.pagerduty.com/docs/authentication)
-- [Sign Up](https://www.pagerduty.com/sign-up-free/)
-- [Login](https://identity.pagerduty.com/sign_in)
-- [Blog](https://www.pagerduty.com/blog/)
-- [Community](https://community.pagerduty.com/)
-- [Support](https://support.pagerduty.com/)
-- [Status](https://status.pagerduty.com/)
-- [Terms of Service](https://www.pagerduty.com/terms-of-service/)
-- [Privacy Policy](https://www.pagerduty.com/privacy-policy/)
-- [GitHub Organization](https://github.com/PagerDuty)
+Postman and Open Collection request collections.
+
+- [PagerDuty Abilities API](https://apis.io/collections/pagerduty/open-pagerduty-abilities-api/)
+- [PagerDuty Abilities Add-Ons API](https://apis.io/collections/pagerduty/open-pagerduty-add-ons-api/)
+- [PagerDuty Abilities Alert Grouping Settings API](https://apis.io/collections/pagerduty/open-pagerduty-alert-grouping-settings-api/)
+- [PagerDuty Abilities Analytics API](https://apis.io/collections/pagerduty/open-pagerduty-analytics-api/)
+- [PagerDuty Abilities Audit API](https://apis.io/collections/pagerduty/open-pagerduty-audit-api/)
+- [PagerDuty Abilities Automation Actions API](https://apis.io/collections/pagerduty/open-pagerduty-automation-actions-api/)
+- [PagerDuty Abilities Business Services API](https://apis.io/collections/pagerduty/open-pagerduty-business-services-api/)
+- [PagerDuty Abilities Change Events API](https://apis.io/collections/pagerduty/open-pagerduty-change-events-api/)
+- [PagerDuty Abilities Change Tags API](https://apis.io/collections/pagerduty/open-pagerduty-change-tags-api/)
+- [PagerDuty Abilities Custom Fields API](https://apis.io/collections/pagerduty/open-pagerduty-custom-fields-api/)
+- [PagerDuty Abilities Escalation Policies API](https://apis.io/collections/pagerduty/open-pagerduty-escalation-policies-api/)
+- [PagerDuty Abilities Event Orchestrations API](https://apis.io/collections/pagerduty/open-pagerduty-event-orchestrations-api/)
+- [PagerDuty Abilities Extension Schemas API](https://apis.io/collections/pagerduty/open-pagerduty-extension-schemas-api/)
+- [PagerDuty Abilities Extensions API](https://apis.io/collections/pagerduty/open-pagerduty-extensions-api/)
+- [PagerDuty Abilities Incident Workflows API](https://apis.io/collections/pagerduty/open-pagerduty-incident-workflows-api/)
+- [PagerDuty Abilities Incidents API](https://apis.io/collections/pagerduty/open-pagerduty-incidents-api/)
+- [PagerDuty Abilities Licenses API](https://apis.io/collections/pagerduty/open-pagerduty-licenses-api/)
+- [PagerDuty Abilities Log Entries API](https://apis.io/collections/pagerduty/open-pagerduty-log-entries-api/)
+- [PagerDuty Abilities Maintenance Windows API](https://apis.io/collections/pagerduty/open-pagerduty-maintenance-windows-api/)
+- [PagerDuty Abilities Notifications API](https://apis.io/collections/pagerduty/open-pagerduty-notifications-api/)
+- [PagerDuty Abilities On-Calls API](https://apis.io/collections/pagerduty/open-pagerduty-on-calls-api/)
+- [PagerDuty Abilities Paused Incident Reports API](https://apis.io/collections/pagerduty/open-pagerduty-paused-incident-reports-api/)
+- [PagerDuty Abilities Priorities API](https://apis.io/collections/pagerduty/open-pagerduty-priorities-api/)
+- [PagerDuty Abilities Response Plays API](https://apis.io/collections/pagerduty/open-pagerduty-response-plays-api/)
+- [PagerDuty Abilities Rulesets API](https://apis.io/collections/pagerduty/open-pagerduty-rulesets-api/)
+- …and 49 more published on APIs.io
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [PagerDuty — asyncapi rules](https://apis.io/rules/pagerduty/pagerduty-asyncapi-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Pagerduty Authentication](https://apis.io/security/pagerduty/pagerduty-authentication/)
+- [Pagerduty Domain Security](https://apis.io/security/pagerduty/pagerduty-domain-security/)
+
+#### Plans and pricing (2)
+
+Published plans, tiers and prices.
+
+- [Pagerduty Plans Pricing](https://apis.io/plans/pagerduty/pagerduty-plans-pricing/)
+- [Pagerduty Price Estimates](https://apis.io/plans/pagerduty/pagerduty-price-estimates/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Pagerduty Rate Limits](https://apis.io/rate-limits/pagerduty/pagerduty-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Pagerduty Finops](https://apis.io/finops/pagerduty/pagerduty-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.pagerduty.com/)
+- [Documentation](https://developer.pagerduty.com/docs/)
+- [Getting started](https://developer.pagerduty.com/docs/getting-started/)
+- [Pricing](https://www.pagerduty.com/pricing/incident-management/)
+- [Support](https://support.pagerduty.com/)
+- [Blog](https://www.pagerduty.com/blog/)
+- [Terms of service](https://www.pagerduty.com/terms-of-service/)
+- [Privacy policy](https://www.pagerduty.com/privacy-policy/)
+- [GitHub](https://github.com/PagerDuty)
+- [Status](https://status.pagerduty.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 43.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 66.7 |
+| Contract quality | 64.2 |
+| Contract governance | 11.4 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 15.5 |
+| Access clarity | 69.7 |
+
+**Agent readiness 48.9** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pagerduty/](https://apis.io/providers/pagerduty/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PagerDuty: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pagerduty/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
